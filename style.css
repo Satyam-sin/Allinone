@@ -224,3 +224,17 @@ footer{
         font-size:16px;
     }
 }
+.knowledge-btn {
+    margin-top: 10px;
+    padding: 10px 18px;
+    font-size: 16px;
+    background: #ffcc00;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.knowledge-btn:hover {
+    background: #ffaa00;
+}
