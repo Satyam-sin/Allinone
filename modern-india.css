@@ -1,0 +1,242 @@
+/* =========================
+   MODERN INDIA - FUTURE THEME
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Segoe UI', sans-serif;
+    min-height:100vh;
+    overflow-x:hidden;
+
+    color:#eaf2ff;
+
+    background:
+    radial-gradient(circle at top,#0b1b3a,#050814 50%,#000 100%);
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+    text-align:center;
+    padding:50px 20px;
+}
+
+.header h1{
+    font-size:3rem;
+
+    background:linear-gradient(90deg,#00c6ff,#7f7fff,#00ffcc);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    text-shadow:0 0 25px rgba(0,198,255,.3);
+}
+
+.header p{
+    margin-top:10px;
+    color:#bcd3ff;
+}
+
+/* =========================
+   NAV
+========================= */
+
+.nav{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin-bottom:30px;
+}
+
+.nav a, .nav button{
+    padding:12px 18px;
+    border-radius:25px;
+
+    border:none;
+    cursor:pointer;
+    text-decoration:none;
+
+    background:rgba(255,255,255,.06);
+    color:#fff;
+
+    backdrop-filter:blur(10px);
+
+    transition:.3s;
+}
+
+.nav a:hover, .nav button:hover{
+    transform:translateY(-3px);
+    background:rgba(0,198,255,.2);
+    box-shadow:0 0 20px rgba(0,198,255,.4);
+}
+
+/* =========================
+   TIMELINE
+========================= */
+
+.timeline{
+    width:90%;
+    max-width:1000px;
+    margin:auto;
+}
+
+/* vertical line */
+.timeline::before{
+    content:"";
+    position:absolute;
+    left:50px;
+    top:0;
+    bottom:0;
+
+    width:3px;
+
+    background:linear-gradient(#00c6ff,#00ffcc);
+}
+
+/* =========================
+   RULERS
+========================= */
+
+.ruler{
+    margin:20px 0;
+    padding:20px;
+
+    border-radius:18px;
+
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+
+    transition:.3s;
+    position:relative;
+}
+
+.ruler:hover{
+    transform:translateX(10px);
+    box-shadow:0 0 25px rgba(0,198,255,.25);
+}
+
+.ruler h3{
+    color:#00ffcc;
+    margin-bottom:8px;
+}
+
+.ruler p{
+    color:#cfe3ff;
+    line-height:1.6;
+}
+
+/* =========================
+   ERA COLORS
+========================= */
+
+.independence-era{ border-left:5px solid #00ffcc; }
+.constitution-era{ border-left:5px solid #00c6ff; }
+.development-era{ border-left:5px solid #7f7fff; }
+.modern-tech-era{ border-left:5px solid #38bdf8; }
+.digital-india-era{ border-left:5px solid #22c55e; }
+
+/* =========================
+   CARD
+========================= */
+
+.card{
+    width:90%;
+    max-width:1000px;
+    margin:30px auto;
+    padding:25px;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,.04);
+    backdrop-filter:blur(12px);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 0 30px rgba(0,198,255,.2);
+}
+
+/* =========================
+   TITLE
+========================= */
+
+.topic-title{
+    text-align:center;
+    font-size:1.8rem;
+
+    background:linear-gradient(90deg,#00c6ff,#00ffcc);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    margin-bottom:20px;
+}
+
+/* =========================
+   POINT BOX
+========================= */
+
+.point{
+    padding:15px;
+    margin:12px 0;
+
+    border-left:4px solid #00c6ff;
+
+    background:rgba(255,255,255,.03);
+
+    border-radius:12px;
+
+    transition:.3s;
+}
+
+.point:hover{
+    transform:translateX(8px);
+    background:rgba(0,198,255,.08);
+}
+
+.point h3{
+    color:#00ffcc;
+    margin-bottom:5px;
+}
+
+.point p{
+    color:#cfe3ff;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    text-align:center;
+    padding:25px;
+    margin-top:40px;
+
+    color:#8fb3ff;
+
+    border-top:1px solid rgba(255,255,255,.1);
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:768px){
+
+    .header h1{
+        font-size:2rem;
+    }
+
+    .timeline::before{
+        left:20px;
+    }
+}

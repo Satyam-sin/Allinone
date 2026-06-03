@@ -1,0 +1,131 @@
+{
+  "project": "Eduverse",
+  "version": "1.0",
+  "subjects": [
+    {
+      "name": "History",
+      "key": "history",
+      "topics": [
+        {
+          "title": "Maurya Empire",
+          "page": "history/maurya.html",
+          "summary": "Maurya Empire was founded by Chandragupta Maurya in 322 BCE. It was one of the largest empires in ancient India.",
+          "tags": ["ashoka", "chandragupta", "ancient india"]
+        },
+        {
+          "title": "Gupta Empire",
+          "page": "history/gupta.html",
+          "summary": "Gupta Empire is known as the Golden Age of India in science, art and literature.",
+          "tags": ["golden age", "samudragupta"]
+        },
+        {
+          "title": "Delhi Sultanate",
+          "page": "history/delhi-sultanate.html",
+          "summary": "Delhi Sultanate ruled India from 1206 to 1526 with multiple dynasties.",
+          "tags": ["slave dynasty", "khilji", "tughlaq"]
+        },
+        {
+          "title": "Mughal Empire",
+          "page": "history/mughal.html",
+          "summary": "Mughal Empire was established by Babur in 1526 after the Battle of Panipat.",
+          "tags": ["akbar", "babur", "shah jahan"]
+        }
+      ]
+    },
+
+    {
+      "name": "Geography",
+      "key": "geography",
+      "topics": [
+        {
+          "title": "India Geography",
+          "page": "geography/india.html",
+          "summary": "India has diverse geography including mountains, plains, deserts and coastal areas.",
+          "tags": ["india map", "states", "rivers"]
+        },
+        {
+          "title": "Rivers of India",
+          "page": "geography/rivers.html",
+          "summary": "Major rivers of India include Ganga, Yamuna, Brahmaputra and Godavari.",
+          "tags": ["ganga", "yamuna"]
+        }
+      ]
+    },
+
+    {
+      "name": "Biology",
+      "key": "biology",
+      "topics": [
+        {
+          "title": "Cells",
+          "page": "biology/cells.html",
+          "summary": "Cell is the basic unit of life. All living organisms are made of cells.",
+          "tags": ["cell structure", "nucleus"]
+        },
+        {
+          "title": "Human Body",
+          "page": "biology/human-body.html",
+          "summary": "Human body consists of different organ systems working together.",
+          "tags": ["organs", "systems"]
+        }
+      ]
+    },
+
+    {
+      "name": "Computer",
+      "key": "computer",
+      "topics": [
+        {
+          "title": "HTML Basics",
+          "page": "computer/html.html",
+          "summary": "HTML is the standard language used to create web pages.",
+          "tags": ["tags", "structure", "web"]
+        },
+        {
+          "title": "JavaScript Basics",
+          "page": "computer/javascript.html",
+          "summary": "JavaScript is used to make websites interactive and dynamic.",
+          "tags": ["js", "functions", "events"]
+        }
+      ]
+    },
+
+    {
+      "name": "Science",
+      "key": "science",
+      "topics": [
+        {
+          "title": "Physics",
+          "page": "science/physics.html",
+          "summary": "Physics studies matter, energy and their interactions.",
+          "tags": ["force", "motion"]
+        },
+        {
+          "title": "Chemistry",
+          "page": "science/chemistry.html",
+          "summary": "Chemistry studies substances and their reactions.",
+          "tags": ["reactions", "elements"]
+        }
+      ]
+    },
+
+    {
+      "name": "GK",
+      "key": "gk",
+      "topics": [
+        {
+          "title": "Countries and Capitals",
+          "page": "gk/countries.html",
+          "summary": "Different countries of the world and their capitals.",
+          "tags": ["capital", "nation"]
+        },
+        {
+          "title": "Inventions",
+          "page": "gk/inventions.html",
+          "summary": "Important inventions that changed the world.",
+          "tags": ["discoveries", "inventors"]
+        }
+      ]
+    }
+  ]
+}

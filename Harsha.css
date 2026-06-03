@@ -1,0 +1,297 @@
+/* =========================
+   HARSHA EMPIRE THEME
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Segoe UI', sans-serif;
+    min-height:100vh;
+    color:#eaeaea;
+    overflow-x:hidden;
+
+    background:
+    radial-gradient(circle at top,#1b2a3a,#0d1117 60%,#05070a);
+}
+
+/* =========================
+   SOFT BLUE LIGHT EFFECT
+========================= */
+
+body::before,
+body::after{
+    content:"";
+    position:fixed;
+    width:420px;
+    height:420px;
+    border-radius:50%;
+    filter:blur(120px);
+    z-index:-1;
+}
+
+body::before{
+    background:rgba(100,180,255,.12);
+    top:-160px;
+    left:-160px;
+    animation:move1 16s infinite alternate;
+}
+
+body::after{
+    background:rgba(255,255,255,.06);
+    bottom:-160px;
+    right:-160px;
+    animation:move2 18s infinite alternate;
+}
+
+@keyframes move1{
+    from{transform:translate(0,0);}
+    to{transform:translate(160px,120px);}
+}
+
+@keyframes move2{
+    from{transform:translate(0,0);}
+    to{transform:translate(-160px,-120px);}
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+    text-align:center;
+    padding:60px 20px;
+}
+
+.header h1{
+    font-size:3rem;
+
+    background:linear-gradient(
+        90deg,
+        #a8d8ff,
+        #ffffff,
+        #7fc7ff
+    );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    text-shadow:0 0 20px rgba(120,200,255,.3);
+}
+
+.header p{
+    margin-top:12px;
+    color:#cfd8e3;
+    font-size:1.05rem;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.nav{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.timeline-btn{
+    border:none;
+    cursor:pointer;
+
+    padding:14px 30px;
+    border-radius:50px;
+
+    font-size:16px;
+    font-weight:bold;
+
+    color:#0b0f14;
+
+    background:linear-gradient(
+        135deg,
+        #8fd3ff,
+        #ffffff,
+        #5fb6ff
+    );
+
+    transition:.4s;
+}
+
+.timeline-btn:hover{
+    transform:translateY(-4px) scale(1.05);
+    box-shadow:0 0 25px rgba(120,200,255,.4);
+}
+
+/* =========================
+   TIMELINE
+========================= */
+
+.timeline{
+    width:90%;
+    max-width:1000px;
+    margin:auto;
+    margin-bottom:40px;
+    display:none;
+}
+
+.timeline.active{
+    display:block;
+}
+
+.ruler{
+    background:rgba(255,255,255,.04);
+    backdrop-filter:blur(14px);
+
+    border-left:5px solid #7fc7ff;
+
+    padding:20px;
+    margin-bottom:18px;
+    border-radius:18px;
+
+    transition:.4s;
+}
+
+.ruler:hover{
+    transform:translateX(8px);
+    box-shadow:0 0 20px rgba(120,200,255,.2);
+}
+
+.ruler h3{
+    color:#a8d8ff;
+    margin-bottom:10px;
+}
+
+.ruler p{
+    color:#e6eef7;
+    line-height:1.8;
+}
+
+/* =========================
+   MAIN CARD
+========================= */
+
+.container{
+    width:92%;
+    max-width:1200px;
+    margin:auto;
+    padding-bottom:60px;
+}
+
+.card{
+    background:rgba(255,255,255,.04);
+    backdrop-filter:blur(18px);
+
+    border:1px solid rgba(120,200,255,.15);
+
+    border-radius:28px;
+
+    padding:35px;
+
+    box-shadow:0 20px 60px rgba(0,0,0,.4);
+}
+
+/* =========================
+   TITLE
+========================= */
+
+.topic-title{
+    text-align:center;
+    font-size:2.2rem;
+
+    margin-bottom:30px;
+
+    background:linear-gradient(
+        90deg,
+        #a8d8ff,
+        #ffffff,
+        #7fc7ff
+    );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    border-bottom:1px solid rgba(255,255,255,.15);
+    padding-bottom:15px;
+}
+
+/* =========================
+   POINT BOX
+========================= */
+
+.point{
+    background:rgba(255,255,255,.03);
+
+    border-left:5px solid #7fc7ff;
+
+    border-radius:16px;
+
+    padding:18px;
+    margin-bottom:18px;
+
+    transition:.4s;
+}
+
+.point:hover{
+    transform:translateY(-6px);
+    background:rgba(255,255,255,.07);
+    box-shadow:0 0 22px rgba(120,200,255,.18);
+}
+
+.point h3{
+    color:#a8d8ff;
+    margin-bottom:10px;
+}
+
+.point p{
+    color:#e6eef7;
+    line-height:1.8;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    text-align:center;
+    padding:30px;
+    margin-top:50px;
+
+    color:#b8c7d6;
+
+    border-top:1px solid rgba(255,255,255,.08);
+}
+
+/* =========================
+   SCROLLBAR
+========================= */
+
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-track{
+    background:#0b0f14;
+}
+
+::-webkit-scrollbar-thumb{
+    background:linear-gradient(#8fd3ff,#5fb6ff);
+    border-radius:20px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:768px){
+
+    .header h1{font-size:2rem;}
+    .topic-title{font-size:1.5rem;}
+    .card{padding:20px;}
+    .timeline-btn{width:90%;}
+}

@@ -1,0 +1,510 @@
+/* ===================================
+   SHUNGA DYNASTY PREMIUM THEME
+   PART 1
+=================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:'Segoe UI',sans-serif;
+
+    color:#f5f5f5;
+
+    min-height:100vh;
+
+    overflow-x:hidden;
+
+    background:
+    radial-gradient(circle at top left,#243b55 0%,transparent 30%),
+    radial-gradient(circle at top right,#4b134f 0%,transparent 30%),
+    linear-gradient(
+    135deg,
+    #0b1020,
+    #111827,
+    #0f172a
+    );
+}
+
+/* =========================
+   FLOATING LIGHTS
+========================= */
+
+body::before,
+body::after{
+
+    content:"";
+
+    position:fixed;
+
+    width:350px;
+    height:350px;
+
+    border-radius:50%;
+
+    filter:blur(120px);
+
+    z-index:-1;
+}
+
+body::before{
+
+    top:-150px;
+    left:-100px;
+
+    background:
+    rgba(0,180,255,.15);
+
+    animation:moveLight1 12s infinite alternate;
+}
+
+body::after{
+
+    bottom:-150px;
+    right:-100px;
+
+    background:
+    rgba(170,0,255,.15);
+
+    animation:moveLight2 15s infinite alternate;
+}
+
+@keyframes moveLight1{
+
+    from{
+        transform:translate(0,0);
+    }
+
+    to{
+        transform:translate(150px,80px);
+    }
+
+}
+
+@keyframes moveLight2{
+
+    from{
+        transform:translate(0,0);
+    }
+
+    to{
+        transform:translate(-150px,-80px);
+    }
+
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+
+    text-align:center;
+
+    padding:60px 20px;
+}
+
+.header h1{
+
+    font-size:3.2rem;
+
+    background:
+    linear-gradient(
+    90deg,
+    #6dd5fa,
+    #ffffff,
+    #a855f7
+    );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.header p{
+
+    margin-top:15px;
+
+    color:#cbd5e1;
+
+    font-size:1.1rem;
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.nav{
+
+    text-align:center;
+
+    margin-bottom:35px;
+}
+
+.timeline-btn{
+
+    border:none;
+
+    cursor:pointer;
+
+    padding:14px 32px;
+
+    border-radius:50px;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    color:white;
+
+    background:
+    linear-gradient(
+    135deg,
+    #2563eb,
+    #7c3aed
+    );
+
+    transition:.4s;
+}
+
+.timeline-btn:hover{
+
+    transform:
+    translateY(-4px)
+    scale(1.03);
+
+    box-shadow:
+    0 0 25px rgba(124,58,237,.6);
+}
+
+/* =========================
+   TIMELINE
+========================= */
+
+.timeline{
+
+    width:90%;
+
+    max-width:1100px;
+
+    margin:auto;
+
+    display:none;
+}
+
+.timeline.active{
+    display:block;
+}
+
+.ruler{
+
+    background:
+    rgba(255,255,255,.06);
+
+    backdrop-filter:blur(15px);
+
+    border:
+    1px solid rgba(255,255,255,.1);
+
+    border-radius:20px;
+
+    padding:22px;
+
+    margin-bottom:20px;
+
+    transition:.4s;
+}
+
+.ruler:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:
+    0 0 25px rgba(0,180,255,.2);
+}
+
+.ruler h3{
+
+    color:#7dd3fc;
+
+    margin-bottom:10px;
+}
+
+.ruler p{
+
+    color:#dbeafe;
+
+    line-height:1.8;
+}
+/* =========================
+   CONTAINER
+========================= */
+
+.container{
+
+    width:92%;
+
+    max-width:1200px;
+
+    margin:auto;
+
+    padding-bottom:50px;
+}
+
+/* =========================
+   MAIN CARD
+========================= */
+
+.card{
+
+    background:
+    rgba(255,255,255,.05);
+
+    backdrop-filter:blur(20px);
+
+    border:
+    1px solid rgba(255,255,255,.12);
+
+    border-radius:30px;
+
+    padding:35px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    box-shadow:
+    0 10px 40px rgba(0,0,0,.35);
+}
+
+/* Glow Border */
+
+.card::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    padding:1px;
+
+    border-radius:30px;
+
+    background:
+    linear-gradient(
+    135deg,
+    rgba(0,180,255,.5),
+    rgba(168,85,247,.5)
+    );
+
+    -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+
+    -webkit-mask-composite:xor;
+
+    pointer-events:none;
+}
+
+/* =========================
+   TITLE
+========================= */
+
+.topic-title{
+
+    text-align:center;
+
+    font-size:2.2rem;
+
+    margin-bottom:30px;
+
+    background:
+    linear-gradient(
+    90deg,
+    #7dd3fc,
+    #ffffff,
+    #c084fc
+    );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    padding-bottom:15px;
+
+    border-bottom:
+    1px solid rgba(255,255,255,.15);
+}
+
+/* =========================
+   INFORMATION BOXES
+========================= */
+
+.point{
+
+    background:
+    rgba(255,255,255,.04);
+
+    border:
+    1px solid rgba(255,255,255,.08);
+
+    border-radius:18px;
+
+    padding:20px;
+
+    margin-bottom:18px;
+
+    transition:.4s;
+}
+
+.point:hover{
+
+    transform:
+    translateY(-6px);
+
+    background:
+    rgba(255,255,255,.08);
+
+    box-shadow:
+    0 0 25px rgba(125,211,252,.18);
+}
+
+.point h3{
+
+    color:#7dd3fc;
+
+    margin-bottom:10px;
+
+    font-size:1.2rem;
+}
+
+.point p{
+
+    color:#dbeafe;
+
+    line-height:1.8;
+}
+
+/* =========================
+   FADE ANIMATION
+========================= */
+
+.point,
+.ruler{
+
+    opacity:0;
+
+    transform:translateY(25px);
+
+    transition:
+    opacity .8s ease,
+    transform .8s ease;
+}
+
+.point.show,
+.ruler.show{
+
+    opacity:1;
+
+    transform:translateY(0);
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+
+    text-align:center;
+
+    margin-top:50px;
+
+    padding:25px;
+
+    color:#94a3b8;
+
+    border-top:
+    1px solid rgba(255,255,255,.08);
+}
+
+/* =========================
+   PREMIUM SCROLLBAR
+========================= */
+
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-track{
+    background:#0f172a;
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:
+    linear-gradient(
+    #38bdf8,
+    #8b5cf6
+    );
+
+    border-radius:20px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:
+    linear-gradient(
+    #7dd3fc,
+    #c084fc
+    );
+}
+
+/* =========================
+   TEXT SELECTION
+========================= */
+
+::selection{
+
+    background:#7c3aed;
+
+    color:white;
+}
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+
+@media(max-width:768px){
+
+    .header h1{
+        font-size:2rem;
+    }
+
+    .header p{
+        font-size:.95rem;
+    }
+
+    .topic-title{
+        font-size:1.6rem;
+    }
+
+    .card{
+        padding:20px;
+    }
+
+    .timeline-btn{
+        width:90%;
+    }
+
+    .point h3{
+        font-size:1rem;
+    }
+
+}

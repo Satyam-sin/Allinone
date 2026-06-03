@@ -1,0 +1,760 @@
+/* =========================
+   GLOBAL RESET + BASE SETUP
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+    font-size:16px;
+}
+
+body{
+    font-family:'Segoe UI', sans-serif;
+    color:#f6ead7;
+    overflow-x:hidden;
+
+    /* Ultra Premium Dark Royal Base */
+    background:
+    radial-gradient(circle at top,#1b0f0a,#0a0705 40%,#050403 100%);
+}
+
+/* =========================
+   FLOATING ROYAL LIGHT SYSTEM
+========================= */
+
+body::before,
+body::after{
+    content:"";
+    position:fixed;
+    width:500px;
+    height:500px;
+    border-radius:50%;
+    filter:blur(140px);
+    z-index:-1;
+    opacity:.6;
+}
+
+/* Golden Glow Left */
+body::before{
+    background:rgba(255,215,0,.10);
+    top:-200px;
+    left:-200px;
+    animation:floatGold 18s infinite alternate ease-in-out;
+}
+
+/* Warm Amber Glow Right */
+body::after{
+    background:rgba(255,140,0,.08);
+    bottom:-200px;
+    right:-200px;
+    animation:floatAmber 22s infinite alternate ease-in-out;
+}
+
+@keyframes floatGold{
+    0%{ transform:translate(0,0) scale(1); }
+    100%{ transform:translate(180px,120px) scale(1.2); }
+}
+
+@keyframes floatAmber{
+    0%{ transform:translate(0,0) scale(1); }
+    100%{ transform:translate(-180px,-120px) scale(1.1); }
+}
+
+/* =========================
+   SMOOTH GLOBAL TRANSITIONS
+========================= */
+
+*{
+    transition:all .25s ease-in-out;
+}
+
+/* =========================
+   SCROLL BAR PREMIUM STYLE
+========================= */
+
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-track{
+    background:#0a0705;
+}
+
+::-webkit-scrollbar-thumb{
+    background:linear-gradient(#ffd700,#ffb347);
+    border-radius:20px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background:linear-gradient(#fff0a0,#ffb347);
+}
+
+/* =========================
+   SELECTION EFFECT
+========================= */
+
+::selection{
+    background:#ffb347;
+    color:#111;
+}
+
+/* =========================
+   CONTAINER SYSTEM
+========================= */
+
+.container{
+    width:92%;
+    max-width:1150px;
+    margin:auto;
+}
+
+/* =========================
+   BASIC SECTION SPACING
+========================= */
+
+section{
+    padding:40px 0;
+}
+
+/* =========================
+   SMOOTH PAGE DEPTH EFFECT
+========================= */
+
+body{
+    perspective:1000px;
+}
+
+/* =========================
+   GLASS BASE (GLOBAL CARD BASE)
+========================= */
+
+.card{
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,215,0,.08);
+    border-radius:22px;
+    padding:25px;
+    backdrop-filter:blur(10px);
+    position:relative;
+    overflow:hidden;
+}
+
+/* Subtle Shine Base */
+.card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+    linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,215,0,.04),
+    transparent
+    );
+    transform:translateX(-100%);
+}
+/* =========================
+   HERO SECTION (ROYAL INTRO)
+========================= */
+
+.hero{
+    text-align:center;
+    padding:70px 20px 40px;
+    position:relative;
+}
+
+.hero h1{
+    font-size:3.2rem;
+    font-weight:700;
+
+    background:linear-gradient(
+        90deg,
+        #ffd700,
+        #fff6c7,
+        #ffb347
+    );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    text-shadow:0 0 25px rgba(255,215,0,.2);
+
+    animation:heroGlow 4s infinite alternate ease-in-out;
+}
+
+.hero p{
+    margin-top:12px;
+    font-size:1.1rem;
+    color:#e8d7b8;
+    max-width:800px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+/* HERO GLOW ANIMATION */
+@keyframes heroGlow{
+    0%{
+        text-shadow:0 0 10px rgba(255,215,0,.2);
+    }
+    100%{
+        text-shadow:
+        0 0 25px rgba(255,215,0,.4),
+        0 0 40px rgba(255,180,71,.2);
+    }
+}
+
+/* =========================
+   NAVIGATION BAR
+========================= */
+
+.nav{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:15px;
+
+    padding:20px;
+    margin-bottom:20px;
+}
+
+.nav a{
+    text-decoration:none;
+    padding:12px 18px;
+    border-radius:30px;
+
+    color:#111;
+    font-weight:600;
+
+    background:linear-gradient(135deg,#ffd700,#ffb347);
+
+    position:relative;
+    overflow:hidden;
+
+    box-shadow:0 0 15px rgba(255,215,0,.15);
+}
+
+/* NAV SHINE EFFECT */
+.nav a::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:100%;
+    height:100%;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.5),
+        transparent
+    );
+
+    transition:.6s;
+}
+
+.nav a:hover::before{
+    left:100%;
+}
+
+.nav a:hover{
+    transform:translateY(-3px) scale(1.03);
+    box-shadow:0 0 25px rgba(255,215,0,.4);
+}
+
+/* =========================
+   BUTTON SYSTEM (ROYAL BUTTON)
+========================= */
+
+.btn{
+    padding:12px 20px;
+    border:none;
+    border-radius:30px;
+
+    cursor:pointer;
+
+    font-weight:600;
+    color:#111;
+
+    background:linear-gradient(135deg,#ffb347,#ffd700);
+
+    position:relative;
+    overflow:hidden;
+
+    transition:.3s;
+}
+
+/* BUTTON SHINE */
+.btn::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:100%;
+    height:100%;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.6),
+        transparent
+    );
+
+    transition:.7s;
+}
+
+.btn:hover::before{
+    left:100%;
+}
+
+.btn:hover{
+    transform:translateY(-4px);
+    box-shadow:0 0 25px rgba(255,215,0,.4);
+}
+
+/* =========================
+   TIMELINE WRAPPER (BASE STYLE)
+========================= */
+
+.timeline{
+    width:92%;
+    max-width:1100px;
+    margin:40px auto;
+
+    display:none;
+    position:relative;
+
+    padding-left:45px;
+}
+
+/* ACTIVE STATE */
+.timeline.active{
+    display:block;
+}
+
+/* CENTRAL LINE */
+.timeline::before{
+    content:"";
+    position:absolute;
+    left:14px;
+    top:0;
+    bottom:0;
+
+    width:4px;
+    border-radius:20px;
+
+    background:linear-gradient(
+        #ffd700,
+        #ffb347,
+        #fff0a0
+    );
+}
+
+/* =========================
+   SMOOTH FADE EFFECT FOR TIMELINE
+========================= */
+
+.timeline{
+    animation:fadeIn .6s ease-in-out;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+@media(max-width:768px){
+
+    .hero h1{
+        font-size:2.2rem;
+    }
+
+    .nav{
+        flex-direction:column;
+    }
+
+    .btn, .nav a{
+        width:90%;
+        text-align:center;
+    }
+
+    .timeline{
+        padding-left:30px;
+    }
+
+    .timeline::before{
+        left:10px;
+    }
+}
+/* =========================
+   TIMELINE RULERS (ADVANCED)
+========================= */
+
+.ruler{
+    position:relative;
+
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,215,0,.08);
+
+    padding:20px;
+    margin-bottom:18px;
+
+    border-radius:18px;
+
+    transition:all .35s ease;
+
+    overflow:hidden;
+}
+
+/* Hover Premium Lift Effect */
+.ruler:hover{
+    transform:translateX(10px) scale(1.01);
+    box-shadow:0 0 25px rgba(255,215,0,.15);
+}
+
+/* Timeline Dot */
+.ruler::before{
+    content:"";
+    position:absolute;
+
+    left:-28px;
+    top:22px;
+
+    width:14px;
+    height:14px;
+
+    border-radius:50%;
+
+    background:gold;
+    box-shadow:0 0 12px gold;
+}
+
+/* =========================
+   DYNASTY COLOR SYSTEM
+========================= */
+
+.babur{
+    border-left:5px solid #ffcc70;
+}
+
+.humayun{
+    border-left:5px solid #8ecae6;
+}
+
+.akbar{
+    border-left:5px solid #ffd166;
+}
+
+.jahangir{
+    border-left:5px solid #90be6d;
+}
+
+.shahjahan{
+    border-left:5px solid #f4a261;
+}
+
+.aurangzeb{
+    border-left:5px solid #e76f51;
+}
+
+.later{
+    border-left:5px solid #adb5bd;
+}
+
+/* =========================
+   EMPEROR NAME STYLE
+========================= */
+
+.ruler h3{
+    color:#ffd700;
+    font-size:1.3rem;
+    margin-bottom:10px;
+
+    text-shadow:0 0 10px rgba(255,215,0,.15);
+}
+
+/* =========================
+   PARAGRAPH STYLING INSIDE RULER
+========================= */
+
+.ruler p{
+    color:#e8d7c2;
+    line-height:1.7;
+    margin-bottom:8px;
+}
+
+/* =========================
+   EMPEROR CARD SYSTEM (EXTRA UI BLOCKS)
+========================= */
+
+.emperor-card{
+    background:linear-gradient(
+        145deg,
+        rgba(255,215,0,.06),
+        rgba(255,255,255,.02)
+    );
+
+    border:1px solid rgba(255,215,0,.12);
+
+    border-radius:20px;
+
+    padding:25px;
+
+    margin:20px 0;
+
+    transition:all .4s ease;
+}
+
+.emperor-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 0 30px rgba(255,215,0,.18);
+}
+
+/* =========================
+   MINI BADGES (FOR HIGHLIGHTS)
+========================= */
+
+.badge{
+    display:inline-block;
+
+    padding:6px 12px;
+
+    border-radius:20px;
+
+    font-size:0.8rem;
+
+    font-weight:bold;
+
+    background:linear-gradient(135deg,#ffd700,#ffb347);
+
+    color:#111;
+
+    margin-right:6px;
+}
+
+/* =========================
+   SOFT BACKGROUND LAYER ANIMATION
+========================= */
+
+@keyframes floatSoft{
+    0%{ transform:translateY(0); }
+    50%{ transform:translateY(-10px); }
+    100%{ transform:translateY(0); }
+}
+
+.ruler{
+    animation:floatSoft 6s ease-in-out infinite;
+}
+
+/* =========================
+   SECTION DIVIDER EFFECT
+========================= */
+
+.divider{
+    height:2px;
+    width:100%;
+
+    margin:30px 0;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,215,0,.4),
+        transparent
+    );
+}
+
+/* =========================
+   ULTRA HOVER GLOW TEXT
+========================= */
+
+.ruler:hover h3{
+    letter-spacing:0.5px;
+    transition:.3s;
+    text-shadow:0 0 20px rgba(255,215,0,.35);
+}
+
+/* =========================
+   MOBILE FIXES
+========================= */
+
+@media(max-width:768px){
+
+    .ruler{
+        padding:16px;
+    }
+
+    .ruler:hover{
+        transform:none;
+    }
+
+}
+/* =========================
+   CINEMATIC BACKGROUND DEPTH
+========================= */
+
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background:
+    radial-gradient(circle at 20% 20%, rgba(255,215,0,.05), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(255,140,0,.04), transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,.02), transparent 60%);
+
+    z-index:-2;
+    pointer-events:none;
+
+    animation:bgShift 12s infinite alternate ease-in-out;
+}
+
+@keyframes bgShift{
+    0%{
+        transform:scale(1);
+        filter:blur(0px);
+    }
+    100%{
+        transform:scale(1.05);
+        filter:blur(1px);
+    }
+}
+
+/* =========================
+   ULTRA GLOW SYSTEM
+========================= */
+
+.glow-text{
+    text-shadow:
+    0 0 10px rgba(255,215,0,.3),
+    0 0 20px rgba(255,180,71,.2),
+    0 0 30px rgba(255,215,0,.1);
+}
+
+/* =========================
+   FLOATING MICRO LIGHTS (FAKE PARTICLES)
+========================= */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background-image:
+    radial-gradient(circle at 10% 20%, rgba(255,255,255,.06) 1px, transparent 1px),
+    radial-gradient(circle at 40% 70%, rgba(255,215,0,.05) 1px, transparent 1px),
+    radial-gradient(circle at 70% 30%, rgba(255,140,0,.04) 1px, transparent 1px);
+
+    background-size:200px 200px;
+
+    opacity:.4;
+    z-index:-3;
+
+    animation:particlesMove 20s linear infinite;
+}
+
+@keyframes particlesMove{
+    from{
+        transform:translateY(0);
+    }
+    to{
+        transform:translateY(-100px);
+    }
+}
+
+/* =========================
+   SECTION CARD POLISH
+========================= */
+
+.card{
+    backdrop-filter:blur(12px);
+    border:1px solid rgba(255,215,0,.1);
+    transition:all .4s ease;
+}
+
+.card:hover{
+    transform:translateY(-6px) scale(1.01);
+    box-shadow:
+    0 10px 40px rgba(0,0,0,.5),
+    0 0 25px rgba(255,215,0,.12);
+}
+
+/* =========================
+   BUTTON FINAL POLISH
+========================= */
+
+.btn, .nav a{
+    position:relative;
+    overflow:hidden;
+}
+
+.btn:hover, .nav a:hover{
+    letter-spacing:0.5px;
+}
+
+/* =========================
+   SCROLL ANIMATION ENHANCEMENT
+========================= */
+
+html{
+    scroll-behavior:smooth;
+}
+
+/* smooth fade for all elements */
+*{
+    transition:all .25s ease-in-out;
+}
+
+/* =========================
+   EXTRA GOLD EDGE HIGHLIGHT
+========================= */
+
+.gold-edge{
+    border:1px solid rgba(255,215,0,.3);
+    box-shadow:
+    inset 0 0 10px rgba(255,215,0,.05),
+    0 0 20px rgba(255,215,0,.08);
+}
+
+/* =========================
+   FINAL RESPONSIVE TWEAKS
+========================= */
+
+@media(max-width:768px){
+
+    body{
+        font-size:14px;
+    }
+
+    .hero h1{
+        font-size:1.8rem;
+    }
+
+    .card{
+        padding:18px;
+    }
+
+}
+
+/* =========================
+   FINAL CLEAN FINISH LINE
+========================= */
+
+footer{
+    opacity:.9;
+    letter-spacing:0.5px;
+}

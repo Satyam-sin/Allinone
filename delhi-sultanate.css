@@ -1,0 +1,490 @@
+/* =========================
+   DELHI SULTANATE
+   PREMIUM DARK ROYAL THEME
+   PART 1
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Segoe UI',sans-serif;
+    min-height:100vh;
+    overflow-x:hidden;
+    color:#f3f0e7;
+
+    background:
+    radial-gradient(circle at top,#1a0f0a,#0c0c0c 60%,#050505);
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+    text-align:center;
+    padding:50px 20px;
+}
+
+.header h1{
+    font-size:3rem;
+    background:linear-gradient(90deg,#ffb347,#ff6a00,#ffcc70);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    text-shadow:0 0 20px rgba(255,140,0,.25);
+}
+
+.header p{
+    margin-top:10px;
+    color:#d7c7b0;
+    font-size:1.1rem;
+}
+
+/* =========================
+   NAV BUTTON
+========================= */
+
+.nav{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.timeline-btn{
+    padding:14px 28px;
+    border:none;
+    border-radius:40px;
+    cursor:pointer;
+
+    font-weight:bold;
+    font-size:16px;
+
+    color:#111;
+
+    background:linear-gradient(135deg,#ffb347,#ff6a00);
+
+    transition:.4s;
+
+    box-shadow:0 0 15px rgba(255,140,0,.25);
+}
+
+.timeline-btn:hover{
+    transform:translateY(-4px);
+    box-shadow:0 0 25px rgba(255,140,0,.5);
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container{
+    width:92%;
+    max-width:1100px;
+    margin:auto;
+}
+
+/* =========================
+   MAIN CARD
+========================= */
+
+.card{
+    background:rgba(255,255,255,.04);
+    backdrop-filter:blur(10px);
+
+    border:1px solid rgba(255,140,0,.15);
+
+    border-radius:25px;
+
+    padding:30px;
+
+    box-shadow:0 0 30px rgba(255,140,0,.08);
+}
+
+/* =========================
+   TITLE
+========================= */
+
+.topic-title{
+    text-align:center;
+    font-size:2rem;
+
+    color:#ffb347;
+
+    border-bottom:2px solid rgba(255,140,0,.25);
+
+    padding-bottom:12px;
+    margin-bottom:25px;
+}
+
+/* =========================
+   POINT BOX
+========================= */
+
+.point{
+    background:rgba(255,255,255,.03);
+
+    border-left:5px solid #ff8c42;
+
+    border-radius:15px;
+
+    padding:18px;
+    margin-bottom:18px;
+
+    transition:.3s;
+}
+
+.point:hover{
+    transform:translateX(8px);
+    background:rgba(255,140,0,.06);
+}
+
+.point h3{
+    color:#ffb347;
+    margin-bottom:8px;
+}
+
+.point p{
+    color:#e6dcc9;
+    line-height:1.8;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    text-align:center;
+    padding:25px;
+    margin-top:40px;
+
+    color:#c9c0b0;
+
+    border-top:1px solid rgba(255,140,0,.15);
+}
+
+/* =========================
+   SCROLLBAR
+========================= */
+
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-track{
+    background:#0b0b0b;
+}
+
+::-webkit-scrollbar-thumb{
+    background:linear-gradient(#ffb347,#ff6a00);
+    border-radius:20px;
+}
+/* =========================
+   TIMELINE BASE DESIGN
+========================= */
+
+.timeline{
+    width:92%;
+    max-width:1000px;
+    margin:40px auto;
+    display:none;
+    position:relative;
+}
+
+.timeline.active{
+    display:block;
+}
+
+/* MAIN VERTICAL LINE */
+.timeline::before{
+    content:"";
+    position:absolute;
+    left:18px;
+    top:0;
+    bottom:0;
+
+    width:4px;
+    border-radius:10px;
+
+    background:linear-gradient(#ffb347,#ff6a00,#ff3c00);
+}
+
+/* =========================
+   RULER (COMMON BLOCK)
+========================= */
+
+.ruler{
+    position:relative;
+
+    margin-bottom:20px;
+    padding:18px 18px 18px 45px;
+
+    border-radius:18px;
+
+    background:rgba(255,255,255,.04);
+
+    backdrop-filter:blur(8px);
+
+    transition:.4s;
+}
+
+.ruler:hover{
+    transform:translateX(10px);
+}
+
+/* DOT ON LINE */
+.ruler::before{
+    content:"";
+    position:absolute;
+    left:10px;
+    top:22px;
+
+    width:16px;
+    height:16px;
+
+    border-radius:50%;
+
+    background:#ffb347;
+
+    box-shadow:0 0 12px rgba(255,140,0,.6);
+}
+
+/* =========================
+   DYNASTY THEMES
+========================= */
+
+/* SLAVE DYNASTY (COOL GOLD BLUE MIX) */
+.slave-dynasty{
+    border-left:5px solid #4fc3f7;
+}
+.slave-dynasty h3{
+    color:#4fc3f7;
+}
+
+/* KHALJI DYNASTY (RED FIRE) */
+.khilji-dynasty{
+    border-left:5px solid #ff4d4d;
+}
+.khilji-dynasty h3{
+    color:#ff4d4d;
+}
+
+/* TUGHLAQ DYNASTY (PURPLE ROYAL) */
+.tughlaq-dynasty{
+    border-left:5px solid #b388ff;
+}
+.tughlaq-dynasty h3{
+    color:#b388ff;
+}
+
+/* SAYYID DYNASTY (SILVER DARK) */
+.sayyid-dynasty{
+    border-left:5px solid #cfd8dc;
+}
+.sayyid-dynasty h3{
+    color:#cfd8dc;
+}
+
+/* LODI DYNASTY (GREEN EARTH) */
+.lodi-dynasty{
+    border-left:5px solid #66bb6a;
+}
+.lodi-dynasty h3{
+    color:#66bb6a;
+}
+
+/* =========================
+   TEXT STYLE INSIDE TIMELINE
+========================= */
+
+.ruler p{
+    color:#e8e1d6;
+    line-height:1.7;
+}
+
+/* =========================
+   SIMPLE FADE IN ANIMATION
+========================= */
+
+.ruler{
+    opacity:0;
+    transform:translateY(20px);
+    animation:fadeUp .6s forwards;
+}
+
+.ruler:nth-child(1){animation-delay:.1s;}
+.ruler:nth-child(2){animation-delay:.2s;}
+.ruler:nth-child(3){animation-delay:.3s;}
+.ruler:nth-child(4){animation-delay:.4s;}
+.ruler:nth-child(5){animation-delay:.5s;}
+
+@keyframes fadeUp{
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* =========================
+   HOVER GLOW EFFECT
+========================= */
+
+.ruler:hover{
+    box-shadow:0 0 20px rgba(255,140,0,.15);
+}
+/* =========================
+   ULTRA PREMIUM FINAL EFFECTS
+========================= */
+
+/* GLOBAL SELECTION */
+::selection{
+    background:#ffb347;
+    color:#111;
+}
+
+/* =========================
+   FLOATING BACKGROUND GLOWS
+========================= */
+
+body::before,
+body::after{
+    content:"";
+    position:fixed;
+    width:400px;
+    height:400px;
+    border-radius:50%;
+    filter:blur(120px);
+    z-index:-1;
+}
+
+body::before{
+    background:rgba(255,140,0,.10);
+    top:-150px;
+    left:-150px;
+    animation:float1 14s infinite alternate;
+}
+
+body::after{
+    background:rgba(255,60,0,.08);
+    bottom:-150px;
+    right:-150px;
+    animation:float2 16s infinite alternate;
+}
+
+@keyframes float1{
+    from{ transform:translate(0,0); }
+    to{ transform:translate(120px,100px); }
+}
+
+@keyframes float2{
+    from{ transform:translate(0,0); }
+    to{ transform:translate(-120px,-100px); }
+}
+
+/* =========================
+   PREMIUM GLASS EFFECT ENHANCEMENT
+========================= */
+
+.card{
+    position:relative;
+    overflow:hidden;
+}
+
+.card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background:
+    linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,140,0,.05),
+    transparent
+    );
+
+    transform:translateX(-100%);
+    animation:shine 6s infinite;
+}
+
+@keyframes shine{
+    0%{ transform:translateX(-100%); }
+    50%{ transform:translateX(100%); }
+    100%{ transform:translateX(100%); }
+}
+
+/* =========================
+   BUTTON SHINE EFFECT
+========================= */
+
+.timeline-btn{
+    position:relative;
+    overflow:hidden;
+}
+
+.timeline-btn::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:100%;
+    height:100%;
+
+    background:
+    linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.5),
+    transparent
+    );
+
+    transition:.6s;
+}
+
+.timeline-btn:hover::before{
+    left:100%;
+}
+
+/* =========================
+   IMPROVED MOBILE RESPONSIVE
+========================= */
+
+@media(max-width:768px){
+
+    .timeline::before{
+        left:12px;
+    }
+
+    .ruler{
+        padding-left:38px;
+    }
+
+    .header h1{
+        font-size:2rem;
+    }
+}
+
+/* =========================
+   PREMIUM DEPTH SHADOWS
+========================= */
+
+.card,
+.ruler{
+    box-shadow:
+    0 10px 30px rgba(0,0,0,.4),
+    0 0 20px rgba(255,140,0,.08);
+}
+
+/* =========================
+   SMOOTH TRANSITIONS GLOBAL
+========================= */
+
+*{
+    transition:all .25s ease-in-out;
+}
