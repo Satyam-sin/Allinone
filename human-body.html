@@ -1,14 +1,129 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="hi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Human Body - Eduverse</title>
+
+<link rel="stylesheet" href="human-body.css">
 </head>
 
 <body>
-  
-</body>
 
+<!-- HEADER -->
+<header class="header">
+    <h1>🧠 Human Body</h1>
+    <p>मानव शरीर की संरचना और कार्य प्रणाली को गहराई से समझें</p>
+</header>
+
+<!-- NAV -->
+<nav class="nav">
+    <a href="index.html">🏠 Home</a>
+    <a href="plants.html">🌿 Plants</a>
+    <a href="animals.html">🐾 Animals</a>
+    <a href="human-body.html">🧍 Human Body</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <h2>🫀 Body Systems Overview</h2>
+    <p>
+        मानव शरीर 11 प्रमुख प्रणालियों से मिलकर बना है जो मिलकर जीवन को नियंत्रित करते हैं।
+    </p>
+</section>
+
+<!-- CONTENT -->
+<section class="container">
+
+    <!-- NERVOUS SYSTEM -->
+    <div class="card">
+        <h3>🧠 Nervous System</h3>
+        <p>मस्तिष्क और नसों द्वारा शरीर को नियंत्रित करता है।</p>
+
+        <button class="info-btn" onclick="openModal('nervous')">🔍 Details</button>
+    </div>
+
+    <!-- CIRCULATORY -->
+    <div class="card">
+        <h3>❤️ Circulatory System</h3>
+        <p>रक्त और ऑक्सीजन को पूरे शरीर में पहुंचाता है।</p>
+
+        <button class="info-btn" onclick="openModal('circulatory')">🔍 Details</button>
+    </div>
+
+    <!-- RESPIRATORY -->
+    <div class="card">
+        <h3>🫁 Respiratory System</h3>
+        <p>ऑक्सीजन लेना और CO₂ बाहर निकालना।</p>
+
+        <button class="info-btn" onclick="openModal('respiratory')">🔍 Details</button>
+    </div>
+
+    <!-- DIGESTIVE -->
+    <div class="card">
+        <h3>🍽 Digestive System</h3>
+        <p>भोजन को ऊर्जा में बदलने की प्रक्रिया।</p>
+
+        <button class="info-btn" onclick="openModal('digestive')">🔍 Details</button>
+    </div>
+
+    <!-- SKELETAL -->
+    <div class="card">
+        <h3>🦴 Skeletal System</h3>
+        <p>शरीर को संरचना और सुरक्षा प्रदान करता है।</p>
+
+        <button class="info-btn" onclick="openModal('skeletal')">🔍 Details</button>
+    </div>
+
+    <!-- MUSCULAR -->
+    <div class="card">
+        <h3>💪 Muscular System</h3>
+        <p>शरीर की गति और ताकत को नियंत्रित करता है।</p>
+
+        <button class="info-btn" onclick="openModal('muscular')">🔍 Details</button>
+    </div>
+
+    <!-- EXCRETORY -->
+    <div class="card">
+        <h3>🚽 Excretory System</h3>
+        <p>शरीर से अपशिष्ट पदार्थ बाहर निकालता है।</p>
+
+        <button class="info-btn" onclick="openModal('excretory')">🔍 Details</button>
+    </div>
+
+    <!-- ENDOCRINE -->
+    <div class="card">
+        <h3>🧪 Endocrine System</h3>
+        <p>हार्मोन द्वारा शरीर के कार्यों को नियंत्रित करता है।</p>
+
+        <button class="info-btn" onclick="openModal('endocrine')">🔍 Details</button>
+    </div>
+
+</section>
+
+<!-- MODAL -->
+<div id="modal" class="modal">
+
+    <div class="modal-box">
+
+        <span class="close" onclick="closeModal()">✖</span>
+
+        <h2 id="modal-title">Details</h2>
+        <p id="modal-text">Information loading...</p>
+
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <h2>🧍 Eduverse Human Body</h2>
+    <p>Explore • Learn • Understand</p>
+    <p>© 2026 Eduverse</p>
+</footer>
+
+<script src="human-body.js" defer></script>
+
+</body>
 </html>

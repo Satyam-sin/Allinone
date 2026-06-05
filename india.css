@@ -1,201 +1,298 @@
 /* =========================
    EDUVERSE HISTORY CSS
-   PREMIUM UNIVERSAL DESIGN
-   ========================= */
+   PREMIUM PROFESSIONAL
+   PART 1
+========================= */
 
 /* RESET */
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Segoe UI, sans-serif;
+    font-family:'Segoe UI',sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 /* =========================
-   BACKGROUND THEME
-   ========================= */
+   HISTORY BACKGROUND
+========================= */
 
 body{
+
     min-height:100vh;
-    color:#fff;
-    background:linear-gradient(135deg,#05061a,#0a0f2d,#02040f,#0b1026);
-    background-size:400% 400%;
-    animation:bgMove 18s ease infinite;
-    overflow-x:hidden;
-}
 
-/* animated background */
-@keyframes bgMove{
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
-}
+    color:white;
 
-/* floating stars effect */
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
     background-image:
-    radial-gradient(circle at 10% 20%, rgba(255,255,255,0.5) 1px, transparent 1px),
-    radial-gradient(circle at 30% 80%, rgba(255,255,255,0.4) 1px, transparent 1px),
-    radial-gradient(circle at 70% 40%, rgba(255,255,255,0.5) 1px, transparent 1px),
-    radial-gradient(circle at 90% 10%, rgba(255,255,255,0.3) 1px, transparent 1px);
-    background-size:300px 300px;
-    opacity:0.4;
-    pointer-events:none;
+    url("https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=2000&q=80");
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-attachment:fixed;
+
+    background-repeat:no-repeat;
+
+    overflow-x:hidden;
 }
 
 /* =========================
    HEADER
-   ========================= */
+========================= */
 
 .header{
+
     text-align:center;
-    padding:50px 20px 30px;
+
+    padding:60px 20px;
+
+    backdrop-filter:blur(4px);
 }
 
 .header h1{
-    font-size:3rem;
-    color:#00e5ff;
-    text-shadow:0 0 20px #00e5ff, 0 0 40px rgba(0,229,255,0.3);
+
+    font-size:3.5rem;
+
+    color:#ffd54f;
+
+    text-shadow:
+    0 0 10px #ffd54f,
+    0 0 25px #ffb300;
 }
 
 .header p{
-    margin-top:10px;
-    color:#b8c1cc;
-    font-size:1.1rem;
+
+    margin-top:15px;
+
+    font-size:1.15rem;
+
+    font-weight:600;
+
+    color:#ffffff;
 }
 
 /* =========================
    NAVIGATION
-   ========================= */
+========================= */
 
 .nav{
+
     display:flex;
+
     justify-content:center;
+
     flex-wrap:wrap;
-    gap:10px;
-    padding:15px;
+
+    gap:12px;
+
+    padding:20px;
 }
 
-/* Home button */
 .nav a{
+
     text-decoration:none;
-    color:#fff;
-    padding:10px 18px;
-    border-radius:25px;
-    background:rgba(255,255,255,0.05);
-    border:1px solid rgba(255,255,255,0.1);
+
+    color:white;
+
+    padding:12px 22px;
+
+    border-radius:30px;
+
+    background:
+    rgba(255,255,255,0.15);
+
     backdrop-filter:blur(10px);
-    transition:0.3s;
+
+    border:
+    1px solid rgba(255,255,255,0.25);
+
+    transition:.4s;
 }
 
 .nav a:hover{
-    background:#00e5ff;
-    color:#000;
-    box-shadow:0 0 15px #00e5ff;
-    transform:translateY(-3px);
+
+    background:#ff9933;
+
+    color:black;
+
+    transform:translateY(-4px);
+
+    box-shadow:
+    0 0 15px #ff9933;
 }
 
 /* =========================
-   DROPDOWN MENU
-   ========================= */
+   DROPDOWN
+========================= */
 
 .dropdown{
+
     position:relative;
+
     display:inline-block;
 }
 
 .dropbtn{
-    padding:10px 18px;
+
     border:none;
-    border-radius:25px;
+
     cursor:pointer;
-    background:rgba(255,255,255,0.07);
+
     color:white;
-    border:1px solid rgba(255,255,255,0.1);
+
+    padding:12px 22px;
+
+    border-radius:30px;
+
+    background:
+    rgba(255,255,255,0.15);
+
+    border:
+    1px solid rgba(255,255,255,0.25);
+
     backdrop-filter:blur(10px);
-    transition:0.3s;
+
+    transition:.4s;
 }
 
 .dropbtn:hover{
-    background:#00e5ff;
-    color:#000;
-    box-shadow:0 0 15px #00e5ff;
+
+    background:#138808;
+
+    color:white;
+
+    box-shadow:
+    0 0 15px #138808;
 }
 
 .dropdown-content{
+
     display:none;
+
     position:absolute;
-    top:55px;
+
+    top:60px;
+
     left:0;
-    min-width:200px;
-    background:rgba(10,15,40,0.95);
+
+    min-width:220px;
+
+    z-index:999;
+
     border-radius:15px;
+
     overflow:hidden;
-    box-shadow:0 10px 30px rgba(0,0,0,0.5);
+
+    background:
+    rgba(0,0,0,0.85);
+
     backdrop-filter:blur(10px);
-    z-index:1000;
 }
 
-/* JS ACTIVE CLASS */
 .dropdown.show .dropdown-content{
     display:block;
 }
 
 .dropdown-content a{
+
     display:block;
+
+    color:white;
+
     padding:12px 15px;
-    color:#fff;
+
     text-decoration:none;
-    transition:0.3s;
+
+    transition:.3s;
 }
 
 .dropdown-content a:hover{
-    background:#00e5ff;
-    color:#000;
+
+    background:#138808;
 }
 
 /* =========================
-   CONTENT GRID
-   ========================= */
+   MAIN CONTAINER
+========================= */
 
 .container{
+
     width:90%;
-    max-width:1100px;
+
+    max-width:1200px;
+
     margin:auto;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:20px;
+
     padding:40px 0;
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(300px,1fr));
+
+    gap:25px;
 }
+/* =========================
+   EDUVERSE HISTORY CSS
+   PREMIUM PROFESSIONAL
+   PART 2
+========================= */
 
 /* =========================
-   CARDS (MAIN CONTENT)
-   ========================= */
+   PREMIUM CARDS
+========================= */
 
 .card{
-    background:rgba(255,255,255,0.06);
-    border:1px solid rgba(255,255,255,0.1);
-    border-radius:20px;
-    padding:25px;
-    backdrop-filter:blur(15px);
-    transition:0.4s ease;
+
+    background:
+    rgba(0,0,0,0.45);
+
+    backdrop-filter:blur(12px);
+
+    border:
+    1px solid rgba(255,255,255,0.20);
+
+    border-radius:25px;
+
+    padding:28px;
+
     position:relative;
+
     overflow:hidden;
+
+    transition:.5s;
+
+    box-shadow:
+    0 8px 25px rgba(0,0,0,.35);
 }
 
-/* glow animation */
+/* GLOW EFFECT */
+
 .card::before{
+
     content:"";
+
     position:absolute;
+
     top:0;
     left:-100%;
+
     width:100%;
     height:100%;
-    background:linear-gradient(120deg,transparent,rgba(0,229,255,0.15),transparent);
-    transition:0.7s;
+
+    background:
+    linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,153,51,.25),
+    transparent);
+
+    transition:.8s;
 }
 
 .card:hover::before{
@@ -203,138 +300,267 @@ body::before{
 }
 
 .card:hover{
-    transform:translateY(-10px) scale(1.02);
-    box-shadow:0 15px 30px rgba(0,229,255,0.2);
+
+    transform:
+    translateY(-10px)
+    scale(1.02);
+
+    box-shadow:
+    0 15px 35px rgba(255,153,51,.30);
 }
 
+/* =========================
+   CARD TITLES
+========================= */
+
 .card h2{
-    color:#ffe066;
-    margin-bottom:10px;
-    font-size:1.3rem;
+
+    color:#ffd54f;
+
+    font-size:1.6rem;
+
+    margin-bottom:15px;
+
+    text-shadow:
+    0 0 10px rgba(255,213,79,.5);
 }
 
 .card p{
-    color:#cbd5e1;
+
+    color:#f1f1f1;
+
+    line-height:1.8;
+
+    font-size:1rem;
+}
+
+/* =========================
+   TOPIC TITLE
+========================= */
+
+.topic-title{
+
+    color:#ffd54f;
+
+    font-size:1.8rem;
+
+    margin-bottom:25px;
+
+    padding-left:15px;
+
+    border-left:
+    5px solid #ff9933;
+
+    text-shadow:
+    0 0 10px rgba(255,213,79,.4);
+}
+
+/* =========================
+   POINT BOXES
+========================= */
+
+.point{
+
+    margin:15px 0;
+
+    padding:15px;
+
+    border-radius:15px;
+
+    background:
+    rgba(255,255,255,.08);
+
+    border-left:
+    4px solid #138808;
+
+    transition:.4s;
+}
+
+.point:hover{
+
+    transform:
+    translateX(8px);
+
+    background:
+    rgba(19,136,8,.15);
+
+    box-shadow:
+    0 0 15px rgba(19,136,8,.25);
+}
+
+.point h3{
+
+    color:#7CFF7C;
+
+    margin-bottom:8px;
+
+    font-size:1.15rem;
+}
+
+.point p{
+
+    color:#f5f5f5;
+
     line-height:1.7;
 }
 
 /* =========================
-   FOOTER
-   ========================= */
+   HISTORY BUTTONS
+========================= */
 
-footer{
-    text-align:center;
-    padding:25px;
-    margin-top:30px;
-    border-top:1px solid rgba(255,255,255,0.1);
-    color:#94a3b8;
+.btn,
+.card a{
+
+    display:inline-block;
+
+    text-decoration:none;
+
+    padding:12px 24px;
+
+    border-radius:30px;
+
+    font-weight:bold;
+
+    color:white;
+
+    background:
+    linear-gradient(
+    135deg,
+    #ff9933,
+    #138808);
+
+    transition:.4s;
+}
+
+.btn:hover,
+.card a:hover{
+
+    transform:
+    scale(1.08);
+
+    box-shadow:
+    0 0 20px #ff9933,
+    0 0 30px #138808;
 }
 
 /* =========================
-   RESPONSIVE
-   ========================= */
+   PROFESSIONAL GREEN FOOTER
+========================= */
+
+footer{
+
+    margin-top:60px;
+
+    padding:40px 20px;
+
+    text-align:center;
+
+    background:
+    linear-gradient(
+    135deg,
+    #0b6623,
+    #138808,
+    #0b6623);
+
+    border-top:
+    2px solid rgba(124,255,124,.4);
+
+    box-shadow:
+    0 -5px 25px rgba(19,136,8,.35);
+}
+
+footer h2{
+
+    color:#7CFF7C;
+
+    font-size:2rem;
+
+    margin-bottom:10px;
+
+    text-shadow:
+    0 0 10px #7CFF7C;
+}
+
+footer p{
+
+    color:#f0fff0;
+
+    margin:8px 0;
+
+    font-size:1rem;
+}
+
+footer:hover{
+
+    box-shadow:
+    0 -10px 35px rgba(19,136,8,.5);
+}
+
+/* =========================
+   TEXT SELECTION
+========================= */
+
+::selection{
+
+    background:#138808;
+
+    color:white;
+}
+
+/* =========================
+   MOBILE DESIGN
+========================= */
 
 @media(max-width:768px){
 
     .header h1{
-        font-size:2.2rem;
+        font-size:2.4rem;
     }
 
-    .dropbtn{
-        padding:8px 14px;
-        font-size:14px;
+    .header p{
+        font-size:1rem;
     }
 
-    .nav a{
-        padding:8px 12px;
-        font-size:14px;
+    .container{
+        width:95%;
     }
-}
-/* =========================
-   CARD BASE DESIGN
-   ========================= */
 
-.card{
-    background:rgba(255,255,255,0.05);
-    border:1px solid rgba(255,255,255,0.1);
-    border-radius:20px;
-    padding:25px;
-    margin:20px 0;
-    backdrop-filter:blur(15px);
-    transition:0.4s ease;
-    overflow:hidden;
-}
+    .card{
+        padding:20px;
+    }
 
-/* hover effect */
-.card:hover{
-    transform:translateY(-8px);
-    box-shadow:0 15px 30px rgba(0,229,255,0.15);
-}
-
-/* =========================
-   MAIN TITLE
-   ========================= */
-
-.topic-title{
-    color:#ffe066;
-    font-size:1.6rem;
-    margin-bottom:20px;
-    padding-left:12px;
-    border-left:4px solid #00e5ff;
-    text-shadow:0 0 10px rgba(255,224,102,0.2);
-}
-
-/* =========================
-   EACH POINT BOX
-   ========================= */
-
-.point{
-    margin:15px 0;
-    padding:12px 15px;
-    border-left:3px solid #00e5ff;
-    background:rgba(255,255,255,0.03);
-    border-radius:12px;
-    transition:0.3s;
-}
-
-/* hover animation */
-.point:hover{
-    transform:translateX(6px);
-    background:rgba(0,229,255,0.08);
-    box-shadow:0 0 10px rgba(0,229,255,0.1);
-}
-
-/* =========================
-   SUB HEADINGS
-   ========================= */
-
-.point h3{
-    color:#00e5ff;
-    margin-bottom:6px;
-    font-size:1.1rem;
-}
-
-/* =========================
-   TEXT PARAGRAPH
-   ========================= */
-
-.point p{
-    color:#cbd5e1;
-    line-height:1.7;
-    font-size:0.95rem;
-    margin-bottom:6px;
-}
-
-/* =========================
-   RESPONSIVE
-   ========================= */
-
-@media(max-width:768px){
-    .topic-title{
+    .card h2{
         font-size:1.3rem;
     }
 
-    .point{
-        padding:10px;
+    .topic-title{
+        font-size:1.4rem;
+    }
+
+    .point h3{
+        font-size:1rem;
+    }
+
+    footer h2{
+        font-size:1.5rem;
+    }
+}
+
+/* =========================
+   EXTRA SMALL DEVICES
+========================= */
+
+@media(max-width:480px){
+
+    .header h1{
+        font-size:2rem;
+    }
+
+    .topic-title{
+        font-size:1.2rem;
+    }
+
+    .card{
+        padding:18px;
     }
 }

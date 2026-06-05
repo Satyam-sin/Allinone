@@ -1,0 +1,347 @@
+/* =========================
+   HUMAN BODY - PREMIUM BIOLOGY THEME
+========================= */
+
+/* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', sans-serif;
+}
+
+/* =========================
+   BACKGROUND - MEDICAL DARK + HEARTBEAT GRID
+========================= */
+
+body{
+    min-height:100vh;
+    overflow-x:hidden;
+    color:#eaf6ff;
+
+    /* IMAGE + DARK BLUE SOFT OVERLAY */
+    background:
+    linear-gradient(
+        rgba(5,7,15,0.55),
+        rgba(5,7,15,0.75)
+    ),
+    url("https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=2000&q=80");
+
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+
+    position:relative;
+}
+
+/* heartbeat line animation */
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background-image:
+    linear-gradient(to right, transparent 49%, rgba(0,255,200,0.05) 50%, transparent 51%),
+    linear-gradient(to bottom, transparent 49%, rgba(0,255,200,0.05) 50%, transparent 51%);
+
+    background-size:80px 80px;
+
+    opacity:0.2;
+
+    animation:gridMove 20s linear infinite;
+    pointer-events:none;
+}
+
+@keyframes gridMove{
+    from{transform:translateY(0);}
+    to{transform:translateY(-80px);}
+}
+
+/* glowing medical orbs */
+body::after{
+    content:"";
+    position:fixed;
+    width:400px;
+    height:400px;
+
+    background:rgba(0,255,180,0.08);
+    border-radius:50%;
+    filter:blur(120px);
+
+    top:-120px;
+    right:-120px;
+
+    animation:float 12s ease-in-out infinite alternate;
+    pointer-events:none;
+}
+
+@keyframes float{
+    from{transform:translate(0,0);}
+    to{transform:translate(-120px,120px);}
+}
+
+/* =========================
+   HEADER (GLASS + GLOW BRAIN FEEL)
+========================= */
+
+.header{
+    text-align:center;
+    padding:60px 20px;
+}
+
+.header h1{
+    font-size:3rem;
+    color:#00ffd0;
+
+    text-shadow:
+    0 0 15px rgba(0,255,208,0.4),
+    0 0 35px rgba(0,255,208,0.2);
+}
+
+.header p{
+    margin-top:10px;
+    color:#cfefff;
+    opacity:0.9;
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.nav{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.nav a{
+    display:inline-block;
+    margin:5px;
+    padding:10px 18px;
+
+    text-decoration:none;
+    color:#eaf6ff;
+
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.12);
+
+    border-radius:25px;
+    backdrop-filter:blur(10px);
+
+    transition:0.3s;
+}
+
+.nav a:hover{
+    background:#00ffd0;
+    color:#000;
+    box-shadow:0 0 15px rgba(0,255,208,0.4);
+}
+
+/* =========================
+   HERO SECTION
+========================= */
+
+.hero{
+    text-align:center;
+    padding:30px 20px;
+}
+
+.hero h2{
+    font-size:2.5rem;
+    color:#00ffd0;
+}
+
+.hero p{
+    max-width:800px;
+    margin:10px auto;
+    color:#cfefff;
+}
+
+/* =========================
+   GRID LAYOUT
+========================= */
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+
+    padding:40px 0;
+}
+
+/* =========================
+   MEDICAL GLASS CARDS
+========================= */
+
+.card{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.12);
+
+    border-radius:20px;
+    padding:25px;
+
+    backdrop-filter:blur(15px);
+
+    position:relative;
+    overflow:hidden;
+
+    transition:0.4s;
+}
+
+/* glow sweep */
+.card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:100%;
+    height:100%;
+
+    background:linear-gradient(
+        120deg,
+        transparent,
+        rgba(0,255,208,0.12),
+        transparent
+    );
+
+    transition:0.7s;
+}
+
+.card:hover::before{
+    left:100%;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 10px 25px rgba(0,255,208,0.2);
+}
+
+/* text */
+.card h3{
+    color:#00ffd0;
+    margin-bottom:10px;
+}
+
+.card p{
+    color:#d6f3ff;
+    line-height:1.7;
+}
+
+/* =========================
+   GLASS FOOTER
+========================= */
+
+footer{
+    text-align:center;
+    padding:40px 20px;
+    margin-top:50px;
+
+    background:rgba(255,255,255,0.04);
+    backdrop-filter:blur(15px);
+
+    border-top:1px solid rgba(0,255,208,0.2);
+
+    color:#cfefff;
+}
+
+footer h2{
+    color:#00ffd0;
+    margin-bottom:8px;
+}
+
+footer p{
+    opacity:0.8;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:768px){
+    .header h1{
+        font-size:2.2rem;
+    }
+
+    .hero h2{
+        font-size:1.8rem;
+    }
+
+    .card{
+        padding:18px;
+    }
+}
+/* =========================
+   INFO BUTTON
+========================= */
+
+.info-btn{
+    margin-top:12px;
+    padding:8px 14px;
+
+    border:none;
+    border-radius:20px;
+
+    cursor:pointer;
+
+    background:rgba(0,255,208,0.15);
+    color:#00ffd0;
+
+    border:1px solid rgba(0,255,208,0.3);
+
+    transition:0.3s;
+}
+
+.info-btn:hover{
+    background:#00ffd0;
+    color:#000;
+    box-shadow:0 0 12px rgba(0,255,208,0.4);
+}
+
+/* =========================
+   MODAL BACKGROUND
+========================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+
+    display:none;
+    justify-content:center;
+    align-items:center;
+
+    background:rgba(0,0,0,0.6);
+    backdrop-filter:blur(10px);
+
+    z-index:9999;
+}
+
+/* MODAL BOX */
+.modal-box{
+    width:90%;
+    max-width:500px;
+
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(0,255,208,0.2);
+
+    border-radius:20px;
+    padding:25px;
+
+    color:#eaf6ff;
+    backdrop-filter:blur(15px);
+
+    position:relative;
+}
+
+/* CLOSE BUTTON */
+.close{
+    position:absolute;
+    top:10px;
+    right:15px;
+
+    cursor:pointer;
+    font-size:18px;
+    color:#00ffd0;
+}

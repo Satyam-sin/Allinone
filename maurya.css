@@ -21,106 +21,15 @@ body{
 
     background:
     linear-gradient(
-    135deg,
-    #050816,
-    #0b1330,
-    #111827,
-    #050816
-    );
+    rgba(0,0,0,.60),
+    rgba(0,0,0,.60)
+    ),
+    url("https://images.unsplash.com/photo-1605640840605-14ac1855827b?auto=format&fit=crop&w=2000&q=80");
 
-    background-size:400% 400%;
-
-    animation:bgMove 15s ease infinite;
-}
-
-/* Animated Background */
-
-@keyframes bgMove{
-
-    0%{
-        background-position:0% 50%;
-    }
-
-    50%{
-        background-position:100% 50%;
-    }
-
-    100%{
-        background-position:0% 50%;
-    }
-
-}
-
-/* Floating Light Effects */
-
-body::before{
-    content:"";
-
-    position:fixed;
-
-    width:350px;
-    height:350px;
-
-    background:
-    rgba(77,166,255,.15);
-
-    border-radius:50%;
-
-    filter:blur(120px);
-
-    top:-100px;
-    left:-100px;
-
-    z-index:-1;
-
-    animation:floatLight1 12s infinite alternate;
-}
-
-body::after{
-    content:"";
-
-    position:fixed;
-
-    width:350px;
-    height:350px;
-
-    background:
-    rgba(255,215,0,.12);
-
-    border-radius:50%;
-
-    filter:blur(120px);
-
-    bottom:-100px;
-    right:-100px;
-
-    z-index:-1;
-
-    animation:floatLight2 14s infinite alternate;
-}
-
-@keyframes floatLight1{
-
-    from{
-        transform:translate(0,0);
-    }
-
-    to{
-        transform:translate(180px,100px);
-    }
-
-}
-
-@keyframes floatLight2{
-
-    from{
-        transform:translate(0,0);
-    }
-
-    to{
-        transform:translate(-180px,-100px);
-    }
-
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+    background-repeat:no-repeat;
 }
 
 /* ==========================
@@ -837,7 +746,23 @@ footer{
 footer{
 
     box-shadow:
-    0 -5px 25px rgba(77,166,255,.08);
+    0 -5px 25px rgba(34,197,94,.25);
+
+    background:
+    linear-gradient(
+    135deg,
+    #14532d,
+    #166534,
+    #14532d
+    );
+
+    border-top:
+    2px solid rgba(9,200,84,.5);
+}
+footer:hover{
+
+    box-shadow:
+    0 -8px 35px rgba(34,197,94,.45);
 }
 
 /* ==========================

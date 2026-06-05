@@ -1,0 +1,300 @@
+/* =========================
+   PLANTS - CLEAN PREMIUM GLASS THEME
+========================= */
+
+/* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', sans-serif;
+}
+
+/* =========================
+   BACKGROUND (VERY LIGHT + NATURAL)
+========================= */
+
+body{
+    min-height:100vh;
+    overflow-x:hidden;
+    color:#eaffea;
+
+    /* Bright Forest Premium Background */
+    background:
+    linear-gradient(
+        rgba(0,0,0,0.18),
+        rgba(0,0,0,0.18)
+    ),
+    url("https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=2000&q=80");
+
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+}
+
+/* very soft floating light (NOT heavy color) */
+body::before,
+body::after{
+    content:"";
+    position:fixed;
+    width:320px;
+    height:320px;
+    border-radius:50%;
+    filter:blur(140px);
+    opacity:0.18;
+    z-index:-1;
+}
+
+body::before{
+    background:#7CFF7C;
+    top:-120px;
+    left:-120px;
+    animation:float1 14s infinite alternate;
+}
+
+body::after{
+    background:#a8ffcc;
+    bottom:-140px;
+    right:-140px;
+    animation:float2 16s infinite alternate;
+}
+
+@keyframes float1{
+    from{transform:translate(0,0);}
+    to{transform:translate(120px,80px);}
+}
+
+@keyframes float2{
+    from{transform:translate(0,0);}
+    to{transform:translate(-120px,-80px);}
+}
+
+/* =========================
+   HEADER (CLEAN TRANSPARENT STYLE)
+========================= */
+
+.header{
+    text-align:center;
+    padding:60px 20px;
+}
+
+.header h1{
+    font-size:3rem;
+    color:#7CFF7C;
+    text-shadow:0 0 15px rgba(124,255,124,0.25);
+}
+
+.header p{
+    margin-top:10px;
+    color:rgba(230,255,230,0.85);
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    text-align:center;
+    padding:30px 20px;
+}
+
+.hero h2{
+    font-size:2.5rem;
+    color:#7CFF7C;
+}
+
+.hero p{
+    margin-top:10px;
+    max-width:800px;
+    margin-inline:auto;
+    color:rgba(230,255,230,0.8);
+}
+
+/* =========================
+   GRID CONTAINER
+========================= */
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+    padding:40px 0;
+}
+/* =========================
+   GLASS CARDS (PURE TRANSPARENT STYLE)
+========================= */
+
+.card{
+    background:rgba(255,255,255,0.05); /* fully glass */
+    border:1px solid rgba(255,255,255,0.10);
+
+    border-radius:20px;
+    padding:25px;
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    position:relative;
+    overflow:hidden;
+
+    transition:0.35s ease;
+}
+
+/* soft green light sweep (very light, not colorful block) */
+.card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-120%;
+    width:120%;
+    height:100%;
+
+    background:linear-gradient(
+        120deg,
+        transparent,
+        rgba(124,255,124,0.10),
+        transparent
+    );
+
+    transition:0.6s ease;
+}
+
+.card:hover::before{
+    left:120%;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 10px 25px rgba(124,255,124,0.12);
+}
+
+/* =========================
+   TEXT INSIDE CARD
+========================= */
+
+.card h3{
+    color:#7CFF7C;
+    margin-bottom:10px;
+    font-size:1.3rem;
+}
+
+.card p{
+    color:rgba(230,255,230,0.85);
+    line-height:1.7;
+}
+
+/* =========================
+   OPTIONAL POINT STYLE (IF YOU USE NOTES INSIDE CARDS)
+========================= */
+
+.point{
+    margin:12px 0;
+    padding:12px 14px;
+
+    background:rgba(255,255,255,0.03);
+    border-left:3px solid rgba(124,255,124,0.5);
+
+    border-radius:12px;
+
+    transition:0.25s;
+}
+
+.point:hover{
+    transform:translateX(5px);
+    background:rgba(124,255,124,0.06);
+}
+
+/* =========================
+   FOOTER (MINIMAL PREMIUM GREEN GLASS)
+========================= */
+
+footer{
+    text-align:center;
+    padding:40px 20px;
+    margin-top:60px;
+
+    /* glass + soft green tint */
+    background:rgba(124,255,124,0.06);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+
+    border-top:1px solid rgba(124,255,124,0.25);
+
+    color:#eaffea;
+
+    position:relative;
+    overflow:hidden;
+}
+
+/* soft green glow effect */
+footer::before{
+    content:"";
+    position:absolute;
+    top:-50%;
+    left:-50%;
+    width:200%;
+    height:200%;
+
+    background:radial-gradient(
+        circle,
+        rgba(124,255,124,0.12),
+        transparent 60%
+    );
+
+    animation:footerGlow 8s infinite alternate;
+}
+
+@keyframes footerGlow{
+    from{transform:translate(0,0);}
+    to{transform:translate(40px,20px);}
+}
+
+/* text styling */
+footer h2{
+    color:#7CFF7C;
+    margin-bottom:10px;
+    font-size:1.6rem;
+    text-shadow:0 0 12px rgba(124,255,124,0.3);
+}
+
+footer p{
+    color:rgba(230,255,230,0.85);
+    margin:6px 0;
+}
+
+/* hover effect */
+footer:hover{
+    border-top:1px solid rgba(124,255,124,0.5);
+    box-shadow:0 -10px 25px rgba(124,255,124,0.15);
+}
+
+/* =========================
+   HOVER LINK STYLE (IF ANY BUTTONS/ANCHORS)
+========================= */
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+/* =========================
+   MOBILE FIX
+========================= */
+
+@media(max-width:768px){
+
+    .header h1{
+        font-size:2.2rem;
+    }
+
+    .hero h2{
+        font-size:1.8rem;
+    }
+
+    .card{
+        padding:18px;
+    }
+}

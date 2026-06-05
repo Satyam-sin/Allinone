@@ -1,14 +1,117 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="hi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Animals - Eduverse</title>
+
+<link rel="stylesheet" href="animals.css">
 </head>
 
 <body>
-  
-</body>
 
+<!-- HEADER -->
+<header class="header">
+    <h1>🐾 Animals World</h1>
+    <p>जानवरों की रोचक दुनिया को सीखें और समझें</p>
+</header>
+
+<!-- NAV -->
+<nav class="nav">
+    <button class="hybrid-btn" onclick="openPanel()">
+🧬 वैज्ञानिकों द्वारा बनाए गए हाइब्रिड एनिमल्स
+</button>
+    <a href="index.html">🏠 Home</a>
+    <a href="plants.html">🌿 Plants</a>
+    <a href="animals.html">🐾 Animals</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <h2>🌍 Nature & Wildlife</h2>
+    <p>
+        जानवर पृथ्वी के प्राकृतिक संतुलन का महत्वपूर्ण हिस्सा हैं।
+        यहाँ आप विभिन्न जानवरों के बारे में सीखेंगे।
+    </p>
+</section>
+
+<!-- CONTENT -->
+<section class="container">
+
+    <div class="card">
+        <h3>🦁 Lion</h3>
+        <p>शेर जंगल का राजा कहलाता है और यह एक मांसाहारी जानवर है।</p>
+    </div>
+
+    <div class="card">
+        <h3>🐘 Elephant</h3>
+        <p>हाथी पृथ्वी का सबसे बड़ा स्थलीय जानवर है।</p>
+    </div>
+
+    <div class="card">
+        <h3>🐯 Tiger</h3>
+        <p>बाघ भारत का राष्ट्रीय पशु है और यह बहुत शक्तिशाली होता है।</p>
+    </div>
+
+    <div class="card">
+        <h3>🐄 Cow</h3>
+        <p>गाय एक पालतू जानवर है जो दूध देती है।</p>
+    </div>
+
+    <div class="card">
+        <h3>🐦 Peacock</h3>
+        <p>मोर भारत का राष्ट्रीय पक्षी है और बहुत सुंदर होता है।</p>
+    </div>
+
+    <div class="card">
+        <h3>🐍 Snake</h3>
+        <p>सांप एक रेंगने वाला जीव है जो बिना पैरों के चलता है।</p>
+    </div>
+
+</section>
+<!-- HYBRID PANEL -->
+<div id="hybridPanel" class="panel">
+
+    <div class="panel-content">
+
+        <h2>🧬 Hybrid Animals (Science & Research)</h2>
+
+        <div class="item">
+            <h3>Liger 🦁🐯</h3>
+            <p>शेर + बाघ का मिश्रण, दुनिया का सबसे बड़ा big cat hybrid.</p>
+        </div>
+
+        <div class="item">
+            <h3>Tigon 🐯🦁</h3>
+            <p>बाघ + शेर का संकर, दुर्लभ और छोटा hybrid animal.</p>
+        </div>
+
+        <div class="item">
+            <h3>Zorse 🐴🦓</h3>
+            <p>घोड़ा + ज़ेब्रा का मिश्रण.</p>
+        </div>
+
+        <div class="item">
+            <h3>Wholphin 🐬🐳</h3>
+            <p>डॉल्फिन + व्हेल का rare hybrid.</p>
+        </div>
+
+        <div class="item">
+            <h3>Cama 🐪🦙</h3>
+            <p>ऊँट + लामा का वैज्ञानिक hybrid experiment.</p>
+        </div>
+
+        <button class="close-btn" onclick="closePanel()">❌ Close</button>
+
+    </div>
+</div>
+<!-- FOOTER -->
+<footer>
+    <h2>🐾 Eduverse Animals Section</h2>
+    <p>Explore • Learn • Discover</p>
+    <p>© 2026 Eduverse</p>
+</footer>
+<script src="animals.js" defer></script>
+</body>
 </html>
