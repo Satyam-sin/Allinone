@@ -14,7 +14,6 @@ html{
 }
 
 body{
-
     font-family:'Segoe UI',sans-serif;
 
     background:
@@ -50,26 +49,20 @@ body{
 /* HEADER */
 
 header{
-
     text-align:center;
-
     padding:60px 20px;
 
     background:
-    linear-gradient(
-    rgba(0,0,0,0.45),
-    rgba(0,0,0,0.45));
+    rgba(0,0,0,0.25);
 
     backdrop-filter:blur(10px);
 
     border-bottom:
-    1px solid rgba(255,255,255,.15);
+    1px solid rgba(255,255,255,0.15);
 }
 
 header h1{
-
     font-size:4rem;
-
     color:#00e5ff;
 
     text-shadow:
@@ -78,75 +71,60 @@ header h1{
 }
 
 header p{
-
-    margin-top:15px;
-
+    margin-top:12px;
     font-size:1.2rem;
-
-    font-weight:bold;
-
-    color:#f1f1f1;
+    font-weight:600;
+    color:#f0f0f0;
 }
 
 /* SEARCH BOX */
 
 .search-box{
-
     max-width:800px;
-
     margin:30px auto;
-
     padding:0 20px;
 }
 
 .search-box input{
-
     width:100%;
-
     padding:18px 25px;
 
     border:none;
-
     outline:none;
 
     border-radius:50px;
 
     font-size:18px;
-
     color:white;
 
     background:
-    rgba(255,255,255,.12);
+    rgba(255,255,255,0.12);
 
     backdrop-filter:blur(15px);
 
     border:
-    1px solid rgba(255,255,255,.2);
+    1px solid rgba(255,255,255,0.20);
 
-    transition:.4s;
+    transition:0.4s;
 }
 
 .search-box input:focus{
-
     box-shadow:
     0 0 20px #00e5ff;
 }
 
 .search-box input::placeholder{
-    color:#ddd;
+    color:#dddddd;
 }
 
-/* HERO */
+/* HERO SECTION */
 
 .hero{
-
     text-align:center;
-
     padding:40px 20px;
 }
 
 .hero h2{
-
     font-size:3rem;
 
     color:#ffe066;
@@ -156,20 +134,15 @@ header p{
 }
 
 .hero p{
-
     margin-top:15px;
-
     font-size:1.2rem;
-
-    font-weight:bold;
+    font-weight:600;
 }
 
-/* CARD CONTAINER */
+/* MAIN CONTAINER */
 
 .container{
-
     width:90%;
-
     max-width:1400px;
 
     margin:auto;
@@ -191,7 +164,6 @@ header p{
 /* PREMIUM CARDS */
 
 .card{
-
     position:relative;
 
     padding:30px;
@@ -215,7 +187,7 @@ header p{
     transition:0.5s ease;
 }
 
-/* GLOW BORDER */
+/* GLOW EFFECT */
 
 .card::before{
 
@@ -233,7 +205,7 @@ header p{
     linear-gradient(
     45deg,
     transparent,
-    rgba(0,229,255,0.25),
+    rgba(0,229,255,0.20),
     transparent);
 
     transform:rotate(25deg);
@@ -241,28 +213,31 @@ header p{
     opacity:0;
 
     transition:0.6s;
+
+    pointer-events:none;
 }
 
 .card:hover::before{
     opacity:1;
 }
 
-/* HOVER EFFECT */
-
 .card:hover{
 
     transform:
-    translateY(-12px)
-    scale(1.03);
+    translateY(-10px)
+    scale(1.02);
 
     box-shadow:
     0 15px 35px rgba(0,229,255,0.25),
-    0 0 30px rgba(124,58,237,0.25);
+    0 0 25px rgba(124,58,237,0.25);
 }
 
-/* CARD TITLES */
+/* CARD CONTENT */
 
 .card h3{
+
+    position:relative;
+    z-index:2;
 
     font-size:1.8rem;
 
@@ -274,24 +249,26 @@ header p{
     0 0 10px #00e5ff;
 }
 
-/* CARD TEXT */
-
 .card p{
+
+    position:relative;
+    z-index:2;
 
     font-size:1.05rem;
 
     line-height:1.7;
-
-    font-weight:600;
 
     color:#f5f5f5;
 
     margin-bottom:25px;
 }
 
-/* EXPLORE BUTTON */
+/* BUTTON */
 
 .card a{
+
+    position:relative;
+    z-index:5;
 
     display:inline-block;
 
@@ -332,7 +309,7 @@ header p{
     }
 
     50%{
-        transform:translateY(-6px);
+        transform:translateY(-5px);
     }
 
     100%{
@@ -341,16 +318,17 @@ header p{
 }
 
 .card{
-    animation:floatCard 5s ease-in-out infinite;
+    animation:
+    floatCard 5s ease-in-out infinite;
 }
 
-/* FADE IN ANIMATION */
+/* FADE IN */
 
 @keyframes fadeUp{
 
     from{
         opacity:0;
-        transform:translateY(50px);
+        transform:translateY(40px);
     }
 
     to{
@@ -366,6 +344,7 @@ header p{
 }
 
 /* PREMIUM FOOTER */
+
 footer{
 
     margin-top:60px;
@@ -392,13 +371,13 @@ footer h2{
 
     font-size:2rem;
 
-    color:#7CFF7C;
+    color:#b8ffb8;
 
     margin-bottom:10px;
 
     text-shadow:
-    0 0 10px #7CFF7C,
-    0 0 20px #7CFF7C;
+    0 0 10px #7cff7c,
+    0 0 20px #7cff7c;
 }
 
 footer p{
@@ -415,7 +394,7 @@ footer p{
 footer:hover{
 
     box-shadow:
-    0 -8px 35px rgba(76,175,80,0.4);
+    0 -8px 35px rgba(76,175,80,0.40);
 }
 
 /* TEXT SELECTION */
@@ -469,20 +448,18 @@ footer:hover{
     }
 }
 
-/* EXTRA SMALL DEVICES */
-
 @media(max-width:480px){
 
     header h1{
-        font-size:2.3rem;
+        font-size:2.2rem;
     }
 
     .hero h2{
-        font-size:1.7rem;
+        font-size:1.6rem;
     }
 
     .search-box input{
-        padding:15px 20px;
         font-size:16px;
+        padding:15px 20px;
     }
 }
