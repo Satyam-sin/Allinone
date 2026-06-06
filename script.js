@@ -90,7 +90,7 @@ if(!visits){
 localStorage.setItem("eduverseVisits", visits);
 
 console.log("Eduverse Visits:", visits);
-
+!
 // 🎉 Welcome Message
 window.addEventListener("load", () => {
 

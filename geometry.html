@@ -1,14 +1,86 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="hi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geometry</title>
+
+<link rel="stylesheet" href="geometry.css">
 </head>
 
 <body>
-  
-</body>
 
+<header>
+📐 Geometry (ज्यामिति)
+</header>
+
+<div class="container">
+
+    <div class="box">
+        <h2>Points & Lines</h2>
+        <p>Basic building blocks of geometry</p>
+        <button class="detail-btn" data-topic="points">📘 Details</button>
+    </div>
+
+    <div class="box">
+        <h2>Angles</h2>
+        <p>Types of angles and their properties</p>
+        <button class="detail-btn" data-topic="angles">📘 Details</button>
+    </div>
+
+    <div class="box">
+        <h2>Triangles</h2>
+        <p>3 sides और 3 angles वाली shape</p>
+        <button class="detail-btn" data-topic="triangles">📘 Details</button>
+    </div>
+
+    <div class="box">
+        <h2>Circles</h2>
+        <p>Round shape with radius & diameter</p>
+        <button class="detail-btn" data-topic="circles">📘 Details</button>
+    </div>
+
+    <div class="box">
+        <h2>Quadrilaterals</h2>
+        <p>4 sides वाली shapes</p>
+        <button class="detail-btn" data-topic="quadgeo">📘 Details</button>
+    </div>
+
+    <div class="box">
+        <h2>Basic Shapes</h2>
+        <p>Square, rectangle, polygon basics</p>
+        <button class="detail-btn" data-topic="shapes">📘 Details</button>
+    </div>
+
+    <div class="box">
+        <h2>Geometry Formulas</h2>
+        <p>Area & perimeter formulas</p>
+        <button class="detail-btn" data-topic="formulas">📘 Details</button>
+    </div>
+
+</div>
+<div class="canvas-section">
+
+    <h2>🧠 Geometry Interactive Lab</h2>
+
+    <canvas id="geoCanvas" width="320" height="320"></canvas>
+
+    <div class="controls">
+        <button onclick="drawTriangle()">🔺 Triangle</button>
+        <button onclick="drawCircle()">⚪ Circle</button>
+        <button onclick="rotateAngle()">📐 Angle Rotate</button>
+        <button onclick="clearCanvas()">🧹 Clear</button>
+    </div>
+
+</div>
+
+
+<footer>
+<a href="../mathematics.html">⬅ Back to Mathematics Hub</a>
+</footer>
+
+<!-- ⚙️ JS FILE (IMPORTANT) -->
+<script src="geometry.js"></script>
+
+</body>
 </html>

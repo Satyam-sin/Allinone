@@ -1,0 +1,335 @@
+body{
+    margin:0;
+    font-family:"Segoe UI", Arial, sans-serif;
+    color:#ffffff;
+
+    /* 🌟 WORKING BACKGROUND IMAGE */
+    background-image: url("https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1600&q=80");
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+}
+
+/* 🌈 Light glass overlay (very soft) */
+body::before{
+    content:"";
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+
+    background: rgba(255,255,255,0.10);
+}
+
+/* 📐 Header glass effect */
+header{
+    text-align:center;
+    padding:22px;
+    font-size:30px;
+    font-weight:bold;
+
+    color:#0ea5e9;
+    letter-spacing:1px;
+
+    /* glass effect */
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+
+    border-bottom:1px solid rgba(255,255,255,0.25);
+}
+
+/* 📦 Grid container */
+.container{
+    padding:25px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+/* 🧊 Glass cards */
+.box{
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(14px);
+
+    border:1px solid rgba(255,255,255,0.25);
+
+    padding:18px;
+    border-radius:18px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+
+    position:relative;
+    overflow:hidden;
+
+    transition:0.35s ease;
+}
+
+/* glowing top line (soft) */
+.box::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:3px;
+
+    background:linear-gradient(90deg,#38bdf8,#a78bfa,#38bdf8);
+}
+
+/* hover */
+.box:hover{
+    transform:translateY(-8px) scale(1.02);
+
+    box-shadow:0 15px 35px rgba(0,0,0,0.2);
+}
+
+/* titles */
+.box h2{
+    margin-bottom:10px;
+    color:#0369a1;
+    font-size:18px;
+}
+
+/* text */
+.box p{
+    font-size:14.8px;
+    line-height:1.7;
+    color:#0f172a;
+}
+
+/* button glass style */
+.detail-btn{
+    margin-top:10px;
+    padding:7px 12px;
+
+    border:none;
+    border-radius:10px;
+
+    background:rgba(14,165,233,0.8);
+    color:white;
+
+    font-weight:bold;
+    cursor:pointer;
+
+    transition:0.3s ease;
+}
+
+.detail-btn:hover{
+    transform:scale(1.05);
+    background:rgba(14,165,233,1);
+}
+
+/* footer glass */
+footer{
+    text-align:center;
+    padding:18px;
+    margin-top:20px;
+
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+
+    border-top:1px solid rgba(255,255,255,0.25);
+}
+
+footer a{
+    color:#0369a1;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+footer a:hover{
+    color:#0ea5e9;
+}
+
+/* animation */
+.box{
+    animation:fadeUp 0.5s ease;
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* diagram style */
+.diagram{
+    font-family: monospace;
+    font-size:16px;
+    color:#0ea5e9;
+
+    background: rgba(255,255,255,0.25);
+    padding:10px;
+    border-radius:10px;
+
+    margin:10px 0;
+    text-align:center;
+
+    border:1px solid rgba(255,255,255,0.3);
+}
+/* 🌫️ Overlay for popup */
+.overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(255,255,255,0.12);
+
+    backdrop-filter: blur(10px);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    z-index:999;
+}
+
+/* 📘 Popup Panel (Glass Card) */
+.panel{
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(18px);
+
+    border:1px solid rgba(255,255,255,0.35);
+
+    padding:25px;
+    border-radius:20px;
+
+    width:92%;
+    max-width:650px;
+    max-height:85vh;
+
+    overflow-y:auto;
+
+    box-shadow:0 15px 40px rgba(0,0,0,0.25);
+
+    animation:pop 0.25s ease;
+}
+
+/* Title inside popup */
+.panel h2{
+    margin-top:0;
+    color:#0ea5e9;
+    font-size:22px;
+
+    border-bottom:1px solid rgba(255,255,255,0.3);
+    padding-bottom:8px;
+}
+
+/* Text inside popup */
+.panel p{
+    white-space:pre-line;
+    line-height:1.8;
+
+    font-size:15px;
+    color:#0f172a;
+}
+
+/* ❌ Close button */
+.close-btn{
+    margin-top:15px;
+    padding:10px 14px;
+
+    border:none;
+    border-radius:10px;
+
+    background:rgba(239,68,68,0.85);
+    color:white;
+
+    font-weight:bold;
+    cursor:pointer;
+
+    transition:0.3s ease;
+}
+
+.close-btn:hover{
+    transform:scale(1.05);
+    background:rgba(239,68,68,1);
+}
+
+/* ✨ Popup animation */
+@keyframes pop{
+    from{
+        transform:scale(0.8);
+        opacity:0;
+    }
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+/* 🧊 Scrollbar (modern look) */
+.panel::-webkit-scrollbar{
+    width:6px;
+}
+
+.panel::-webkit-scrollbar-thumb{
+    background:rgba(14,165,233,0.7);
+    border-radius:10px;
+}
+
+.panel::-webkit-scrollbar-track{
+    background:rgba(255,255,255,0.2);
+}
+
+/* 📱 Mobile responsive tuning */
+@media (max-width:600px){
+
+    header{
+        font-size:22px;
+        padding:16px;
+    }
+
+    .box{
+        padding:14px;
+    }
+
+    .panel{
+        width:95%;
+        padding:18px;
+    }
+}
+.canvas-section{
+    margin:30px auto;
+    text-align:center;
+}
+
+canvas{
+    background:rgba(255,255,255,0.2);
+    backdrop-filter:blur(10px);
+
+    border:2px solid rgba(255,255,255,0.4);
+    border-radius:15px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+.controls{
+    margin-top:15px;
+}
+
+.controls button{
+    margin:5px;
+    padding:8px 12px;
+
+    border:none;
+    border-radius:10px;
+
+    background:#0ea5e9;
+    color:white;
+
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.controls button:hover{
+    transform:scale(1.05);
+}

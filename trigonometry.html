@@ -1,14 +1,67 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="hi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trigonometry</title>
+
+<link rel="stylesheet" href="trigonometry.css">
 </head>
 
 <body>
-  
-</body>
 
+<header>
+📐 Trigonometry (त्रिकोणमिति)
+<input id="searchBox" onkeyup="searchTopic()" placeholder="Search topic...">
+</header>
+
+<div class="container">
+
+    <div class="box">
+        <h2>Basics of Trigonometry</h2>
+        <p>Sine, Cosine, Tangent introduction</p>
+        <button class="detail-btn" data-topic="basic">📘 Details</button>
+    </div>
+
+    <div class="box">
+        <h2>Trigonometric Ratios</h2>
+        <p>sin, cos, tan, cosec, sec, cot</p>
+        <button class="detail-btn" data-topic="ratios">📘 Details</button>
+    </div>
+
+    <div class="box">
+        <h2>Angles in Trigonometry</h2>
+        <p>0°, 30°, 45°, 60°, 90° values</p>
+        <button class="detail-btn" data-topic="angles">📘 Details</button>
+    </div>
+
+    <div class="box">
+        <h2>Trigonometric Identities</h2>
+        <p>Important formulas and relations</p>
+        <button class="detail-btn" data-topic="identities">📘 Details</button>
+    </div>
+
+    <div class="box">
+        <h2>Height & Distance</h2>
+        <p>Real life applications</p>
+        <button class="detail-btn" data-topic="height">📘 Details</button>
+    </div>
+
+</div>
+
+<footer class="app-footer">
+
+    <div class="footer-text">
+        📘 Trigonometry Learning Hub
+    </div>
+
+    <button class="footer-btn">
+        ✔ Mark as Completed
+    </button>
+
+</footer>
+
+<script src="trigonometry.js"></script>
+
+</body>
 </html>

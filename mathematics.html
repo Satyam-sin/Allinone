@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mathematics Hub</title>
+
+<style>
+    body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    color:white;
+
+    background:
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url("https://images.unsplash.com/photo-1509228468518-180dd4864904");
+
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+}
+
+    header{
+        text-align:center;
+        padding:20px;
+        background:rgba(0,0,0,0.4);
+        font-size:28px;
+        font-weight:bold;
+    }
+
+    .container{
+        display:flex;
+        flex-wrap:wrap;
+        justify-content:center;
+        padding:20px;
+        gap:20px;
+    }
+
+    .card{
+        width:220px;
+        padding:20px;
+        background:rgba(255,255,255,0.1);
+        border-radius:15px;
+        text-align:center;
+        text-decoration:none;
+        color:white;
+        transition:0.3s;
+        box-shadow:0 0 10px rgba(0,0,0,0.3);
+    }
+
+    .card:hover{
+        transform:scale(1.05);
+        background:rgba(255,255,255,0.2);
+    }
+
+    .emoji{
+        font-size:30px;
+        margin-bottom:10px;
+        display:block;
+    }
+
+    footer{
+        text-align:center;
+        padding:15px;
+        background:rgba(0,0,0,0.4);
+        margin-top:20px;
+    }
+</style>
+
+</head>
+
+<body>
+
+<header>
+📘 Mathematics Hub
+</header>
+
+<div class="container">
+
+    <a class="card" href="numbers.html">
+        <span class="emoji">🔢</span>
+        Basics
+    </a>
+
+    <a class="card" href="algebra.html">
+        <span class="emoji">➗</span>
+        Algebra
+    </a>
+
+    <a class="card" href="math/geometry.html">
+        <span class="emoji">📐</span>
+        Geometry
+    </a>
+
+    <a class="card" href="math/trigonometry.html">
+        <span class="emoji">📊</span>
+        Trigonometry
+    </a>
+
+    <a class="card" href="math/mensuration.html">
+        <span class="emoji">📦</span>
+        Mensuration
+    </a>
+
+    <a class="card" href="math/statistics.html">
+        <span class="emoji">📈</span>
+        Statistics
+    </a>
+
+    <a class="card" href="math/tricks.html">
+        <span class="emoji">🧠</span>
+        Math Tricks
+    </a>
+
+    <a class="card" href="math/tools.html">
+        <span class="emoji">⚙️</span>
+        Tools
+    </a>
+
+</div>
+
+<footer>
+Made with ❤️ for Learning Mathematics
+</footer>
+
+</body>
+</html>
