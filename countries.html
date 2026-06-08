@@ -1,14 +1,253 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>🌍 Countries Explorer</title>
+
+<link rel="stylesheet" href="countries.css">
+
 </head>
 
 <body>
-  
-</body>
 
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <div class="hero-content">
+
+        <h1>🌍 Countries Explorer</h1>
+
+        <p>
+            Explore countries, capitals, flags,
+            languages, populations and geographical
+            information from around the world.
+        </p>
+
+        <div class="hero-stats">
+
+            <div class="stat-box">
+                <h3>250+</h3>
+                <span>Countries</span>
+            </div>
+
+            <div class="stat-box">
+                <h3>6</h3>
+                <span>Regions</span>
+            </div>
+
+            <div class="stat-box">
+                <h3>1000+</h3>
+                <span>Data Points</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main>
+
+    <!-- Search -->
+
+    <section class="search-section">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="🔍 Search country..."
+        >
+
+        <button id="searchBtn">
+            Search
+        </button>
+
+    </section>
+
+    <!-- Filter -->
+
+    <section class="filter-section">
+
+        <select id="regionFilter">
+
+            <option value="">
+                🌎 All Regions
+            </option>
+
+            <option value="Africa">
+                Africa
+            </option>
+
+            <option value="Americas">
+                Americas
+            </option>
+
+            <option value="Asia">
+                Asia
+            </option>
+
+            <option value="Europe">
+                Europe
+            </option>
+
+            <option value="Oceania">
+                Oceania
+            </option>
+
+        </select>
+
+    </section>
+
+    <!-- Loading -->
+
+    <div id="loading">
+        Loading countries...
+    </div>
+
+    <!-- Error -->
+
+    <div id="errorMessage"></div>
+
+    <!-- Countries Grid -->
+
+    <section id="countriesContainer">
+
+        <!-- JS Creates Cards Here -->
+
+    </section>
+
+</main>
+
+<!-- =========================
+     DETAILS MODAL
+========================= -->
+
+<div id="countryModal" class="modal">
+
+    <div class="modal-content">
+
+        <button
+            id="closeModal"
+            class="close-modal"
+        >
+            ✖
+        </button>
+
+        <div id="modalBody">
+
+            <!-- JS Details -->
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <div class="footer-top">
+
+        <div class="footer-brand">
+
+            <h2>
+                🌍 Countries Explorer
+            </h2>
+
+            <p>
+                Learn about nations, cultures,
+                geography, capitals, populations,
+                currencies and much more.
+            </p>
+
+        </div>
+
+        <div class="footer-links">
+
+            <h3>Quick Links</h3>
+
+            <ul>
+
+                <li>
+                    <a href="#">
+                        Home
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        Countries
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        Regions
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        Explore
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+        <div class="footer-features">
+
+            <h3>Features</h3>
+
+            <ul>
+
+                <li>🌎 Country Information</li>
+                <li>🏛 Capitals</li>
+                <li>👥 Population</li>
+                <li>💰 Currencies</li>
+                <li>🗣 Languages</li>
+                <li>📏 Area Data</li>
+                <li>🕒 Time Zones</li>
+                <li>🚩 National Flags</li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 Countries Explorer
+        </p>
+
+        <p>
+            Learn • Explore • Discover
+        </p>
+
+    </div>
+
+</footer>
+
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+<script src="countries.js"></script>
+
+</body>
 </html>

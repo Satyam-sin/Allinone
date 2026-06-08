@@ -1,0 +1,966 @@
+/* =========================
+   GOOGLE FONT
+========================= */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* =========================
+   ROOT
+========================= */
+:root{
+    --glass: rgba(15,23,42,0.25);
+    --glass-border: rgba(255,255,255,0.12);
+    --text: #ffffff;
+    --text-light: #dbeafe;
+    --shadow: 0 12px 40px rgba(0,0,0,.5);
+}
+
+/* =========================
+   RESET
+========================= */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    color:var(--text);
+    overflow-x:hidden;
+
+    background:
+    linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.55)),
+    url("https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=1800&q=80");
+
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+}
+
+/* =========================
+   ANIMATED GLOW
+========================= */
+body::before{
+    content:"";
+    position:fixed;
+    width:500px;
+    height:500px;
+    border-radius:50%;
+    background:rgba(0,140,255,.25);
+    filter:blur(120px);
+    top:-150px;
+    left:-150px;
+    animation:float1 12s infinite alternate;
+    pointer-events:none;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    width:500px;
+    height:500px;
+    border-radius:50%;
+    background:rgba(174,0,255,.2);
+    filter:blur(120px);
+    bottom:-150px;
+    right:-150px;
+    animation:float2 15s infinite alternate;
+    pointer-events:none;
+}
+
+@keyframes float1{
+    from{transform:translateY(0);}
+    to{transform:translateY(150px);}
+}
+
+@keyframes float2{
+    from{transform:translateY(0);}
+    to{transform:translateY(-150px);}
+}
+
+/* =========================
+   HEADER
+========================= */
+header{
+    position: relative;
+    text-align: center;
+
+    margin: 30px auto;
+    padding: 60px 25px;
+
+    width: min(1100px,95%);
+
+    background: rgba(255,255,255,0.05);
+
+    border: 1px solid rgba(255,255,255,0.12);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    border-radius: 30px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.35);
+}
+
+/* Glow Effect */
+header::before{
+    content:"";
+
+    position:absolute;
+
+    width:300px;
+    height:300px;
+
+    background:
+    radial-gradient(
+        circle,
+        rgba(0,170,255,.35),
+        transparent 70%
+    );
+
+    top:-150px;
+    left:-100px;
+
+    filter:blur(50px);
+
+    pointer-events:none;
+}
+
+header::after{
+    content:"";
+
+    position:absolute;
+
+    width:300px;
+    height:300px;
+
+    background:
+    radial-gradient(
+        circle,
+        rgba(153,0,255,.30),
+        transparent 70%
+    );
+
+    bottom:-150px;
+    right:-100px;
+
+    filter:blur(50px);
+
+    pointer-events:none;
+}
+
+/* Main Title */
+header h1{
+
+    position:relative;
+    z-index:2;
+
+    font-size: clamp(2.5rem, 6vw, 5rem);
+
+    font-weight:900;
+
+    letter-spacing:2px;
+
+    background: linear-gradient(
+        90deg,
+        #ffffff,
+        #7ee8ff,
+        #00bfff,
+        #b266ff,
+        #ffffff
+    );
+
+    background-size:300% 300%;
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    animation:
+    titleGlow 8s linear infinite;
+
+    text-shadow:
+        0 0 25px rgba(255,255,255,.25);
+}
+
+/* Subtitle */
+header p{
+
+    position:relative;
+    z-index:2;
+
+    margin-top:18px;
+
+    max-width:700px;
+
+    margin-left:auto;
+    margin-right:auto;
+
+    color:#e8f4ff;
+
+    font-size:1.15rem;
+
+    line-height:1.8;
+
+    letter-spacing:.4px;
+}
+
+/* Animated Gradient */
+@keyframes titleGlow{
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    50%{
+        background-position:100% 50%;
+    }
+
+    100%{
+        background-position:0% 50%;
+    }
+
+}
+
+/* =========================
+   MAIN
+========================= */
+main{
+    width:min(1400px,95%);
+    margin:auto;
+}
+
+/* =========================
+   SEARCH SECTION
+========================= */
+/* =========================
+   SEARCH SECTION
+========================= */
+
+.search-section{
+
+    position:relative;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    gap:18px;
+
+    width:min(1000px,95%);
+    margin:0 auto 40px;
+
+    padding:28px;
+
+    background:rgba(255,255,255,0.05);
+
+    border:1px solid rgba(255,255,255,0.12);
+
+    backdrop-filter:blur(25px);
+    -webkit-backdrop-filter:blur(25px);
+
+    border-radius:28px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.35);
+}
+
+/* Blue Glow */
+.search-section::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:300px;
+    height:300px;
+
+    top:-150px;
+    left:-100px;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(
+        circle,
+        rgba(0,170,255,.30),
+        transparent 70%
+    );
+
+    filter:blur(50px);
+
+    pointer-events:none;
+}
+
+/* Purple Glow */
+.search-section::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:300px;
+    height:300px;
+
+    bottom:-150px;
+    right:-100px;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(
+        circle,
+        rgba(162,89,255,.25),
+        transparent 70%
+    );
+
+    filter:blur(50px);
+
+    pointer-events:none;
+}
+
+/* Search Input */
+
+.search-section input{
+
+    position:relative;
+    z-index:2;
+
+    flex:1;
+
+    min-width:280px;
+    max-width:600px;
+
+    padding:18px 24px;
+
+    border-radius:18px;
+
+    border:1px solid rgba(255,255,255,0.15);
+
+    background:rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(15px);
+
+    color:#ffffff;
+
+    font-size:1rem;
+
+    outline:none;
+
+    transition:.3s;
+
+    box-shadow:
+        inset 0 0 15px rgba(255,255,255,.03);
+}
+
+.search-section input:focus{
+
+    border-color:#00c3ff;
+
+    box-shadow:
+        0 0 25px rgba(0,195,255,.35);
+}
+
+.search-section input::placeholder{
+
+    color:#cfd8e6;
+}
+
+/* Search Button */
+
+.search-section button{
+
+    position:relative;
+    z-index:2;
+
+    border:none;
+
+    padding:18px 32px;
+
+    border-radius:18px;
+
+    font-size:1rem;
+    font-weight:700;
+
+    letter-spacing:.5px;
+
+    cursor:pointer;
+
+    color:white;
+
+    background:
+    linear-gradient(
+        135deg,
+        #00c6ff,
+        #0072ff,
+        #7a5cff
+    );
+
+    background-size:200% 200%;
+
+    transition:.35s;
+
+    box-shadow:
+        0 10px 25px rgba(0,114,255,.35);
+}
+
+.search-section button:hover{
+
+    transform:
+    translateY(-4px)
+    scale(1.04);
+
+    box-shadow:
+        0 15px 35px rgba(0,170,255,.5);
+}
+
+.search-section button:active{
+
+    transform:scale(.98);
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+    .search-section{
+
+        padding:20px;
+    }
+
+    .search-section input{
+
+        width:100%;
+        max-width:none;
+    }
+
+    .search-section button{
+
+        width:100%;
+    }
+
+}
+
+/* =========================
+   FILTER
+========================= */
+/* =========================
+   REGION FILTER
+========================= */
+
+.filter-section{
+
+    position:relative;
+
+    display:flex;
+    justify-content:center;
+
+    width:min(500px,95%);
+
+    margin:0 auto 45px;
+
+    padding:20px;
+
+    border-radius:25px;
+
+    background:rgba(255,255,255,0.05);
+
+    border:1px solid rgba(255,255,255,0.12);
+
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+
+    overflow:hidden;
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.35);
+}
+
+/* Glow */
+
+.filter-section::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:220px;
+    height:220px;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(
+        circle,
+        rgba(0,200,255,.25),
+        transparent 70%
+    );
+
+    top:-100px;
+    left:-80px;
+
+    filter:blur(40px);
+
+    pointer-events:none;
+}
+
+.filter-section::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:220px;
+    height:220px;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(
+        circle,
+        rgba(153,51,255,.20),
+        transparent 70%
+    );
+
+    bottom:-100px;
+    right:-80px;
+
+    filter:blur(40px);
+
+    pointer-events:none;
+}
+
+/* Select Box */
+
+.filter-section select{
+
+    position:relative;
+    z-index:2;
+
+    width:100%;
+    max-width:320px;
+
+    padding:16px 20px;
+
+    border-radius:18px;
+
+    border:1px solid rgba(255,255,255,.15);
+
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(15px);
+
+    color:#ffffff;
+
+    font-size:1rem;
+    font-weight:600;
+
+    outline:none;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    box-shadow:
+        inset 0 0 15px rgba(255,255,255,.03);
+}
+
+/* Focus Effect */
+
+.filter-section select:focus{
+
+    border-color:#00c3ff;
+
+    box-shadow:
+        0 0 25px rgba(0,195,255,.35);
+}
+
+/* Dropdown Options */
+
+.filter-section option{
+
+    background:#0f172a;
+    color:#ffffff;
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+    .filter-section{
+
+        width:95%;
+        padding:15px;
+    }
+
+    .filter-section select{
+
+        max-width:none;
+    }
+
+}
+
+/* =========================
+   LOADING / ERROR
+========================= */
+#loading,
+#errorMessage{
+    text-align:center;
+    margin:25px 0;
+    font-size:1.1rem;
+}
+
+#errorMessage{
+    color:#ff9d9d;
+}
+
+/* =========================
+   COUNTRIES GRID
+========================= */
+#countriesContainer{
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(320px,1fr));
+
+    gap:28px;
+    padding-bottom:50px;
+}
+
+/* =========================
+   COUNTRY CARD
+========================= */
+/* =========================
+   COUNTRY CARD
+========================= */
+
+.country-card{
+
+    position:relative;
+
+    background:
+    rgba(255,255,255,0.05);
+
+    border:
+    1px solid rgba(255,255,255,.12);
+
+    border-radius:28px;
+
+    overflow:hidden;
+
+    backdrop-filter:blur(25px);
+    -webkit-backdrop-filter:blur(25px);
+
+    transition:
+    transform .4s ease,
+    box-shadow .4s ease;
+
+    box-shadow:
+    0 12px 35px rgba(0,0,0,.35);
+
+}
+
+/* Glow Background */
+
+.country-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:250px;
+    height:250px;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(
+        circle,
+        rgba(0,170,255,.20),
+        transparent 70%
+    );
+
+    top:-120px;
+    left:-120px;
+
+    filter:blur(45px);
+
+    pointer-events:none;
+}
+
+.country-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:250px;
+    height:250px;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(
+        circle,
+        rgba(170,0,255,.15),
+        transparent 70%
+    );
+
+    bottom:-120px;
+    right:-120px;
+
+    filter:blur(45px);
+
+    pointer-events:none;
+}
+
+/* Hover */
+
+.country-card:hover{
+
+    transform:
+    translateY(-12px)
+    scale(1.03);
+
+    box-shadow:
+    0 20px 50px rgba(0,0,0,.55);
+
+    border-color:
+    rgba(0,195,255,.35);
+}
+
+/* Flag */
+
+.country-card img{
+
+    width:100%;
+    height:220px;
+
+    object-fit:cover;
+
+    transition:
+    transform .6s ease;
+}
+
+.country-card:hover img{
+
+    transform:
+    scale(1.08);
+}
+
+/* Content */
+
+.country-info{
+
+    position:relative;
+    z-index:2;
+
+    padding:22px;
+}
+
+/* Country Name */
+
+.country-info h2{
+
+    font-size:1.5rem;
+
+    font-weight:800;
+
+    margin-bottom:14px;
+
+    color:#ffffff;
+
+    letter-spacing:.5px;
+}
+
+/* Info Text */
+
+.country-info p{
+
+    margin:10px 0;
+
+    color:#dbeafe;
+
+    line-height:1.7;
+
+    font-size:.96rem;
+}
+
+/* Labels */
+
+.country-info strong{
+
+    color:#ffffff;
+}
+
+/* Details Button */
+
+.details-btn{
+
+    width:100%;
+
+    margin-top:18px;
+
+    border:none;
+
+    padding:14px;
+
+    border-radius:16px;
+
+    font-weight:700;
+
+    color:white;
+
+    cursor:pointer;
+
+    background:
+    linear-gradient(
+        135deg,
+        #00c6ff,
+        #0072ff
+    );
+
+    transition:.3s;
+}
+
+.details-btn:hover{
+
+    transform:
+    translateY(-2px);
+
+    box-shadow:
+    0 10px 25px
+    rgba(0,170,255,.4);
+}
+
+/* Download Button */
+
+.download-btn{
+
+    width:100%;
+
+    margin-top:12px;
+
+    border:none;
+
+    padding:14px;
+
+    border-radius:16px;
+
+    font-weight:700;
+
+    color:white;
+
+    cursor:pointer;
+
+    background:
+    linear-gradient(
+        135deg,
+        #00d084,
+        #00a86b
+    );
+
+    transition:.3s;
+}
+
+.download-btn:hover{
+
+    transform:
+    translateY(-2px);
+
+    box-shadow:
+    0 10px 25px
+    rgba(0,208,132,.35);
+}
+
+/* =========================
+   GLASS BADGE
+========================= */
+.country-badge{
+    position:absolute;
+    top:15px;
+    right:15px;
+
+    background:rgba(255,255,255,.12);
+
+    backdrop-filter:blur(12px);
+
+    padding:8px 14px;
+    border-radius:30px;
+
+    border:1px solid rgba(255,255,255,.18);
+
+    font-size:.85rem;
+}
+
+/* =========================
+   FOOTER
+========================= */
+footer{
+    text-align:center;
+
+    margin-top:40px;
+    padding:25px;
+
+    background:rgba(255,255,255,.05);
+    backdrop-filter:blur(12px);
+
+    border-top:1px solid rgba(255,255,255,.1);
+}
+
+footer p{
+    color:#d7e4ff;
+}
+
+/* =========================
+   SCROLLBAR
+========================= */
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-track{
+    background:#111;
+}
+
+::-webkit-scrollbar-thumb{
+    background:linear-gradient(
+        #00aaff,
+        #7a00ff
+    );
+    border-radius:20px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media(max-width:768px){
+
+    header h1{
+        font-size:2.2rem;
+    }
+
+    .search-section{
+        flex-direction:column;
+        align-items:center;
+    }
+
+    .search-section button,
+    .search-section input{
+        width:100%;
+    }
+
+    #countriesContainer{
+        grid-template-columns:1fr;
+    }
+}

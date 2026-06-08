@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>🐦 Birds Encyclopedia</title>
+
+    <meta name="description"
+        content="Birds Encyclopedia - पक्षियों की जानकारी, चित्र, वैज्ञानिक नाम, आवास और भोजन।">
+
+    <link rel="stylesheet" href="birds.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="header-content">
+
+            <h1>🐦 Birds Encyclopedia</h1>
+
+            <p class="subtitle">
+                पक्षियों की दुनिया को जानिए और खोजिए
+            </p>
+<p class="tagline">
+    Discover Birds from Around the World 🌍🐦
+</p>
+            <div class="controls">
+
+                <!-- Search -->
+                <input type="text"
+                    id="searchBox"
+                    placeholder="🔍 पक्षी खोजें...">
+
+                <!-- Filter -->
+                <select id="filter">
+                    <option value="all">🌍 सभी महाद्वीप</option>
+                    <option value="Asia">🌏 Asia</option>
+                    <option value="Europe">🌍 Europe</option>
+                    <option value="Africa">🌍 Africa</option>
+                    <option value="North America">🌎 North America</option>
+                    <option value="South America">🌎 South America</option>
+                    <option value="Australia">🦘 Australia</option>
+                </select>
+
+                <!-- Dark Mode -->
+                <button id="darkBtn">
+                    🌙 Dark Mode
+                </button>
+
+            </div>
+
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main>
+
+        <section class="birds-section">
+
+            <h2 class="section-title">
+                📚 Bird Collection
+            </h2>
+
+            <div id="birdsContainer"></div>
+
+        </section>
+
+    </main>
+
+    <!-- DETAIL MODAL -->
+    <div id="modal" class="modal">
+
+        <div class="modal-content">
+
+            <span id="closeBtn">&times;</span>
+
+            <div id="birdDetail"></div>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+
+        <div class="footer-content">
+
+            <h3>🐦 Birds Encyclopedia</h3>
+
+            <p>
+                पक्षियों के बारे में जानकारी प्राप्त करें,
+                उनकी तस्वीरें देखें और उनके वैज्ञानिक नाम,
+                आवास तथा भोजन के बारे में जानें।
+            </p>
+
+            <p>
+                📖 Total Birds: 60+
+            </p>
+
+            <p>
+                🌍 Educational Project for Bird Lovers
+            </p>
+
+            <p class="copyright">
+                © 2026 Birds Encyclopedia • Made with ❤️ for Learning
+            </p>
+
+        </div>
+
+    </footer>
+
+    <script src="birds.js"></script>
+
+</body>
+
+</html>

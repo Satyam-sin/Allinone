@@ -1,0 +1,408 @@
+/* =========================
+   GENERAL SETTINGS
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    margin:0;
+    padding:0;
+
+    font-family: Arial, Helvetica, sans-serif;
+    color:#ffffff;
+
+    min-height:100vh;
+    overflow-x:hidden;
+
+    background:
+    linear-gradient(
+        rgba(0,0,0,0.45),
+        rgba(0,0,0,0.55)
+    ),
+    url("gk.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* =========================
+   HERO SECTION
+========================= */
+
+.hero{
+    padding:80px 20px;
+    text-align:center;
+}
+
+.hero-content{
+    max-width:900px;
+    margin:auto;
+}
+
+.hero h1{
+    font-size:3rem;
+    margin-bottom:20px;
+    text-shadow:
+    0 0 10px rgba(255,255,255,.3),
+    0 0 20px rgba(255,255,255,.2);
+}
+
+.hero p{
+    max-width:700px;
+    margin:auto;
+    line-height:1.8;
+    color:#d8e6ff;
+    font-size:1.1rem;
+}
+
+/* =========================
+   SEARCH BOX
+========================= */
+
+.search-box{
+    margin-top:35px;
+}
+
+.search-box input{
+    width:100%;
+    max-width:600px;
+
+    padding:15px 20px;
+
+    border:none;
+    outline:none;
+
+    border-radius:50px;
+
+    background:rgba(255,255,255,.12);
+
+    color:white;
+
+    font-size:1rem;
+
+    backdrop-filter:blur(10px);
+}
+
+.search-box input::placeholder{
+    color:#c8d7ff;
+}
+
+/* =========================
+   MAIN CONTENT
+========================= */
+
+main{
+    width:95%;
+    max-width:1400px;
+    margin:auto;
+}
+
+/* =========================
+   SECTION TITLES
+========================= */
+
+.categories h2,
+.about h2,
+.quote h2{
+    text-align:center;
+    margin-bottom:30px;
+    font-size:2rem;
+}
+
+/* =========================
+   CATEGORY GRID
+========================= */
+
+.category-grid{
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(250px,1fr));
+
+    gap:25px;
+}
+
+/* =========================
+   CATEGORY CARDS
+========================= */
+
+.card{
+    text-decoration:none;
+
+    background:
+    rgba(255,255,255,0.08);
+
+    border:
+    1px solid rgba(255,255,255,0.15);
+
+    border-radius:20px;
+
+    padding:25px;
+
+    color:white;
+
+    transition:.4s;
+
+    backdrop-filter:blur(12px);
+}
+
+.card:hover{
+    transform:
+    translateY(-8px)
+    scale(1.03);
+
+    border-color:#4fc3f7;
+
+    box-shadow:
+    0 0 20px rgba(79,195,247,.4);
+}
+
+.card h3{
+    margin-bottom:12px;
+    font-size:1.3rem;
+}
+
+.card p{
+    color:#d6e5ff;
+    line-height:1.6;
+}
+/* =========================
+   ABOUT SECTION
+========================= */
+
+.about{
+    margin-top:80px;
+
+    padding:40px;
+
+    background:
+    rgba(255,255,255,0.05);
+
+    border:
+    1px solid rgba(255,255,255,0.12);
+
+    border-radius:25px;
+
+    backdrop-filter:blur(10px);
+}
+
+.about p{
+    max-width:900px;
+
+    margin:auto;
+
+    text-align:center;
+
+    line-height:1.9;
+
+    color:#d6e5ff;
+
+    font-size:1.05rem;
+}
+
+/* =========================
+   QUOTE SECTION
+========================= */
+
+.quote{
+    margin-top:60px;
+
+    padding:50px 25px;
+
+    text-align:center;
+
+    border-radius:25px;
+
+    background:
+    linear-gradient(
+    135deg,
+    rgba(0,150,255,.15),
+    rgba(0,255,180,.12)
+    );
+
+    border:
+    1px solid rgba(255,255,255,.15);
+}
+
+.quote p{
+    font-size:1.4rem;
+
+    font-style:italic;
+
+    color:#ffffff;
+
+    line-height:1.8;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    margin-top:80px;
+
+    padding:35px 20px;
+
+    text-align:center;
+
+    background:
+    rgba(0,0,0,.25);
+
+    border-top:
+    1px solid rgba(255,255,255,.1);
+}
+
+footer p{
+    margin:8px 0;
+
+    color:#d6e5ff;
+}
+
+/* =========================
+   ANIMATED STARS
+========================= */
+
+body::before{
+    content:"";
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    pointer-events:none;
+
+    background-image:
+    radial-gradient(white 1px, transparent 1px),
+    radial-gradient(white 1px, transparent 1px),
+    radial-gradient(white 1px, transparent 1px);
+
+    background-size:
+    120px 120px,
+    180px 180px,
+    250px 250px;
+
+    opacity:.25;
+
+    animation:
+    starsMove 120s linear infinite;
+}
+
+@keyframes starsMove{
+
+    from{
+        transform:translateY(0);
+    }
+
+    to{
+        transform:translateY(-1000px);
+    }
+
+}
+
+/* =========================
+   FADE ANIMATION
+========================= */
+
+.hero,
+.categories,
+.about,
+.quote{
+    animation:
+    fadeUp 1s ease;
+}
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+/* =========================
+   SCROLLBAR
+========================= */
+
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-track{
+    background:#09111f;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#1d7be6;
+    border-radius:20px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background:#49a3ff;
+}
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+@media(max-width:900px){
+
+    .hero h1{
+        font-size:2.4rem;
+    }
+
+    .hero p{
+        font-size:1rem;
+    }
+
+    .category-grid{
+        grid-template-columns:
+        repeat(auto-fit,minmax(220px,1fr));
+    }
+
+}
+
+@media(max-width:600px){
+
+    .hero{
+        padding:60px 15px;
+    }
+
+    .hero h1{
+        font-size:2rem;
+    }
+
+    .categories h2,
+    .about h2,
+    .quote h2{
+        font-size:1.6rem;
+    }
+
+    .card{
+        padding:20px;
+    }
+
+    .quote p{
+        font-size:1.1rem;
+    }
+
+}
