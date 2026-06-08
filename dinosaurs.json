@@ -1,0 +1,281 @@
+[
+  {
+    "name": "Tyrannosaurus Rex",
+    "image": "trex.jpg",
+
+    "period": "Late Cretaceous (68–66 Million Years Ago)",
+    "diet": "Carnivore",
+    "height": "12 Feet",
+    "length": "40 Feet",
+    "weight": "8 Tons",
+
+    "description": {
+      "overviewTitle": "🦖 Overview",
+      "overview": "Tyrannosaurus Rex, जिसे सामान्य रूप से T-Rex कहा जाता है, पृथ्वी पर रहने वाले सबसे प्रसिद्ध और शक्तिशाली मांसाहारी डायनासोरों में से एक था। यह लगभग 68 से 66 मिलियन वर्ष पहले Late Cretaceous Period में रहता था। इसके विशाल जबड़े, तेज दांत और मजबूत पैरों ने इसे अपने समय का शीर्ष शिकारी (Apex Predator) बना दिया था।",
+
+      "habitatTitle": "🌍 Habitat",
+      "habitat": "T-Rex मुख्य रूप से वर्तमान North America के जंगलों, नदी घाटियों और खुले मैदानों में रहता था। उस समय का वातावरण गर्म और आर्द्र था तथा वहाँ कई बड़े शाकाहारी डायनासोर पाए जाते थे जो इसका भोजन बनते थे।",
+
+      "dietTitle": "🍖 Diet and Hunting",
+      "dietInfo": "यह एक शक्तिशाली Carnivore था। इसके जबड़ों की ताकत इतनी अधिक थी कि यह हड्डियों को भी तोड़ सकता था। वैज्ञानिकों का मानना है कि यह सक्रिय रूप से शिकार भी करता था और कभी-कभी मृत जानवरों को भी खा लेता था।",
+
+      "bodyTitle": "🦴 Body Structure",
+      "bodyInfo": "इसके सिर का आकार बहुत बड़ा था, जबकि आगे के हाथ छोटे थे। इसकी लंबी पूंछ शरीर का संतुलन बनाए रखने में मदद करती थी। इसके दांत लगभग केले के आकार के और बेहद मजबूत होते थे।",
+
+      "factTitle": "⭐ Interesting Facts",
+      "factInfo": "T-Rex का काटने का बल (Bite Force) किसी भी ज्ञात स्थलीय जीव से अधिक माना जाता है। इसके जीवाश्म कनाडा और अमेरिका के कई क्षेत्रों में पाए गए हैं।"
+    }
+  },
+
+  {
+    "name": "Triceratops",
+    "image": "triceratops.jpg",
+
+    "period": "Late Cretaceous (68–66 Million Years Ago)",
+    "diet": "Herbivore",
+    "height": "10 Feet",
+    "length": "30 Feet",
+    "weight": "10 Tons",
+
+    "description": {
+      "overviewTitle": "🦕 Overview",
+      "overview": "Triceratops एक विशाल शाकाहारी डायनासोर था जो अपने तीन सींगों और बड़े सिर की ढाल (Frill) के लिए प्रसिद्ध है। यह Late Cretaceous Period में रहता था और T-Rex के समय का ही जीव था।",
+
+      "habitatTitle": "🌍 Habitat",
+      "habitat": "यह खुले मैदानों, जंगलों और वनस्पति से भरपूर क्षेत्रों में रहता था। वहाँ प्रचुर मात्रा में पौधे और झाड़ियाँ उपलब्ध थीं जो इसका मुख्य भोजन थीं।",
+
+      "dietTitle": "🌿 Diet",
+      "dietInfo": "Triceratops पूरी तरह शाकाहारी था। इसकी मजबूत चोंच और दांत कठोर पौधों, झाड़ियों और निम्न ऊँचाई वाले वृक्षों की पत्तियाँ खाने के लिए उपयुक्त थे।",
+
+      "bodyTitle": "🦴 Body Structure",
+      "bodyInfo": "इसके सिर पर दो लंबे सींग आँखों के ऊपर और एक छोटा सींग नाक पर होता था। सिर के पीछे की बड़ी हड्डीदार ढाल इसे शिकारियों से बचाने में मदद करती थी।",
+
+      "factTitle": "⭐ Interesting Facts",
+      "factInfo": "Triceratops और T-Rex के बीच संघर्ष की संभावना वैज्ञानिकों द्वारा अक्सर अध्ययन की जाती है। इसके जीवाश्म North America में बड़ी संख्या में मिले हैं।"
+    }
+  },
+
+  {
+    "name": "Velociraptor",
+    "image": "velociraptor.jpg",
+
+    "period": "Late Cretaceous (75–71 Million Years Ago)",
+    "diet": "Carnivore",
+    "height": "2 Feet",
+    "length": "6 Feet",
+    "weight": "15 Kilograms",
+
+    "description": {
+      "overviewTitle": "🦖 Overview",
+      "overview": "Velociraptor एक छोटा लेकिन अत्यंत बुद्धिमान और तेज शिकारी डायनासोर था। फिल्मों में इसे विशाल दिखाया जाता है, लेकिन वास्तविकता में इसका आकार काफी छोटा था।",
+
+      "habitatTitle": "🌍 Habitat",
+      "habitat": "यह वर्तमान Mongolia और China के रेगिस्तानी तथा अर्ध-शुष्क क्षेत्रों में रहता था।",
+
+      "dietTitle": "🍖 Hunting Style",
+      "dietInfo": "Velociraptor अपने तेज पंजों और गति के लिए प्रसिद्ध था। यह छोटे जानवरों और अन्य डायनासोरों का शिकार करता था।",
+
+      "bodyTitle": "🦴 Body Structure",
+      "bodyInfo": "इसके पिछले पैरों में एक बड़ा मुड़ा हुआ पंजा होता था जो शिकार पकड़ने के लिए उपयोग किया जाता था। वैज्ञानिकों का मानना है कि इसके शरीर पर पंख भी मौजूद थे।",
+
+      "factTitle": "⭐ Interesting Facts",
+      "factInfo": "Velociraptor का नाम Latin भाषा से आया है जिसका अर्थ है 'Swift Thief' यानी तेज चोर।"
+    }
+  },
+
+  {
+    "name": "Stegosaurus",
+    "image": "stegosaurus.jpg",
+
+    "period": "Late Jurassic (155–150 Million Years Ago)",
+    "diet": "Herbivore",
+    "height": "14 Feet",
+    "length": "30 Feet",
+    "weight": "5 Tons",
+
+    "description": {
+      "overviewTitle": "🦕 Overview",
+      "overview": "Stegosaurus एक प्रसिद्ध शाकाहारी डायनासोर था जिसकी पीठ पर बड़ी-बड़ी प्लेटें और पूंछ पर नुकीले कांटे होते थे। यह Jurassic Period में रहता था।",
+
+      "habitatTitle": "🌍 Habitat",
+      "habitat": "यह वनस्पति से भरपूर मैदानों और जंगलों में रहता था जहाँ पर्याप्त मात्रा में पौधे उपलब्ध होते थे।",
+
+      "dietTitle": "🌿 Diet",
+      "dietInfo": "Stegosaurus मुख्य रूप से फर्न, झाड़ियाँ और छोटे पौधे खाता था। इसका सिर छोटा और गर्दन नीचे की ओर झुकी रहती थी।",
+
+      "bodyTitle": "🦴 Body Structure",
+      "bodyInfo": "पीठ पर स्थित बड़ी प्लेटों का उपयोग तापमान नियंत्रण या प्रदर्शन के लिए किया जाता होगा। इसकी पूंछ के कांटे शिकारियों से रक्षा करते थे।",
+
+      "factTitle": "⭐ Interesting Facts",
+      "factInfo": "Stegosaurus का मस्तिष्क उसके विशाल शरीर की तुलना में बहुत छोटा था।"
+    }
+  },
+
+  {
+    "name": "Brachiosaurus",
+    "image": "brachiosaurus.jpg",
+
+    "period": "Late Jurassic (154–150 Million Years Ago)",
+    "diet": "Herbivore",
+    "height": "40 Feet",
+    "length": "85 Feet",
+    "weight": "50 Tons",
+
+    "description": {
+      "overviewTitle": "🦕 Overview",
+      "overview": "Brachiosaurus पृथ्वी पर रहने वाले सबसे ऊँचे डायनासोरों में से एक था। इसकी लंबी गर्दन इसे ऊँचे पेड़ों की पत्तियाँ खाने में सक्षम बनाती थी।",
+
+      "habitatTitle": "🌍 Habitat",
+      "habitat": "यह बड़े जंगलों और हरियाली वाले क्षेत्रों में रहता था जहाँ ऊँचे वृक्षों की भरपूर संख्या थी।",
+
+      "dietTitle": "🌿 Diet",
+      "dietInfo": "Brachiosaurus एक विशाल Herbivore था जो ऊँचे पेड़ों की पत्तियाँ और टहनियाँ खाता था। इसकी लंबी गर्दन इसे अन्य शाकाहारी डायनासोरों से अलग बनाती थी।",
+
+      "bodyTitle": "🦴 Body Structure",
+      "bodyInfo": "इसके अगले पैर पिछले पैरों से लंबे थे, जिससे इसका शरीर आगे की ओर ऊँचा दिखाई देता था। इसकी गर्दन बहुत लंबी और पूंछ अपेक्षाकृत छोटी थी।",
+
+      "factTitle": "⭐ Interesting Facts",
+      "factInfo": "Brachiosaurus की ऊँचाई लगभग चार मंजिला इमारत जितनी हो सकती थी। यह अपने समय के सबसे विशाल स्थलीय जीवों में से एक था।"
+    }
+  }
+  ,
+{
+  "name": "Spinosaurus",
+  "image": "spinosaurus.jpg",
+
+  "period": "Late Cretaceous (99–93 Million Years Ago)",
+  "diet": "Carnivore",
+  "height": "15 Feet",
+  "length": "50 Feet",
+  "weight": "7.5 Tons",
+
+  "description": {
+    "overviewTitle": "🦖 Overview",
+    "overview": "Spinosaurus को अब तक खोजे गए सबसे लंबे मांसाहारी डायनासोरों में से एक माना जाता है। इसकी पीठ पर एक बड़ी Sail जैसी संरचना होती थी जो इसे अन्य डायनासोरों से अलग बनाती थी। यह मुख्य रूप से उत्तरी अफ्रीका में रहता था और पानी के पास अपना अधिकांश समय बिताता था।",
+
+    "habitatTitle": "🌍 Habitat",
+    "habitat": "Spinosaurus नदियों, झीलों और दलदली क्षेत्रों के आसपास रहता था। इसके जीवाश्म मिस्र, मोरक्को और अफ्रीका के अन्य भागों में मिले हैं।",
+
+    "dietTitle": "🐟 Diet and Hunting",
+    "dietInfo": "यह मछलियाँ खाने में विशेषज्ञ था, लेकिन छोटे डायनासोर और अन्य जानवरों का भी शिकार कर सकता था। इसके लंबे जबड़े मगरमच्छ जैसे दिखाई देते थे।",
+
+    "bodyTitle": "🦴 Body Structure",
+    "bodyInfo": "इसकी पीठ पर ऊँची हड्डियों से बनी Sail थी। इसके पैर अपेक्षाकृत छोटे और पूंछ चौड़ी थी, जो इसे तैरने में मदद करती थी।",
+
+    "factTitle": "⭐ Interesting Facts",
+    "factInfo": "Spinosaurus को पहला ज्ञात Semi-Aquatic Dinosaur माना जाता है, यानी यह भूमि और पानी दोनों में रहने में सक्षम था।"
+  }
+},
+
+{
+  "name": "Ankylosaurus",
+  "image": "ankylosaurus.jpg",
+
+  "period": "Late Cretaceous (68–66 Million Years Ago)",
+  "diet": "Herbivore",
+  "height": "6 Feet",
+  "length": "26 Feet",
+  "weight": "6 Tons",
+
+  "description": {
+    "overviewTitle": "🦕 Overview",
+    "overview": "Ankylosaurus एक भारी कवच वाला शाकाहारी डायनासोर था। इसका पूरा शरीर हड्डीदार प्लेटों से ढका होता था जो इसे शिकारियों से बचाते थे।",
+
+    "habitatTitle": "🌍 Habitat",
+    "habitat": "यह जंगलों और वनस्पति वाले क्षेत्रों में रहता था जहाँ पर्याप्त मात्रा में पौधे उपलब्ध होते थे।",
+
+    "dietTitle": "🌿 Diet",
+    "dietInfo": "Ankylosaurus फर्न, झाड़ियाँ और जमीन के पास उगने वाले पौधे खाता था। इसकी चोंच जैसी बनावट पौधों को काटने में सहायक थी।",
+
+    "bodyTitle": "🦴 Body Structure",
+    "bodyInfo": "इसकी सबसे विशेष पहचान इसकी भारी गदा जैसी पूंछ थी। यह पूंछ दुश्मनों पर जोरदार प्रहार कर सकती थी।",
+
+    "factTitle": "⭐ Interesting Facts",
+    "factInfo": "कई वैज्ञानिक Ankylosaurus को डायनासोर युग का 'Living Tank' कहते हैं क्योंकि इसका शरीर अत्यधिक सुरक्षित था।"
+  }
+},
+
+{
+  "name": "Allosaurus",
+  "image": "allosaurus.jpg",
+
+  "period": "Late Jurassic (155–145 Million Years Ago)",
+  "diet": "Carnivore",
+  "height": "16 Feet",
+  "length": "39 Feet",
+  "weight": "2 Tons",
+
+  "description": {
+    "overviewTitle": "🦖 Overview",
+    "overview": "Allosaurus Jurassic Period का एक प्रमुख शिकारी था। यह अपने समय का Apex Predator माना जाता है और Stegosaurus जैसे बड़े शाकाहारी डायनासोरों का शिकार करता था।",
+
+    "habitatTitle": "🌍 Habitat",
+    "habitat": "यह खुले मैदानों, जंगलों और नदी क्षेत्रों में पाया जाता था। इसके जीवाश्म मुख्य रूप से North America में मिले हैं।",
+
+    "dietTitle": "🍖 Diet and Hunting",
+    "dietInfo": "Allosaurus एक सक्रिय शिकारी था। इसके दांत तेज और घुमावदार थे जो मांस को आसानी से काट सकते थे।",
+
+    "bodyTitle": "🦴 Body Structure",
+    "bodyInfo": "इसकी लंबी पूंछ, शक्तिशाली पैर और मजबूत जबड़े इसे एक प्रभावी शिकारी बनाते थे।",
+
+    "factTitle": "⭐ Interesting Facts",
+    "factInfo": "Jurassic काल में Allosaurus उतना ही प्रसिद्ध शिकारी था जितना Cretaceous काल में T-Rex था।"
+  }
+},
+
+{
+  "name": "Parasaurolophus",
+  "image": "parasaurolophus.jpg",
+
+  "period": "Late Cretaceous (76–73 Million Years Ago)",
+  "diet": "Herbivore",
+  "height": "16 Feet",
+  "length": "33 Feet",
+  "weight": "3 Tons",
+
+  "description": {
+    "overviewTitle": "🦕 Overview",
+    "overview": "Parasaurolophus एक शाकाहारी डायनासोर था जिसकी सबसे बड़ी पहचान उसके सिर पर मौजूद लंबी खोखली कलगी (Crest) थी।",
+
+    "habitatTitle": "🌍 Habitat",
+    "habitat": "यह जंगलों, नदी घाटियों और हरियाली वाले क्षेत्रों में झुंड बनाकर रहता था।",
+
+    "dietTitle": "🌿 Diet",
+    "dietInfo": "यह पत्तियाँ, टहनियाँ, फल और अन्य पौधों को खाता था। इसके दांत पौधों को पीसने के लिए अनुकूलित थे।",
+
+    "bodyTitle": "🦴 Body Structure",
+    "bodyInfo": "इसके सिर की लंबी Crest का उपयोग ध्वनि उत्पन्न करने, पहचान बनाने और साथी आकर्षित करने के लिए किया जाता होगा।",
+
+    "factTitle": "⭐ Interesting Facts",
+    "factInfo": "वैज्ञानिकों का मानना है कि इसकी Crest से गहरी और दूर तक सुनाई देने वाली आवाज़ें निकल सकती थीं।"
+  }
+},
+
+{
+  "name": "Diplodocus",
+  "image": "diplodocus.jpg",
+
+  "period": "Late Jurassic (154–152 Million Years Ago)",
+  "diet": "Herbivore",
+  "height": "15 Feet",
+  "length": "90 Feet",
+  "weight": "15 Tons",
+
+  "description": {
+    "overviewTitle": "🦕 Overview",
+    "overview": "Diplodocus पृथ्वी पर रहने वाले सबसे लंबे डायनासोरों में से एक था। इसकी अत्यंत लंबी गर्दन और पूंछ इसे आसानी से पहचानने योग्य बनाती है।",
+
+    "habitatTitle": "🌍 Habitat",
+    "habitat": "यह विशाल मैदानों और जंगलों में रहता था जहाँ पर्याप्त वनस्पति उपलब्ध होती थी।",
+
+    "dietTitle": "🌿 Diet",
+    "dietInfo": "Diplodocus मुख्य रूप से पत्तियाँ और मुलायम पौधे खाता था। इसकी लंबी गर्दन भोजन तक पहुँचने में मदद करती थी।",
+
+    "bodyTitle": "🦴 Body Structure",
+    "bodyInfo": "इसकी पूंछ बहुत लंबी और चाबुक जैसी थी। शरीर विशाल होने के बावजूद इसका सिर अपेक्षाकृत छोटा था।",
+
+    "factTitle": "⭐ Interesting Facts",
+    "factInfo": "Diplodocus की लंबाई लगभग 90 फीट तक पहुँच सकती थी, जो एक बड़े यात्री बस से भी कहीं अधिक है।"
+  }
+}
+]
