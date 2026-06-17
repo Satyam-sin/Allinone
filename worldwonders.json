@@ -1,0 +1,65 @@
+[
+  {
+    "name": "Taj Mahal",
+    "country": "India",
+    "type": "modern",
+    "image": "tajmahal.jpg",
+    "description": "A symbol of love built by Shah Jahan in memory of Mumtaz Mahal.",
+    "lat": 27.1751,
+    "lng": 78.0421
+  },
+  {
+    "name": "Great Wall of China",
+    "country": "China",
+    "type": "ancient",
+    "image": "greatwall.jpg",
+    "description": "One of the longest man-made structures in the world.",
+    "lat": 40.4319,
+    "lng": 116.5704
+  },
+  {
+    "name": "Petra",
+    "country": "Jordan",
+    "type": "ancient",
+    "image": "petra.jpg",
+    "description": "Ancient city carved into red sandstone cliffs.",
+    "lat": 30.3285,
+    "lng": 35.4444
+  },
+  {
+    "name": "Colosseum",
+    "country": "Italy",
+    "type": "ancient",
+    "image": "colosseum.jpg",
+    "description": "Huge amphitheatre in the center of Rome.",
+    "lat": 41.8902,
+    "lng": 12.4922
+  },
+  {
+    "name": "Chichen Itza",
+    "country": "Mexico",
+    "type": "ancient",
+    "image": "chichenitza.jpg",
+    "description": "Famous Mayan pyramid temple.",
+    "lat": 20.6843,
+    "lng": -88.5678
+  },
+  {
+    "name": "Christ the Redeemer",
+    "country": "Brazil",
+    "type": "modern",
+    "image": "christredeemer.jpg",
+    "description": "Iconic statue of Jesus Christ in Rio de Janeiro.",
+    "lat": -22.9519,
+    "lng": -43.2105
+  },
+  {
+    "name": "Machu Picchu",
+    "country": "Peru",
+    "type": "natural",
+    "image": "machupicchu.jpg",
+    "description": "Ancient Incan city located in the Andes Mountains.",
+    "lat": -13.1631,
+    "lng": -72.5450
+  }
+]

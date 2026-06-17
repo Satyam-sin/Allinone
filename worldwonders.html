@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>🌍 World Wonders Explorer | Explore Ancient & Modern Wonders</title>
+
+    <!-- SEO -->
+    <meta name="description" content="Explore the most amazing world wonders including Taj Mahal, Great Wall of China, Petra, Colosseum and more with interactive maps, images and details.">
+    <meta name="keywords" content="world wonders, taj mahal, great wall of china, petra, colosseum, chichen itza, travel, history, maps">
+    <meta name="author" content="World Wonders Explorer">
+
+    <!-- Favicon (Logo) -->
+    <link rel="icon" type="image/png" href="logo.png">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="worldwonders.css">
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#203a43">
+
+    <!-- Leaflet Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+    <!-- Open Graph (WhatsApp / Facebook / Instagram preview) -->
+    <meta property="og:title" content="🌍 World Wonders Explorer">
+    <meta property="og:description" content="Discover ancient & modern world wonders with images, maps and details.">
+    <meta property="og:image" content="logo.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://your-website-link.com">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="🌍 World Wonders Explorer">
+    <meta name="twitter:description" content="Explore world wonders with interactive maps and images.">
+    <meta name="twitter:image" content="logo.png">
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <h1>🌍 World Wonders Explorer</h1>
+        <p>Explore amazing wonders of the world with map & details</p>
+    </header>
+
+    <!-- SEARCH + FILTER -->
+    <section class="search-section">
+
+        <input type="text" id="searchBox" placeholder="Search wonders...">
+
+        <select id="filter">
+            <option value="all">All Wonders</option>
+            <option value="ancient">Ancient</option>
+            <option value="modern">Modern</option>
+            <option value="natural">Natural</option>
+        </select>
+
+    </section>
+
+    <!-- CARDS CONTAINER -->
+    <main>
+        <div id="wondersContainer" class="grid-container"></div>
+    </main>
+
+    <!-- MODAL -->
+    <div id="modal" class="modal hidden">
+
+        <div class="modal-content">
+
+            <span id="closeBtn">&times;</span>
+
+            <h2 id="modalTitle"></h2>
+
+            <img id="modalImage" src="" alt="wonder image">
+
+            <p id="modalDescription"></p>
+
+            <p id="modalCountry"></p>
+
+            <!-- MAP -->
+            <div id="map"></div>
+
+        </div>
+
+    </div>
+
+    <!-- JS FILE -->
+    <script src="worldwonders.js"></script>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<!-- FOOTER -->
+<footer class="footer">
+
+    <p>🌍 World Wonders Explorer</p>
+
+    <p>Made with ❤️ for learning web development</p>
+
+    <p>© 2026 All Rights Reserved</p>
+
+</footer>
+</body>
+
+</html>
