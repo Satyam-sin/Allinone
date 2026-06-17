@@ -264,3 +264,38 @@ body.dark #birdDetail p:nth-child(even) {
             0 0 60px rgba(0,191,255,0.6);
     }
 }
+footer{
+    background: #2E8B57;
+    color: white;
+    padding: 40px 20px;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.footer-content{
+    max-width: 900px;
+    margin: auto;
+}
+
+.footer-content h3{
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.footer-content p{
+    font-size: 1rem;
+    line-height: 1.8;
+    margin: 10px 0;
+}
+
+.copyright{
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255,255,255,0.3);
+    font-size: 0.9rem;
+}
+
+
+footer{
+    box-shadow: 0 -4px 15px rgba(0,0,0,0.2);
+}
