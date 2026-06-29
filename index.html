@@ -1,142 +1,242 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Eduverse - Knowledge Universe</title>
-
-<meta name="description"
-content="Explore History, Geography, Biology, Mathematics, Computer Science, Artificial Intelligence, Science and General Knowledge. Learn thousands of educational topics in one place with Eduverse.">
-
-<meta name="keywords" content="Education, Learning, History, Geography, Biology, Mathematics, Computer Science, Science, AI, General Knowledge">
-
-<meta name="author" content="Satyam">
-
-<meta name="robots" content="index, follow">
-
-<meta name="theme-color" content="#0f172a">
-
-<!-- WhatsApp / Facebook Preview -->
+<meta name="description" content="Explore History, Geography, Biology, Mathematics, Computer Science, Artificial Intelligence, Science and General Knowledge.">
+<meta name="theme-color" content="#0a0f1e">
 <meta property="og:title" content="Eduverse - Knowledge Universe">
 <meta property="og:description" content="Explore science, technology, history, AI and much more. Learn something new every day with Eduverse.">
 <meta property="og:image" content="https://satyam-sin.github.io/Allinone/logo.png">
 <meta property="og:url" content="https://satyam-sin.github.io/Allinone/">
 <meta property="og:type" content="website">
-
-<!-- Twitter Preview -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Eduverse - Knowledge Universe">
-<meta name="twitter:description" content="Explore science, technology, history, AI and much more.">
-<meta name="twitter:image" content="https://satyam-sin.github.io/Allinone/logo.png">
+<link rel="icon" type="image/png" href="logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="style.css">
-<link rel="icon" type="image/png" href="logo.png">
 </head>
 <body>
-    <header>
-    <h1>🎓 Eduverse</h1>
-    <p>Your Personal Knowledge Universe</p>
-</header><div class="search-box">
-    <input type="text" placeholder="Search topics...">
-</div><div class="hero">
-    <h2>📚 Learn Something New Every Day</h2>
-    <p>Explore science, technology, history, space, AI and much more.</p>
-    </div>
-<div class="container">
 
-    <div class="card">
-        <h3>📜 History</h3>
-        <p>India, Maurya Empire, Gupta Empire, World War II and more.</p>
-        <a href="history.html">Explore</a>
-    </div>
+<canvas id="starfield"></canvas>
 
-    <div class="card">
-        <h3>🌍 Geography</h3>
-        <p>India, Asia, Rivers, Mountains and Earth.</p>
-        <a href="geography.html">Explore</a>
-    </div>
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">🎓 Eduverse</div>
+  <ul class="nav-links">
+    <li><a href="history.html">History</a></li>
+    <li><a href="science.html">Science</a></li>
+    <li><a href="ai.html">AI</a></li>
+    <li><a href="mathematics.html">Math</a></li>
+    <li><a href="gk.html">GK</a></li>
+  </ul>
+</nav>
 
-    <div class="card">
-        <h3>🌱 Biology</h3>
-        <p>Plants, Animals, Cells and Human Body.</p>
-        <a href="biology.html">Explore</a>
-    </div>
+<!-- HERO -->
+<section class="hero">
+  <div class="orbit-ring"></div>
+  <div class="orbit-ring"></div>
+  <div class="orbit-ring"></div>
 
-    <div class="card">
-        <h3>🧮 Mathematics</h3>
-        <p>Algebra, Geometry, Trigonometry and more.</p>
-        <a href="mathematics.html">Explore</a>
-    </div>
+  <div class="hero-eyebrow"><span>✦</span> Your Personal Knowledge Universe</div>
 
-    <div class="card">
-        <h3>💻 Computer</h3>
-        <p>HTML, CSS, JavaScript, AI and Programming.</p>
-        <a href="computer.html">Explore</a>
-    </div>
+  <h1>
+    Explore the<br>
+    <span class="gradient">Universe of Knowledge</span>
+  </h1>
 
-    <div class="card">
-        <h3>🔬 Science</h3>
-        <p>Physics, Chemistry, Astronomy and Discoveries.</p>
-        <a href="science.html">Explore</a>
-    </div>
+  <p>From ancient history to artificial intelligence — dive deep into the subjects that shape our world. Learn something extraordinary every day.</p>
 
-    <div class="card">
-        <h3>📚 General Knowledge</h3>
-        <p>Countries, Capitals, Inventions and Facts.</p>
-        <a href="gk.html">Explore</a>
-    </div>
+  <div class="hero-cta">
+    <a href="#subjects" class="btn-primary">Start Exploring</a>
+    <a href="gk.html" class="btn-secondary">Daily Knowledge</a>
+  </div>
 
-    <div class="card">
-        <h3>🤖 Artificial Intelligence</h3>
-        <p>Machine Learning, Neural Networks and AI Tools.</p>
-        <a href="ai.html">Explore</a>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">8+</div>
+      <div class="stat-label">Subjects</div>
     </div>
+    <div class="stat">
+      <div class="stat-num">1000+</div>
+      <div class="stat-label">Topics</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">Free</div>
+      <div class="stat-label">Forever</div>
+    </div>
+  </div>
+</section>
+
+<!-- SEARCH -->
+<div class="search-section">
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="searchInput" placeholder="Search subjects, topics, or concepts...">
+  </div>
+</div>
+
+<!-- SUBJECTS -->
+<div class="section-header reveal">
+  <div class="section-tag">All Subjects</div>
+  <h2>What do you want to learn today?</h2>
+  <p>Eight worlds of knowledge, waiting to be explored.</p>
+</div>
+
+<div class="subjects-grid" id="subjects">
+
+  <a href="history.html" class="subject-card card-history reveal">
+    <span class="card-icon">📜</span>
+    <div class="card-label">History</div>
+    <div class="card-title">Stories of the Past</div>
+    <div class="card-desc">From the Maurya Empire to World War II — discover the events that shaped humanity across centuries.</div>
+    <div class="card-tags">
+      <span class="tag">India</span>
+      <span class="tag">Mughal Empire</span>
+      <span class="tag">World Wars</span>
+      <span class="tag">Ancient Civilizations</span>
+    </div>
+    <span class="card-link">Explore History</span>
+  </a>
+
+  <a href="geography.html" class="subject-card card-geography reveal">
+    <span class="card-icon">🌍</span>
+    <div class="card-label">Geography</div>
+    <div class="card-title">Our Living Planet</div>
+    <div class="card-desc">Oceans, mountains, rivers, and continents — understand the physical world and its incredible diversity.</div>
+    <div class="card-tags">
+      <span class="tag">India</span>
+      <span class="tag">Asia</span>
+      <span class="tag">Rivers</span>
+      <span class="tag">Mountains</span>
+    </div>
+    <span class="card-link">Explore Geography</span>
+  </a>
+
+  <a href="biology.html" class="subject-card card-biology reveal">
+    <span class="card-icon">🌱</span>
+    <div class="card-label">Biology</div>
+    <div class="card-title">The Science of Life</div>
+    <div class="card-desc">Plants, animals, cells, DNA — explore the incredible machinery of life at every scale.</div>
+    <div class="card-tags">
+      <span class="tag">Human Body</span>
+      <span class="tag">Cells</span>
+      <span class="tag">Animals</span>
+      <span class="tag">Plants</span>
+    </div>
+    <span class="card-link">Explore Biology</span>
+  </a>
+
+  <a href="mathematics.html" class="subject-card card-math reveal">
+    <span class="card-icon">🧮</span>
+    <div class="card-label">Mathematics</div>
+    <div class="card-title">The Language of Logic</div>
+    <div class="card-desc">Algebra, geometry, trigonometry and beyond — the universal language that powers everything.</div>
+    <div class="card-tags">
+      <span class="tag">Algebra</span>
+      <span class="tag">Geometry</span>
+      <span class="tag">Trigonometry</span>
+      <span class="tag">Calculus</span>
+    </div>
+    <span class="card-link">Explore Mathematics</span>
+  </a>
+
+  <a href="computer.html" class="subject-card card-computer reveal">
+    <span class="card-icon">💻</span>
+    <div class="card-label">Computer Science</div>
+    <div class="card-title">Build the Digital World</div>
+    <div class="card-desc">HTML, CSS, JavaScript, Python — learn to code and create technology from scratch.</div>
+    <div class="card-tags">
+      <span class="tag">HTML/CSS</span>
+      <span class="tag">JavaScript</span>
+      <span class="tag">Python</span>
+      <span class="tag">Algorithms</span>
+    </div>
+    <span class="card-link">Explore Computing</span>
+  </a>
+
+  <a href="science.html" class="subject-card card-science reveal">
+    <span class="card-icon">🔬</span>
+    <div class="card-label">Science</div>
+    <div class="card-title">Unlock the Universe</div>
+    <div class="card-desc">Physics, chemistry, astronomy — the fundamental forces and discoveries that explain reality.</div>
+    <div class="card-tags">
+      <span class="tag">Physics</span>
+      <span class="tag">Chemistry</span>
+      <span class="tag">Astronomy</span>
+      <span class="tag">Discoveries</span>
+    </div>
+    <span class="card-link">Explore Science</span>
+  </a>
+
+  <a href="gk.html" class="subject-card card-gk reveal">
+    <span class="card-icon">📚</span>
+    <div class="card-label">General Knowledge</div>
+    <div class="card-title">Know Your World</div>
+    <div class="card-desc">Countries, capitals, inventions, records and fascinating facts about our extraordinary world.</div>
+    <div class="card-tags">
+      <span class="tag">Countries</span>
+      <span class="tag">Capitals</span>
+      <span class="tag">Inventions</span>
+      <span class="tag">World Records</span>
+    </div>
+    <span class="card-link">Explore GK</span>
+  </a>
+
+  <a href="ai.html" class="subject-card card-ai reveal">
+    <span class="card-icon">🤖</span>
+    <div class="card-label">Artificial Intelligence</div>
+    <div class="card-title">The Mind of Machines</div>
+    <div class="card-desc">Machine learning, neural networks, large language models — understand the technology reshaping civilization.</div>
+    <div class="card-tags">
+      <span class="tag">Machine Learning</span>
+      <span class="tag">Neural Networks</span>
+      <span class="tag">LLMs</span>
+      <span class="tag">AI Tools</span>
+    </div>
+    <span class="card-link">Explore AI</span>
+  </a>
 
 </div>
+
+<!-- FEATURE BANNER -->
+<div style="padding: 0 2rem; max-width:1200px; margin: 0 auto 6rem;">
+  <div class="feature-banner reveal">
+    <div class="feature-emoji">🚀</div>
+    <div class="feature-text">
+      <h3>New topics added regularly</h3>
+      <p>Eduverse grows every week. Bookmark this page and come back — there's always something new to discover across all eight subject worlds.</p>
+    </div>
+  </div>
 </div>
+
+<!-- FOOTER -->
 <footer>
+  <div class="footer-logo">🎓 Eduverse</div>
+  <div class="footer-tagline">Explore • Learn • Discover • Innovate</div>
 
-    <div class="footer-content">
+  <div class="footer-subjects">
+    <a href="history.html" class="footer-badge">📜 History</a>
+    <a href="geography.html" class="footer-badge">🌍 Geography</a>
+    <a href="biology.html" class="footer-badge">🌱 Biology</a>
+    <a href="mathematics.html" class="footer-badge">🧮 Mathematics</a>
+    <a href="computer.html" class="footer-badge">💻 Computer</a>
+    <a href="science.html" class="footer-badge">🔬 Science</a>
+    <a href="gk.html" class="footer-badge">📚 General Knowledge</a>
+    <a href="ai.html" class="footer-badge">🤖 AI</a>
+  </div>
 
-        <h2>🎓 Eduverse</h2>
+  <hr class="footer-divider">
 
-        <p>
-            Explore • Learn • Discover • Innovate
-        </p>
+  <div class="footer-bottom">
+    <span>© 2026 Eduverse</span>
+    <span>·</span>
+    <span>All Rights Reserved</span>
+    <span>·</span>
+    <span>🚀 Developed by Satyam</span>
+  </div>
+</footer>
 
-        <p>
-            Your Personal Knowledge Universe
-        </p>
-
-        <hr>
-
-        <!-- Project Images -->
-
-        <h3>📸 My Projects</h3>
-
-        <div class="project-gallery">
-
-            <img src="project1.png" alt="Project 1">
-
-            <img src="project1.1.png" alt="Project 1.1">
-
-            <img src="project 2.png" alt="Project 2">
-
-            <img src="project 3.png" alt="Project 3">
-
-        </div>
-
-        <hr>
-
-        <p>
-            © 2026 Eduverse | All Rights Reserved
-        </p>
-
-        <p>
-            🚀 Developed by Satyam
-        </p>
-
-    </div>
-
-</footer><script src="script.js"></script></body>
+<script src="script.js"></script>
+</body>
 </html>

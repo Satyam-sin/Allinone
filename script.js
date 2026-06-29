@@ -1,162 +1,65 @@
-// ==========================
-// 🎓 EDUVERSE SCRIPT
-// ==========================
 
-// 🔍 Live Search
-const searchInput = document.querySelector(".search-box input");
+  // ── Starfield Canvas ──
+  const canvas = document.getElementById('starfield');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
 
-if(searchInput){
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
 
-    searchInput.addEventListener("keyup", function(){
-
-        let value = this.value.toLowerCase();
-
-        document.querySelectorAll(".card").forEach(card => {
-
-            let text = card.innerText.toLowerCase();
-
-            if(text.includes(value)){
-                card.style.display = "block";
-            }else{
-                card.style.display = "none";
-            }
-
-        });
-
-    });
-
-}
-
-// ⌨️ Enter = Open First Visible Card
-if(searchInput){
-
-    searchInput.addEventListener("keydown", function(e){
-
-        if(e.key === "Enter"){
-
-            let firstLink = document.querySelector(
-                '.card[style*="block"] a, .card:not([style*="none"]) a'
-            );
-
-            if(firstLink){
-                window.location.href = firstLink.href;
-            }
-
-        }
-
-    });
-
-}
-
-// ✨ Scroll Animation
-const cards = document.querySelectorAll(".card");
-
-const observer = new IntersectionObserver(entries => {
-
-    entries.forEach(entry => {
-
-        if(entry.isIntersecting){
-
-            entry.target.style.opacity = "1";
-            entry.target.style.transform = "translateY(0px)";
-
-        }
-
-    });
-
-},{
-    threshold:0.15
-});
-
-cards.forEach(card => {
-
-    card.style.opacity = "0";
-    card.style.transform = "translateY(40px)";
-    card.style.transition = "all 0.8s ease";
-
-    observer.observe(card);
-
-});
-
-// 📊 Local Visitor Counter
-let visits = localStorage.getItem("eduverseVisits");
-
-if(!visits){
-    visits = 1;
-}else{
-    visits = Number(visits) + 1;
-}
-
-localStorage.setItem("eduverseVisits", visits);
-
-console.log("Eduverse Visits:", visits);
-!
-// 🎉 Welcome Message
-window.addEventListener("load", () => {
-
-    setTimeout(() => {
-
-        console.log("🎓 Welcome to Eduverse!");
-
-    }, 500);
-
-});
-
-// ⬆️ Back To Top Button
-const topBtn = document.createElement("button");
-
-topBtn.innerHTML = "⬆";
-topBtn.style.position = "fixed";
-topBtn.style.bottom = "20px";
-topBtn.style.right = "20px";
-topBtn.style.width = "50px";
-topBtn.style.height = "50px";
-topBtn.style.border = "none";
-topBtn.style.borderRadius = "50%";
-topBtn.style.cursor = "pointer";
-topBtn.style.fontSize = "20px";
-topBtn.style.display = "none";
-topBtn.style.zIndex = "9999";
-
-document.body.appendChild(topBtn);
-
-window.addEventListener("scroll", () => {
-
-    if(window.scrollY > 300){
-        topBtn.style.display = "block";
-    }else{
-        topBtn.style.display = "none";
+  function initStars() {
+    stars = [];
+    for (let i = 0; i < 200; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.2 + 0.2,
+        o: Math.random() * 0.6 + 0.1,
+        speed: Math.random() * 0.015 + 0.005
+      });
     }
+  }
 
-});
-
-topBtn.addEventListener("click", () => {
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
+  function drawStars() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stars.forEach(s => {
+      s.o += Math.sin(Date.now() * s.speed * 0.01) * 0.003;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(196,181,253,${Math.max(0.05, s.o)})`;
+      ctx.fill();
     });
+    requestAnimationFrame(drawStars);
+  }
 
-});
+  resize();
+  initStars();
+  drawStars();
+  window.addEventListener('resize', () => { resize(); initStars(); });
 
-// 🌟 Dynamic Title Effect
-const titles = [
-    "🎓 Eduverse",
-    "📚 Knowledge Universe",
-    "🌍 Explore Knowledge",
-    "🚀 Learn Every Day"
-];
+  // ── Scroll Reveal ──
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
 
-let index = 0;
+  // ── Search Filter ──
+  const searchInput = document.getElementById('searchInput');
+  const cards = document.querySelectorAll('.subject-card');
 
-setInterval(() => {
+  searchInput.addEventListener('input', () => {
+    const q = searchInput.value.toLowerCase();
+    cards.forEach(card => {
+      const text = card.textContent.toLowerCase();
+      card.style.display = text.includes(q) ? 'block' : 'none';
+    });
+  });
 
-    document.title = titles[index];
-
-    index++;
-
-    if(index >= titles.length){
-        index = 0;
-    }
-
-}, 3000);
+  // ── Smooth scroll for anchor ──
+  document.querySelector('a[href="#subjects"]').addEventListener('click', e => {
+    e.preventDefault();
+    document.getElementById('subjects').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
