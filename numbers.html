@@ -3,103 +3,158 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Numbers System - Full Guide</title>
+<meta name="theme-color" content="#0B1E33">
+<title>Number System — Eduverse Mathematics</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="numbers.css">
-</head>
 
+</head>
 <body>
 
-<header>
-🔢 Numbers System (पूर्ण जानकारी)
+<nav class="topbar">
+  <div class="brand"><span class="sigma">∑</span> Eduverse</div>
+  <div class="crumb">Subjects / <a href="../mathematics.html">Mathematics</a> / <span>Numbers</span></div>
+</nav>
+
+<header class="hero">
+  <span class="eyebrow">Chapter 01 · Basics</span>
+  <h1>The Number System</h1>
+  <p class="lede">हर संख्या किसी न किसी परिवार से है — गिनती के सीधे-सादे नंबरों से लेकर π जैसी अनंत संख्याओं तक। नीचे का diagram दिखाता है कौन किसके अंदर आता है, और हर section में पूरी जानकारी है।</p>
 </header>
 
-<div class="container">
+<div class="ruler" aria-hidden="true"></div>
 
-    <div class="box">
-        <h2>🔹 Natural Numbers</h2>
-        <p>
-            Natural numbers वे संख्याएँ होती हैं जिनसे हम गिनती करते हैं।
-        </p>
-        <p><b>Set:</b> 1, 2, 3, 4, 5, ...</p>
-        <p><b>Use:</b> वस्तुओं की गिनती, गणना</p>
+<section class="diagram-section">
+  <h2>संख्याओं का परिवार</h2>
+  <p class="sub">हर बड़ा set अपने अंदर छोटे sets को समेटे हुए है — सिर्फ़ irrational numbers अलग रास्ते से Real में आते हैं।</p>
+
+  <div class="diagram-wrap">
+    <div class="frame real">
+      <span class="tag-label">Real Numbers</span>
+
+      <div class="branch-rational">
+        <span class="tag-label">Rational</span>
+        <div class="frame integers">
+          <span class="tag-label">Integers</span>
+          <div class="frame whole">
+            <span class="tag-label">Whole</span>
+            <div class="frame natural">1, 2, 3, 4, …</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="branch-irrational">
+        <span class="tag-label">Irrational</span>
+        <p>√2, √3, π, e …</p>
+      </div>
+    </div>
+  </div>
+
+  <p class="chain-caption">Natural ⊂ Whole ⊂ Integers ⊂ Rational ⊂ Real</p>
+  <p class="chain-note">Irrational, Real के अंदर है पर Rational के बाहर — इन दोनों में कोई overlap नहीं होता।</p>
+</section>
+
+<section class="concepts-section">
+  <h2>हर Type को विस्तार से समझें</h2>
+  <p class="sub">Diagram में जो क्रम देखा, वही क्रम यहाँ भी है — हर concept पिछले वाले पर बनता है।</p>
+
+  <div class="concepts-grid">
+
+    <div class="concept-card">
+      <span class="chapter-no">01</span>
+      <h2>Natural Numbers</h2>
+      <p>वो संख्याएं जिनसे गिनती शुरू होती है — 1 से शुरू, कभी न ख़त्म होने वाला क्रम।</p>
+      <p class="set"><b>Set:</b> 1, 2, 3, 4, 5, …</p>
+      <p class="note"><b>Use:</b> वस्तुओं की गिनती और रोज़मर्रा की गणना में</p>
     </div>
 
-    <div class="box">
-        <h2>🔹 Whole Numbers</h2>
-        <p>
-            Whole numbers में 0 भी शामिल होता है।
-        </p>
-        <p><b>Set:</b> 0, 1, 2, 3, 4, 5, ...</p>
-        <p><b>Difference:</b> Natural numbers में 0 नहीं होता</p>
+    <div class="concept-card">
+      <span class="chapter-no">02</span>
+      <h2>Whole Numbers</h2>
+      <p>Natural numbers जैसी ही, सिर्फ़ फ़र्क़ यह कि अब 0 भी इस परिवार में शामिल है।</p>
+      <p class="set"><b>Set:</b> 0, 1, 2, 3, 4, 5, …</p>
+      <p class="note"><b>Difference:</b> Natural numbers में 0 नहीं आता</p>
     </div>
 
-    <div class="box">
-        <h2>🔹 Integers</h2>
-        <p>
-            Integers में negative, zero और positive सभी शामिल होते हैं।
-        </p>
-        <p><b>Set:</b> ..., -3, -2, -1, 0, 1, 2, 3, ...</p>
-        <p><b>Example:</b> temperature, profit-loss</p>
+    <div class="concept-card">
+      <span class="chapter-no">03</span>
+      <h2>Integers</h2>
+      <p>अब negative numbers भी जुड़ जाते हैं — negative, zero और positive तीनों एक साथ।</p>
+      <p class="set"><b>Set:</b> …, -3, -2, -1, 0, 1, 2, 3, …</p>
+      <p class="note"><b>Example:</b> तापमान, profit-loss की गणना</p>
     </div>
 
-    <div class="box">
-        <h2>🔹 Rational Numbers</h2>
-        <p>
-            जो संख्या p/q के रूप में लिखी जा सके (जहाँ q ≠ 0)।
-        </p>
-        <p><b>Examples:</b> 1/2, 3/4, -5/6, 2</p>
-        <p><b>Note:</b> सभी integers भी rational होते हैं</p>
+    <div class="concept-card">
+      <span class="chapter-no">04</span>
+      <h2>Rational Numbers</h2>
+      <p>कोई भी संख्या जो p/q के रूप में लिखी जा सके (जहाँ q ≠ 0), rational कहलाती है।</p>
+      <p class="set"><b>Examples:</b> 1/2, 3/4, -5/6, 2</p>
+      <p class="note"><b>Note:</b> हर integer भी rational है (q = 1 के साथ)</p>
     </div>
 
-    <div class="box">
-        <h2>🔹 Irrational Numbers</h2>
-        <p>
-            जो संख्या fraction में नहीं लिखी जा सकती और जिनका decimal non-terminating & non-repeating होता है।
-        </p>
-        <p><b>Examples:</b> √2, √3, π, e</p>
-        <p><b>Special:</b> इनके digits कभी खत्म नहीं होते</p>
+    <div class="concept-card coral">
+      <span class="chapter-no">05</span>
+      <h2>Irrational Numbers</h2>
+      <p>जिन्हें p/q के रूप में नहीं लिखा जा सकता — decimal कभी रुकता नहीं, न दोहराता है।</p>
+      <p class="set"><b>Examples:</b> √2, √3, π, e</p>
+      <p class="note"><b>Special:</b> कोई repeating pattern नहीं होता</p>
     </div>
 
-    <div class="box">
-        <h2>🔹 Real Numbers</h2>
-        <p>
-            सभी rational और irrational numbers मिलकर real numbers बनाते हैं।
-        </p>
-        <p><b>Set:</b> All numbers on number line</p>
-        <p><b>Example:</b> -2, 0, 3.5, √5, π</p>
+    <div class="concept-card real">
+      <span class="chapter-no">06</span>
+      <h2>Real Numbers</h2>
+      <p>Rational और Irrational — दोनों मिलकर ही पूरी Real numbers की दुनिया बनाते हैं।</p>
+      <p class="set"><b>Set:</b> Number line पर मौजूद हर संख्या</p>
+      <p class="note"><b>Example:</b> -2, 0, 3.5, √5, π</p>
     </div>
 
-    <div class="box">
-        <h2>📊 Number Line Concept</h2>
-        <p>
-            Number line एक सीधी रेखा होती है जिसमें numbers को क्रम में रखा जाता है।
-        </p>
-        <p><b>Left:</b> Negative numbers</p>
-        <p><b>Right:</b> Positive numbers</p>
-    </div>
+  </div>
+</section>
 
-    <div class="box">
-        <h2>🔥 Important Relations</h2>
-        <p>
-            Natural ⊂ Whole ⊂ Integers ⊂ Rational ⊂ Real
-        </p>
-    </div>
+<section class="numberline-section">
+  <h2>Number Line</h2>
+  <p class="sub">एक सीधी रेखा जिसपर हर संख्या को उसके क्रम में रखा जाता है — बायीं तरफ़ negative, दायीं तरफ़ positive।</p>
 
-    <div class="box">
-        <h2>🧠 Quick Facts</h2>
-        <p>✔ 0 सबसे छोटा whole number है</p>
-        <p>✔ √2 irrational है</p>
-        <p>✔ हर integer rational होता है</p>
+  <div class="numberline">
+    <span class="nl-arrow">←</span>
+    <div class="nl-track">
+      <span class="nl-tick" style="left:5%"></span><span class="nl-label" style="left:5%">-3</span>
+      <span class="nl-tick" style="left:20%"></span><span class="nl-label" style="left:20%">-2</span>
+      <span class="nl-tick" style="left:35%"></span><span class="nl-label" style="left:35%">-1</span>
+      <span class="nl-tick zero" style="left:50%"></span><span class="nl-label zero" style="left:50%">0</span>
+      <span class="nl-tick" style="left:65%"></span><span class="nl-label" style="left:65%">1</span>
+      <span class="nl-tick" style="left:80%"></span><span class="nl-label" style="left:80%">2</span>
+      <span class="nl-tick" style="left:95%"></span><span class="nl-label" style="left:95%">3</span>
     </div>
+    <span class="nl-arrow">→</span>
+  </div>
+  <div class="nl-zones">
+    <span class="neg">← Negative numbers</span>
+    <span class="pos">Positive numbers →</span>
+  </div>
+</section>
 
-</div>
+<section class="field-note">
+  <div class="box">
+    <span class="tag">QUICK FACTS</span>
+    <ul class="facts">
+      <li>0 सबसे छोटा whole number है, लेकिन यह natural number नहीं है।</li>
+      <li>हर integer rational होता है, पर हर rational integer नहीं होता।</li>
+      <li>√2 एक irrational number है — इसका decimal कभी ख़त्म नहीं होता।</li>
+    </ul>
+  </div>
+</section>
 
 <footer>
-<a href="../mathematics.html">⬅ Back to Mathematics Hub</a>
+  <a class="back-btn" href="../mathematics.html">← Back to Mathematics Hub</a>
+  <h3>Eduverse Mathematics</h3>
+  <p class="tagline">LEARN · PRACTICE · MASTER</p>
+  <p class="fine">© 2026 Eduverse · Chapter 01 — Numbers</p>
 </footer>
-
-<script src="numbers.js"></script>
 
 </body>
 </html>
