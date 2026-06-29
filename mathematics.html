@@ -1,127 +1,201 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mathematics Hub</title>
+<meta name="theme-color" content="#0B1E33">
+<title>Mathematics Hub | Eduverse</title>
 
-<style>
-    body{
-    margin:0;
-    font-family:Arial, sans-serif;
-    color:white;
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 
-    background:
-        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-        url("https://images.unsplash.com/photo-1509228468518-180dd4864904");
-
-    background-size:cover;
-    background-position:center;
-    background-attachment:fixed;
-}
-
-    header{
-        text-align:center;
-        padding:20px;
-        background:rgba(0,0,0,0.4);
-        font-size:28px;
-        font-weight:bold;
-    }
-
-    .container{
-        display:flex;
-        flex-wrap:wrap;
-        justify-content:center;
-        padding:20px;
-        gap:20px;
-    }
-
-    .card{
-        width:220px;
-        padding:20px;
-        background:rgba(255,255,255,0.1);
-        border-radius:15px;
-        text-align:center;
-        text-decoration:none;
-        color:white;
-        transition:0.3s;
-        box-shadow:0 0 10px rgba(0,0,0,0.3);
-    }
-
-    .card:hover{
-        transform:scale(1.05);
-        background:rgba(255,255,255,0.2);
-    }
-
-    .emoji{
-        font-size:30px;
-        margin-bottom:10px;
-        display:block;
-    }
-
-    footer{
-        text-align:center;
-        padding:15px;
-        background:rgba(0,0,0,0.4);
-        margin-top:20px;
-    }
-</style>
-
+<link rel="stylesheet" href="mathematics.css">
 </head>
-
 <body>
 
-<header>
-📘 Mathematics Hub
+<nav class="topbar">
+  <div class="brand"><span class="sigma">∑</span> Eduverse</div>
+  <div class="crumb">Subjects / <span>Mathematics</span></div>
+</nav>
+
+<header class="hero">
+  <span class="eyebrow">A field guide to numbers</span>
+  <h1>Mathematics Hub</h1>
+
+  <svg class="sine-wrap" viewBox="0 0 420 34" aria-hidden="true">
+    <path d="M4 24 C 60 2, 100 2, 160 24 S 280 46, 340 24 S 400 8, 416 18"
+          fill="none" stroke="#7FE7C4" stroke-width="2.5" />
+  </svg>
+
+  <p class="lede">Eight chapters, from first counting to calculator-ready tools. Pick one to start, or search for a topic below.</p>
+
+  <div class="search-row">
+    <div class="search-box">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input id="searchInput" type="text" placeholder="Search a chapter — try “triangles” or “mean”" aria-label="Search mathematics chapters">
+    </div>
+    <span class="chapter-count" id="chapterCount">8 of 8 chapters</span>
+  </div>
 </header>
 
-<div class="container">
+<div class="ruler" aria-hidden="true"></div>
 
-    <a class="card" href="numbers.html">
-        <span class="emoji">🔢</span>
-        Basics
-    </a>
+<main class="container" id="chapterGrid">
 
-    <a class="card" href="algebra.html">
-        <span class="emoji">➗</span>
-        Algebra
-    </a>
+  <a href="numbers.html" class="card" data-search="basics numbers operations fractions fundamentals counting place value">
+    <div class="card-top">
+      <span class="chapter-no">01</span>
+      <svg class="icon" viewBox="0 0 48 48">
+        <line x1="6" y1="14" x2="42" y2="14"/>
+        <line x1="6" y1="24" x2="42" y2="24"/>
+        <line x1="6" y1="34" x2="42" y2="34"/>
+        <circle cx="14" cy="14" r="2.4" fill="currentColor"/>
+        <circle cx="26" cy="24" r="2.4" fill="currentColor"/>
+        <circle cx="34" cy="34" r="2.4" fill="currentColor"/>
+      </svg>
+    </div>
+    <h2>Basics</h2>
+    <p>Numbers, operations, fractions, and the rules everything else builds on.</p>
+  </a>
 
-    <a class="card" href="math/geometry.html">
-        <span class="emoji">📐</span>
-        Geometry
-    </a>
+  <a href="algebra.html" class="card" data-search="algebra variables equations expressions formulas unknowns">
+    <div class="card-top">
+      <span class="chapter-no">02</span>
+      <svg class="icon" viewBox="0 0 48 48">
+        <line x1="24" y1="6" x2="24" y2="38"/>
+        <line x1="8" y1="14" x2="40" y2="14"/>
+        <path d="M8 14 L3 25 L13 25 Z"/>
+        <path d="M40 14 L35 25 L45 25 Z"/>
+        <line x1="17" y1="38" x2="31" y2="38"/>
+      </svg>
+    </div>
+    <h2>Algebra</h2>
+    <p>Variables, equations, and the grammar for solving for the unknown.</p>
+  </a>
 
-    <a class="card" href="math/trigonometry.html">
-        <span class="emoji">📊</span>
-        Trigonometry
-    </a>
+  <a href="geometry.html" class="card" data-search="geometry shapes angles polygons constructions triangles circles">
+    <div class="card-top">
+      <span class="chapter-no">03</span>
+      <svg class="icon" viewBox="0 0 48 48">
+        <circle cx="24" cy="14" r="2" fill="currentColor"/>
+        <line x1="24" y1="14" x2="10" y2="40"/>
+        <line x1="24" y1="14" x2="38" y2="40"/>
+        <path d="M16 34 a10 10 0 0 0 16 0"/>
+      </svg>
+    </div>
+    <h2>Geometry</h2>
+    <p>Shapes, angles, polygons, and how to construct them by hand.</p>
+  </a>
 
-    <a class="card" href="math/mensuration.html">
-        <span class="emoji">📦</span>
-        Mensuration
-    </a>
+  <a href="trigonometry.html" class="card" data-search="trigonometry sine cosine tangent identities angles">
+    <div class="card-top">
+      <span class="chapter-no">04</span>
+      <svg class="icon" viewBox="0 0 48 48">
+        <line x1="4" y1="24" x2="44" y2="24" stroke-dasharray="2 4" stroke-width="1.4"/>
+        <path d="M4 24 C 10 8, 16 8, 24 24 S 38 40, 44 24"/>
+      </svg>
+    </div>
+    <h2>Trigonometry</h2>
+    <p>Sine, cosine, tangent, and the identities that connect them.</p>
+  </a>
 
-    <a class="card" href="math/statistics.html">
-        <span class="emoji">📈</span>
-        Statistics
-    </a>
+  <a href="mensuration.html" class="card" data-search="mensuration area perimeter volume surface area solids">
+    <div class="card-top">
+      <span class="chapter-no">05</span>
+      <svg class="icon" viewBox="0 0 48 48">
+        <polygon points="10,16 24,8 38,16 38,32 24,40 10,32"/>
+        <line x1="10" y1="16" x2="24" y2="24"/>
+        <line x1="38" y1="16" x2="24" y2="24"/>
+        <line x1="24" y1="24" x2="24" y2="40"/>
+      </svg>
+    </div>
+    <h2>Mensuration</h2>
+    <p>Area, perimeter, volume, and surface area for real-world shapes.</p>
+  </a>
 
-    <a class="card" href="math/tricks.html">
-        <span class="emoji">🧠</span>
-        Math Tricks
-    </a>
+  <a href="statistics.html" class="card" data-search="statistics data analysis graphs averages mean median mode">
+    <div class="card-top">
+      <span class="chapter-no">06</span>
+      <svg class="icon" viewBox="0 0 48 48">
+        <line x1="6" y1="40" x2="42" y2="40"/>
+        <rect x="10" y="26" width="6" height="14"/>
+        <rect x="21" y="18" width="6" height="22"/>
+        <rect x="32" y="10" width="6" height="30"/>
+      </svg>
+    </div>
+    <h2>Statistics</h2>
+    <p>Collecting data, reading graphs, and making sense of averages.</p>
+  </a>
 
-    <a class="card" href="math/tools.html">
-        <span class="emoji">⚙️</span>
-        Tools
-    </a>
+  <a href="tricks.html" class="card" data-search="math tricks fast calculations shortcuts mental math techniques">
+    <div class="card-top">
+      <span class="chapter-no">07</span>
+      <svg class="icon" viewBox="0 0 48 48">
+        <path d="M26 4 L14 26 H22 L18 44 L36 18 H26 Z"/>
+      </svg>
+    </div>
+    <h2>Math Tricks</h2>
+    <p>Shortcuts and mental-math methods for faster calculation.</p>
+  </a>
 
-</div>
+  <a href="tools.html" class="card" data-search="math tools calculators utilities conversion">
+    <div class="card-top">
+      <span class="chapter-no">08</span>
+      <svg class="icon" viewBox="0 0 48 48">
+        <rect x="10" y="6" width="28" height="36" rx="3"/>
+        <rect x="14" y="11" width="20" height="8"/>
+        <circle cx="16" cy="26" r="1.6" fill="currentColor"/>
+        <circle cx="24" cy="26" r="1.6" fill="currentColor"/>
+        <circle cx="32" cy="26" r="1.6" fill="currentColor"/>
+        <circle cx="16" cy="34" r="1.6" fill="currentColor"/>
+        <circle cx="24" cy="34" r="1.6" fill="currentColor"/>
+        <circle cx="32" cy="34" r="1.6" fill="currentColor"/>
+      </svg>
+    </div>
+    <h2>Math Tools</h2>
+    <p>Calculators and utilities that handle the busywork for you.</p>
+  </a>
+
+  <p id="emptyState" hidden></p>
+
+</main>
+
+<section class="field-note">
+  <div class="box">
+    <span class="tag">FIELD NOTE</span>
+    <h2>Why mathematics is worth the effort</h2>
+    <p>Mathematics trains you to think in steps, spot patterns, and trust a chain of logic even before you can see where it leads. That habit carries directly into science, engineering, finance, and the everyday decisions that don't come with a formula sheet.</p>
+  </div>
+</section>
 
 <footer>
-Made with ❤️ for Learning Mathematics
+  <h3>Eduverse Mathematics</h3>
+  <p class="tagline">LEARN · PRACTICE · MASTER</p>
+  <p class="fine">© 2026 Eduverse</p>
 </footer>
+
+<script>
+  const input = document.getElementById('searchInput');
+  const cards = Array.from(document.querySelectorAll('.card'));
+  const emptyState = document.getElementById('emptyState');
+  const countEl = document.getElementById('chapterCount');
+
+  input.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    let visible = 0;
+    cards.forEach(card => {
+      const match = card.dataset.search.includes(q);
+      card.style.display = match ? '' : 'none';
+      if (match) visible++;
+    });
+    emptyState.hidden = visible !== 0;
+    if (!emptyState.hidden) {
+      emptyState.textContent = `No chapter matches "${input.value.trim()}". Try "algebra", "geometry", or "statistics".`;
+    }
+    countEl.textContent = `${visible} of ${cards.length} chapters`;
+  });
+</script>
 
 </body>
 </html>
