@@ -1,67 +1,984 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trigonometry</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>त्रिकोणमिति — पूर्ण गाइड | गणित नोटबुक</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@500;600;700;900&family=Hind:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<style>
+  :root{
+    --paper:#FBF8F1;
+    --paper-line: rgba(181,84,28,0.07);
+    --ink-dark:#1F2430;
+    --ink-soft:#5B6270;
+    --accent:#B5541C;
+    --accent-light:#F8EADD;
+    --accent-deep:#7A3710;
+    --mark-cos:#1E6B55;
+    --mark-sin:#3B4FA0;
+    --card:#FFFFFF;
+    --line:rgba(31,36,48,0.10);
+    --radius:12px;
+  }
+  *,*::before,*::after{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+  body{
+    margin:0;
+    font-family:'Hind',sans-serif;
+    color:var(--ink-dark);
+    background-color:var(--paper);
+    background-image:
+      linear-gradient(var(--paper-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--paper-line) 1px, transparent 1px);
+    background-size:28px 28px;
+    line-height:1.7;
+    font-size:16.5px;
+  }
+  h1,h2,h3{font-family:'Noto Serif Devanagari',serif; color:var(--ink-dark); margin:0 0 .4em;}
+  a{color:var(--accent-deep);}
+  ::selection{background:var(--accent-light);}
+  :focus-visible{outline:2.5px solid var(--accent-deep); outline-offset:3px;}
 
-<link rel="stylesheet" href="trigonometry.css">
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--accent-deep); font-weight:600; display:flex;align-items:center;gap:.5em; margin-bottom:.6em;
+  }
+  .eyebrow .num{background:var(--accent); color:#fff; padding:.15em .5em; border-radius:5px; font-size:.9em;}
+
+  .topbar{
+    position:sticky; top:0; z-index:50; background:rgba(251,248,241,0.92); backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:space-between;
+    padding:.9rem 1.5rem; gap:1rem; flex-wrap:wrap;
+  }
+  .brand{display:flex; align-items:center; gap:.7rem;}
+  .brand svg{width:34px;height:34px;color:var(--accent);}
+  .brand-text .t1{font-family:'Noto Serif Devanagari',serif; font-weight:800; font-size:1.25rem; line-height:1;}
+  .brand-text .t2{font-family:'IBM Plex Mono',monospace; font-size:.68rem; color:var(--ink-soft); letter-spacing:.08em;}
+  .switcher{display:flex; gap:.4rem; flex-wrap:wrap;}
+  .switcher a{
+    text-decoration:none; font-family:'IBM Plex Mono',monospace; font-size:.78rem;
+    padding:.45rem .8rem; border-radius:999px; border:1px solid var(--line); color:var(--ink-soft); background:var(--card);
+  }
+  .switcher a.active{background:var(--accent); color:#fff; border-color:var(--accent);}
+  .switcher a:hover{border-color:var(--accent);}
+
+  .layout{
+    max-width:1240px; margin:0 auto; padding:2rem 1.5rem 4rem;
+    display:grid; grid-template-columns:250px 1fr; gap:2.6rem; align-items:start;
+  }
+  .toc{
+    position:sticky; top:84px; background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    padding:1.1rem 1rem; max-height:calc(100vh - 110px); overflow:auto;
+  }
+  .toc h3{font-size:.85rem; font-family:'IBM Plex Mono',monospace; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.08em; margin-bottom:.8rem;}
+  .toc ol{list-style:none; margin:0; padding:0; counter-reset:sec;}
+  .toc li{counter-increment:sec; margin-bottom:.15rem;}
+  .toc a{display:flex; gap:.55rem; text-decoration:none; color:var(--ink-dark); font-size:.87rem; padding:.42rem .5rem; border-radius:8px;}
+  .toc a::before{content:counter(sec,decimal-leading-zero); font-family:'IBM Plex Mono',monospace; color:var(--accent); font-size:.78rem; flex:none;}
+  .toc a:hover{background:var(--accent-light);}
+  .toc a.current{background:var(--accent); color:#fff;}
+  .toc a.current::before{color:#fff;}
+
+  main{min-width:0;}
+
+  .hero{
+    background:linear-gradient(155deg, var(--accent-deep), var(--accent) 70%);
+    color:#fff; border-radius:18px; padding:2.2rem;
+    display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:center;
+    margin-bottom:2.6rem; overflow:hidden; position:relative;
+  }
+  .hero h1{color:#fff; font-size:2.15rem; margin-bottom:.5rem;}
+  .hero p{color:rgba(255,255,255,0.86); max-width:46ch;}
+  .hero .eyebrow{color:#FDE6D2;}
+  .hero .eyebrow .num{background:rgba(255,255,255,0.22);}
+  .hero-panel{background:rgba(255,255,255,0.96); border-radius:14px; padding:1.1rem 1.1rem 1.3rem; color:var(--ink-dark); text-align:center;}
+  .hero-panel canvas{width:100%; max-width:340px; height:auto; display:block; margin:0 auto; border-radius:8px; background:#fff; touch-action:none; cursor:grab;}
+  .angle-row{display:flex; align-items:center; gap:.7rem; margin-top:.7rem;}
+  .angle-row input[type=range]{flex:1; accent-color:var(--accent);}
+  #angleLabel{font-family:'IBM Plex Mono',monospace; font-weight:700; color:var(--accent-deep); width:3.6rem; text-align:right;}
+  .hero-stats{margin-top:.8rem; display:grid; grid-template-columns:repeat(2,1fr); gap:.5rem; font-size:.82rem; text-align:left;}
+  .hero-stats div{background:var(--accent-light); border-radius:8px; padding:.5rem .6rem;}
+  .hero-stats .k{display:block; font-family:'IBM Plex Mono',monospace; font-size:.66rem; color:var(--accent-deep); text-transform:uppercase; letter-spacing:.06em; margin-bottom:.15rem;}
+  .hero-stats .wide{grid-column:1/-1;}
+
+  section.block{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:1.8rem 2rem; margin-bottom:1.6rem; scroll-margin-top:90px;}
+  section.block h2{font-size:1.5rem;}
+  section.block p{color:var(--ink-dark); margin:.5rem 0 1rem;}
+  .lead{color:var(--ink-soft); font-size:1.02rem;}
+
+  .formula-box{background:var(--accent-light); border-left:4px solid var(--accent); border-radius:8px; padding:.9rem 1.1rem; margin:.8rem 0; overflow-x:auto;}
+  .formula-box .fname{font-family:'IBM Plex Mono',monospace; font-size:.72rem; color:var(--accent-deep); text-transform:uppercase; letter-spacing:.05em; margin-bottom:.35rem; display:block;}
+  .formula-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:.8rem;}
+  @media (max-width:640px){.formula-grid{grid-template-columns:1fr;}}
+
+  .note{border:1px dashed var(--accent); background:#fff; border-radius:10px; padding:.9rem 1.1rem; margin:1rem 0; display:flex; gap:.7rem; align-items:flex-start;}
+  .note svg{flex:none; width:20px;height:20px; color:var(--accent-deep); margin-top:.2rem;}
+  .note strong{color:var(--accent-deep);}
+
+  table{width:100%; border-collapse:collapse; margin:1rem 0; font-size:.9rem;}
+  th,td{border:1px solid var(--line); padding:.5rem .6rem; text-align:center;}
+  th{background:var(--accent-light); color:var(--accent-deep); font-family:'IBM Plex Mono',monospace; font-size:.74rem; text-transform:uppercase; letter-spacing:.04em;}
+  tr:nth-child(even) td{background:rgba(181,84,28,0.03);}
+  td:first-child, th:first-child{text-align:left;}
+
+  .sheet-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:.85rem;}
+  @media (max-width:900px){.sheet-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:600px){.sheet-grid{grid-template-columns:1fr;}}
+  .sheet-card{background:var(--accent-light); border:1px solid var(--line); border-radius:10px; padding:.85rem .95rem;}
+  .sheet-card .fname{font-family:'IBM Plex Mono',monospace; font-size:.68rem; color:var(--accent-deep); text-transform:uppercase; letter-spacing:.05em; display:block; margin-bottom:.3rem;}
+
+  .example-card{border:1px solid var(--line); border-radius:10px; padding:1rem 1.2rem; margin-bottom:1rem; background:#fffefb;}
+  .example-card .tag{font-family:'IBM Plex Mono',monospace; font-size:.7rem; color:#fff; background:var(--mark-sin); padding:.15rem .55rem; border-radius:999px;}
+  .example-card .q{font-weight:600; margin:.6rem 0 .4rem;}
+  .example-card .ans{background:var(--accent-light); border-radius:8px; padding:.5rem .8rem; margin-top:.5rem; font-weight:600; color:var(--accent-deep);}
+
+  details.practice{border:1px solid var(--line); border-radius:10px; padding:.2rem 1rem; margin-bottom:.7rem; background:#fff;}
+  details.practice summary{cursor:pointer; padding:.7rem 0; font-weight:600; list-style:none; display:flex; gap:.6rem; align-items:flex-start;}
+  details.practice summary::before{content:"▸"; color:var(--accent); flex:none; transition:transform .15s;}
+  details.practice[open] summary::before{transform:rotate(90deg);}
+  details.practice summary::-webkit-details-marker{display:none;}
+  details.practice .body{padding:0 0 1rem 1.4rem; color:var(--ink-soft);}
+  details.practice .body .ans{color:var(--accent-deep); font-weight:700;}
+
+  .legend{display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-top:.5rem; font-size:.75rem; font-family:'IBM Plex Mono',monospace; color:var(--ink-soft);}
+  .legend span{display:inline-flex; align-items:center; gap:.35rem;}
+  .legend i{width:10px;height:10px;border-radius:50%;display:inline-block;}
+
+  footer{max-width:1240px; margin:0 auto; padding:2rem 1.5rem 3rem; color:var(--ink-soft); font-size:.85rem; text-align:center;}
+  footer .switcher{justify-content:center; margin-top:.8rem;}
+
+  @media (max-width:900px){
+    .layout{grid-template-columns:1fr;}
+    .toc{position:static; max-height:none;}
+    .hero{grid-template-columns:1fr;}
+  }
+</style>
 </head>
-
 <body>
 
-<header>
-📐 Trigonometry (त्रिकोणमिति)
-<input id="searchBox" onkeyup="searchTopic()" placeholder="Search topic...">
+<header class="topbar">
+  <div class="brand">
+    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+      <circle cx="24" cy="24" r="16" />
+      <line x1="24" y1="24" x2="35.3" y2="16.8" />
+      <line x1="24" y1="24" x2="35.3" y2="24" />
+      <line x1="35.3" y1="16.8" x2="35.3" y2="24" stroke-dasharray="3 3" />
+    </svg>
+
+    <div class="brand-text">
+      <div class="t1">Trigonometry</div>
+      <div class="t2">Math Notebook · Part 03</div>
+    </div>
+  </div>
+
+  <nav class="switcher">
+    <a href="Algebra.html">Algebra</a>
+    <a href="geometry.html">Geometry</a>
+    <a href="trigonometry.html" class="active">Trigonometry</a>
+  </nav>
 </header>
 
-<div class="container">
+<div class="layout">
 
-    <div class="box">
-        <h2>Basics of Trigonometry</h2>
-        <p>Sine, Cosine, Tangent introduction</p>
-        <button class="detail-btn" data-topic="basic">📘 Details</button>
+  <nav class="toc" id="toc">
+    <h3>Table of Contents</h3>
+
+    <ol>
+      <li><a href="#intro">Introduction</a></li>
+      <li><a href="#ratios">Basic Ratios</a></li>
+      <li><a href="#table">Standard Angle Table</a></li>
+      <li><a href="#quadrants">Quadrant Rules</a></li>
+      <li><a href="#identities">Basic Identities</a></li>
+      <li><a href="#sumdiff">Sum & Difference Formulae</a></li>
+      <li><a href="#double">Double & Triple Angle Formulae</a></li>
+      <li><a href="#sumproduct">Sum-to-Product & Product-to-Sum</a></li>
+      <li><a href="#inverse">Inverse Trigonometric Functions</a></li>
+      <li><a href="#graphs">Graphs of Functions</a></li>
+      <li><a href="#heights">Heights & Distances</a></li>
+      <li><a href="#sheet">Formula Sheet</a></li>
+      <li><a href="#examples">Solved Examples</a></li>
+      <li><a href="#practice">Practice Questions</a></li>
+    </ol>
+
+  </nav>
+
+  <main>
+
+    <section class="hero">
+  <div>
+    <div class="eyebrow"><span class="num">Interactive</span> Unit Circle</div>
+    <h1>Unit Circle Explorer</h1>
+    <p>Drag the point around the circle or move the slider. As the angle θ changes, the values of sin, cos, and tan update instantly.</p>
+  </div>
+
+  <div class="hero-panel">
+    <canvas id="circCanvas" width="420" height="420" aria-label="Unit Circle Explorer"></canvas>
+
+    <div class="legend">
+      <span><i style="background:#3B4FA0"></i> sin θ</span>
+      <span><i style="background:#1E6B55"></i> cos θ</span>
+      <span><i style="background:#7A3710"></i> Radius</span>
     </div>
 
-    <div class="box">
-        <h2>Trigonometric Ratios</h2>
-        <p>sin, cos, tan, cosec, sec, cot</p>
-        <button class="detail-btn" data-topic="ratios">📘 Details</button>
+    <div class="angle-row">
+      <input type="range" id="angleRange" min="0" max="360" step="1" value="40">
+      <span id="angleLabel">40°</span>
     </div>
 
-    <div class="box">
-        <h2>Angles in Trigonometry</h2>
-        <p>0°, 30°, 45°, 60°, 90° values</p>
-        <button class="detail-btn" data-topic="angles">📘 Details</button>
+    <div class="hero-stats">
+      <div><span class="k">sin θ</span><span id="statSin">—</span></div>
+      <div><span class="k">cos θ</span><span id="statCos">—</span></div>
+      <div><span class="k">tan θ</span><span id="statTan">—</span></div>
+      <div class="wide"><span class="k">Quadrant</span><span id="statQuad">—</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="intro">
+  <div class="eyebrow"><span class="num">01</span> Introduction</div>
+  <h2>What is Trigonometry?</h2>
+
+  <p class="lead">
+    Trigonometry is the branch of mathematics that studies the relationships
+    between the sides and angles of triangles, especially right-angled
+    triangles. It is widely used in engineering, navigation, physics,
+    astronomy, surveying, and architecture.
+  </p>
+</section>
+
+<section class="block" id="ratios">
+  <div class="eyebrow"><span class="num">02</span> Ratios</div>
+  <h2>Basic Trigonometric Ratios</h2>
+
+  <p>
+    In a right triangle, with respect to angle θ, the three sides are:
+    <strong>Perpendicular</strong>, <strong>Base</strong>, and
+    <strong>Hypotenuse</strong>.
+  </p>
+
+  <div class="formula-grid">
+    <div class="formula-box">
+      <span class="fname">sin θ</span>
+      \[
+      \sin\theta=\frac{\text{Perpendicular}}{\text{Hypotenuse}}
+      \]
     </div>
 
-    <div class="box">
-        <h2>Trigonometric Identities</h2>
-        <p>Important formulas and relations</p>
-        <button class="detail-btn" data-topic="identities">📘 Details</button>
+    <div class="formula-box">
+      <span class="fname">cos θ</span>
+      \[
+      \cos\theta=\frac{\text{Base}}{\text{Hypotenuse}}
+      \]
     </div>
 
-    <div class="box">
-        <h2>Height & Distance</h2>
-        <p>Real life applications</p>
-        <button class="detail-btn" data-topic="height">📘 Details</button>
+    <div class="formula-box">
+      <span class="fname">tan θ</span>
+      \[
+      \tan\theta=\frac{\text{Perpendicular}}{\text{Base}}
+      =\frac{\sin\theta}{\cos\theta}
+      \]
     </div>
 
+    <div class="formula-box">
+      <span class="fname">Reciprocal Ratios</span>
+      \[
+      \csc\theta=\frac1{\sin\theta},
+      \quad
+      \sec\theta=\frac1{\cos\theta},
+      \quad
+      \cot\theta=\frac1{\tan\theta}
+      \]
+    </div>
+  </div>
+</section>
+
+<section class="block" id="table">
+  <div class="eyebrow"><span class="num">03</span> Table</div>
+  <h2>Standard Angle Table</h2>
+
+  <table>
+    <tr>
+      <th>Ratio</th>
+      <th>0°</th>
+      <th>30°</th>
+      <th>45°</th>
+      <th>60°</th>
+      <th>90°</th>
+    </tr>
+
+    <tr>
+      <td>sin</td>
+      <td>0</td>
+      <td>1/2</td>
+      <td>1/√2</td>
+      <td>√3/2</td>
+      <td>1</td>
+    </tr>
+
+    <tr>
+      <td>cos</td>
+      <td>1</td>
+      <td>√3/2</td>
+      <td>1/√2</td>
+      <td>1/2</td>
+      <td>0</td>
+    </tr>
+
+    <tr>
+      <td>tan</td>
+      <td>0</td>
+      <td>1/√3</td>
+      <td>1</td>
+      <td>√3</td>
+      <td>Undefined</td>
+    </tr>
+
+    <tr>
+      <td>cosec</td>
+      <td>Undefined</td>
+      <td>2</td>
+      <td>√2</td>
+      <td>2/√3</td>
+      <td>1</td>
+    </tr>
+
+    <tr>
+      <td>sec</td>
+      <td>1</td>
+      <td>2/√3</td>
+      <td>√2</td>
+      <td>2</td>
+      <td>Undefined</td>
+    </tr>
+
+    <tr>
+      <td>cot</td>
+      <td>Undefined</td>
+      <td>√3</td>
+      <td>1</td>
+      <td>1/√3</td>
+      <td>0</td>
+    </tr>
+  </table>
+</section>
+
+<section class="block" id="quadrants">
+  <div class="eyebrow"><span class="num">04</span> Quadrants</div>
+  <h2>Quadrant Rules (ASTC Rule)</h2>
+
+  <p>
+    In each quadrant, only certain trigonometric ratios are positive.
+    The mnemonic <strong>"All Students Take Calculus"</strong> (ASTC)
+    helps remember this rule.
+  </p>
+
+  <table>
+    <tr>
+      <th>Quadrant</th>
+      <th>Angle Range</th>
+      <th>Positive Ratios</th>
+    </tr>
+
+    <tr>
+      <td>I</td>
+      <td>0°–90°</td>
+      <td>All</td>
+    </tr>
+
+    <tr>
+      <td>II</td>
+      <td>90°–180°</td>
+      <td>sin, cosec</td>
+    </tr>
+
+    <tr>
+      <td>III</td>
+      <td>180°–270°</td>
+      <td>tan, cot</td>
+    </tr>
+
+    <tr>
+      <td>IV</td>
+      <td>270°–360°</td>
+      <td>cos, sec</td>
+    </tr>
+  </table>
+
+  <div class="note">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="12" cy="12" r="9"/>
+      <path d="M12 8v5M12 16h.01"/>
+    </svg>
+
+    <div>
+      <strong>Tip:</strong>
+      Move the slider in the Unit Circle Explorer above to observe how the signs of the trigonometric ratios change in different quadrants.
+    </div>
+  </div>
+</section>
+
+<section class="block" id="identities">
+  <div class="eyebrow"><span class="num">05</span> Identities</div>
+  <h2>Basic Trigonometric Identities</h2>
+
+  <div class="formula-grid">
+    <div class="formula-box">
+      <span class="fname">Pythagorean Identity 1</span>
+      \[
+      \sin^2\theta+\cos^2\theta=1
+      \]
+    </div>
+
+    <div class="formula-box">
+      <span class="fname">Pythagorean Identity 2</span>
+      \[
+      1+\tan^2\theta=\sec^2\theta
+      \]
+    </div>
+
+    <div class="formula-box">
+      <span class="fname">Pythagorean Identity 3</span>
+      \[
+      1+\cot^2\theta=\csc^2\theta
+      \]
+    </div>
+  </div>
+</section>
+
+<section class="block" id="sumdiff">
+  <div class="eyebrow"><span class="num">06</span> Formulae</div>
+  <h2>Sum & Difference Formulae</h2>
+
+  <div class="formula-grid">
+    <div class="formula-box">
+      <span class="fname">sin(A ± B)</span>
+      \[
+      \sin(A\pm B)=\sin A\cos B\pm\cos A\sin B
+      \]
+    </div>
+
+    <div class="formula-box">
+      <span class="fname">cos(A ± B)</span>
+      \[
+      \cos(A\pm B)=\cos A\cos B\mp\sin A\sin B
+      \]
+    </div>
+
+    <div class="formula-box">
+      <span class="fname">tan(A ± B)</span>
+      \[
+      \tan(A\pm B)=
+      \frac{\tan A\pm\tan B}
+      {1\mp\tan A\tan B}
+      \]
+    </div>
+  </div>
+</section>
+
+<section class="block" id="double">
+  <div class="eyebrow"><span class="num">07</span> Formulae</div>
+  <h2>Double & Triple Angle Formulae</h2>
+
+  <div class="formula-grid">
+    <div class="formula-box">
+      <span class="fname">sin 2A</span>
+      \[
+      \sin2A=2\sin A\cos A
+      \]
+    </div>
+
+    <div class="formula-box">
+      <span class="fname">cos 2A</span>
+      \[
+      \cos2A=\cos^2A-\sin^2A=1-2\sin^2A
+      \]
+    </div>
+
+    <div class="formula-box">
+      <span class="fname">tan 2A</span>
+      \[
+      \tan2A=\frac{2\tan A}{1-\tan^2A}
+      \]
+    </div>
+
+    <div class="formula-box">
+      <span class="fname">sin 3A</span>
+      \[
+      \sin3A=3\sin A-4\sin^3A
+      \]
+    </div>
+
+    <div class="formula-box">
+      <span class="fname">cos 3A</span>
+      \[
+      \cos3A=4\cos^3A-3\cos A
+      \]
+    </div>
+  </div>
+</section>
+
+<section class="block" id="sumproduct">
+  <div class="eyebrow"><span class="num">08</span> Transformations</div>
+  <h2>Sum-to-Product Formulas</h2>
+
+  <div class="formula-grid">
+    <div class="formula-box">
+      <span class="fname">sin C + sin D</span>
+      \[
+      2\sin\!\left(\tfrac{C+D}{2}\right)\cos\!\left(\tfrac{C-D}{2}\right)
+      \]
+    </div>
+
+    <div class="formula-box">
+      <span class="fname">sin C − sin D</span>
+      \[
+      2\cos\!\left(\tfrac{C+D}{2}\right)\sin\!\left(\tfrac{C-D}{2}\right)
+      \]
+    </div>
+
+    <div class="formula-box">
+      <span class="fname">cos C + cos D</span>
+      \[
+      2\cos\!\left(\tfrac{C+D}{2}\right)\cos\!\left(\tfrac{C-D}{2}\right)
+      \]
+    </div>
+
+    <div class="formula-box">
+      <span class="fname">cos C − cos D</span>
+      \[
+      -2\sin\!\left(\tfrac{C+D}{2}\right)\sin\!\left(\tfrac{C-D}{2}\right)
+      \]
+    </div>
+  </div>
+</section>
+
+<section class="block" id="inverse">
+  <div class="eyebrow"><span class="num">09</span> Inverse Functions</div>
+  <h2>Inverse Trigonometric Functions</h2>
+
+  <p>Inverse trigonometric functions determine the angle corresponding to a given trigonometric ratio.</p>
+
+  <table>
+    <tr>
+      <th>Function</th>
+      <th>Domain</th>
+      <th>Principal Range</th>
+    </tr>
+    <tr>
+      <td>\(\sin^{-1}x\)</td>
+      <td>[−1, 1]</td>
+      <td>[−90°, 90°]</td>
+    </tr>
+    <tr>
+      <td>\(\cos^{-1}x\)</td>
+      <td>[−1, 1]</td>
+      <td>[0°, 180°]</td>
+    </tr>
+    <tr>
+      <td>\(\tan^{-1}x\)</td>
+      <td>All Real Numbers</td>
+      <td>(−90°, 90°)</td>
+    </tr>
+  </table>
+</section>
+
+<section class="block" id="graphs">
+  <div class="eyebrow"><span class="num">10</span> Graphs</div>
+  <h2>Graphs of Trigonometric Functions</h2>
+
+  <table>
+    <tr>
+      <th>Function</th>
+      <th>Period</th>
+      <th>Range</th>
+    </tr>
+    <tr>
+      <td>sin x</td>
+      <td>360° (2π)</td>
+      <td>[−1, 1]</td>
+    </tr>
+    <tr>
+      <td>cos x</td>
+      <td>360° (2π)</td>
+      <td>[−1, 1]</td>
+    </tr>
+    <tr>
+      <td>tan x</td>
+      <td>180° (π)</td>
+      <td>All Real Numbers</td>
+    </tr>
+  </table>
+
+  <p style="font-size:.85rem;color:var(--ink-soft)">
+    The graph of tan x has vertical asymptotes at 90°, 270°, etc., where the function is undefined.
+  </p>
+</section>
+
+<section class="block" id="heights">
+  <div class="eyebrow"><span class="num">11</span> Applications</div>
+  <h2>Heights and Distances</h2>
+
+  <div class="formula-grid">
+    <div class="formula-box">
+      <span class="fname">Angle of Elevation</span>
+      The angle formed when looking upward from the horizontal line.
+    </div>
+
+    <div class="formula-box">
+      <span class="fname">Angle of Depression</span>
+      The angle formed when looking downward from the horizontal line.
+    </div>
+  </div>
+
+  <div class="formula-box">
+    <span class="fname">Basic Formula</span>
+    \[
+    \tan\theta=\frac{\text{Height}}{\text{Distance}}
+    \]
+  </div>
+</section>
+
+<section class="block" id="sheet">
+  <div class="eyebrow"><span class="num">12</span> Quick Reference</div>
+  <h2>Formula Sheet</h2>
+
+  <div class="sheet-grid">
+    <div class="sheet-card">
+      <span class="fname">Fundamental Identity</span>
+      \(\sin^2\theta+\cos^2\theta=1\)
+    </div>
+
+    <div class="sheet-card">
+      <span class="fname">sin(A+B)</span>
+      \(\sin(A+B)\)
+    </div>
+
+    <div class="sheet-card">
+      <span class="fname">cos(A+B)</span>
+      \(\cos(A+B)\)
+    </div>
+
+    <div class="sheet-card">
+      <span class="fname">Double Angle</span>
+      \(\sin2A=2\sin A\cos A\)
+    </div>
+
+    <div class="sheet-card">
+      <span class="fname">tan θ</span>
+      \(\sin\theta/\cos\theta\)
+    </div>
+
+    <div class="sheet-card">
+      <span class="fname">sec² θ</span>
+      \(1+\tan^2\theta\)
+    </div>
+
+    <div class="sheet-card">
+      <span class="fname">cosec² θ</span>
+      \(1+\cot^2\theta\)
+    </div>
+
+    <div class="sheet-card">
+      <span class="fname">Angle of Elevation</span>
+      \(\tan\theta=h/d\)
+    </div>
+
+    <div class="sheet-card">
+      <span class="fname">ASTC Rule</span>
+      All · Sin · Tan · Cos
+    </div>
+  </div>
+</section>
+
+<section class="block" id="examples">
+  <div class="eyebrow"><span class="num">13</span> Practice</div>
+  <h2>Solved Examples</h2>
+
+  <div class="example-card">
+    <span class="tag">Example 1</span>
+
+    <div class="q">
+      If \(\sin\theta=\frac35\), find \(\cos\theta\) and \(\tan\theta\).
+    </div>
+
+    <p>
+      Solution: Using the 3-4-5 right triangle,
+      Hypotenuse = 5, Opposite = 3, Adjacent = 4.
+    </p>
+
+    <div class="ans">
+      \(\cos\theta=\frac45,\qquad\tan\theta=\frac34\)
+    </div>
+  </div>
+
+  <div class="example-card">
+    <span class="tag">Example 2</span>
+
+    <div class="q">
+      Evaluate:
+      \(\sin30^\circ\cos60^\circ+\cos30^\circ\sin60^\circ\)
+    </div>
+
+    <p>
+      Solution: Apply the identity
+      \(\sin(A+B)\), where A = 30° and B = 60°.
+    </p>
+
+    <div class="ans">
+      Value = 1
+    </div>
+  </div>
+
+  <div class="example-card">
+    <span class="tag">Example 3</span>
+
+    <div class="q">
+      A person stands 50 m away from a tower. The angle of elevation to the top of the tower is 30°. Find the height of the tower.
+    </div>
+
+    <p>
+      Solution:
+      \(\tan30^\circ=\frac{h}{50}\Rightarrow h=50\times\frac1{\sqrt3}\)
+    </p>
+
+    <div class="ans">
+      Height ≈ 28.87 m
+    </div>
+  </div>
+
+  <div class="example-card">
+    <span class="tag">Example 4</span>
+
+    <div class="q">
+      Prove:
+      \(\frac{1-\cos^2\theta}{\sin\theta}=\sin\theta\)
+    </div>
+
+    <p>
+      Solution:
+      Since
+      \(1-\cos^2\theta=\sin^2\theta\),
+      therefore
+      \(\frac{\sin^2\theta}{\sin\theta}=\sin\theta\).
+    </p>
+
+    <div class="ans">
+      Hence Proved.
+    </div>
+  </div>
+</section>
+
+   <section class="block" id="practice">
+  <div class="eyebrow"><span class="num">14</span> Practice</div>
+
+  <h2>Practice Yourself</h2>
+
+  <p class="lead">Tap on a question to reveal the answer.</p>
+
+  <details class="practice">
+    <summary>1. If \(\cos\theta=\tfrac{12}{13}\), find \(\sin\theta\).</summary>
+    <div class="body">
+      Using the 5-12-13 right triangle.
+      <span class="ans">\(\sin\theta=\frac{5}{13}\)</span>
+    </div>
+  </details>
+
+  <details class="practice">
+    <summary>2. Evaluate \(\tan45^\circ+\cos60^\circ\).</summary>
+    <div class="body">
+      \(1+\frac12\)
+      <span class="ans">=\(\frac32\)</span>
+    </div>
+  </details>
+
+  <details class="practice">
+    <summary>3. A kite string is 100 m long and makes an angle of elevation of 60°. Find the height of the kite.</summary>
+    <div class="body">
+      \(h=100\sin60^\circ=100\times\frac{\sqrt3}{2}\)
+      <span class="ans">\(h\approx86.6\text{ m}\)</span>
+    </div>
+  </details>
+
+  <details class="practice">
+    <summary>4. Simplify: \(\sec^2\theta-\tan^2\theta\).</summary>
+    <div class="body">
+      Using the fundamental identity.
+      <span class="ans">= 1</span>
+    </div>
+  </details>
+
+  <details class="practice">
+    <summary>5. In which quadrant does the angle 150° lie, and which trigonometric ratios are positive there?</summary>
+    <div class="body">
+      150° lies in the Second Quadrant.
+      <span class="ans">Sine (sin) and Cosecant (csc) are positive.</span>
+    </div>
+  </details>
+
+</section>
+
+  </main>
 </div>
 
-<footer class="app-footer">
+<footer>
+  This page is a free educational reference resource from the Mathematics Notebook Series.
 
-    <div class="footer-text">
-        📘 Trigonometry Learning Hub
-    </div>
-
-    <button class="footer-btn">
-        ✔ Mark as Completed
-    </button>
-
+  <nav class="switcher">
+    <a href="Algebra.html">Algebra</a>
+    <a href="geometry.html">Geometry</a>
+    <a href="trigonometry.html" class="active">Trigonometry</a>
+  </nav>
 </footer>
 
-<script src="trigonometry.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    if(window.renderMathInElement){
+      renderMathInElement(document.body, {
+        delimiters: [
+          {left:"\\[", right:"\\]", display:true},
+          {left:"\\(", right:"\\)", display:false}
+        ],
+        throwOnError:false
+      });
+    }
+  });
 
+  (function(){
+    const links = document.querySelectorAll('.toc a');
+    const sections = Array.from(links).map(l=>document.querySelector(l.getAttribute('href')));
+    if('IntersectionObserver' in window){
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            const id = '#'+entry.target.id;
+            links.forEach(l=>l.classList.toggle('current', l.getAttribute('href')===id));
+          }
+        });
+      }, {rootMargin:'-40% 0px -50% 0px'});
+      sections.forEach(s=>{ if(s) io.observe(s); });
+    }
+  })();
+
+  // unit circle explorer
+  (function(){
+    const canvas=document.getElementById('circCanvas');
+    if(!canvas) return;
+    const ctx=canvas.getContext('2d');
+    const CSS_W=340, CSS_H=340;
+    function setupRes(){
+      const dpr=window.devicePixelRatio||1;
+      canvas.width=CSS_W*dpr; canvas.height=CSS_H*dpr;
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+    }
+    setupRes();
+
+    const cx=CSS_W/2, cy=CSS_H/2, R=130;
+    const slider=document.getElementById('angleRange');
+    const angleLabel=document.getElementById('angleLabel');
+    const statSin=document.getElementById('statSin');
+    const statCos=document.getElementById('statCos');
+    const statTan=document.getElementById('statTan');
+    const statQuad=document.getElementById('statQuad');
+    let dragging=false;
+
+    function draw(){
+      const deg=parseFloat(slider.value);
+      const rad=deg*Math.PI/180;
+      ctx.clearRect(0,0,CSS_W,CSS_H);
+
+      ctx.strokeStyle='rgba(181,84,28,0.10)';
+      ctx.lineWidth=1;
+      for(let gx=0;gx<=CSS_W;gx+=28){ctx.beginPath();ctx.moveTo(gx,0);ctx.lineTo(gx,CSS_H);ctx.stroke();}
+      for(let gy=0;gy<=CSS_H;gy+=28){ctx.beginPath();ctx.moveTo(0,gy);ctx.lineTo(CSS_W,gy);ctx.stroke();}
+
+      ctx.strokeStyle='rgba(31,36,48,0.45)';
+      ctx.lineWidth=1.5;
+      ctx.beginPath();ctx.moveTo(0,cy);ctx.lineTo(CSS_W,cy);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(cx,0);ctx.lineTo(cx,CSS_H);ctx.stroke();
+
+      ctx.beginPath();
+      ctx.arc(cx,cy,R,0,Math.PI*2);
+      ctx.strokeStyle='#B5541C';
+      ctx.lineWidth=2;
+      ctx.stroke();
+
+      const px=cx+R*Math.cos(rad);
+      const py=cy-R*Math.sin(rad);
+
+      ctx.strokeStyle='#1E6B55';
+      ctx.lineWidth=3;
+      ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(px,cy);ctx.stroke();
+
+      ctx.strokeStyle='#3B4FA0';
+      ctx.lineWidth=3;
+      ctx.beginPath();ctx.moveTo(px,cy);ctx.lineTo(px,py);ctx.stroke();
+
+      ctx.strokeStyle='#7A3710';
+      ctx.lineWidth=2;
+      ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(px,py);ctx.stroke();
+
+      ctx.beginPath();ctx.arc(px,py,6,0,Math.PI*2);ctx.fillStyle='#7A3710';ctx.fill();
+
+      const sinV=Math.sin(rad), cosV=Math.cos(rad);
+      const tanV = Math.abs(cosV)<0.0001? null : sinV/cosV;
+
+      angleLabel.textContent=deg.toFixed(0)+'°';
+      statSin.textContent=sinV.toFixed(3);
+      statCos.textContent=cosV.toFixed(3);
+      statTan.textContent = tanV===null?'अपरिभाषित':tanV.toFixed(3);
+
+      let quad='—';
+      const normalized=((deg%360)+360)%360;
+      if(normalized===0||normalized===90||normalized===180||normalized===270) quad='अक्ष पर (Axis)';
+      else if(normalized<90) quad='प्रथम चतुर्थांश (सभी धनात्मक)';
+      else if(normalized<180) quad='द्वितीय चतुर्थांश (sin धनात्मक)';
+      else if(normalized<270) quad='तृतीय चतुर्थांश (tan धनात्मक)';
+      else quad='चतुर्थ चतुर्थांश (cos धनात्मक)';
+      statQuad.textContent=quad;
+    }
+
+    function angleFromPos(x,y){
+      let rad=Math.atan2(-(y-cy), x-cx);
+      let deg=rad*180/Math.PI;
+      if(deg<0) deg+=360;
+      return deg;
+    }
+    function getPos(evt){
+      const rect=canvas.getBoundingClientRect();
+      const scaleX=CSS_W/rect.width, scaleY=CSS_H/rect.height;
+      const clientX=evt.touches?evt.touches[0].clientX:evt.clientX;
+      const clientY=evt.touches?evt.touches[0].clientY:evt.clientY;
+      return {x:(clientX-rect.left)*scaleX, y:(clientY-rect.top)*scaleY};
+    }
+    function down(evt){ dragging=true; canvas.style.cursor='grabbing'; move(evt); }
+    function move(evt){
+      if(!dragging) return;
+      evt.preventDefault();
+      const pos=getPos(evt);
+      const deg=angleFromPos(pos.x,pos.y);
+      slider.value=deg.toFixed(0);
+      draw();
+    }
+    function up(){ dragging=false; canvas.style.cursor='grab'; }
+
+    canvas.addEventListener('mousedown',down);
+    canvas.addEventListener('mousemove',move);
+    window.addEventListener('mouseup',up);
+    canvas.addEventListener('touchstart',down,{passive:false});
+    canvas.addEventListener('touchmove',move,{passive:false});
+    canvas.addEventListener('touchend',up);
+    slider.addEventListener('input',draw);
+
+    draw();
+  })();
+</script>
 </body>
 </html>

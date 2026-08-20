@@ -1,69 +1,644 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Algebra</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>बीजगणित — पूर्ण गाइड | गणित नोटबुक</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@500;600;700;900&family=Hind:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<style>
+  :root{
+    --paper:#FBF8F1;
+    --paper-line: rgba(59,79,160,0.07);
+    --ink-dark:#1F2430;
+    --ink-soft:#5B6270;
+    --accent:#3B4FA0;
+    --accent-light:#E7EAF7;
+    --accent-deep:#232F6B;
+    --mark-root:#1E6B55;
+    --mark-vertex:#B5541C;
+    --card:#FFFFFF;
+    --line:rgba(31,36,48,0.10);
+    --radius:12px;
+  }
+  *,*::before,*::after{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+  body{
+    margin:0;
+    font-family:'Hind',sans-serif;
+    color:var(--ink-dark);
+    background-color:var(--paper);
+    background-image:
+      linear-gradient(var(--paper-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--paper-line) 1px, transparent 1px);
+    background-size:28px 28px;
+    line-height:1.7;
+    font-size:16.5px;
+  }
+  h1,h2,h3{font-family:'Noto Serif Devanagari',serif; color:var(--ink-dark); margin:0 0 .4em;}
+  a{color:var(--accent-deep);}
+  ::selection{background:var(--accent-light);}
+  :focus-visible{outline:2.5px solid var(--accent-deep); outline-offset:3px;}
 
-<link rel="stylesheet" href="algebra.css">
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.72rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--accent-deep);
+    font-weight:600;
+    display:flex;align-items:center;gap:.5em;
+    margin-bottom:.6em;
+  }
+  .eyebrow .num{
+    background:var(--accent);
+    color:#fff;
+    padding:.15em .5em;
+    border-radius:5px;
+    font-size:.9em;
+  }
+
+  /* topbar */
+  .topbar{
+    position:sticky; top:0; z-index:50;
+    background:rgba(251,248,241,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+    display:flex; align-items:center; justify-content:space-between;
+    padding:.9rem 1.5rem;
+    gap:1rem; flex-wrap:wrap;
+  }
+  .brand{display:flex; align-items:center; gap:.7rem;}
+  .brand svg{width:34px;height:34px;color:var(--accent);}
+  .brand-text .t1{font-family:'Noto Serif Devanagari',serif; font-weight:800; font-size:1.25rem; line-height:1;}
+  .brand-text .t2{font-family:'IBM Plex Mono',monospace; font-size:.68rem; color:var(--ink-soft); letter-spacing:.08em;}
+  .switcher{display:flex; gap:.4rem; flex-wrap:wrap;}
+  .switcher a{
+    text-decoration:none; font-family:'IBM Plex Mono',monospace; font-size:.78rem;
+    padding:.45rem .8rem; border-radius:999px; border:1px solid var(--line);
+    color:var(--ink-soft); background:var(--card);
+  }
+  .switcher a.active{background:var(--accent); color:#fff; border-color:var(--accent);}
+  .switcher a:hover{border-color:var(--accent);}
+
+  /* layout */
+  .layout{
+    max-width:1240px; margin:0 auto; padding:2rem 1.5rem 4rem;
+    display:grid; grid-template-columns:250px 1fr; gap:2.6rem; align-items:start;
+  }
+  .toc{
+    position:sticky; top:84px;
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    padding:1.1rem 1rem; max-height:calc(100vh - 110px); overflow:auto;
+  }
+  .toc h3{font-size:.85rem; font-family:'IBM Plex Mono',monospace; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.08em; margin-bottom:.8rem;}
+  .toc ol{list-style:none; margin:0; padding:0; counter-reset:sec;}
+  .toc li{counter-increment:sec; margin-bottom:.15rem;}
+  .toc a{
+    display:flex; gap:.55rem; text-decoration:none; color:var(--ink-dark);
+    font-size:.87rem; padding:.42rem .5rem; border-radius:8px;
+  }
+  .toc a::before{
+    content:counter(sec,decimal-leading-zero);
+    font-family:'IBM Plex Mono',monospace; color:var(--accent); font-size:.78rem; flex:none;
+  }
+  .toc a:hover{background:var(--accent-light);}
+  .toc a.current{background:var(--accent); color:#fff;}
+  .toc a.current::before{color:#fff;}
+
+  main{min-width:0;}
+
+  /* hero */
+  .hero{
+    background:linear-gradient(155deg, var(--accent-deep), var(--accent) 70%);
+    color:#fff; border-radius:18px; padding:2.2rem;
+    display:grid; grid-template-columns:1.05fr 1fr; gap:2rem; align-items:center;
+    margin-bottom:2.6rem; overflow:hidden; position:relative;
+  }
+  .hero h1{color:#fff; font-size:2.15rem; margin-bottom:.5rem;}
+  .hero p{color:rgba(255,255,255,0.86); max-width:46ch;}
+  .hero .eyebrow{color:#FBEFD9;}
+  .hero .eyebrow .num{background:rgba(255,255,255,0.22);}
+  .hero-panel{
+    background:rgba(255,255,255,0.96); border-radius:14px; padding:1.1rem 1.1rem 1.3rem; color:var(--ink-dark);
+  }
+  .hero-panel canvas{width:100%; height:auto; display:block; border-radius:8px; background:#fff;}
+  .sliders{display:flex; flex-direction:column; gap:.55rem; margin-top:.7rem;}
+  .slider-row{display:flex; align-items:center; gap:.6rem; font-family:'IBM Plex Mono',monospace; font-size:.82rem;}
+  .slider-row label{width:1.4rem; font-weight:700; color:var(--accent-deep);}
+  .slider-row input[type=range]{flex:1; accent-color:var(--accent);}
+  .slider-row .v{width:3.4rem; text-align:right; color:var(--ink-soft);}
+  .hero-stats{margin-top:.8rem; display:grid; grid-template-columns:1fr 1fr; gap:.5rem; font-size:.82rem;}
+  .hero-stats div{background:var(--accent-light); border-radius:8px; padding:.5rem .6rem;}
+  .hero-stats .k{display:block; font-family:'IBM Plex Mono',monospace; font-size:.66rem; color:var(--accent-deep); text-transform:uppercase; letter-spacing:.06em; margin-bottom:.15rem;}
+
+  /* content sections */
+  section.block{
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    padding:1.8rem 2rem; margin-bottom:1.6rem; scroll-margin-top:90px;
+  }
+  section.block h2{font-size:1.5rem;}
+  section.block p{color:var(--ink-dark); margin:.5rem 0 1rem;}
+  .lead{color:var(--ink-soft); font-size:1.02rem;}
+
+  .formula-box{
+    background:var(--accent-light); border-left:4px solid var(--accent); border-radius:8px;
+    padding:.9rem 1.1rem; margin:.8rem 0; overflow-x:auto;
+  }
+  .formula-box .fname{font-family:'IBM Plex Mono',monospace; font-size:.72rem; color:var(--accent-deep); text-transform:uppercase; letter-spacing:.05em; margin-bottom:.35rem; display:block;}
+  .formula-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:.8rem;}
+  @media (max-width:640px){.formula-grid{grid-template-columns:1fr;}}
+
+  .note{
+    border:1px dashed var(--accent); background:#fff; border-radius:10px; padding:.9rem 1.1rem; margin:1rem 0;
+    display:flex; gap:.7rem; align-items:flex-start;
+  }
+  .note svg{flex:none; width:20px;height:20px; color:var(--accent-deep); margin-top:.2rem;}
+  .note strong{color:var(--accent-deep);}
+
+  table{width:100%; border-collapse:collapse; margin:1rem 0; font-size:.92rem;}
+  th,td{border:1px solid var(--line); padding:.55rem .7rem; text-align:center;}
+  th{background:var(--accent-light); color:var(--accent-deep); font-family:'IBM Plex Mono',monospace; font-size:.78rem; text-transform:uppercase; letter-spacing:.04em;}
+  tr:nth-child(even) td{background:rgba(59,79,160,0.03);}
+  td:first-child, th:first-child{text-align:right;}
+
+  .sheet-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:.85rem;}
+  @media (max-width:900px){.sheet-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:600px){.sheet-grid{grid-template-columns:1fr;}}
+  .sheet-card{background:var(--accent-light); border:1px solid var(--line); border-radius:10px; padding:.85rem .95rem;}
+  .sheet-card .fname{font-family:'IBM Plex Mono',monospace; font-size:.68rem; color:var(--accent-deep); text-transform:uppercase; letter-spacing:.05em; display:block; margin-bottom:.3rem;}
+
+  .example-card{border:1px solid var(--line); border-radius:10px; padding:1rem 1.2rem; margin-bottom:1rem; background:#fffefb;}
+  .example-card .tag{font-family:'IBM Plex Mono',monospace; font-size:.7rem; color:#fff; background:var(--mark-vertex); padding:.15rem .55rem; border-radius:999px;}
+  .example-card .q{font-weight:600; margin:.6rem 0 .4rem;}
+  .example-card .ans{background:var(--accent-light); border-radius:8px; padding:.5rem .8rem; margin-top:.5rem; font-weight:600; color:var(--accent-deep);}
+
+  details.practice{border:1px solid var(--line); border-radius:10px; padding:.2rem 1rem; margin-bottom:.7rem; background:#fff;}
+  details.practice summary{cursor:pointer; padding:.7rem 0; font-weight:600; list-style:none; display:flex; gap:.6rem; align-items:flex-start;}
+  details.practice summary::before{content:"▸"; color:var(--accent); flex:none; transition:transform .15s;}
+  details.practice[open] summary::before{transform:rotate(90deg);}
+  details.practice summary::-webkit-details-marker{display:none;}
+  details.practice .body{padding:0 0 1rem 1.4rem; color:var(--ink-soft);}
+  details.practice .body .ans{color:var(--mark-root); font-weight:700;}
+
+  footer{max-width:1240px; margin:0 auto; padding:2rem 1.5rem 3rem; color:var(--ink-soft); font-size:.85rem; text-align:center;}
+  footer .switcher{justify-content:center; margin-top:.8rem;}
+
+  @media (max-width:900px){
+    .layout{grid-template-columns:1fr;}
+    .toc{position:static; max-height:none;}
+    .hero{grid-template-columns:1fr;}
+  }
+</style>
 </head>
-
 <body>
 
-<header>
-➗ Algebra (बीजगणित)
+<header class="topbar">
+  <div class="brand">
+    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+      <path d="M6 38 C 14 38, 16 10, 24 10 S 34 38, 42 38" />
+      <circle cx="24" cy="24" r="2.4" fill="currentColor" stroke="none"/>
+    </svg>
+    <div class="brand-text">
+      <div class="t1">बीजगणित</div>
+      <div class="t2">गणित नोटबुक · भाग 01</div>
+    </div>
+  </div>
+  <nav class="switcher">
+    <a href="Algebra.html" class="active">बीजगणित</a>
+    <a href="geometry.html">ज्यामिति</a>
+    <a href="trigonometry.html">त्रिकोणमिति</a>
+  </nav>
 </header>
-<button class="formula-btn">📘 Formula Book</button>
-<div class="container">
 
-<div class="box">
-    <h2>Algebraic Expressions</h2>
-    <p>Variables और constants से बनी mathematical expressions</p>
+<div class="layout">
+  <nav class="toc" id="toc">
+    <h3>विषय-सूची</h3>
+    <ol>
+      <li><a href="#intro">परिचय</a></li>
+      <li><a href="#expr">व्यंजक और पद</a></li>
+      <li><a href="#identities">सर्वसमिकाएँ</a></li>
+      <li><a href="#exponents">घातांक के नियम</a></li>
+      <li><a href="#surds">करणी</a></li>
+      <li><a href="#linear">रैखिक समीकरण</a></li>
+      <li><a href="#quadratic">द्विघात समीकरण</a></li>
+      <li><a href="#polynomials">बहुपद</a></li>
+      <li><a href="#ap">समांतर श्रेणी</a></li>
+      <li><a href="#gp">गुणोत्तर श्रेणी</a></li>
+      <li><a href="#inequalities">असमिकाएँ</a></li>
+      <li><a href="#sheet">सूत्र-पत्रक</a></li>
+      <li><a href="#examples">हल उदाहरण</a></li>
+      <li><a href="#practice">अभ्यास प्रश्न</a></li>
+    </ol>
+  </nav>
 
-    <button class="detail-btn" data-topic="expressions">📘 Details</button>
-</div>
-<div class="box">
-    <h2>Linear Equations</h2>
-    <p>Ax + B = 0 type equations</p>
+  <main>
 
-    <button class="detail-btn" data-topic="linear">📘 Details</button>
-</div>
+    <section class="hero">
+      <div>
+        <div class="eyebrow"><span class="num">इंटरैक्टिव</span> लाइव ग्राफ़</div>
+        <h1>द्विघात फलन एक्सप्लोरर</h1>
+        <p>स्लाइडर घुमाकर a, b, c बदलें और देखें कि परवलय (parabola) कैसे बदलता है — मूल, विविक्तकर और शीर्ष सब कुछ लाइव अपडेट होगा।</p>
+      </div>
+      <div class="hero-panel">
+        <canvas id="quadCanvas" height="320" aria-label="द्विघात फलन का ग्राफ"></canvas>
+        <div class="sliders">
+          <div class="slider-row"><label for="aRange">a</label><input type="range" id="aRange" min="-5" max="5" step="0.1" value="1"><span class="v" id="aVal">1.0</span></div>
+          <div class="slider-row"><label for="bRange">b</label><input type="range" id="bRange" min="-10" max="10" step="0.1" value="-2"><span class="v" id="bVal">-2.0</span></div>
+          <div class="slider-row"><label for="cRange">c</label><input type="range" id="cRange" min="-10" max="10" step="0.1" value="-3"><span class="v" id="cVal">-3.0</span></div>
+        </div>
+        <div class="hero-stats">
+          <div><span class="k">समीकरण</span><span id="statEq">—</span></div>
+          <div><span class="k">विविक्तकर D</span><span id="statDisc">—</span></div>
+          <div><span class="k">शीर्ष (Vertex)</span><span id="statVertex">—</span></div>
+          <div><span class="k">मूल (Roots)</span><span id="statRoots">—</span></div>
+        </div>
+      </div>
+    </section>
 
-    <div class="box">
-    <h2>Quadratic Equations</h2>
-    <p>Ax² + Bx + C = 0 type equations</p>
+    <section class="block" id="intro">
+      <div class="eyebrow"><span class="num">01</span> परिचय</div>
+      <h2>बीजगणित क्या है?</h2>
+      <p class="lead">बीजगणित (Algebra) गणित की वह शाखा है जिसमें संख्याओं के स्थान पर अक्षर चिह्नों — जैसे x, y, a, b — का उपयोग किया जाता है ताकि सामान्य नियम और संबंध लिखे जा सकें जो हर संख्या के लिए सत्य हों। यह अंकगणित का विस्तार है और विज्ञान, इंजीनियरिंग, अर्थशास्त्र व कंप्यूटर विज्ञान की नींव है।</p>
+      <div class="formula-grid">
+        <div class="formula-box"><span class="fname">चर (Variable)</span>वह अक्षर जिसका मान बदल सकता है — जैसे x, y</div>
+        <div class="formula-box"><span class="fname">अचर (Constant)</span>वह संख्या जिसका मान स्थिर रहता है — जैसे 5, −3</div>
+        <div class="formula-box"><span class="fname">गुणांक (Coefficient)</span>चर के साथ गुणा होने वाली संख्या — 7x में 7</div>
+        <div class="formula-box"><span class="fname">पद (Term)</span>व्यंजक का एक भाग, जो + या − से अलग होता है</div>
+      </div>
+    </section>
 
-    <button class="detail-btn" data-topic="quadratic">📘 Details</button>
-</div>
+    <section class="block" id="expr">
+      <div class="eyebrow"><span class="num">02</span> बीजीय व्यंजक</div>
+      <h2>व्यंजक और पदों के प्रकार</h2>
+      <p>पदों की संख्या के आधार पर बीजीय व्यंजक को नाम दिए जाते हैं। समान पद (like terms) — जिनमें चर व घात दोनों समान हों — उन्हें ही जोड़ा या घटाया जा सकता है।</p>
+      <table>
+        <tr><th>प्रकार</th><th>पदों की संख्या</th><th>उदाहरण</th></tr>
+        <tr><td>एकपदी (Monomial)</td><td>1</td><td>\(5x^2\)</td></tr>
+        <tr><td>द्विपदी (Binomial)</td><td>2</td><td>\(3x + 7\)</td></tr>
+        <tr><td>त्रिपदी (Trinomial)</td><td>3</td><td>\(x^2+5x+6\)</td></tr>
+        <tr><td>बहुपद (Polynomial)</td><td>2 या अधिक</td><td>\(x^3-2x^2+x-9\)</td></tr>
+      </table>
+      <div class="note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+        <div><strong>याद रखें:</strong> \(3x + 5x = 8x\) क्योंकि दोनों समान पद हैं, लेकिन \(3x + 5x^2\) को आगे सरल नहीं किया जा सकता क्योंकि घात अलग है।</div>
+      </div>
+    </section>
 
-<div class="box">
-    <h2>Factorisation</h2>
-    <p>Expression को छोटे factors में तोड़ना</p>
+    <section class="block" id="identities">
+      <div class="eyebrow"><span class="num">03</span> सर्वसमिकाएँ</div>
+      <h2>बीजीय सर्वसमिकाएँ (Identities)</h2>
+      <p>ये सूत्र हर मान के लिए सत्य होते हैं और गुणनखंडन व त्वरित गणना में बहुत काम आते हैं।</p>
+      <div class="formula-grid">
+        <div class="formula-box"><span class="fname">01</span>\[(a+b)^2 = a^2 + 2ab + b^2\]</div>
+        <div class="formula-box"><span class="fname">02</span>\[(a-b)^2 = a^2 - 2ab + b^2\]</div>
+        <div class="formula-box"><span class="fname">03</span>\[a^2 - b^2 = (a+b)(a-b)\]</div>
+        <div class="formula-box"><span class="fname">04</span>\[(a+b)^3 = a^3+3a^2b+3ab^2+b^3\]</div>
+        <div class="formula-box"><span class="fname">05</span>\[(a-b)^3 = a^3-3a^2b+3ab^2-b^3\]</div>
+        <div class="formula-box"><span class="fname">06</span>\[a^3+b^3=(a+b)(a^2-ab+b^2)\]</div>
+        <div class="formula-box"><span class="fname">07</span>\[a^3-b^3=(a-b)(a^2+ab+b^2)\]</div>
+        <div class="formula-box"><span class="fname">08</span>\[(a+b+c)^2=a^2+b^2+c^2+2ab+2bc+2ca\]</div>
+      </div>
+    </section>
 
-    <button class="detail-btn" data-topic="factorisation">📘 Details</button>
-</div>
+    <section class="block" id="exponents">
+      <div class="eyebrow"><span class="num">04</span> घातांक</div>
+      <h2>घातांक के नियम (Laws of Exponents)</h2>
+      <table>
+        <tr><th>नियम</th><th>सूत्र</th></tr>
+        <tr><td>गुणन</td><td>\(a^m \cdot a^n = a^{m+n}\)</td></tr>
+        <tr><td>भाग</td><td>\(a^m \div a^n = a^{m-n}\)</td></tr>
+        <tr><td>घात की घात</td><td>\((a^m)^n = a^{mn}\)</td></tr>
+        <tr><td>शून्य घात</td><td>\(a^0 = 1 \ (a \neq 0)\)</td></tr>
+        <tr><td>ऋणात्मक घात</td><td>\(a^{-n} = \dfrac{1}{a^n}\)</td></tr>
+        <tr><td>गुणनफल की घात</td><td>\((ab)^n = a^n b^n\)</td></tr>
+        <tr><td>भिन्न की घात</td><td>\(\left(\dfrac{a}{b}\right)^n = \dfrac{a^n}{b^n}\)</td></tr>
+      </table>
+    </section>
 
-    <div class="box">
-    <h2>Algebraic Identities</h2>
-    <p>(a+b)², (a-b)², a²-b² formulas</p>
+    <section class="block" id="surds">
+      <div class="eyebrow"><span class="num">05</span> करणी</div>
+      <h2>करणी (Surds)</h2>
+      <p>वे अपरिमेय संख्याएँ जो \(\sqrt[n]{a}\) के रूप में लिखी जाएँ, करणी कहलाती हैं। हर में करणी होने पर उसे परिमेयीकरण (rationalisation) से हटाया जाता है।</p>
+      <div class="formula-box"><span class="fname">परिमेयीकरण उदाहरण</span>\[\frac{1}{\sqrt{a}+\sqrt{b}} \times \frac{\sqrt{a}-\sqrt{b}}{\sqrt{a}-\sqrt{b}} = \frac{\sqrt{a}-\sqrt{b}}{a-b}\]</div>
+    </section>
 
-    <button class="detail-btn" data-topic="identities">📘 Details</button>
-</div>
+    <section class="block" id="linear">
+      <div class="eyebrow"><span class="num">06</span> समीकरण</div>
+      <h2>रैखिक समीकरण (Linear Equations)</h2>
+      <p><strong>एक चर में:</strong> \(ax+b=0\) का हल \(x = -\dfrac{b}{a}\) होता है।</p>
+      <p><strong>दो चर में (युग्म समीकरण):</strong> दो समीकरणों को हल करने की चार प्रमुख विधियाँ हैं —</p>
+      <table>
+        <tr><th>विधि</th><th>संक्षिप्त विवरण</th></tr>
+        <tr><td>प्रतिस्थापन विधि</td><td>एक समीकरण से एक चर का मान निकालकर दूसरे में रखें</td></tr>
+        <tr><td>विलोपन विधि</td><td>समीकरणों को गुणा/भाग कर एक चर को हटाएँ</td></tr>
+        <tr><td>आलेखीय विधि</td><td>दोनों रेखाओं को आलेखित कर प्रतिच्छेद बिंदु ज्ञात करें</td></tr>
+        <tr><td>क्रैमर नियम</td><td>सारणिक (determinant) का उपयोग</td></tr>
+      </table>
+      <div class="formula-box"><span class="fname">क्रैमर नियम</span>\(a_1x+b_1y=c_1,\ a_2x+b_2y=c_2\) के लिए:
+      \[x=\frac{c_1b_2-c_2b_1}{a_1b_2-a_2b_1}, \qquad y=\frac{a_1c_2-a_2c_1}{a_1b_2-a_2b_1}\]</div>
+    </section>
 
-<div class="box">
-    <h2>Variables</h2>
-    <p>x, y, z जैसे unknown values</p>
+    <section class="block" id="quadratic">
+      <div class="eyebrow"><span class="num">07</span> द्विघात समीकरण</div>
+      <h2>द्विघात समीकरण (Quadratic Equations)</h2>
+      <p>मानक रूप: \(ax^2+bx+c=0,\ (a \neq 0)\)। इसे गुणनखंडन, वर्ग पूर्ण करने, या सीधे सूत्र से हल किया जा सकता है।</p>
+      <div class="formula-box"><span class="fname">द्विघातीय सूत्र (Quadratic Formula)</span>\[x = \frac{-b \pm \sqrt{b^2-4ac}}{2a}\]</div>
+      <table>
+        <tr><th>विविक्तकर D = b²−4ac</th><th>मूलों की प्रकृति</th></tr>
+        <tr><td>D &gt; 0</td><td>दो भिन्न वास्तविक मूल</td></tr>
+        <tr><td>D = 0</td><td>दो बराबर वास्तविक मूल</td></tr>
+        <tr><td>D &lt; 0</td><td>कोई वास्तविक मूल नहीं (काल्पनिक मूल)</td></tr>
+      </table>
+      <div class="formula-box"><span class="fname">मूलों का योग व गुणनफल</span>\[\text{योग} = -\frac{b}{a}, \qquad \text{गुणनफल} = \frac{c}{a}\]</div>
+      <div class="note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+        <div><strong>ऊपर के इंटरैक्टिव ग्राफ़ में</strong> D को शून्य के बराबर करके देखें — परवलय ठीक x-अक्ष को छुएगा, आगे नहीं काटेगा।</div>
+      </div>
+    </section>
 
-    <button class="detail-btn" data-topic="variables">📘 Details</button>
-</div>
+    <section class="block" id="polynomials">
+      <div class="eyebrow"><span class="num">08</span> बहुपद</div>
+      <h2>बहुपद (Polynomials)</h2>
+      <table>
+        <tr><th>घात (Degree)</th><th>नाम</th></tr>
+        <tr><td>1</td><td>रैखिक (Linear)</td></tr>
+        <tr><td>2</td><td>द्विघात (Quadratic)</td></tr>
+        <tr><td>3</td><td>त्रिघात (Cubic)</td></tr>
+      </table>
+      <div class="formula-box"><span class="fname">शेषफल प्रमेय (Remainder Theorem)</span>बहुपद \(p(x)\) को \((x-a)\) से भाग देने पर शेषफल \(p(a)\) होता है।</div>
+      <div class="formula-box"><span class="fname">गुणनखंड प्रमेय (Factor Theorem)</span>यदि \(p(a)=0\) है, तो \((x-a)\), \(p(x)\) का एक गुणनखंड है।</div>
+    </section>
 
+    <section class="block" id="ap">
+      <div class="eyebrow"><span class="num">09</span> श्रेणी</div>
+      <h2>समांतर श्रेणी (Arithmetic Progression)</h2>
+      <p>जिस श्रेणी में लगातार पदों का अंतर स्थिर (d) रहता है, वह समांतर श्रेणी कहलाती है।</p>
+      <div class="formula-grid">
+        <div class="formula-box"><span class="fname">n-वाँ पद</span>\[a_n = a + (n-1)d\]</div>
+        <div class="formula-box"><span class="fname">n पदों का योग</span>\[S_n = \frac{n}{2}\big[2a+(n-1)d\big]\]</div>
+      </div>
+    </section>
+
+    <section class="block" id="gp">
+      <div class="eyebrow"><span class="num">10</span> श्रेणी</div>
+      <h2>गुणोत्तर श्रेणी (Geometric Progression)</h2>
+      <p>जिस श्रेणी में लगातार पदों का अनुपात स्थिर (r) रहता है, वह गुणोत्तर श्रेणी कहलाती है।</p>
+      <div class="formula-grid">
+        <div class="formula-box"><span class="fname">n-वाँ पद</span>\[a_n = a \cdot r^{\,n-1}\]</div>
+        <div class="formula-box"><span class="fname">n पदों का योग (r ≠ 1)</span>\[S_n = \frac{a(r^n-1)}{r-1}\]</div>
+        <div class="formula-box"><span class="fname">अनंत योग (|r| &lt; 1)</span>\[S_\infty = \frac{a}{1-r}\]</div>
+      </div>
+    </section>
+
+    <section class="block" id="inequalities">
+      <div class="eyebrow"><span class="num">11</span> असमिकाएँ</div>
+      <h2>असमिकाएँ (Inequalities)</h2>
+      <p>असमिका के दोनों पक्षों में एक ही धनात्मक संख्या जोड़ने/घटाने/गुणा करने से चिह्न नहीं बदलता, परन्तु किसी ऋणात्मक संख्या से गुणा या भाग करने पर असमिका का चिह्न पलट जाता है।</p>
+      <div class="formula-box"><span class="fname">उदाहरण</span>\[-2x > 8 \ \Longrightarrow\ x < -4 \quad (\text{चिह्न पलटा})\]</div>
+    </section>
+
+    <section class="block" id="sheet">
+      <div class="eyebrow"><span class="num">12</span> संदर्भ</div>
+      <h2>त्वरित सूत्र-पत्रक</h2>
+      <div class="sheet-grid">
+        <div class="sheet-card"><span class="fname">वर्ग योग</span>\((a+b)^2=a^2+2ab+b^2\)</div>
+        <div class="sheet-card"><span class="fname">वर्ग अंतर</span>\((a-b)^2=a^2-2ab+b^2\)</div>
+        <div class="sheet-card"><span class="fname">वर्गों का अंतर</span>\(a^2-b^2=(a+b)(a-b)\)</div>
+        <div class="sheet-card"><span class="fname">द्विघात सूत्र</span>\(x=\dfrac{-b\pm\sqrt{b^2-4ac}}{2a}\)</div>
+        <div class="sheet-card"><span class="fname">AP: n-वाँ पद</span>\(a_n=a+(n-1)d\)</div>
+        <div class="sheet-card"><span class="fname">GP: n-वाँ पद</span>\(a_n=ar^{n-1}\)</div>
+        <div class="sheet-card"><span class="fname">घातांक गुणन</span>\(a^m\cdot a^n=a^{m+n}\)</div>
+        <div class="sheet-card"><span class="fname">शेषफल प्रमेय</span>\(p(a)\) = शेषफल</div>
+        <div class="sheet-card"><span class="fname">मूलों का योग</span>\(-b/a\)</div>
+      </div>
+    </section>
+
+    <section class="block" id="examples">
+      <div class="eyebrow"><span class="num">13</span> अभ्यास</div>
+      <h2>हल किए गए उदाहरण</h2>
+
+      <div class="example-card">
+        <span class="tag">उदाहरण 1</span>
+        <div class="q">गुणनखंड कीजिए: \(x^2+7x+12\)</div>
+        <p>हल: दो संख्याएँ चाहिए जिनका योग 7 और गुणनफल 12 हो → 3 और 4।</p>
+        <div class="ans">\(x^2+7x+12=(x+3)(x+4)\)</div>
+      </div>
+
+      <div class="example-card">
+        <span class="tag">उदाहरण 2</span>
+        <div class="q">हल कीजिए: \(2x^2-5x+3=0\)</div>
+        <p>हल: \(a=2,\ b=-5,\ c=3\)। \(D=b^2-4ac=25-24=1\)।<br>
+        \(x=\dfrac{5\pm1}{4}\)</p>
+        <div class="ans">\(x=1 \text{ या } x=\dfrac{3}{2}\)</div>
+      </div>
+
+      <div class="example-card">
+        <span class="tag">उदाहरण 3</span>
+        <div class="q">समांतर श्रेणी 3, 7, 11, … के पहले 10 पदों का योग ज्ञात कीजिए।</div>
+        <p>हल: \(a=3,\ d=4,\ n=10\)<br>\(S_{10}=\dfrac{10}{2}[2(3)+9(4)] = 5[6+36]=5\times42\)</p>
+        <div class="ans">\(S_{10}=210\)</div>
+      </div>
+
+      <div class="example-card">
+        <span class="tag">उदाहरण 4</span>
+        <div class="q">दो संख्याओं का योग 25 है और अंतर 5 है। दोनों संख्याएँ ज्ञात कीजिए।</div>
+        <p>हल: मान लीजिए संख्याएँ x और y हैं। \(x+y=25,\ x-y=5\)। दोनों समीकरण जोड़ने पर \(2x=30 \Rightarrow x=15\), फिर \(y=10\)।</p>
+        <div class="ans">संख्याएँ 15 और 10 हैं</div>
+      </div>
+    </section>
+
+    <section class="block" id="practice">
+      <div class="eyebrow"><span class="num">14</span> अभ्यास</div>
+      <h2>स्वयं हल करें</h2>
+      <p class="lead">प्रश्न पर टैप करें और उत्तर देखें।</p>
+
+      <details class="practice">
+        <summary>1. \(x^2-9x+20=0\) के मूल ज्ञात कीजिए।</summary>
+        <div class="body">विविक्तकर \(D=81-80=1\)। मूल: <span class="ans">x = 4, 5</span></div>
+      </details>
+      <details class="practice">
+        <summary>2. \((2a+3b)^2\) का प्रसार कीजिए।</summary>
+        <div class="body"><span class="ans">\(4a^2+12ab+9b^2\)</span></div>
+      </details>
+      <details class="practice">
+        <summary>3. गुणोत्तर श्रेणी 2, 6, 18, … का 6-वाँ पद ज्ञात कीजिए।</summary>
+        <div class="body">\(a=2,\ r=3,\ a_6=2\times3^5=2\times243\)। <span class="ans">a₆ = 486</span></div>
+      </details>
+      <details class="practice">
+        <summary>4. यदि \(p(x)=x^3-4x^2+x+6\), तो जाँचिए कि क्या \((x-2)\) इसका गुणनखंड है।</summary>
+        <div class="body">\(p(2)=8-16+2+6=0\)। चूँकि शेषफल शून्य है, <span class="ans">हाँ, (x−2) एक गुणनखंड है</span></div>
+      </details>
+      <details class="practice">
+        <summary>5. असमिका हल कीजिए: \(3x-7 \leq 11\)</summary>
+        <div class="body">\(3x \leq 18\)। <span class="ans">x ≤ 6</span></div>
+      </details>
+    </section>
+
+  </main>
 </div>
 
 <footer>
-<a href="../mathematics.html">⬅ Back to Mathematics Hub</a>
+  यह पेज केवल शैक्षणिक उपयोग हेतु एक निःशुल्क संदर्भ सामग्री है — गणित नोटबुक शृंखला
+  <nav class="switcher">
+    <a href="Algebra.html" class="active">बीजगणित</a>
+    <a href="geometry.html">ज्यामिति</a>
+    <a href="trigonometry.html">त्रिकोणमिति</a>
+  </nav>
 </footer>
 
-<script src="algebra.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    if(window.renderMathInElement){
+      renderMathInElement(document.body, {
+        delimiters: [
+          {left:"\\[", right:"\\]", display:true},
+          {left:"\\(", right:"\\)", display:false}
+        ],
+        throwOnError:false
+      });
+    }
+  });
 
+  // scroll-spy for TOC
+  (function(){
+    const links = document.querySelectorAll('.toc a');
+    const sections = Array.from(links).map(l=>document.querySelector(l.getAttribute('href')));
+    if('IntersectionObserver' in window){
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            const id = '#'+entry.target.id;
+            links.forEach(l=>l.classList.toggle('current', l.getAttribute('href')===id));
+          }
+        });
+      }, {rootMargin:'-40% 0px -50% 0px'});
+      sections.forEach(s=>{ if(s) io.observe(s); });
+    }
+  })();
+
+  // quadratic grapher
+  (function(){
+    const canvas = document.getElementById('quadCanvas');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const aInput=document.getElementById('aRange');
+    const bInput=document.getElementById('bRange');
+    const cInput=document.getElementById('cRange');
+    const aVal=document.getElementById('aVal');
+    const bVal=document.getElementById('bVal');
+    const cVal=document.getElementById('cVal');
+    const statVertex=document.getElementById('statVertex');
+    const statDisc=document.getElementById('statDisc');
+    const statRoots=document.getElementById('statRoots');
+    const statEq=document.getElementById('statEq');
+
+    const xMin=-10,xMax=10,yMin=-10,yMax=10;
+    const CSS_H = 320;
+
+    function toPx(x,y,w,h){
+      const px=(x-xMin)/(xMax-xMin)*w;
+      const py=h-(y-yMin)/(yMax-yMin)*h;
+      return [px,py];
+    }
+
+    function draw(){
+      const w = canvas.clientWidth || 320;
+      const h = CSS_H;
+      const dpr = window.devicePixelRatio||1;
+      canvas.width = w*dpr; canvas.height = h*dpr;
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+      ctx.clearRect(0,0,w,h);
+
+      const a=parseFloat(aInput.value), b=parseFloat(bInput.value), c=parseFloat(cInput.value);
+      aVal.textContent=a.toFixed(1);
+      bVal.textContent=b.toFixed(1);
+      cVal.textContent=c.toFixed(1);
+
+      ctx.strokeStyle='rgba(31,36,48,0.10)';
+      ctx.lineWidth=1;
+      for(let gx=Math.ceil(xMin);gx<=xMax;gx++){
+        const [px]=toPx(gx,0,w,h);
+        ctx.beginPath();ctx.moveTo(px,0);ctx.lineTo(px,h);ctx.stroke();
+      }
+      for(let gy=Math.ceil(yMin);gy<=yMax;gy++){
+        const [,py]=toPx(0,gy,w,h);
+        ctx.beginPath();ctx.moveTo(0,py);ctx.lineTo(w,py);ctx.stroke();
+      }
+      ctx.strokeStyle='rgba(31,36,48,0.55)';
+      ctx.lineWidth=1.5;
+      const [,oy]=toPx(0,0,w,h);
+      const [ox]=toPx(0,0,w,h);
+      ctx.beginPath();ctx.moveTo(0,oy);ctx.lineTo(w,oy);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(ox,0);ctx.lineTo(ox,h);ctx.stroke();
+
+      ctx.strokeStyle='#3B4FA0';
+      ctx.lineWidth=2.5;
+      ctx.beginPath();
+      let started=false;
+      for(let px=0;px<=w;px+=2){
+        const x = xMin+(px/w)*(xMax-xMin);
+        const y = a*x*x+b*x+c;
+        if(y<yMin-6||y>yMax+6){ started=false; continue; }
+        const [,py]=toPx(x,y,w,h);
+        if(!started){ctx.moveTo(px,py);started=true;} else {ctx.lineTo(px,py);}
+      }
+      ctx.stroke();
+
+      let vertexText='—';
+      if(a!==0){
+        const vx=-b/(2*a);
+        const vy=a*vx*vx+b*vx+c;
+        const [vpx,vpy]=toPx(vx,vy,w,h);
+        ctx.fillStyle='#B5541C';
+        ctx.beginPath();ctx.arc(vpx,vpy,5,0,Math.PI*2);ctx.fill();
+        vertexText = '('+vx.toFixed(2)+', '+vy.toFixed(2)+')';
+      }
+
+      let discText='—', rootsText='कोई वास्तविक मूल नहीं';
+      if(a!==0){
+        const D=b*b-4*a*c;
+        discText=D.toFixed(2);
+        if(D>0){
+          const r1=(-b+Math.sqrt(D))/(2*a);
+          const r2=(-b-Math.sqrt(D))/(2*a);
+          rootsText = 'x₁='+r1.toFixed(2)+', x₂='+r2.toFixed(2);
+          [r1,r2].forEach(rx=>{
+            const [rpx,rpy]=toPx(rx,0,w,h);
+            ctx.fillStyle='#1E6B55';
+            ctx.beginPath();ctx.arc(rpx,rpy,5,0,Math.PI*2);ctx.fill();
+          });
+        } else if(D===0){
+          const r=-b/(2*a);
+          rootsText = 'x='+r.toFixed(2)+' (बराबर मूल)';
+          const [rpx,rpy]=toPx(r,0,w,h);
+          ctx.fillStyle='#1E6B55';
+          ctx.beginPath();ctx.arc(rpx,rpy,5,0,Math.PI*2);ctx.fill();
+        }
+      } else {
+        discText='अपरिभाषित (a=0)';
+        rootsText='यह रैखिक समीकरण है';
+      }
+
+      const bSign = b>=0?'+':'-';
+      const cSign = c>=0?'+':'-';
+      statEq.textContent = 'f(x) = '+a+'x² '+bSign+' '+Math.abs(b)+'x '+cSign+' '+Math.abs(c);
+      statVertex.textContent = vertexText;
+      statDisc.textContent = discText;
+      statRoots.textContent = rootsText;
+    }
+
+    [aInput,bInput,cInput].forEach(inp=>inp.addEventListener('input', draw));
+    window.addEventListener('resize', draw);
+    draw();
+  })();
+</script>
 </body>
 </html>

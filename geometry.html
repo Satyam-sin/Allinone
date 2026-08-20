@@ -1,86 +1,1264 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Geometry</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ज्यामिति — पूर्ण गाइड | गणित नोटबुक</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@500;600;700;900&family=Hind:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<style>
+  :root{
+    --paper:#FBF8F1;
+    --paper-line: rgba(30,107,85,0.07);
+    --ink-dark:#1F2430;
+    --ink-soft:#5B6270;
+    --accent:#1E6B55;
+    --accent-light:#E3F1EC;
+    --accent-deep:#123F32;
+    --mark-a:#B5541C;
+    --mark-b:#3B4FA0;
+    --card:#FFFFFF;
+    --line:rgba(31,36,48,0.10);
+    --radius:12px;
+  }
+  *,*::before,*::after{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+  body{
+    margin:0;
+    font-family:'Hind',sans-serif;
+    color:var(--ink-dark);
+    background-color:var(--paper);
+    background-image:
+      linear-gradient(var(--paper-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--paper-line) 1px, transparent 1px);
+    background-size:28px 28px;
+    line-height:1.7;
+    font-size:16.5px;
+  }
+  h1,h2,h3{font-family:'Noto Serif Devanagari',serif; color:var(--ink-dark); margin:0 0 .4em;}
+  a{color:var(--accent-deep);}
+  ::selection{background:var(--accent-light);}
+  :focus-visible{outline:2.5px solid var(--accent-deep); outline-offset:3px;}
 
-<link rel="stylesheet" href="geometry.css">
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--accent-deep); font-weight:600; display:flex;align-items:center;gap:.5em; margin-bottom:.6em;
+  }
+  .eyebrow .num{background:var(--accent); color:#fff; padding:.15em .5em; border-radius:5px; font-size:.9em;}
+
+  .topbar{
+    position:sticky; top:0; z-index:50; background:rgba(251,248,241,0.92); backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:space-between;
+    padding:.9rem 1.5rem; gap:1rem; flex-wrap:wrap;
+  }
+  .brand{display:flex; align-items:center; gap:.7rem;}
+  .brand svg{width:34px;height:34px;color:var(--accent);}
+  .brand-text .t1{font-family:'Noto Serif Devanagari',serif; font-weight:800; font-size:1.25rem; line-height:1;}
+  .brand-text .t2{font-family:'IBM Plex Mono',monospace; font-size:.68rem; color:var(--ink-soft); letter-spacing:.08em;}
+  .switcher{display:flex; gap:.4rem; flex-wrap:wrap;}
+  .switcher a{
+    text-decoration:none; font-family:'IBM Plex Mono',monospace; font-size:.78rem;
+    padding:.45rem .8rem; border-radius:999px; border:1px solid var(--line); color:var(--ink-soft); background:var(--card);
+  }
+  .switcher a.active{background:var(--accent); color:#fff; border-color:var(--accent);}
+  .switcher a:hover{border-color:var(--accent);}
+
+  .layout{
+    max-width:1240px; margin:0 auto; padding:2rem 1.5rem 4rem;
+    display:grid; grid-template-columns:250px 1fr; gap:2.6rem; align-items:start;
+  }
+  .toc{
+    position:sticky; top:84px; background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    padding:1.1rem 1rem; max-height:calc(100vh - 110px); overflow:auto;
+  }
+  .toc h3{font-size:.85rem; font-family:'IBM Plex Mono',monospace; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.08em; margin-bottom:.8rem;}
+  .toc ol{list-style:none; margin:0; padding:0; counter-reset:sec;}
+  .toc li{counter-increment:sec; margin-bottom:.15rem;}
+  .toc a{display:flex; gap:.55rem; text-decoration:none; color:var(--ink-dark); font-size:.87rem; padding:.42rem .5rem; border-radius:8px;}
+  .toc a::before{content:counter(sec,decimal-leading-zero); font-family:'IBM Plex Mono',monospace; color:var(--accent); font-size:.78rem; flex:none;}
+  .toc a:hover{background:var(--accent-light);}
+  .toc a.current{background:var(--accent); color:#fff;}
+  .toc a.current::before{color:#fff;}
+
+  main{min-width:0;}
+
+  .hero{
+    background:linear-gradient(155deg, var(--accent-deep), var(--accent) 70%);
+    color:#fff; border-radius:18px; padding:2.2rem;
+    display:grid; grid-template-columns:1.05fr 1fr; gap:2rem; align-items:center;
+    margin-bottom:2.6rem; overflow:hidden; position:relative;
+  }
+  .hero h1{color:#fff; font-size:2.15rem; margin-bottom:.5rem;}
+  .hero p{color:rgba(255,255,255,0.86); max-width:46ch;}
+  .hero .eyebrow{color:#E9F6D9;}
+  .hero .eyebrow .num{background:rgba(255,255,255,0.22);}
+  .hero-panel{background:rgba(255,255,255,0.96); border-radius:14px; padding:1.1rem 1.1rem 1.3rem; color:var(--ink-dark);}
+  .hero-panel canvas{width:100%; height:auto; display:block; border-radius:8px; background:#fff; touch-action:none; cursor:grab;}
+  .hero-hint{font-size:.75rem; color:var(--ink-soft); margin-top:.4rem; font-family:'IBM Plex Mono',monospace;}
+  .hero-stats{margin-top:.8rem; display:grid; grid-template-columns:1fr 1fr; gap:.5rem; font-size:.82rem;}
+  .hero-stats div{background:var(--accent-light); border-radius:8px; padding:.5rem .6rem;}
+  .hero-stats .k{display:block; font-family:'IBM Plex Mono',monospace; font-size:.66rem; color:var(--accent-deep); text-transform:uppercase; letter-spacing:.06em; margin-bottom:.15rem;}
+  .hero-stats .wide{grid-column:1/-1;}
+
+  section.block{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:1.8rem 2rem; margin-bottom:1.6rem; scroll-margin-top:90px;}
+  section.block h2{font-size:1.5rem;}
+  section.block p{color:var(--ink-dark); margin:.5rem 0 1rem;}
+  .lead{color:var(--ink-soft); font-size:1.02rem;}
+
+  .formula-box{background:var(--accent-light); border-left:4px solid var(--accent); border-radius:8px; padding:.9rem 1.1rem; margin:.8rem 0; overflow-x:auto;}
+  .formula-box .fname{font-family:'IBM Plex Mono',monospace; font-size:.72rem; color:var(--accent-deep); text-transform:uppercase; letter-spacing:.05em; margin-bottom:.35rem; display:block;}
+  .formula-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:.8rem;}
+  @media (max-width:640px){.formula-grid{grid-template-columns:1fr;}}
+
+  .note{border:1px dashed var(--accent); background:#fff; border-radius:10px; padding:.9rem 1.1rem; margin:1rem 0; display:flex; gap:.7rem; align-items:flex-start;}
+  .note svg{flex:none; width:20px;height:20px; color:var(--accent-deep); margin-top:.2rem;}
+  .note strong{color:var(--accent-deep);}
+
+  table{width:100%; border-collapse:collapse; margin:1rem 0; font-size:.9rem;}
+  th,td{border:1px solid var(--line); padding:.5rem .65rem; text-align:center;}
+  th{background:var(--accent-light); color:var(--accent-deep); font-family:'IBM Plex Mono',monospace; font-size:.75rem; text-transform:uppercase; letter-spacing:.04em;}
+  tr:nth-child(even) td{background:rgba(30,107,85,0.03);}
+  td:first-child, th:first-child{text-align:left;}
+
+  .shape-row{display:flex; align-items:center; gap:.6rem;}
+  .shape-row svg{flex:none; width:34px;height:34px;color:var(--accent);}
+
+  .sheet-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:.85rem;}
+  @media (max-width:900px){.sheet-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:600px){.sheet-grid{grid-template-columns:1fr;}}
+  .sheet-card{background:var(--accent-light); border:1px solid var(--line); border-radius:10px; padding:.85rem .95rem;}
+  .sheet-card .fname{font-family:'IBM Plex Mono',monospace; font-size:.68rem; color:var(--accent-deep); text-transform:uppercase; letter-spacing:.05em; display:block; margin-bottom:.3rem;}
+
+  .example-card{border:1px solid var(--line); border-radius:10px; padding:1rem 1.2rem; margin-bottom:1rem; background:#fffefb;}
+  .example-card .tag{font-family:'IBM Plex Mono',monospace; font-size:.7rem; color:#fff; background:var(--mark-a); padding:.15rem .55rem; border-radius:999px;}
+  .example-card .q{font-weight:600; margin:.6rem 0 .4rem;}
+  .example-card .ans{background:var(--accent-light); border-radius:8px; padding:.5rem .8rem; margin-top:.5rem; font-weight:600; color:var(--accent-deep);}
+
+  details.practice{border:1px solid var(--line); border-radius:10px; padding:.2rem 1rem; margin-bottom:.7rem; background:#fff;}
+  details.practice summary{cursor:pointer; padding:.7rem 0; font-weight:600; list-style:none; display:flex; gap:.6rem; align-items:flex-start;}
+  details.practice summary::before{content:"▸"; color:var(--accent); flex:none; transition:transform .15s;}
+  details.practice[open] summary::before{transform:rotate(90deg);}
+  details.practice summary::-webkit-details-marker{display:none;}
+  details.practice .body{padding:0 0 1rem 1.4rem; color:var(--ink-soft);}
+  details.practice .body .ans{color:var(--accent-deep); font-weight:700;}
+
+  footer{max-width:1240px; margin:0 auto; padding:2rem 1.5rem 3rem; color:var(--ink-soft); font-size:.85rem; text-align:center;}
+  footer .switcher{justify-content:center; margin-top:.8rem;}
+
+  @media (max-width:900px){
+    .layout{grid-template-columns:1fr;}
+    .toc{position:static; max-height:none;}
+    .hero{grid-template-columns:1fr;}
+  }
+</style>
 </head>
-
 <body>
 
-<header>
-📐 Geometry (ज्यामिति)
+<header class="topbar">
+  <div class="brand">
+    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M24 8 L40 38 L8 38 Z" />
+      <circle cx="24" cy="29" r="12.5" opacity="0.55" />
+    </svg>
+    <div class="brand-text">
+      <div class="t1">Geometry</div>
+      <div class="t2">Math Notebook · Part 02</div>
+    </div>
+  </div>
+
+  <nav class="switcher">
+    <a href="Algebra.html">Algebra</a>
+    <a href="geometry.html" class="active">Geometry</a>
+    <a href="trigonometry.html">Trigonometry</a>
+  </nav>
 </header>
 
-<div class="container">
+<div class="layout">
+  <nav class="toc" id="toc">
+    <h3>Table of Contents</h3>
+    <ol>
+      <li><a href="#intro">Basic Concepts</a></li>
+      <li><a href="#angles">Types of Angles</a></li>
+      <li><a href="#triangles">Triangles</a></li>
+      <li><a href="#pythagoras">Pythagoras' Theorem</a></li>
+      <li><a href="#congruence">Congruence & Similarity</a></li>
+      <li><a href="#quadrilaterals">Quadrilaterals</a></li>
+      <li><a href="#circles">Circles</a></li>
+      <li><a href="#area">Area & Perimeter</a></li>
+      <li><a href="#solids">3D Solid Shapes</a></li>
+      <li><a href="#coordinate">Coordinate Geometry</a></li>
+      <li><a href="#theorems">Important Theorems</a></li>
+      <li><a href="#sheet">Formula Sheet</a></li>
+      <li><a href="#examples">Solved Examples</a></li>
+      <li><a href="#practice">Practice Questions</a></li>
+    </ol>
+  </nav>
 
-    <div class="box">
-        <h2>Points & Lines</h2>
-        <p>Basic building blocks of geometry</p>
-        <button class="detail-btn" data-topic="points">📘 Details</button>
+  <main>
+
+<section class="hero">
+  <div>
+    <div class="eyebrow"><span class="num">Interactive</span> Live Triangle</div>
+    <h1>Triangle Explorer</h1>
+    <p>Drag the three vertices (A, B, and C) to change the shape of the triangle. The perimeter, area, angles, and triangle type will update instantly in real time.</p>
+  </div>
+
+  <div class="hero-panel">
+    <canvas id="triCanvas" width="560" height="380" aria-label="Triangle Explorer"></canvas>
+
+    <div class="hero-hint">👆 Drag any vertex (A, B, or C)</div>
+
+    <div class="hero-stats">
+      <div>
+        <span class="k">Perimeter</span>
+        <span id="triPerimeter">—</span>
+      </div>
+
+      <div>
+        <span class="k">Area</span>
+        <span id="triArea">—</span>
+      </div>
+
+      <div class="wide">
+        <span class="k">Angles</span>
+        <span id="triAngles">—</span>
+      </div>
+
+      <div class="wide">
+        <span class="k">Type</span>
+        <span id="triType">—</span>
+      </div>
+    </div>
+  </div>
+</section>
+   <section class="block" id="intro">
+  <div class="eyebrow"><span class="num">01</span> Introduction</div>
+
+  <h2>Basic Concepts</h2>
+
+  <p class="lead">
+    Geometry is the branch of mathematics that studies shapes, sizes,
+    measurements, and the properties of space. Every geometric figure is
+    built from a few fundamental elements:
+  </p>
+
+  <div class="formula-grid">
+
+    <div class="formula-box">
+      <span class="fname">Point</span>
+      Represents an exact position in space. It has no length, width, or height (no dimensions).
     </div>
 
-    <div class="box">
-        <h2>Angles</h2>
-        <p>Types of angles and their properties</p>
-        <button class="detail-btn" data-topic="angles">📘 Details</button>
+    <div class="formula-box">
+      <span class="fname">Line</span>
+      Extends infinitely in both directions and has no thickness.
     </div>
 
-    <div class="box">
-        <h2>Triangles</h2>
-        <p>3 sides और 3 angles वाली shape</p>
-        <button class="detail-btn" data-topic="triangles">📘 Details</button>
+    <div class="formula-box">
+      <span class="fname">Ray</span>
+      Begins at one endpoint and extends infinitely in one direction.
     </div>
 
-    <div class="box">
-        <h2>Circles</h2>
-        <p>Round shape with radius & diameter</p>
-        <button class="detail-btn" data-topic="circles">📘 Details</button>
+    <div class="formula-box">
+      <span class="fname">Line Segment</span>
+      The part of a line bounded by two fixed endpoints.
     </div>
 
-    <div class="box">
-        <h2>Quadrilaterals</h2>
-        <p>4 sides वाली shapes</p>
-        <button class="detail-btn" data-topic="quadgeo">📘 Details</button>
+  </div>
+</section>
+
+<section class="block" id="angles">
+  <div class="eyebrow"><span class="num">02</span> Angles</div>
+  <h2>Types of Angles & Properties</h2>
+
+  <table>
+    <tr>
+      <th>Angle</th>
+      <th>Measure</th>
+    </tr>
+    <tr>
+      <td>Acute Angle</td>
+      <td>Between 0° and 90°</td>
+    </tr>
+    <tr>
+      <td>Right Angle</td>
+      <td>Exactly 90°</td>
+    </tr>
+    <tr>
+      <td>Obtuse Angle</td>
+      <td>Between 90° and 180°</td>
+    </tr>
+    <tr>
+      <td>Straight Angle</td>
+      <td>Exactly 180°</td>
+    </tr>
+    <tr>
+      <td>Reflex Angle</td>
+      <td>Between 180° and 360°</td>
+    </tr>
+  </table>
+
+  <div class="formula-grid">
+    <div class="formula-box">
+      <span class="fname">Complementary Angles</span>
+      Two angles whose sum is <strong>90°</strong>.
     </div>
 
-    <div class="box">
-        <h2>Basic Shapes</h2>
-        <p>Square, rectangle, polygon basics</p>
-        <button class="detail-btn" data-topic="shapes">📘 Details</button>
+    <div class="formula-box">
+      <span class="fname">Supplementary Angles</span>
+      Two angles whose sum is <strong>180°</strong>.
+    </div>
+  </div>
+
+  <p>
+    When a <strong>transversal</strong> intersects two parallel lines,
+    the <strong>corresponding angles</strong> are equal and the
+    <strong>alternate angles</strong> are also equal.
+  </p>
+</section>
+
+<section class="block" id="triangles">
+  <div class="eyebrow"><span class="num">03</span> Triangles</div>
+
+  <h2>Triangles — Types & Properties</h2>
+
+  <table>
+    <tr>
+      <th>Based on Sides</th>
+      <th>Properties</th>
+    </tr>
+    <tr>
+      <td>Equilateral Triangle</td>
+      <td>All three sides are equal, each angle is 60°</td>
+    </tr>
+    <tr>
+      <td>Isosceles Triangle</td>
+      <td>Two sides are equal</td>
+    </tr>
+    <tr>
+      <td>Scalene Triangle</td>
+      <td>All three sides are unequal</td>
+    </tr>
+  </table>
+
+  <div class="formula-grid">
+    <div class="formula-box">
+      <span class="fname">Sum of Interior Angles</span>
+      \[
+      \angle A + \angle B + \angle C = 180^\circ
+      \]
     </div>
 
-    <div class="box">
-        <h2>Geometry Formulas</h2>
-        <p>Area & perimeter formulas</p>
-        <button class="detail-btn" data-topic="formulas">📘 Details</button>
+    <div class="formula-box">
+      <span class="fname">Exterior Angle Theorem</span>
+      Exterior Angle = Sum of the two remote interior angles.
+    </div>
+  </div>
+
+  <div class="note">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="12" cy="12" r="9"/>
+      <path d="M12 8v5M12 16h.01"/>
+    </svg>
+
+    <div>
+      <strong>Triangle Inequality:</strong>
+      The sum of any two sides of a triangle must always be greater than the third side; otherwise, a triangle cannot be formed.
+    </div>
+  </div>
+</section>
+
+<section class="block" id="pythagoras">
+  <div class="eyebrow"><span class="num">04</span> Theorem</div>
+
+  <h2>Pythagorean Theorem</h2>
+
+  <p>
+    In a right-angled triangle, the square of the hypotenuse is equal
+    to the sum of the squares of the other two sides.
+  </p>
+
+  <div class="formula-box">
+    <span class="fname">Pythagorean Theorem</span>
+    \[
+    c^2 = a^2 + b^2
+    \]
+  </div>
+
+  <p>Common Pythagorean Triples (integer side lengths):</p>
+
+  <table>
+    <tr>
+      <th>Triple</th>
+      <th>a, b, c</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>3, 4, 5</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>5, 12, 13</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>8, 15, 17</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>7, 24, 25</td>
+    </tr>
+  </table>
+</section>
+
+<section class="block" id="congruence">
+  <div class="eyebrow"><span class="num">05</span> Comparison</div>
+
+  <h2>Congruence & Similarity</h2>
+
+  <p>
+    <strong>Congruence:</strong>
+    Two triangles are congruent if they have exactly the same shape and size.
+    Common tests: <strong>SSS, SAS, ASA, AAS, RHS</strong>.
+  </p>
+
+  <p>
+    <strong>Similarity:</strong>
+    Two triangles are similar if their corresponding angles are equal
+    and their corresponding sides are proportional.
+    Common tests: <strong>AA, SSS, SAS</strong>.
+  </p>
+
+  <div class="formula-box">
+    <span class="fname">Area Ratio of Similar Triangles</span>
+    \[
+    \frac{\text{Area}_1}{\text{Area}_2}
+    =
+    \left(
+    \frac{\text{Side}_1}{\text{Side}_2}
+    \right)^2
+    \]
+  </div>
+</section>
+
+    <section class="block" id="quadrilaterals">
+  <div class="eyebrow"><span class="num">06</span> Quadrilaterals</div>
+
+  <h2>Types & Properties of Quadrilaterals</h2>
+
+  <p class="lead">
+    A quadrilateral is a polygon with four sides, four vertices, and four angles.
+    The sum of all interior angles of every quadrilateral is
+    <strong>360°</strong>. Different quadrilaterals have different
+    properties based on their sides, angles, and diagonals.
+  </p>
+
+  <table>
+    <tr>
+      <th>Shape</th>
+      <th>Sides</th>
+      <th>Angles</th>
+      <th>Diagonals</th>
+    </tr>
+
+    <tr>
+      <td>Square</td>
+      <td>All four sides are equal</td>
+      <td>All angles are 90°</td>
+      <td>Equal, perpendicular, bisect each other and the angles</td>
+    </tr>
+
+    <tr>
+      <td>Rectangle</td>
+      <td>Opposite sides are equal and parallel</td>
+      <td>All angles are 90°</td>
+      <td>Equal and bisect each other</td>
+    </tr>
+
+    <tr>
+      <td>Parallelogram</td>
+      <td>Opposite sides are equal and parallel</td>
+      <td>Opposite angles are equal</td>
+      <td>Bisect each other</td>
+    </tr>
+
+    <tr>
+      <td>Rhombus</td>
+      <td>All four sides are equal</td>
+      <td>Opposite angles are equal</td>
+      <td>Perpendicular, bisect each other, and bisect angles</td>
+    </tr>
+
+    <tr>
+      <td>Trapezium</td>
+      <td>One pair of opposite sides is parallel</td>
+      <td>No fixed property</td>
+      <td>No fixed property</td>
+    </tr>
+
+    <tr>
+      <td>Isosceles Trapezium</td>
+      <td>One pair of parallel sides; non-parallel sides are equal</td>
+      <td>Base angles are equal</td>
+      <td>Equal diagonals</td>
+    </tr>
+
+    <tr>
+      <td>Kite (Deltoid)</td>
+      <td>Two pairs of adjacent equal sides</td>
+      <td>One pair of opposite angles are equal</td>
+      <td>Perpendicular; one diagonal bisects the other</td>
+    </tr>
+
+    <tr>
+      <td>Cyclic Quadrilateral</td>
+      <td>All four vertices lie on a circle</td>
+      <td>Opposite angles are supplementary (sum = 180°)</td>
+      <td>No fixed property</td>
+    </tr>
+
+    <tr>
+      <td>Tangential Quadrilateral</td>
+      <td>Has an inscribed circle touching all four sides</td>
+      <td>No fixed property</td>
+      <td>No fixed property</td>
+    </tr>
+
+    <tr>
+      <td>Irregular Quadrilateral</td>
+      <td>No special side relationship</td>
+      <td>No special angle relationship</td>
+      <td>No fixed property</td>
+    </tr>
+  </table>
+
+  <div class="formula-grid">
+    <div class="formula-box">
+      <span class="fname">Interior Angle Sum</span>
+      \[
+      \angle A+\angle B+\angle C+\angle D=360^\circ
+      \]
     </div>
 
+    <div class="formula-box">
+      <span class="fname">Square Area</span>
+      \[
+      \text{Area}=a^2
+      \]
+    </div>
+
+    <div class="formula-box">
+      <span class="fname">Rectangle Area</span>
+      \[
+      \text{Area}=l\times b
+      \]
+    </div>
+
+    <div class="formula-box">
+      <span class="fname">Parallelogram Area</span>
+      \[
+      \text{Area}=b\times h
+      \]
+    </div>
+
+    <div class="formula-box">
+      <span class="fname">Rhombus Area</span>
+      \[
+      \text{Area}=\frac{d_1\times d_2}{2}
+      \]
+    </div>
+
+    <div class="formula-box">
+      <span class="fname">Trapezium Area</span>
+      \[
+      \text{Area}=\frac{1}{2}(a+b)\times h
+      \]
+    </div>
+  </div>
+
+  <div class="note">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="12" cy="12" r="9"/>
+      <path d="M12 8v5M12 16h.01"/>
+    </svg>
+
+    <div>
+      <strong>Important:</strong> Every square is a rectangle and a rhombus,
+      but not every rectangle or rhombus is a square. Likewise, every rectangle
+      and rhombus is a parallelogram, but every parallelogram is not a rectangle
+      or a rhombus.
+    </div>
+  </div>
+</section>
+
+  <section class="block" id="circles">
+  <div class="eyebrow"><span class="num">07</span> Circle</div>
+
+  <h2>Circle (Geometry)</h2>
+
+  <p class="lead">
+    A circle is the set of all points in a plane that are at the same
+    distance from a fixed point called the <strong>center</strong>.
+    This fixed distance is called the <strong>radius</strong>.
+  </p>
+
+  <div class="formula-grid">
+
+    <div class="formula-box">
+      <span class="fname">Radius & Diameter</span>
+      \[
+      d = 2r
+      \]
+    </div>
+
+    <div class="formula-box">
+      <span class="fname">Circumference</span>
+      \[
+      C = 2\pi r = \pi d
+      \]
+    </div>
+
+    <div class="formula-box">
+      <span class="fname">Area of Circle</span>
+      \[
+      A = \pi r^2
+      \]
+    </div>
+
+    <div class="formula-box">
+      <span class="fname">Arc Length</span>
+      \[
+      L=\frac{\theta}{360^\circ}\times2\pi r
+      \]
+    </div>
+
+    <div class="formula-box">
+      <span class="fname">Area of Sector</span>
+      \[
+      A=\frac{\theta}{360^\circ}\times\pi r^2
+      \]
+    </div>
+
+    <div class="formula-box">
+      <span class="fname">Tangent Property</span>
+      A tangent is always perpendicular to the radius at the point of contact.
+    </div>
+
+  </div>
+
+  <table>
+    <tr>
+      <th>Part of Circle</th>
+      <th>Description</th>
+    </tr>
+
+    <tr>
+      <td>Center</td>
+      <td>The fixed point of the circle.</td>
+    </tr>
+
+    <tr>
+      <td>Radius</td>
+      <td>Line segment from the center to any point on the circle.</td>
+    </tr>
+
+    <tr>
+      <td>Diameter</td>
+      <td>A chord passing through the center (largest chord).</td>
+    </tr>
+
+    <tr>
+      <td>Chord</td>
+      <td>A line segment joining any two points on the circle.</td>
+    </tr>
+
+    <tr>
+      <td>Arc</td>
+      <td>A part of the circumference.</td>
+    </tr>
+
+    <tr>
+      <td>Sector</td>
+      <td>Region enclosed by two radii and an arc.</td>
+    </tr>
+
+    <tr>
+      <td>Segment</td>
+      <td>Region enclosed by a chord and an arc.</td>
+    </tr>
+
+    <tr>
+      <td>Tangent</td>
+      <td>A line touching the circle at exactly one point.</td>
+    </tr>
+
+    <tr>
+      <td>Secant</td>
+      <td>A line intersecting the circle at two points.</td>
+    </tr>
+  </table>
+
+<div class="note">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <circle cx="12" cy="12" r="9"/>
+    <path d="M12 8v5M12 16h.01"/>
+  </svg>
+
+  <div>
+    <strong>Important:</strong>
+    The diameter is the longest chord of a circle, and a tangent is always perpendicular to the radius at the point of contact.
+  </div>
 </div>
-<div class="canvas-section">
+</section>
 
-    <h2>🧠 Geometry Interactive Lab</h2>
+   <section class="block" id="area">
+  <div class="eyebrow"><span class="num">08</span> Measurement</div>
 
-    <canvas id="geoCanvas" width="320" height="320"></canvas>
+  <h2>Area & Perimeter Formulas</h2>
 
-    <div class="controls">
-        <button onclick="drawTriangle()">🔺 Triangle</button>
-        <button onclick="drawCircle()">⚪ Circle</button>
-        <button onclick="rotateAngle()">📐 Angle Rotate</button>
-        <button onclick="clearCanvas()">🧹 Clear</button>
+  <table>
+    <tr>
+      <th>Shape</th>
+      <th>Area</th>
+      <th>Perimeter / Circumference</th>
+    </tr>
+
+    <tr>
+      <td>Square</td>
+      <td>\(a^2\)</td>
+      <td>\(4a\)</td>
+    </tr>
+
+    <tr>
+      <td>Rectangle</td>
+      <td>\(l \times b\)</td>
+      <td>\(2(l+b)\)</td>
+    </tr>
+
+    <tr>
+      <td>Triangle</td>
+      <td>\(\frac12 \times \text{Base} \times \text{Height}\)</td>
+      <td>\(a+b+c\)</td>
+    </tr>
+
+    <tr>
+      <td>Equilateral Triangle</td>
+      <td>\(\frac{\sqrt3}{4}a^2\)</td>
+      <td>\(3a\)</td>
+    </tr>
+
+    <tr>
+      <td>Parallelogram</td>
+      <td>\(\text{Base} \times \text{Height}\)</td>
+      <td>\(2(a+b)\)</td>
+    </tr>
+
+    <tr>
+      <td>Rhombus</td>
+      <td>\(\frac12 d_1d_2\)</td>
+      <td>\(4a\)</td>
+    </tr>
+
+    <tr>
+      <td>Trapezium</td>
+      <td>\(\frac12(a+b)\times h\)</td>
+      <td>Sum of all four sides</td>
+    </tr>
+
+    <tr>
+      <td>Circle</td>
+      <td>\(\pi r^2\)</td>
+      <td>\(2\pi r\)</td>
+    </tr>
+
+    <tr>
+      <td>Semicircle</td>
+      <td>\(\frac12\pi r^2\)</td>
+      <td>\(\pi r+2r\)</td>
+    </tr>
+  </table>
+
+  <div class="formula-box">
+    <span class="fname">Heron's Formula</span>
+
+    For a triangle with sides \(a\), \(b\), and \(c\):
+
+    \[
+    s=\frac{a+b+c}{2}
+    \]
+
+    \[
+    \text{Area}=\sqrt{s(s-a)(s-b)(s-c)}
+    \]
+  </div>
+</section>
+
+    <section class="block" id="solids">
+  <div class="eyebrow"><span class="num">09</span> 3D Geometry</div>
+
+  <h2>Three-Dimensional (3D) Solids</h2>
+
+  <p class="lead">
+    Three-dimensional (3D) solids have length, width, and height.
+    Their important measurements are <strong>Volume</strong>,
+    <strong>Curved Surface Area (CSA)</strong>, and
+    <strong>Total Surface Area (TSA)</strong>.
+  </p>
+
+  <table>
+    <tr>
+      <th>Solid</th>
+      <th>Volume</th>
+      <th>CSA</th>
+      <th>TSA</th>
+    </tr>
+
+    <tr>
+      <td>Cube</td>
+      <td>\(a^3\)</td>
+      <td>—</td>
+      <td>\(6a^2\)</td>
+    </tr>
+
+    <tr>
+      <td>Cuboid</td>
+      <td>\(lbh\)</td>
+      <td>—</td>
+      <td>\(2(lb+bh+hl)\)</td>
+    </tr>
+
+    <tr>
+      <td>Right Circular Cylinder</td>
+      <td>\(\pi r^2h\)</td>
+      <td>\(2\pi rh\)</td>
+      <td>\(2\pi r(h+r)\)</td>
+    </tr>
+
+    <tr>
+      <td>Right Circular Cone</td>
+      <td>\(\frac13\pi r^2h\)</td>
+      <td>\(\pi rl\)</td>
+      <td>\(\pi r(l+r)\)</td>
+    </tr>
+
+    <tr>
+      <td>Sphere</td>
+      <td>\(\frac43\pi r^3\)</td>
+      <td>\(4\pi r^2\)</td>
+      <td>\(4\pi r^2\)</td>
+    </tr>
+
+    <tr>
+      <td>Hemisphere</td>
+      <td>\(\frac23\pi r^3\)</td>
+      <td>\(2\pi r^2\)</td>
+      <td>\(3\pi r^2\)</td>
+    </tr>
+
+    <tr>
+      <td>Prism</td>
+      <td>\(\text{Base Area}\times h\)</td>
+      <td>Depends on the shape</td>
+      <td>Depends on the shape</td>
+    </tr>
+
+    <tr>
+      <td>Pyramid</td>
+      <td>\(\frac13\times\text{Base Area}\times h\)</td>
+      <td>Depends on the shape</td>
+      <td>Depends on the shape</td>
+    </tr>
+  </table>
+
+  <div class="note">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="12" cy="12" r="9"/>
+      <path d="M12 8v5M12 16h.01"/>
+    </svg>
+
+    <div>
+      <strong>Important:</strong>
+      For a cone, the slant height is
+      \[
+      l=\sqrt{r^2+h^2}
+      \]
+    </div>
+  </div>
+</section>
+
+    <section class="block" id="coordinate">
+  <div class="eyebrow"><span class="num">10</span> Coordinate</div>
+  <h2>Coordinate Geometry</h2>
+
+  <div class="formula-grid">
+    <div class="formula-box">
+      <span class="fname">Distance Formula</span>
+      \[
+      d=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}
+      \]
     </div>
 
-</div>
+    <div class="formula-box">
+      <span class="fname">Midpoint Formula</span>
+      \[
+      \left(\frac{x_1+x_2}{2},\frac{y_1+y_2}{2}\right)
+      \]
+    </div>
 
+    <div class="formula-box">
+      <span class="fname">Slope</span>
+      \[
+      m=\frac{y_2-y_1}{x_2-x_1}
+      \]
+    </div>
+
+    <div class="formula-box">
+      <span class="fname">Equation of a Line</span>
+      \[
+      y=mx+c
+      \]
+    </div>
+  </div>
+</section>
+
+<section class="block" id="theorems">
+  <div class="eyebrow"><span class="num">11</span> Theorems</div>
+  <h2>Important Theorems at a Glance</h2>
+
+  <table>
+    <tr>
+      <th>Theorem</th>
+      <th>Statement (Brief)</th>
+    </tr>
+
+    <tr>
+      <td>Thales' Theorem</td>
+      <td>A line parallel to one side of a triangle divides the other two sides in the same ratio.</td>
+    </tr>
+
+    <tr>
+      <td>Midpoint Theorem</td>
+      <td>The line joining the midpoints of two sides of a triangle is parallel to the third side and half of its length.</td>
+    </tr>
+
+    <tr>
+      <td>Pythagoras Theorem</td>
+      <td>In a right triangle, c² = a² + b².</td>
+    </tr>
+
+    <tr>
+      <td>Cyclic Quadrilateral Theorem</td>
+      <td>The sum of opposite angles of a cyclic quadrilateral is 180°.</td>
+    </tr>
+
+    <tr>
+      <td>Tangent Theorem</td>
+      <td>A tangent is perpendicular to the radius at the point of contact.</td>
+    </tr>
+  </table>
+</section>
+
+<section class="block" id="sheet">
+  <div class="eyebrow"><span class="num">12</span> Reference</div>
+  <h2>Quick Formula Sheet</h2>
+
+  <div class="sheet-grid">
+    <div class="sheet-card">
+      <span class="fname">Circle Area</span>
+      \(\pi r^2\)
+    </div>
+
+    <div class="sheet-card">
+      <span class="fname">Circle Circumference</span>
+      \(2\pi r\)
+    </div>
+
+    <div class="sheet-card">
+      <span class="fname">Triangle Area</span>
+      \(\tfrac12 bh\)
+    </div>
+
+    <div class="sheet-card">
+      <span class="fname">Heron's Formula</span>
+      \(\sqrt{s(s-a)(s-b)(s-c)}\)
+    </div>
+
+    <div class="sheet-card">
+      <span class="fname">Pythagoras</span>
+      \(c^2=a^2+b^2\)
+    </div>
+
+    <div class="sheet-card">
+      <span class="fname">Distance Formula</span>
+      \(\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}\)
+    </div>
+
+    <div class="sheet-card">
+      <span class="fname">Cuboid Volume</span>
+      \(lbh\)
+    </div>
+
+    <div class="sheet-card">
+      <span class="fname">Cylinder Volume</span>
+      \(\pi r^2h\)
+    </div>
+
+    <div class="sheet-card">
+      <span class="fname">Sphere Volume</span>
+      \(\tfrac43\pi r^3\)
+    </div>
+  </div>
+</section>
+
+<section class="block" id="examples">
+  <div class="eyebrow"><span class="num">13</span> Examples</div>
+  <h2>Solved Examples</h2>
+
+  <div class="example-card">
+    <span class="tag">Example 1</span>
+    <div class="q">A right triangle has sides 6 cm and 8 cm. Find the hypotenuse.</div>
+    <p>Solution: \(c^2=6^2+8^2=36+64=100\)</p>
+    <div class="ans">c = 10 cm</div>
+  </div>
+
+  <div class="example-card">
+    <span class="tag">Example 2</span>
+    <div class="q">Find the area of a triangle whose sides are 5 cm, 6 cm and 7 cm.</div>
+    <p>Solution: \(s=\dfrac{5+6+7}{2}=9\)<br>Area \(=\sqrt{9\times4\times3\times2}=\sqrt{216}\)</p>
+    <div class="ans">Area ≈ 14.7 cm²</div>
+  </div>
+
+  <div class="example-card">
+    <span class="tag">Example 3</span>
+    <div class="q">Find the area and circumference of a circle with radius 7 cm. (π = 22/7)</div>
+    <p>Solution: Area \(=\tfrac{22}{7}\times7^2=154\), Circumference \(=2\times\tfrac{22}{7}\times7=44\)</p>
+    <div class="ans">Area = 154 cm², Circumference = 44 cm</div>
+  </div>
+
+  <div class="example-card">
+    <span class="tag">Example 4</span>
+    <div class="q">Find the volume of a cylinder with radius 7 cm and height 10 cm.</div>
+    <p>Solution: \(V=\pi r^2h=\tfrac{22}{7}\times49\times10\)</p>
+    <div class="ans">V = 1540 cm³</div>
+  </div>
+
+</section>
+
+<section class="block" id="practice">
+  <div class="eyebrow"><span class="num">14</span> Practice</div>
+  <h2>Practice Yourself</h2>
+  <p class="lead">Tap on a question to reveal the answer.</p>
+
+  <details class="practice">
+    <summary>1. A rectangle has a length of 12 cm and a width of 5 cm. Find its diagonal.</summary>
+    <div class="body">
+      Diagonal \(=\sqrt{12^2+5^2}=\sqrt{169}\).
+      <span class="ans">Diagonal = 13 cm</span>
+    </div>
+  </details>
+
+  <details class="practice">
+    <summary>2. An equilateral triangle has a side length of 8 cm. Find its perimeter.</summary>
+    <div class="body">
+      <span class="ans">Perimeter = 24 cm</span>
+    </div>
+  </details>
+
+  <details class="practice">
+    <summary>3. Find the volume of a sphere with radius 14 cm. (π = 22/7)</summary>
+    <div class="body">
+      \(V=\tfrac43\times\tfrac{22}{7}\times14^3\).
+      <span class="ans">V ≈ 11498.7 cm³</span>
+    </div>
+  </details>
+
+  <details class="practice">
+    <summary>4. The angles of a triangle are in the ratio 3:4:5. Find the largest angle.</summary>
+    <div class="body">
+      Total parts = 12, each part = 15°. Largest angle = 5 × 15°.
+      <span class="ans">75°</span>
+    </div>
+  </details>
+
+  <details class="practice">
+    <summary>5. Find the distance between the points (2,3) and (6,6).</summary>
+    <div class="body">
+      \(d=\sqrt{(6-2)^2+(6-3)^2}=\sqrt{16+9}=\sqrt{25}\).
+      <span class="ans">d = 5 units</span>
+    </div>
+  </details>
+
+</section>
+
+  </main>
+</div>
 
 <footer>
-<a href="../mathematics.html">⬅ Back to Mathematics Hub</a>
+  This page is a free educational reference from the Mathematics Notebook Series.
+
+  <nav class="switcher">
+    <a href="Algebra.html">Algebra</a>
+    <a href="geometry.html" class="active">Geometry</a>
+    <a href="trigonometry.html">Trigonometry</a>
+  </nav>
 </footer>
 
-<!-- ⚙️ JS FILE (IMPORTANT) -->
-<script src="geometry.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    if(window.renderMathInElement){
+      renderMathInElement(document.body, {
+        delimiters: [
+          {left:"\\[", right:"\\]", display:true},
+          {left:"\\(", right:"\\)", display:false}
+        ],
+        throwOnError:false
+      });
+    }
+  });
 
+  (function(){
+    const links = document.querySelectorAll('.toc a');
+    const sections = Array.from(links).map(l=>document.querySelector(l.getAttribute('href')));
+    if('IntersectionObserver' in window){
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            const id = '#'+entry.target.id;
+            links.forEach(l=>l.classList.toggle('current', l.getAttribute('href')===id));
+          }
+        });
+      }, {rootMargin:'-40% 0px -50% 0px'});
+      sections.forEach(s=>{ if(s) io.observe(s); });
+    }
+  })();
+
+  // triangle explorer
+  (function(){
+    const canvas=document.getElementById('triCanvas');
+    if(!canvas) return;
+    const ctx=canvas.getContext('2d');
+    const CSS_W=560, CSS_H=380;
+    function setupRes(){
+      const dpr=window.devicePixelRatio||1;
+      canvas.width=CSS_W*dpr; canvas.height=CSS_H*dpr;
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+    }
+    setupRes();
+
+    let pts=[{x:120,y:300},{x:430,y:310},{x:300,y:70}];
+    let dragIdx=-1;
+
+    const statPerimeter=document.getElementById('triPerimeter');
+    const statArea=document.getElementById('triArea');
+    const statAngles=document.getElementById('triAngles');
+    const statType=document.getElementById('triType');
+
+    function dist(p,q){return Math.hypot(p.x-q.x,p.y-q.y);}
+    function angleAt(P,Q,R){
+      const v1={x:Q.x-P.x,y:Q.y-P.y};
+      const v2={x:R.x-P.x,y:R.y-P.y};
+      const dot=v1.x*v2.x+v1.y*v2.y;
+      const m1=Math.hypot(v1.x,v1.y), m2=Math.hypot(v2.x,v2.y);
+      let cos = m1*m2===0?0:dot/(m1*m2);
+      cos=Math.max(-1,Math.min(1,cos));
+      return Math.acos(cos)*180/Math.PI;
+    }
+
+    function draw(){
+      ctx.clearRect(0,0,CSS_W,CSS_H);
+      ctx.strokeStyle='rgba(30,107,85,0.10)';
+      ctx.lineWidth=1;
+      for(let gx=0;gx<=CSS_W;gx+=28){ctx.beginPath();ctx.moveTo(gx,0);ctx.lineTo(gx,CSS_H);ctx.stroke();}
+      for(let gy=0;gy<=CSS_H;gy+=28){ctx.beginPath();ctx.moveTo(0,gy);ctx.lineTo(CSS_W,gy);ctx.stroke();}
+
+      const [A,B,C]=pts;
+      ctx.beginPath();
+      ctx.moveTo(A.x,A.y);ctx.lineTo(B.x,B.y);ctx.lineTo(C.x,C.y);ctx.closePath();
+      ctx.fillStyle='rgba(30,107,85,0.14)';
+      ctx.fill();
+      ctx.strokeStyle='#1E6B55';
+      ctx.lineWidth=2.5;
+      ctx.stroke();
+
+      const labels=['A','B','C'];
+      pts.forEach((p,i)=>{
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,7,0,Math.PI*2);
+        ctx.fillStyle='#123F32';
+        ctx.fill();
+        ctx.font="700 15px 'IBM Plex Mono', monospace";
+        ctx.fillStyle='#123F32';
+        const dy = p.y < CSS_H/2 ? -14 : 24;
+        ctx.fillText(labels[i], p.x-4, p.y+dy);
+      });
+
+      const a=dist(B,C), b=dist(A,C), c=dist(A,B);
+      const perimeter=a+b+c;
+      const s=perimeter/2;
+      const areaSq=s*(s-a)*(s-b)*(s-c);
+      const area=areaSq>0?Math.sqrt(areaSq):0;
+      const angA=angleAt(A,B,C), angB=angleAt(B,A,C), angC=angleAt(C,A,B);
+
+      const unit=28;
+      statPerimeter.textContent=(perimeter/unit).toFixed(2)+' यूनिट';
+      statArea.textContent=(area/(unit*unit)).toFixed(2)+' वर्ग यूनिट';
+      statAngles.textContent='A='+angA.toFixed(0)+'°, B='+angB.toFixed(0)+'°, C='+angC.toFixed(0)+'°';
+
+      const eps=6;
+      let sideType='विषमबाहु (Scalene)';
+      if(Math.abs(a-b)<eps && Math.abs(b-c)<eps) sideType='समबाहु (Equilateral)';
+      else if(Math.abs(a-b)<eps || Math.abs(b-c)<eps || Math.abs(a-c)<eps) sideType='समद्विबाहु (Isosceles)';
+
+      const maxAng=Math.max(angA,angB,angC);
+      let angType='न्यूनकोण (Acute)';
+      if(Math.abs(maxAng-90)<3) angType='समकोण (Right)';
+      else if(maxAng>90) angType='अधिककोण (Obtuse)';
+
+      statType.textContent = sideType+' · '+angType;
+    }
+
+    function getPos(evt){
+      const rect=canvas.getBoundingClientRect();
+      const scaleX=CSS_W/rect.width, scaleY=CSS_H/rect.height;
+      const clientX=evt.touches?evt.touches[0].clientX:evt.clientX;
+      const clientY=evt.touches?evt.touches[0].clientY:evt.clientY;
+      return {x:(clientX-rect.left)*scaleX, y:(clientY-rect.top)*scaleY};
+    }
+    function down(evt){
+      const pos=getPos(evt);
+      let closest=-1, best=20;
+      pts.forEach((p,i)=>{
+        const d=Math.hypot(p.x-pos.x,p.y-pos.y);
+        if(d<best){best=d;closest=i;}
+      });
+      dragIdx=closest;
+      if(dragIdx>=0){ evt.preventDefault(); canvas.style.cursor='grabbing'; }
+    }
+    function move(evt){
+      if(dragIdx<0) return;
+      evt.preventDefault();
+      const pos=getPos(evt);
+      pts[dragIdx]={x:Math.max(14,Math.min(CSS_W-14,pos.x)), y:Math.max(14,Math.min(CSS_H-14,pos.y))};
+      draw();
+    }
+    function up(){ dragIdx=-1; canvas.style.cursor='grab'; }
+
+    canvas.addEventListener('mousedown',down);
+    canvas.addEventListener('mousemove',move);
+    window.addEventListener('mouseup',up);
+    canvas.addEventListener('touchstart',down,{passive:false});
+    canvas.addEventListener('touchmove',move,{passive:false});
+    canva<script src="script.js"></script>s.addEventListener('touchend',up);
+
+    draw();
+  })();
+</script>
 </body>
 </html>

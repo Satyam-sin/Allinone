@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Factorisation | Math Notebook</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&family=Noto+Serif+Devanagari:wght@500;600;700;900&display=swap" rel="stylesheet">
+
+    <!-- KaTeX -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="factorisation.css">
+</head>
+
+<body>
+<header class="topbar">
+
+  <div class="brand">
+    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+      <rect x="10" y="10" width="28" height="28" rx="3"/>
+      <path d="M16 18h16M16 24h16M16 30h10"/>
+    </svg>
+
+    <div class="brand-text">
+      <div class="t1">Factorisation</div>
+      <div class="t2">Math Notebook · Part 04</div>
+    </div>
+  </div>
+
+  <nav class="switcher">
+    <a href="Algebra.html">Algebra</a>
+    <a href="geometry.html">Geometry</a>
+    <a href="trigonometry.html">Trigonometry</a>
+    <a href="factorisation.html" class="active">Factorisation</a>
+  </nav>
+
+</header>
+
+
+<div class="layout">
+
+  <!-- Table of Contents -->
+  <nav class="toc" id="toc">
+
+    <h3>Table of Contents</h3>
+
+    <ol>
+
+      <li><a href="#intro">Introduction</a></li>
+      <li><a href="#common-factor">Common Factor Method</a></li>
+      <li><a href="#grouping">Grouping Method</a></li>
+      <li><a href="#difference-square">Difference of Squares</a></li>
+      <li><a href="#perfect-square">Perfect Square Formulae</a></li>
+      <li><a href="#cube">Cube Formulae</a></li>
+      <li><a href="#quadratic">Quadratic Factorisation</a></li>
+      <li><a href="#middle-term">Splitting Middle Term</a></li>
+      <li><a href="#formula-sheet">Formula Sheet</a></li>
+      <li><a href="#examples">Solved Examples</a></li>
+      <li><a href="#practice">Practice Questions</a></li>
+
+    </ol>
+
+  </nav>
+
+
+  <main>
+
+<section class="hero">
+
+    <div class="hero-text">
+
+        <div class="eyebrow">
+            <span class="num">Interactive</span>
+            Algebra
+        </div>
+
+        <h1>Factorisation</h1>
+
+        <p>
+            Factorisation is the process of expressing an algebraic expression
+            as the product of two or more factors. It is one of the most
+            important concepts in algebra and helps simplify expressions,
+            solve equations, and understand polynomial relationships.
+        </p>
+
+    </div>
+
+    <div class="hero-card">
+
+        <h3>Quick Facts</h3>
+
+        <ul>
+            <li>✔ Converts expressions into factors.</li>
+            <li>✔ Makes solving equations easier.</li>
+            <li>✔ Used in Algebra and Calculus.</li>
+            <li>✔ Helps simplify polynomial expressions.</li>
+        </ul>
+
+    </div>
+
+</section>
+
+
+<!-- Section Card -->
+<div class="section-card">
+
+<section class="block" id="intro">
+
+    <div class="eyebrow">
+        <span class="num">01</span>
+        Introduction
+    </div>
+
+    <h2>What is Factorisation?</h2>
+
+    <p class="lead">
+        Factorisation is the process of breaking an algebraic expression
+        into smaller expressions whose product gives the original expression.
+        Each smaller expression is called a <strong>factor</strong>.
+    </p>
+
+    <div class="note">
+        <strong>Example</strong>
+        <p>x² + 5x + 6 = (x + 2)(x + 3)</p>
+    </div>
+
+</section>
+
+</div>
+
+
+
+<!-- Section Card -->
+<div class="section-card">
+
+<section class="block" id="importance">
+
+    <div class="eyebrow">
+        <span class="num">02</span>
+        Importance
+    </div>
+
+    <h2>Why is Factorisation Important?</h2>
+
+    <ul>
+        <li>Simplifies algebraic expressions.</li>
+        <li>Helps solve quadratic equations.</li>
+        <li>Useful in graphing polynomial functions.</li>
+        <li>Widely used in higher mathematics.</li>
+        <li>Improves problem-solving speed.</li>
+    </ul>
+
+</section>
+
+</div>
+
+
+
+
+</div>
+<section class="block" id="common-factor">
+
+    <div class="eyebrow">
+        <span class="num">03</span>
+        Method
+    </div>
+
+    <h2>Common Factor Method</h2>
+
+    <p class="lead">
+        The <strong>Common Factor Method</strong> is the simplest method of
+        factorisation. In this method, we first find the greatest common
+        factor (GCF) that is common to every term and then take it outside
+        the brackets.
+    </p>
+
+    <div class="note">
+        <strong>Rule</strong><br>
+        Find the common factor → Take it outside → Write the remaining terms inside the brackets.
+    </div>
+
+    <h3>General Formula</h3>
+
+    <div class="formula-box">
+        <span class="fname">Common Factor</span>
+
+        \[
+        ab+ac=a(b+c)
+        \]
+
+    </div>
+
+    <h3>Examples</h3>
+
+    <table>
+
+        <tr>
+            <th>Expression</th>
+            <th>Factorised Form</th>
+        </tr>
+
+        <tr>
+            <td>3x + 6</td>
+            <td>3(x + 2)</td>
+        </tr>
+
+        <tr>
+            <td>5x² + 10x</td>
+            <td>5x(x + 2)</td>
+        </tr>
+
+        <tr>
+            <td>8a²b + 12ab</td>
+            <td>4ab(2a + 3)</td>
+        </tr>
+
+        <tr>
+            <td>15xy + 20x</td>
+            <td>5x(3y + 4)</td>
+        </tr>
+
+    </table>
+
+    <div class="example-card">
+
+        <span class="tag">Solved Example</span>
+
+        <div class="q">
+            Factorise:
+            <strong>12x² + 18x</strong>
+        </div>
+
+        <p>
+            The greatest common factor is <strong>6x</strong>.
+        </p>
+
+        <div class="ans">
+
+            12x² + 18x
+
+            <br><br>
+
+            = 6x(2x + 3)
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="block" id="grouping">
+
+    <div class="eyebrow">
+        <span class="num">04</span>
+        Method
+    </div>
+
+    <h2>Grouping Method</h2>
+
+    <p class="lead">
+        The <strong>Grouping Method</strong> is used when an algebraic
+        expression has four or more terms. The terms are grouped so that
+        each group has a common factor, making the expression easier to
+        factorise.
+    </p>
+
+    <div class="note">
+        <strong>Rule</strong><br>
+        Group the terms → Take out the common factor from each group →
+        Find the common bracket → Write the final factorised form.
+    </div>
+
+    <h3>General Formula</h3>
+
+    <div class="formula-box">
+
+        <span class="fname">Grouping</span>
+
+        \[
+        ab+ac+db+dc=(a+d)(b+c)
+        \]
+
+    </div>
+
+    <h3>Examples</h3>
+
+    <table>
+
+        <tr>
+            <th>Expression</th>
+            <th>Factorised Form</th>
+        </tr>
+
+        <tr>
+            <td>ax + ay + bx + by</td>
+            <td>(a+b)(x+y)</td>
+        </tr>
+
+        <tr>
+            <td>3x + 3y + 2x + 2y</td>
+            <td>(3+2)(x+y)</td>
+        </tr>
+
+        <tr>
+            <td>x² + 2x + 3x + 6</td>
+            <td>(x+2)(x+3)</td>
+        </tr>
+
+        <tr>
+            <td>5a + 10b + 2a + 4b</td>
+            <td>(5+2)(a+2b)</td>
+        </tr>
+
+    </table>
+
+    <div class="example-card">
+
+        <span class="tag">Solved Example</span>
+
+        <div class="q">
+            Factorise: <strong>x² + 5x + 6</strong>
+        </div>
+
+        <p>
+
+            x² + 5x + 6
+
+            <br>
+
+            = x² + 2x + 3x + 6
+
+            <br>
+
+            = x(x+2)+3(x+2)
+
+        </p>
+
+        <div class="ans">
+
+            (x+2)(x+3)
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="block diff-card" id="difference-square">
+
+    <div class="eyebrow">
+        <span class="num">04</span>
+        Formula
+    </div>
+
+    <h2>Difference of Squares</h2>
+
+    <p class="lead">
+        When two perfect squares are connected by a minus sign,
+        they can be factorised using the Difference of Squares Formula.
+    </p>
+
+    <div class="note diff-note">
+
+        <strong>Remember</strong><br>
+
+        This identity works only when both terms are perfect squares and
+        the sign between them is minus (−).
+
+    </div>
+
+    <h3>Main Formula</h3>
+
+    <div class="formula-box diff-formula">
+
+        <span class="fname">Identity</span>
+
+        <div class="formula">
+
+            a<sup>2</sup> − b<sup>2</sup>
+
+            =
+
+            (a + b)(a − b)
+
+        </div>
+
+    </div>
+
+    <h3>Examples</h3>
+
+    <table>
+
+        <tr>
+
+            <th>Expression</th>
+
+            <th>Factorised Form</th>
+
+        </tr>
+
+        <tr>
+
+            <td>x<sup>2</sup> − 16</td>
+
+            <td>(x + 4)(x − 4)</td>
+
+        </tr>
+
+        <tr>
+
+            <td>9a<sup>2</sup> − 25</td>
+
+            <td>(3a + 5)(3a − 5)</td>
+
+        </tr>
+
+        <tr>
+
+            <td>49x<sup>2</sup> − y<sup>2</sup></td>
+
+            <td>(7x + y)(7x − y)</td>
+
+        </tr>
+
+        <tr>
+
+            <td>100m<sup>2</sup> − 81n<sup>2</sup></td>
+
+            <td>(10m + 9n)(10m − 9n)</td>
+
+        </tr>
+
+    </table>
+
+    <div class="example-card diff-example">
+
+        <span class="tag">Solved Example</span>
+
+        <div class="q">
+
+            Factorise
+
+            <strong>64x<sup>2</sup> − 25</strong>
+
+        </div>
+
+        <p>
+
+            Since
+
+            64 = 8<sup>2</sup>
+
+            and
+
+            25 = 5<sup>2</sup>
+
+            apply the identity.
+
+        </p>
+
+        <div class="ans">
+
+            64x<sup>2</sup> − 25
+
+            <br><br>
+
+            =
+
+            (8x + 5)(8x − 5)
+
+        </div>
+
+    </div>
+
+</section>
+<section class="block perfect-card" id="perfect-square">
+
+    <div class="eyebrow">
+        <span class="num">05</span>
+        Formulae
+    </div>
+
+    <h2>Perfect Square Formulae</h2>
+
+    <p class="lead">
+        Perfect Square Formulae are special algebraic identities used to
+        expand and factorise algebraic expressions quickly. These identities
+        are used frequently in Algebra.
+    </p>
+
+    <div class="note perfect-note">
+
+        <strong>Tip</strong><br>
+
+        Learn these three identities by heart. They appear in many
+        mathematics problems.
+
+    </div>
+
+    <h3>Main Formulae</h3>
+
+    <div class="formula-grid">
+
+        <div class="formula-box perfect-box">
+
+            <span class="fname">Identity 1</span>
+
+            <div class="formula">
+
+                (a + b)<sup>2</sup>
+
+                =
+
+                a<sup>2</sup> + 2ab + b<sup>2</sup>
+
+            </div>
+
+        </div>
+
+        <div class="formula-box perfect-box">
+
+            <span class="fname">Identity 2</span>
+
+            <div class="formula">
+
+                (a − b)<sup>2</sup>
+
+                =
+
+                a<sup>2</sup> − 2ab + b<sup>2</sup>
+
+            </div>
+
+        </div>
+
+        <div class="formula-box perfect-box">
+
+            <span class="fname">Identity 3</span>
+
+            <div class="formula">
+
+                a<sup>2</sup> − b<sup>2</sup>
+
+                =
+
+                (a+b)(a−b)
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <h3>Examples</h3>
+
+    <table>
+
+        <tr>
+
+            <th>Expression</th>
+
+            <th>Result</th>
+
+        </tr>
+
+        <tr>
+
+            <td>x<sup>2</sup> + 6x + 9</td>
+
+            <td>(x + 3)<sup>2</sup></td>
+
+        </tr>
+
+        <tr>
+
+            <td>a<sup>2</sup> − 10a + 25</td>
+
+            <td>(a − 5)<sup>2</sup></td>
+
+        </tr>
+
+        <tr>
+
+            <td>16m<sup>2</sup> − 81</td>
+
+            <td>(4m+9)(4m−9)</td>
+
+        </tr>
+
+        <tr>
+
+            <td>(2x+5)<sup>2</sup></td>
+
+            <td>4x<sup>2</sup>+20x+25</td>
+
+        </tr>
+
+    </table>
+
+    <div class="example-card perfect-example">
+
+        <span class="tag">Solved Example</span>
+
+        <div class="q">
+
+            Factorise
+
+            <strong>x<sup>2</sup> + 14x + 49</strong>
+
+        </div>
+
+        <p>
+
+            49 = 7<sup>2</sup>
+
+            and
+
+            14x = 2 × 7 × x
+
+        </p>
+
+        <div class="ans">
+
+            x<sup>2</sup> + 14x + 49
+
+            <br><br>
+
+            =
+
+            (x + 7)<sup>2</sup>
+
+        </div>
+
+    </div>
+
+</section>
+<section class="block cube-card" id="cube">
+
+    <div class="eyebrow">
+        <span class="num">06</span>
+        Formulae
+    </div>
+
+    <h2>Cube Formulae</h2>
+
+    <p class="lead">
+        Cube identities are used to expand and factorise expressions involving cubes.
+        These formulas are very important in algebra and competitive exams.
+    </p>
+
+    <div class="note cube-note">
+
+        <strong>Remember</strong><br>
+
+        These identities are very powerful for fast calculations and simplifications.
+
+    </div>
+
+    <h3>Important Identities</h3>
+
+    <div class="formula-grid">
+
+        <div class="formula-box cube-box">
+
+            <span class="fname">Identity 1</span>
+
+            <div class="formula">
+
+                (a + b)<sup>3</sup>
+
+                = a<sup>3</sup> + 3a<sup>2</sup>b + 3ab<sup>2</sup> + b<sup>3</sup>
+
+            </div>
+
+        </div>
+
+        <div class="formula-box cube-box">
+
+            <span class="fname">Identity 2</span>
+
+            <div class="formula">
+
+                (a − b)<sup>3</sup>
+
+                = a<sup>3</sup> − 3a<sup>2</sup>b + 3ab<sup>2</sup> − b<sup>3</sup>
+
+            </div>
+
+        </div>
+
+        <div class="formula-box cube-box">
+
+            <span class="fname">Identity 3</span>
+
+            <div class="formula">
+
+                a<sup>3</sup> + b<sup>3</sup>
+
+                = (a + b)(a<sup>2</sup> − ab + b<sup>2</sup>)
+
+            </div>
+
+        </div>
+
+        <div class="formula-box cube-box">
+
+            <span class="fname">Identity 4</span>
+
+            <div class="formula">
+
+                a<sup>3</sup> − b<sup>3</sup>
+
+                = (a − b)(a<sup>2</sup> + ab + b<sup>2</sup>)
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <h3>Examples</h3>
+
+    <table>
+
+        <tr>
+            <th>Expression</th>
+            <th>Factorised Form</th>
+        </tr>
+
+        <tr>
+            <td>x<sup>3</sup> + 8</td>
+            <td>(x + 2)(x<sup>2</sup> − 2x + 4)</td>
+        </tr>
+
+        <tr>
+            <td>a<sup>3</sup> − 27</td>
+            <td>(a − 3)(a<sup>2</sup> + 3a + 9)</td>
+        </tr>
+
+        <tr>
+            <td>x<sup>3</sup> − 64</td>
+            <td>(x − 4)(x<sup>2</sup> + 4x + 16)</td>
+        </tr>
+
+        <tr>
+            <td>(2a − b)<sup>3</sup></td>
+            <td>8a<sup>3</sup> − 12a<sup>2</sup>b + 6ab<sup>2</sup> − b<sup>3</sup></td>
+        </tr>
+
+    </table>
+
+    <div class="example-card cube-example">
+
+        <span class="tag">Solved Example</span>
+
+        <div class="q">
+
+            Factorise
+
+            <strong>x<sup>3</sup> − 64</strong>
+
+        </div>
+
+        <p>
+
+            Since 64 = 4<sup>3</sup>, we use:
+
+            a<sup>3</sup> − b<sup>3</sup> formula.
+
+        </p>
+
+        <div class="ans">
+
+            x<sup>3</sup> − 64
+
+            <br><br>
+
+            = (x − 4)(x<sup>2</sup> + 4x + 16)
+
+        </div>
+
+    </div>
+
+</section>
+<section class="block quad-card" id="quadratic">
+
+  <div class="eyebrow">
+    <span class="num">07</span>
+    Method
+  </div>
+
+  <h2>Quadratic Factorisation</h2>
+
+  <p class="lead">
+    Quadratic expressions are of the form <b>ax² + bx + c</b>.
+    Factorisation helps to split them into two simpler binomial expressions.
+  </p>
+
+  <div class="note quad-note">
+    <strong>Key Idea</strong><br>
+    Find two numbers whose product is <b>a × c</b> and sum is <b>b</b>.
+  </div>
+
+  <h3>General Form</h3>
+
+  <div class="formula-box quad-box">
+    <span class="fname">Quadratic Form</span>
+
+    \[
+    ax^2 + bx + c = (px + q)(rx + s)
+    \]
+
+  </div>
+
+  <h3>Examples</h3>
+
+  <table>
+
+    <tr>
+      <th>Expression</th>
+      <th>Factorised Form</th>
+    </tr>
+
+    <tr>
+      <td>x² + 5x + 6</td>
+      <td>(x + 2)(x + 3)</td>
+    </tr>
+
+    <tr>
+      <td>x² + 7x + 12</td>
+      <td>(x + 3)(x + 4)</td>
+    </tr>
+
+    <tr>
+      <td>x² − x − 6</td>
+      <td>(x − 3)(x + 2)</td>
+    </tr>
+
+    <tr>
+      <td>2x² + 7x + 3</td>
+      <td>(2x + 1)(x + 3)</td>
+    </tr>
+
+  </table>
+
+  <div class="example-card quad-example">
+
+    <span class="tag">Solved Example</span>
+
+    <div class="q">
+      Factorise: <b>x² + 9x + 20</b>
+    </div>
+
+    <p>
+      We need two numbers whose product = 20 and sum = 9 → (4,5)
+    </p>
+
+    <div class="ans">
+      (x + 4)(x + 5)
+    </div>
+
+  </div>
+
+</section>
+<section class="block split-card" id="middle-term">
+
+  <div class="eyebrow">
+    <span class="num">08</span>
+    Technique
+  </div>
+
+  <h2>Splitting the Middle Term</h2>
+
+  <p class="lead">
+    This method is used in quadratic expressions of the form <b>ax² + bx + c</b>.
+    We split the middle term into two parts so that grouping becomes possible.
+  </p>
+
+  <div class="note split-note">
+    <strong>Core Idea</strong><br>
+    Find two numbers whose product = a × c and sum = b, then split the middle term.
+  </div>
+
+  <h3>Method Steps</h3>
+
+  <div class="formula-box split-box">
+    <span class="fname">Steps</span>
+
+    <ol>
+      <li>Multiply a × c</li>
+      <li>Find two numbers with product and sum</li>
+      <li>Split middle term</li>
+      <li>Group terms and factorise</li>
+    </ol>
+
+  </div>
+
+  <h3>Example</h3>
+
+  <table>
+
+    <tr>
+      <th>Expression</th>
+      <th>Process</th>
+      <th>Result</th>
+    </tr>
+
+    <tr>
+      <td>2x² + 7x + 3</td>
+      <td>7x = 6x + x</td>
+      <td>(2x + 1)(x + 3)</td>
+    </tr>
+
+    <tr>
+      <td>x² + 8x + 12</td>
+      <td>8x = 6x + 2x</td>
+      <td>(x + 2)(x + 6)</td>
+    </tr>
+
+  </table>
+
+  <div class="example-card split-example">
+
+    <span class="tag">Solved Example</span>
+
+    <div class="q">
+      Factorise: <b>x² + 11x + 24</b>
+    </div>
+
+    <p>
+      24 → (3,8) because 3 + 8 = 11
+    </p>
+
+    <div class="ans">
+      (x + 3)(x + 8)
+    </div>
+
+  </div>
+
+</section>
+<section class="block formula-card" id="formula-sheet">
+
+  <div class="eyebrow">
+    <span class="num">09</span>
+    Revision
+  </div>
+
+  <h2>Formula Sheet</h2>
+
+  <p class="lead">
+    This section contains all important algebraic identities used in factorisation.
+    Use it for quick revision before exams.
+  </p>
+
+  <div class="note formula-note">
+    <strong>Tip</strong><br>
+    Learn these formulas by heart — they are the foundation of algebra.
+  </div>
+
+  <div class="formula-grid">
+
+    <div class="formula-box">
+      <span class="fname">Identity 1</span>
+      <p>(a + b)² = a² + 2ab + b²</p>
+    </div>
+
+    <div class="formula-box">
+      <span class="fname">Identity 2</span>
+      <p>(a − b)² = a² − 2ab + b²</p>
+    </div>
+
+    <div class="formula-box">
+      <span class="fname">Identity 3</span>
+      <p>a² − b² = (a + b)(a − b)</p>
+    </div>
+
+    <div class="formula-box">
+      <span class="fname">Identity 4</span>
+      <p>(a + b)³ = a³ + 3a²b + 3ab² + b³</p>
+    </div>
+
+    <div class="formula-box">
+      <span class="fname">Identity 5</span>
+      <p>(a − b)³ = a³ − 3a²b + 3ab² − b³</p>
+    </div>
+
+    <div class="formula-box">
+      <span class="fname">Identity 6</span>
+      <p>a³ + b³ = (a + b)(a² − ab + b²)</p>
+    </div>
+
+    <div class="formula-box">
+      <span class="fname">Identity 7</span>
+      <p>a³ − b³ = (a − b)(a² + ab + b²)</p>
+    </div>
+
+  </div>
+
+</section>
+<section class="block example-interactive" id="examples">
+
+  <div class="eyebrow">
+    <span class="num">10</span>
+    Practice
+  </div>
+
+  <h2>Solved Examples (Interactive)</h2>
+
+  <p class="lead">
+    Click on each step to reveal solution step-by-step.
+  </p>
+
+  <!-- Example 1 -->
+  <div class="exp-card">
+
+    <button class="exp-title" onclick="toggleExp(this)">
+      Example 1: Factorise x² + 7x + 12
+    </button>
+
+    <div class="exp-body">
+
+      <div class="step">Step 1: Find two numbers whose product = 12 and sum = 7</div>
+
+      <div class="step">Step 2: Numbers are 3 and 4</div>
+
+      <div class="step">Step 3: Split middle term → x² + 3x + 4x + 12</div>
+
+      <div class="step">Step 4: Group → x(x+3) + 4(x+3)</div>
+
+      <div class="step final">Answer: (x + 3)(x + 4)</div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Example 2 -->
+  <div class="exp-card">
+
+    <button class="exp-title" onclick="toggleExp(this)">
+      Example 2: Factorise 2x² + 7x + 3
+    </button>
+
+    <div class="exp-body">
+
+      <div class="step">Step 1: a × c = 2 × 3 = 6</div>
+
+      <div class="step">Step 2: Numbers are 6 and 1</div>
+
+      <div class="step">Step 3: Split → 2x² + 6x + x + 3</div>
+
+      <div class="step">Step 4: Group → 2x(x+3) + 1(x+3)</div>
+
+      <div class="step final">Answer: (2x + 1)(x + 3)</div>
+
+    </div>
+
+  </div>
+
+<section class="block quiz-card" id="practice">
+
+  <div class="eyebrow">
+    <span class="num">11</span>
+    Practice
+  </div>
+
+  <h2>Practice Questions (Quiz)</h2>
+
+  <p class="lead">
+    Select the correct answer. Your score will update automatically.
+  </p>
+
+  <div class="score-box">
+    Score: <span id="score">0</span>/10
+  </div>
+
+  <!-- Question 1 -->
+  <div class="qbox">
+    <p>1. Factorise x² + 5x + 6</p>
+    <button onclick="checkAnswer(this, true)">(x+2)(x+3)</button>
+    <button onclick="checkAnswer(this, false)">(x+1)(x+6)</button>
+    <button onclick="checkAnswer(this, false)">(x+4)(x+5)</button>
+  </div>
+
+  <!-- Question 2 -->
+  <div class="qbox">
+    <p>2. x² − 16 is equal to:</p>
+    <button onclick="checkAnswer(this, true)">(x+4)(x−4)</button>
+    <button onclick="checkAnswer(this, false)">(x+8)(x−2)</button>
+    <button onclick="checkAnswer(this, false)">(x+2)(x−8)</button>
+  </div>
+
+  <!-- Question 3 -->
+  <div class="qbox">
+    <p>3. (a+b)² expands to:</p>
+    <button onclick="checkAnswer(this, true)">a² + 2ab + b²</button>
+    <button onclick="checkAnswer(this, false)">a² − b²</button>
+    <button onclick="checkAnswer(this, false)">a² + b²</button>
+  </div>
+
+  <!-- Question 4 -->
+  <div class="qbox">
+    <p>4. 2x² + 7x + 3 factorises to:</p>
+    <button onclick="checkAnswer(this, true)">(2x+1)(x+3)</button>
+    <button onclick="checkAnswer(this, false)">(x+3)(x+1)</button>
+    <button onclick="checkAnswer(this, false)">(2x+3)(x+1)</button>
+  </div>
+
+  <!-- Question 5 -->
+  <div class="qbox">
+    <p>5. a³ − b³ formula is:</p>
+    <button onclick="checkAnswer(this, false)">(a+b)(a²+ab+b²)</button>
+    <button onclick="checkAnswer(this, true)">(a−b)(a²+ab+b²)</button>
+    <button onclick="checkAnswer(this, false)">(a−b)(a²−ab−b²)</button>
+  </div>
+
+  <!-- Question 6 -->
+  <div class="qbox">
+    <p>6. x² − 9 is:</p>
+    <button onclick="checkAnswer(this, true)">(x+3)(x−3)</button>
+    <button onclick="checkAnswer(this, false)">(x+9)(x−1)</button>
+    <button onclick="checkAnswer(this, false)">(x+2)(x−5)</button>
+  </div>
+
+  <!-- Question 7 -->
+  <div class="qbox">
+    <p>7. (a−b)² equals:</p>
+    <button onclick="checkAnswer(this, true)">a² − 2ab + b²</button>
+    <button onclick="checkAnswer(this, false)">a² + b²</button>
+    <button onclick="checkAnswer(this, false)">a² − b²</button>
+  </div>
+
+  <!-- Question 8 -->
+  <div class="qbox">
+    <p>8. x³ + 8 factorises to:</p>
+    <button onclick="checkAnswer(this, true)">(x+2)(x²−2x+4)</button>
+    <button onclick="checkAnswer(this, false)">(x−2)(x²+2x+4)</button>
+    <button onclick="checkAnswer(this, false)">(x+4)(x²+4x+8)</button>
+  </div>
+
+  <!-- Question 9 -->
+  <div class="qbox">
+    <p>9. Common factor of 6x + 12 is:</p>
+    <button onclick="checkAnswer(this, true)">6</button>
+    <button onclick="checkAnswer(this, false)">3x</button>
+    <button onclick="checkAnswer(this, false)">12</button>
+  </div>
+
+  <!-- Question 10 -->
+  <div class="qbox">
+    <p>10. 4x² − 25 is:</p>
+    <button onclick="checkAnswer(this, true)">(2x+5)(2x−5)</button>
+    <button onclick="checkAnswer(this, false)">(x+5)(x−5)</button>
+    <button onclick="checkAnswer(this, false)">(2x+25)(2x−1)</button>
+  </div>
+
+</section>
+  </main>
+
+
+<footer>
+
+  This page is a free educational reference resource from the Mathematics Notebook Series.
+
+  <nav class="switcher">
+    <a href="Algebra.html">Algebra</a>
+    <a href="geometry.html">Geometry</a>
+    <a href="trigonometry.html">Trigonometry</a>
+    <a href="factorisation.html" class="active">Factorisation</a>
+  </nav>
+
+</footer>
+
+
+<script>
+function toggleExp(btn){
+  const body = btn.nextElementSibling;
+  body.classList.toggle("active");
+}
+</script>
+
+    <!-- JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+
+    <script src="factorisation.js"></script>
+<script>
+
+let score = 0;
+let answered = new Set();
+
+function checkAnswer(btn, isCorrect){
+
+  const parent = btn.parentElement;
+  const buttons = parent.querySelectorAll("button");
+
+  if(parent.classList.contains("done")) return;
+
+  parent.classList.add("done");
+
+  buttons.forEach(b => b.disabled = true);
+
+  if(isCorrect){
+    btn.classList.add("correct");
+    score++;
+  } else {
+    btn.classList.add("wrong");
+    buttons.forEach(b=>{
+      if(b.getAttribute("onclick").includes("true")){
+        b.classList.add("correct");
+      }
+    });
+  }
+
+  document.getElementById("score").innerText = score;
+}
+
+</script>
+</body>
+</html>
