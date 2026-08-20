@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Quadratic Equation Solver · द्विघात समीकरण सॉल्वर</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Noto+Serif+Devanagari:wght@600;700&family=Noto+Sans:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4F7FB;
+    --grid:#CBDCEF;
+    --ink:#172542;
+    --ink-soft:#51608A;
+    --card-bg:#FFFFFF;
+    --accent:#2856A3;
+    --accent-warn:#E15A45;
+    --accent2:#7C5FC4;
+    --accent-tint: rgba(40,86,163,.12);
+    --accent2-tint: rgba(124,95,196,.14);
+    --warn-tint: rgba(225,90,69,.12);
+    --shadow: 0 1px 2px rgba(23,37,66,.06), 0 8px 24px rgba(23,37,66,.09);
+    --radius: 14px;
+    --font-display:'Fraunces','Noto Serif Devanagari', ui-serif, serif;
+    --font-body:'Noto Sans','Noto Sans Devanagari', ui-sans-serif, sans-serif;
+    --font-mono:'IBM Plex Mono', ui-monospace, monospace;
+  }
+  [data-theme="dark"]{
+    --paper:#16241D;
+    --grid:#2C4136;
+    --ink:#F2EFE4;
+    --ink-soft:#AFC2B4;
+    --card-bg:#1E2F25;
+    --accent:#7FB6E8;
+    --accent-warn:#E8879E;
+    --accent2:#E8C46B;
+    --accent-tint: rgba(127,182,232,.16);
+    --accent2-tint: rgba(232,196,107,.16);
+    --warn-tint: rgba(232,135,158,.16);
+    --shadow: 0 1px 2px rgba(0,0,0,.35), 0 10px 28px rgba(0,0,0,.4);
+  }
+
+  *,*::before,*::after{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background-color:var(--paper);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size:24px 24px;
+    color:var(--ink);
+    font-family:var(--font-body);
+    line-height:1.5;
+    transition:background-color .3s ease, color .3s ease;
+    -webkit-font-smoothing:antialiased;
+  }
+  [data-theme="dark"] body{
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+      radial-gradient(ellipse at 20% 20%, rgba(255,255,255,.035), transparent 60%),
+      radial-gradient(ellipse at 80% 75%, rgba(255,255,255,.03), transparent 55%);
+    background-size:24px 24px, 24px 24px, cover, cover;
+  }
+  h1,h2,h3{font-family:var(--font-display);margin:0 0 .3em;line-height:1.2;}
+  p{margin:0;}
+  button{font-family:var(--font-body);}
+  a{color:var(--accent);}
+
+  .page{position:relative;max-width:960px;margin:0 auto;padding:1.25rem 1rem 4rem;}
+  .page::before{
+    content:'';
+    position:absolute; top:0; bottom:0; left:44px; width:2px;
+    background:var(--accent-warn); opacity:.45; pointer-events:none;
+  }
+  @media (max-width:639px){ .page::before{display:none;} }
+  [data-theme="dark"] .page::before{display:none;}
+
+  .site-header{
+    display:flex; justify-content:space-between; align-items:center; gap:1rem;
+    flex-wrap:wrap; padding:.5rem 0 1.5rem;
+  }
+  .brand{display:flex;align-items:center;gap:.9rem;}
+  .brand-mark{
+    font-family:var(--font-mono); font-size:.75rem; font-weight:600;
+    color:var(--accent-warn); border:1.5px solid var(--accent-warn);
+    padding:.3em .5em; border-radius:6px; white-space:nowrap; letter-spacing:.02em;
+    transform:rotate(-3deg); opacity:.85;
+  }
+  .brand-text h1{font-size:clamp(1.15rem,3vw,1.5rem); font-weight:700;}
+  .tagline{color:var(--ink-soft); font-size:.85rem; margin-top:.15rem;}
+  .controls{display:flex; align-items:center; gap:.6rem;}
+
+  .pill-btn{
+    font-family:var(--font-mono); font-weight:600; font-size:.85rem;
+    border:1px solid var(--grid); background:var(--card-bg); color:var(--ink);
+    padding:.5em .9em; border-radius:999px; cursor:pointer; transition:transform .15s ease, border-color .2s ease;
+  }
+  .pill-btn:hover{border-color:var(--accent); transform:translateY(-1px);}
+  .icon-btn{
+    width:38px; height:38px; border-radius:50%; border:1px solid var(--grid);
+    background:var(--card-bg); color:var(--ink); display:flex; align-items:center; justify-content:center;
+    cursor:pointer; position:relative; transition:transform .15s ease, border-color .2s ease;
+  }
+  .icon-btn:hover{border-color:var(--accent); transform:translateY(-1px);}
+  .icon-btn.small{width:32px;height:32px;font-family:var(--font-mono);font-weight:700;font-size:1rem;}
+  .icon-btn svg{width:18px;height:18px;position:absolute;}
+
+  :focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+
+  main{display:flex;flex-direction:column;gap:1.25rem;}
+
+  .hero{
+    position:relative; min-height:170px; border-radius:var(--radius);
+    background:var(--card-bg); box-shadow:var(--shadow); overflow:hidden;
+    display:flex; align-items:center; justify-content:center; padding:1rem;
+  }
+  .sketch-canvas{position:absolute; inset:0; width:100%; height:100%; opacity:.9;}
+  .hero-equation{
+    position:relative; z-index:1; font-family:var(--font-mono); font-weight:600;
+    font-size:clamp(1.5rem,5.2vw,2.75rem); color:var(--ink); text-align:center;
+    background:var(--card-bg); padding:.2em .5em; border-radius:8px;
+    box-shadow:0 0 0 8px var(--card-bg);
+  }
+
+  .card{
+    background:var(--card-bg); border:1px solid var(--grid); border-radius:var(--radius);
+    box-shadow:var(--shadow); padding:clamp(1rem,3vw,1.6rem);
+  }
+  .card h2{font-size:1.05rem; font-weight:600; color:var(--ink);}
+  .sub-heading{font-size:.9rem; font-weight:600; color:var(--ink-soft); margin-top:1.1rem;}
+
+  .input-card .input-row{display:flex; flex-wrap:wrap; gap:1rem;}
+  .input-group{display:flex; flex-direction:column; gap:.4rem; flex:1 1 140px;}
+  .input-group span{font-size:.75rem; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--ink-soft);}
+  .input-group input{
+    font-family:var(--font-mono); font-size:1.4rem; font-weight:600; text-align:center;
+    color:var(--ink); background:transparent; border:none; border-bottom:2px solid var(--grid);
+    padding:.35em .2em; transition:border-color .2s ease;
+  }
+  .input-group input:focus{border-bottom-color:var(--accent); outline:none;}
+  .action-row{display:flex; gap:.75rem; margin-top:1.25rem; flex-wrap:wrap;}
+  .btn{
+    font-weight:600; font-size:.9rem; padding:.65em 1.3em; border-radius:999px;
+    cursor:pointer; border:1px solid transparent; transition:transform .15s ease, opacity .2s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--accent); color:var(--card-bg);}
+  .btn-ghost{background:transparent; border-color:var(--grid); color:var(--ink);}
+
+  .warning-banner{
+    background:var(--warn-tint); border-left:3px solid var(--accent-warn); color:var(--ink);
+    padding:.9rem 1.1rem; border-radius:10px; font-size:.9rem;
+  }
+
+  .results{display:grid; grid-template-columns:1fr; gap:1.25rem;}
+  @media (min-width:720px){ .results{grid-template-columns:repeat(3,1fr);} }
+  .stat-card{display:flex; flex-direction:column; gap:.5rem;}
+  .big-value{font-family:var(--font-mono); font-size:2rem; font-weight:700;}
+  .big-value.accent-pos{color:var(--accent);}
+  .big-value.accent-zero{color:var(--ink);}
+  .big-value.accent-neg{color:var(--accent2);}
+  .mono-line{font-family:var(--font-mono); font-size:.82rem; color:var(--ink-soft); word-break:break-word;}
+  .pill{display:inline-block; padding:.4em 1em; border-radius:999px; font-weight:600; font-size:.9rem; width:fit-content;}
+  .pill-accent{background:var(--accent-tint); color:var(--accent);}
+  .pill-accent2{background:var(--accent2-tint); color:var(--accent2);}
+
+  .roots-grid{display:flex; flex-direction:column; gap:.6rem;}
+  .root-item{display:flex; justify-content:space-between; align-items:baseline; gap:.5rem;
+    font-family:var(--font-mono); border-bottom:1px dashed var(--grid); padding-bottom:.4rem;}
+  .root-item span{font-size:.75rem; color:var(--ink-soft); font-family:var(--font-body); text-transform:uppercase; letter-spacing:.03em;}
+  .root-item strong{font-size:1.15rem;}
+
+  .steps-list{list-style:none; margin:0; padding:0; counter-reset:step; display:flex; flex-direction:column; gap:1rem;}
+  .steps-list li{
+    position:relative; padding-left:2.6rem; counter-increment:step;
+    border-left:2px solid var(--grid); padding-bottom:1rem;
+  }
+  .steps-list li:last-child{border-left-color:transparent; padding-bottom:0;}
+  .steps-list li::before{
+    content:counter(step); position:absolute; left:-16px; top:-2px;
+    width:32px; height:32px; border-radius:50%; background:var(--accent); color:var(--card-bg);
+    font-family:var(--font-mono); font-weight:700; display:flex; align-items:center; justify-content:center;
+    font-size:.9rem;
+  }
+  .step-title{font-weight:600; margin-bottom:.3rem;}
+  .step-math{font-family:var(--font-mono); font-size:.85rem; color:var(--ink-soft); overflow-x:auto;}
+
+  .big-mono{font-size:1.3rem; font-weight:600; color:var(--ink); line-height:1.5;}
+  .muted-note{color:var(--ink-soft); font-family:var(--font-body); font-size:.88rem;}
+  .factor-complex{color:var(--accent2);}
+
+  .stat-strip{display:grid; grid-template-columns:repeat(2,1fr); gap:1rem;}
+  @media (min-width:720px){ .stat-strip{grid-template-columns:repeat(4,1fr);} }
+  .mini-stat{
+    background:var(--card-bg); border:1px solid var(--grid); border-radius:12px;
+    padding:.9rem; display:flex; flex-direction:column; gap:.35rem; align-items:center; text-align:center;
+  }
+  .mini-stat span{font-size:.72rem; text-transform:uppercase; letter-spacing:.04em; color:var(--ink-soft); font-weight:600;}
+  .mini-stat strong{font-family:var(--font-mono); font-size:1rem; color:var(--ink);}
+
+  .graph-header{display:flex; justify-content:space-between; align-items:center; gap:.75rem; flex-wrap:wrap; margin-bottom:.75rem;}
+  .graph-controls{display:flex; gap:.5rem;}
+  .graph-wrap{position:relative; height:320px; border-radius:10px; overflow:hidden; background:var(--paper); border:1px solid var(--grid);}
+  @media (min-width:720px){ .graph-wrap{height:400px;} }
+  #mainCanvas{display:block; width:100%; height:100%; touch-action:none; cursor:grab;}
+  #mainCanvas:active{cursor:grabbing;}
+  .coord-readout{
+    position:absolute; top:8px; right:8px; background:var(--card-bg); border:1px solid var(--grid);
+    border-radius:6px; padding:.3em .6em; font-family:var(--font-mono); font-size:.75rem; color:var(--ink);
+  }
+  .graph-legend{display:flex; flex-wrap:wrap; gap:.6rem 1.2rem; margin-top:.85rem; font-size:.78rem; color:var(--ink-soft);}
+  .legend-item{display:inline-flex; align-items:center; gap:.4rem;}
+  .legend-dot{width:10px; height:10px; display:inline-block;}
+  .legend-dot.roots{background:var(--accent2); border-radius:50%;}
+  .legend-dot.yint{background:var(--ink); border-radius:50%;}
+  .legend-dot.vertex{background:var(--accent-warn); transform:rotate(45deg);}
+  .legend-line{width:14px; height:0; border-top:2px dashed var(--accent-warn); display:inline-block;}
+
+  .site-footer{text-align:center; color:var(--ink-soft); font-size:.8rem; padding-top:2rem;}
+
+  .toast{
+    position:fixed; left:50%; bottom:1.5rem; transform:translate(-50%,20px);
+    background:var(--ink); color:var(--paper); padding:.6em 1.2em; border-radius:999px;
+    font-size:.85rem; opacity:0; pointer-events:none; transition:opacity .25s ease, transform .25s ease;
+    z-index:50; box-shadow:var(--shadow);
+  }
+  .toast.show{opacity:1; transform:translate(-50%,0);}
+
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none !important; animation:none !important;}
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <header class="site-header">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">ax²+bx+c=0</span>
+        <div class="brand-text">
+          <h1 data-i18n="appName">Quadratic Solver</h1>
+          <p class="tagline" data-i18n="appTagline">Solve, factor and graph any ax² + bx + c = 0</p>
+        </div>
+      </div>
+      <div class="controls">
+        <button id="langToggle" class="pill-btn" type="button" aria-label="Switch language">
+          <span id="langToggleLabel">हिं</span>
+        </button>
+        <button id="themeToggle" class="icon-btn" type="button" aria-label="Toggle dark mode">
+          <svg id="themeIconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
+          <svg id="themeIconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5Z"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-hidden="false">
+        <canvas id="sketchCanvas" class="sketch-canvas" aria-hidden="true"></canvas>
+        <div class="hero-equation" id="heroEquation">f(x) = x² − 3x + 2</div>
+      </section>
+
+      <section class="card input-card">
+        <div class="input-row">
+          <label class="input-group">
+            <span data-i18n="coeffA">Coefficient a</span>
+            <input type="number" step="any" id="inputA" value="1" inputmode="decimal">
+          </label>
+          <label class="input-group">
+            <span data-i18n="coeffB">Coefficient b</span>
+            <input type="number" step="any" id="inputB" value="-3" inputmode="decimal">
+          </label>
+          <label class="input-group">
+            <span data-i18n="coeffC">Coefficient c</span>
+            <input type="number" step="any" id="inputC" value="2" inputmode="decimal">
+          </label>
+        </div>
+        <div class="action-row">
+          <button id="resetBtn" class="btn btn-ghost" type="button" data-i18n="reset">Reset</button>
+          <button id="copyBtn" class="btn btn-primary" type="button" data-i18n="copy">Copy result</button>
+        </div>
+      </section>
+
+      <div id="warningBanner" class="warning-banner" hidden></div>
+
+      <section class="results" id="resultsSection">
+        <div class="card stat-card">
+          <h2 data-i18n="discriminant">Discriminant</h2>
+          <div class="big-value" id="discriminantValue">1</div>
+          <div class="mono-line" id="discriminantFormula"></div>
+        </div>
+        <div class="card stat-card">
+          <h2 data-i18n="natureOfRoots">Nature of Roots</h2>
+          <div class="pill pill-accent" id="natureValue">—</div>
+        </div>
+        <div class="card stat-card">
+          <h2 data-i18n="roots">Roots</h2>
+          <div class="roots-grid" id="rootsValue"></div>
+        </div>
+      </section>
+
+      <section class="card steps-card">
+        <h2 data-i18n="steps">Step-by-Step Solution</h2>
+        <ol class="steps-list" id="stepsList"></ol>
+      </section>
+
+      <section class="card factor-card">
+        <h2 data-i18n="factorization">Factorization</h2>
+        <div class="big-mono" id="factorValue"></div>
+        <h3 class="sub-heading" data-i18n="vertexForm">Vertex form</h3>
+        <div class="mono-line" id="vertexFormValue"></div>
+      </section>
+
+      <section class="stat-strip">
+        <div class="mini-stat"><span data-i18n="vertex">Vertex</span><strong id="vertexValue"></strong></div>
+        <div class="mini-stat"><span data-i18n="axisOfSymmetry">Axis of symmetry</span><strong id="axisValue"></strong></div>
+        <div class="mini-stat"><span data-i18n="yIntercept">y-intercept</span><strong id="yInterceptValue"></strong></div>
+        <div class="mini-stat"><span data-i18n="direction">Direction</span><strong id="directionValue"></strong></div>
+      </section>
+
+      <section class="card graph-card">
+        <div class="graph-header">
+          <h2 data-i18n="graphTitle">Interactive Graph</h2>
+          <div class="graph-controls">
+            <button id="zoomInBtn" class="icon-btn small" type="button" aria-label="Zoom in">+</button>
+            <button id="zoomOutBtn" class="icon-btn small" type="button" aria-label="Zoom out">−</button>
+            <button id="recenterBtn" class="icon-btn small" type="button" aria-label="Recenter">⟲</button>
+          </div>
+        </div>
+        <div class="graph-wrap">
+          <canvas id="mainCanvas"></canvas>
+          <div class="coord-readout" id="coordReadout" hidden></div>
+        </div>
+        <div class="graph-legend">
+          <span class="legend-item"><i class="legend-dot vertex" aria-hidden="true"></i><span data-i18n="vertex">Vertex</span></span>
+          <span class="legend-item"><i class="legend-dot roots" aria-hidden="true"></i><span data-i18n="roots">Roots</span></span>
+          <span class="legend-item"><i class="legend-dot yint" aria-hidden="true"></i><span data-i18n="yIntercept">y-intercept</span></span>
+          <span class="legend-item"><i class="legend-line" aria-hidden="true"></i><span data-i18n="axisOfSymmetry">Axis of symmetry</span></span>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p data-i18n="footer">Built with HTML, CSS &amp; JavaScript</p>
+    </footer>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  'use strict';
+
+  var translations = {
+    en:{
+      appName:"Quadratic Solver",
+      appTagline:"Solve, factor and graph any ax² + bx + c = 0",
+      coeffA:"Coefficient a", coeffB:"Coefficient b", coeffC:"Coefficient c",
+      reset:"Reset", copy:"Copy result", copied:"Copied to clipboard",
+      warnAZero:"a can't be 0 — this isn't a quadratic equation anymore.",
+      linearFallback:"It becomes linear instead:",
+      linearNoSolution:"No solution exists (this reduces to a false statement).",
+      linearInfiniteSolution:"Every value of x is a solution.",
+      discriminant:"Discriminant (Δ)",
+      natureOfRoots:"Nature of the Roots",
+      natureEqual:"Real & equal roots",
+      natureUnequalRational:"Real, unequal & rational roots",
+      natureUnequalIrrational:"Real, unequal & irrational roots",
+      natureComplex:"No real roots — complex conjugate pair",
+      roots:"Roots", root1:"Root x₁", root2:"Root x₂",
+      steps:"Step-by-Step Solution",
+      step1Title:"Write the standard form",
+      step2Title:"Calculate the discriminant",
+      step3Title:"Read the nature of the roots",
+      step4Title:"Apply the quadratic formula",
+      step5Title:"Simplify",
+      factorization:"Factorization",
+      factorNotReal:"Can't be factorized over real numbers — see the complex form below.",
+      factorComplex:"Factorization over complex numbers",
+      vertexForm:"Vertex form",
+      vertex:"Vertex", axisOfSymmetry:"Axis of symmetry", yIntercept:"y-intercept",
+      direction:"Parabola opens", up:"Upward ⌣ (minimum)", down:"Downward ⌢ (maximum)",
+      graphTitle:"Interactive Graph", point:"Point",
+      footer:"Built with for Solving Quadratic Equations"
+    },
+    hi:{
+      appName:"द्विघात समीकरण सॉल्वर",
+      appTagline:"किसी भी ax² + bx + c = 0 को हल करें, गुणनखंडित करें और ग्राफ़ बनाएं",
+      coeffA:"गुणांक a", coeffB:"गुणांक b", coeffC:"गुणांक c",
+      reset:"रीसेट करें", copy:"परिणाम कॉपी करें", copied:"क्लिपबोर्ड पर कॉपी हो गया",
+      warnAZero:"a का मान 0 नहीं हो सकता — यह अब द्विघात समीकरण नहीं है।",
+      linearFallback:"यह अब एक रैखिक समीकरण बन जाता है:",
+      linearNoSolution:"कोई हल नहीं है (यह एक असत्य कथन बन जाता है)।",
+      linearInfiniteSolution:"x का हर मान इसका हल है।",
+      discriminant:"विविक्तकर (Δ)",
+      natureOfRoots:"मूलों की प्रकृति",
+      natureEqual:"वास्तविक और समान मूल",
+      natureUnequalRational:"वास्तविक, असमान और परिमेय मूल",
+      natureUnequalIrrational:"वास्तविक, असमान और अपरिमेय मूल",
+      natureComplex:"कोई वास्तविक मूल नहीं — सम्मिश्र संयुग्मी युग्म",
+      roots:"मूल", root1:"मूल x₁", root2:"मूल x₂",
+      steps:"चरण-दर-चरण हल",
+      step1Title:"मानक रूप लिखें",
+      step2Title:"विविक्तकर की गणना करें",
+      step3Title:"मूलों की प्रकृति पहचानें",
+      step4Title:"द्विघात सूत्र लागू करें",
+      step5Title:"सरल करें",
+      factorization:"गुणनखंडन",
+      factorNotReal:"वास्तविक संख्याओं पर गुणनखंडन संभव नहीं — नीचे सम्मिश्र रूप देखें।",
+      factorComplex:"सम्मिश्र संख्याओं पर गुणनखंडन",
+      vertexForm:"शीर्ष रूप",
+      vertex:"शीर्ष (Vertex)", axisOfSymmetry:"सममिति अक्ष", yIntercept:"y-अंतःखंड",
+      direction:"परवलय की दिशा", up:"ऊपर की ओर ⌣ (न्यूनतम)", down:"नीचे की ओर ⌢ (अधिकतम)",
+      graphTitle:"इंटरैक्टिव ग्राफ", point:"बिंदु",
+      footer:"द्विघात समीकरणों को हल करने के लिए निर्मित"
+    }
+  };
+
+  var state = { a:1, b:-3, c:2, lang:'en' };
+  var mainView = null;
+  var hoverPoint = null;
+  var isDragging = false;
+  var dragLast = null;
+  var toastTimer = null;
+
+  function el(id){ return document.getElementById(id); }
+  var inputA = el('inputA'), inputB = el('inputB'), inputC = el('inputC');
+  var heroEquation = el('heroEquation');
+  var sketchCanvas = el('sketchCanvas'), mainCanvas = el('mainCanvas');
+  var coordReadout = el('coordReadout');
+  var warningBanner = el('warningBanner');
+  var resultsSection = el('resultsSection');
+  var discriminantValue = el('discriminantValue'), discriminantFormula = el('discriminantFormula');
+  var natureValue = el('natureValue'), rootsValue = el('rootsValue');
+  var stepsList = el('stepsList');
+  var factorValue = el('factorValue'), vertexFormValue = el('vertexFormValue');
+  var vertexValue = el('vertexValue'), axisValue = el('axisValue');
+  var yInterceptValue = el('yInterceptValue'), directionValue = el('directionValue');
+  var toast = el('toast'), langToggleLabel = el('langToggleLabel');
+
+  function t(key){
+    var d = translations[state.lang] || translations.en;
+    return d[key] !== undefined ? d[key] : (translations.en[key] || key);
+  }
+
+  function fmt(n){
+    if (n===undefined || n===null || !isFinite(n)) return '0';
+    var r = Math.round(n*10000)/10000;
+    if (Math.abs(r) < 1e-9) r = 0;
+    if (Object.is(r,-0)) r = 0;
+    return r.toString();
+  }
+
+  function parseInput(v){
+    if (v==='' || v==='-' || v==='.' || v==='-.') return 0;
+    var n = parseFloat(v);
+    return isNaN(n) ? 0 : n;
+  }
+
+  function termString(coef, suffix, isFirst){
+    if (coef===0) return '';
+    var absVal = Math.abs(coef);
+    var numPart = (absVal===1 && suffix!=='') ? '' : fmt(absVal);
+    var body = numPart + suffix;
+    if (isFirst) return coef<0 ? ('-'+body) : body;
+    return coef<0 ? (' - '+body) : (' + '+body);
+  }
+
+  function equationString(a,b,c){
+    var s = termString(a,'x²',true) + termString(b,'x',false) + termString(c,'',false);
+    return s.trim()==='' ? '0' : s;
+  }
+
+  function computeAll(){
+    var a=state.a, b=state.b, c=state.c;
+    if (a===0){
+      return { isLinear:true, a:a, b:b, c:c };
+    }
+    var D = b*b - 4*a*c;
+    var vx = -b/(2*a);
+    var vy = c - (b*b)/(4*a);
+    var res = { isLinear:false, a:a, b:b, c:c, D:D, vx:vx, vy:vy, direction: a>0?'up':'down' };
+    if (D >= 0){
+      var sq = Math.sqrt(D);
+      res.real = true;
+      res.x1 = (-b+sq)/(2*a);
+      res.x2 = (-b-sq)/(2*a);
+      if (D===0){
+        res.natureKey = 'natureEqual';
+      } else {
+        var isIntCoeffs = Number.isInteger(a) && Number.isInteger(b) && Number.isInteger(c);
+        var sqRounded = Math.round(sq);
+        var isPerfectSquare = isIntCoeffs && Math.abs(sq - sqRounded) < 1e-9;
+        res.natureKey = isPerfectSquare ? 'natureUnequalRational' : 'natureUnequalIrrational';
+      }
+    } else {
+      var sq2 = Math.sqrt(-D);
+      res.real = false;
+      res.re = -b/(2*a);
+      res.im = Math.abs(sq2/(2*a));
+      res.natureKey = 'natureComplex';
+    }
+    return res;
+  }
+
+  function factorSignTerm(r){
+    var rr = fmt(r);
+    return r>=0 ? ('- '+rr) : ('+ '+fmt(-r));
+  }
+
+  function renderFactorization(res){
+    var aPrefix = res.a===1 ? '' : (res.a===-1 ? '-' : fmt(res.a));
+    if (res.real){
+      if (res.D===0){
+        factorValue.innerHTML = aPrefix + '(x ' + factorSignTerm(res.x1) + ')²';
+      } else {
+        factorValue.innerHTML = aPrefix + '(x ' + factorSignTerm(res.x1) + ')(x ' + factorSignTerm(res.x2) + ')';
+      }
+    } else {
+      var reS = fmt(res.re), imS = fmt(res.im);
+      factorValue.innerHTML = '<span class="muted-note">' + t('factorNotReal') + '</span><br>' +
+        '<span class="factor-complex">' + t('factorComplex') + ': ' + aPrefix +
+        '(x − (' + reS + ' + ' + imS + 'i))(x − (' + reS + ' − ' + imS + 'i))</span>';
+    }
+  }
+
+  function renderSteps(res){
+    var steps = [];
+    steps.push({title:t('step1Title'), math:'a = '+fmt(res.a)+', b = '+fmt(res.b)+', c = '+fmt(res.c)+'  →  '+equationString(res.a,res.b,res.c)+' = 0'});
+    steps.push({title:t('step2Title'), math:'Δ = b² − 4ac = ('+fmt(res.b)+')² − 4('+fmt(res.a)+')('+fmt(res.c)+') = '+fmt(res.b*res.b)+' − '+fmt(4*res.a*res.c)+' = '+fmt(res.D)});
+    steps.push({title:t('step3Title'), math:t(res.natureKey)});
+    if (res.real){
+      steps.push({title:t('step4Title'), math:'x = (−b ± √Δ) / 2a = (−('+fmt(res.b)+') ± √'+fmt(res.D)+') / (2×'+fmt(res.a)+')'});
+      steps.push({title:t('step5Title'), math:'x₁ = '+fmt(res.x1)+',  x₂ = '+fmt(res.x2)});
+    } else {
+      steps.push({title:t('step4Title'), math:'x = (−b ± √Δ) / 2a = (−('+fmt(res.b)+') ± √('+fmt(res.D)+')) / (2×'+fmt(res.a)+')'});
+      steps.push({title:t('step5Title'), math:'x = '+fmt(res.re)+' ± '+fmt(res.im)+'i'});
+    }
+    stepsList.innerHTML = steps.map(function(s){
+      return '<li><div class="step-title">'+s.title+'</div><div class="step-math">'+s.math+'</div></li>';
+    }).join('');
+  }
+
+  function render(){
+    heroEquation.textContent = 'f(x) = ' + equationString(state.a,state.b,state.c);
+    var res = computeAll();
+
+    if (res.isLinear){
+      warningBanner.hidden = false;
+      var msg = t('warnAZero') + ' ';
+      if (res.b !== 0){
+        var x = -res.c/res.b;
+        msg += t('linearFallback') + ' ' + termString(res.b,'x',true).trim() + termString(res.c,'',false) + ' = 0 → x = ' + fmt(x);
+      } else if (res.c === 0){
+        msg += t('linearInfiniteSolution');
+      } else {
+        msg += t('linearNoSolution');
+      }
+      warningBanner.textContent = msg;
+      resultsSection.style.opacity = '.35';
+      resultsSection.style.pointerEvents = 'none';
+      stepsList.innerHTML = '';
+      factorValue.textContent = '—';
+      vertexFormValue.textContent = '—';
+      vertexValue.textContent = '—';
+      axisValue.textContent = '—';
+      yInterceptValue.textContent = '—';
+      directionValue.textContent = '—';
+      drawSketch(res);
+      drawMainGraph(res);
+      return;
+    }
+
+    warningBanner.hidden = true;
+    resultsSection.style.opacity = '1';
+    resultsSection.style.pointerEvents = 'auto';
+
+    discriminantValue.textContent = fmt(res.D);
+    discriminantValue.className = 'big-value ' + (res.D>0?'accent-pos':(res.D===0?'accent-zero':'accent-neg'));
+    discriminantFormula.textContent = 'Δ = b² − 4ac = ('+fmt(res.b)+')² − 4('+fmt(res.a)+')('+fmt(res.c)+') = '+fmt(res.D);
+
+    natureValue.textContent = t(res.natureKey);
+    natureValue.className = 'pill ' + (res.natureKey==='natureComplex' ? 'pill-accent2' : 'pill-accent');
+
+    if (res.real){
+      rootsValue.innerHTML =
+        '<div class="root-item"><span>'+t('root1')+'</span><strong>'+fmt(res.x1)+'</strong></div>'+
+        '<div class="root-item"><span>'+t('root2')+'</span><strong>'+fmt(res.x2)+'</strong></div>';
+    } else {
+      var reS2 = fmt(res.re), imS2 = fmt(res.im);
+      rootsValue.innerHTML =
+        '<div class="root-item"><span>'+t('root1')+'</span><strong>'+reS2+' + '+imS2+'i</strong></div>'+
+        '<div class="root-item"><span>'+t('root2')+'</span><strong>'+reS2+' − '+imS2+'i</strong></div>';
+    }
+
+    renderSteps(res);
+    renderFactorization(res);
+
+    var hSign = res.vx>=0 ? '-' : '+', hAbs = fmt(Math.abs(res.vx));
+    var kSign = res.vy>=0 ? '+' : '-', kAbs = fmt(Math.abs(res.vy));
+    var aPrefix = res.a===1 ? '' : (res.a===-1 ? '-' : fmt(res.a));
+    vertexFormValue.textContent = 'f(x) = ' + aPrefix + '(x ' + hSign + ' ' + hAbs + ')² ' + kSign + ' ' + kAbs;
+
+    vertexValue.textContent = '(' + fmt(res.vx) + ', ' + fmt(res.vy) + ')';
+    axisValue.textContent = 'x = ' + fmt(res.vx);
+    yInterceptValue.textContent = '(0, ' + fmt(res.c) + ')';
+    directionValue.textContent = t(res.direction==='up' ? 'up' : 'down');
+
+    drawSketch(res);
+    drawMainGraph(res);
+  }
+
+  function buildSummaryText(){
+    var res = computeAll();
+    var lines = [];
+    lines.push(t('appName'));
+    lines.push(equationString(state.a,state.b,state.c) + ' = 0');
+    if (res.isLinear){
+      lines.push(t('warnAZero'));
+      return lines.join('\n');
+    }
+    lines.push(t('discriminant') + ': ' + fmt(res.D));
+    lines.push(t('natureOfRoots') + ': ' + t(res.natureKey));
+    if (res.real){
+      lines.push(t('roots') + ': x₁ = ' + fmt(res.x1) + ', x₂ = ' + fmt(res.x2));
+    } else {
+      lines.push(t('roots') + ': x = ' + fmt(res.re) + ' ± ' + fmt(res.im) + 'i');
+    }
+    lines.push(t('vertex') + ': (' + fmt(res.vx) + ', ' + fmt(res.vy) + ')');
+    lines.push(t('axisOfSymmetry') + ': x = ' + fmt(res.vx));
+    lines.push(t('yIntercept') + ': (0, ' + fmt(res.c) + ')');
+    lines.push(t('direction') + ': ' + t(res.direction==='up'?'up':'down'));
+    return lines.join('\n');
+  }
+
+  function showToast(msg){
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ toast.classList.remove('show'); }, 2200);
+  }
+
+  function copyResult(){
+    var text = buildSummaryText();
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){
+        showToast(t('copied'));
+      }).catch(function(){ fallbackCopy(text); });
+    } else {
+      fallbackCopy(text);
+    }
+  }
+  function fallbackCopy(text){
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.focus(); ta.select();
+    try { document.execCommand('copy'); showToast(t('copied')); } catch(e){}
+    document.body.removeChild(ta);
+  }
+
+  // ---------- Graph rendering ----------
+  function cssVar(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+  function computeAutoRange(a,b,c){
+    var vx=-b/(2*a), vy=c-(b*b)/(4*a);
+    var xs=[vx,0];
+    var D=b*b-4*a*c;
+    if (D>=0){ var sq=Math.sqrt(D); xs.push((-b+sq)/(2*a),(-b-sq)/(2*a)); }
+    var xMin=Math.min.apply(null,xs), xMax=Math.max.apply(null,xs);
+    var spanX=xMax-xMin;
+    if (spanX<4){ var midx=(xMax+xMin)/2; xMin=midx-2; xMax=midx+2; spanX=4; }
+    var padX=spanX*0.35;
+    xMin-=padX; xMax+=padX;
+    var yMin=Infinity, yMax=-Infinity;
+    for (var i=0;i<=60;i++){
+      var x=xMin+(xMax-xMin)*i/60;
+      var y=a*x*x+b*x+c;
+      if (y<yMin) yMin=y;
+      if (y>yMax) yMax=y;
+    }
+    yMin=Math.min(yMin,0,c); yMax=Math.max(yMax,0,c);
+    var spanY=yMax-yMin;
+    if (spanY<4){ var midy=(yMax+yMin)/2; yMin=midy-2; yMax=midy+2; spanY=4; }
+    var padY=spanY*0.25;
+    yMin-=padY; yMax+=padY;
+    return {xMin:xMin,xMax:xMax,yMin:yMin,yMax:yMax};
+  }
+
+  function niceStep(min,max,targetSteps){
+    var range=max-min;
+    var rough=range/Math.max(targetSteps,1);
+    if (!isFinite(rough) || rough<=0) return 1;
+    var mag=Math.pow(10,Math.floor(Math.log10(rough)));
+    var norm=rough/mag, step;
+    if (norm<1.5) step=1*mag;
+    else if (norm<3) step=2*mag;
+    else if (norm<7) step=5*mag;
+    else step=10*mag;
+    return step;
+  }
+
+  function setupCanvas(canvas, fallbackHeight){
+    var dpr = window.devicePixelRatio || 1;
+    var width = canvas.parentElement.clientWidth || 300;
+    var height = canvas.parentElement.clientHeight || fallbackHeight;
+    canvas.style.width = width+'px';
+    canvas.style.height = height+'px';
+    canvas.width = Math.round(width*dpr);
+    canvas.height = Math.round(height*dpr);
+    var ctx = canvas.getContext('2d');
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    return { ctx:ctx, width:width, height:height };
+  }
+
+  function drawPoint(ctx, px, py, color, shape, r){
+    r = r || 5;
+    ctx.fillStyle = color;
+    ctx.strokeStyle = cssVar('--card-bg');
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    if (shape==='diamond'){
+      ctx.moveTo(px,py-r); ctx.lineTo(px+r,py); ctx.lineTo(px,py+r); ctx.lineTo(px-r,py); ctx.closePath();
+    } else {
+      ctx.arc(px,py,r,0,Math.PI*2);
+    }
+    ctx.fill(); ctx.stroke();
+  }
+
+  function paintGraph(ctx, width, height, view, res, interactive){
+    var grid=cssVar('--grid'), ink=cssVar('--ink'), inkSoft=cssVar('--ink-soft');
+    var accent=cssVar('--accent'), accent2=cssVar('--accent2'), accentWarn=cssVar('--accent-warn');
+
+    ctx.clearRect(0,0,width,height);
+
+    function toPx(x){ return (x-view.xMin)/(view.xMax-view.xMin)*width; }
+    function toPy(y){ return height-(y-view.yMin)/(view.yMax-view.yMin)*height; }
+
+    var stepX = niceStep(view.xMin, view.xMax, Math.max(4, width/70));
+    var stepY = niceStep(view.yMin, view.yMax, Math.max(4, height/50));
+
+    ctx.strokeStyle = grid; ctx.lineWidth = 1;
+    ctx.beginPath();
+    var gx;
+    for (gx = Math.ceil(view.xMin/stepX)*stepX; gx<=view.xMax; gx+=stepX){
+      var px=toPx(gx); ctx.moveTo(px,0); ctx.lineTo(px,height);
+    }
+    var gy;
+    for (gy = Math.ceil(view.yMin/stepY)*stepY; gy<=view.yMax; gy+=stepY){
+      var py=toPy(gy); ctx.moveTo(0,py); ctx.lineTo(width,py);
+    }
+    ctx.stroke();
+
+    if (interactive){
+      ctx.fillStyle = inkSoft;
+      ctx.font = '11px "IBM Plex Mono", monospace';
+      for (gx = Math.ceil(view.xMin/stepX)*stepX; gx<=view.xMax; gx+=stepX){
+        if (Math.abs(gx) < stepX/1000) continue;
+        var lx = toPx(gx);
+        var ly = toPy(0)+3;
+        if (ly > height-14) ly = height-14;
+        ctx.textBaseline='top';
+        ctx.fillText(fmt(gx), lx+3, ly);
+      }
+      for (gy = Math.ceil(view.yMin/stepY)*stepY; gy<=view.yMax; gy+=stepY){
+        if (Math.abs(gy) < stepY/1000) continue;
+        ctx.textBaseline='middle';
+        ctx.fillText(fmt(gy), toPx(0)+4, toPy(gy));
+      }
+    }
+
+    ctx.strokeStyle = ink; ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    var zx=toPx(0), zy=toPy(0);
+    ctx.moveTo(0,zy); ctx.lineTo(width,zy);
+    ctx.moveTo(zx,0); ctx.lineTo(zx,height);
+    ctx.stroke();
+
+    if (!res.isLinear){
+      ctx.save();
+      ctx.strokeStyle = accentWarn; ctx.setLineDash([5,5]); ctx.lineWidth=1.25;
+      ctx.beginPath();
+      var vxPx = toPx(res.vx);
+      ctx.moveTo(vxPx,0); ctx.lineTo(vxPx,height);
+      ctx.stroke();
+      ctx.restore();
+
+      ctx.strokeStyle = accent; ctx.lineWidth = interactive?2.5:2;
+      ctx.beginPath();
+      var N=240;
+      for (var i=0;i<=N;i++){
+        var x = view.xMin + (view.xMax-view.xMin)*i/N;
+        var y = res.a*x*x+res.b*x+res.c;
+        var cx=toPx(x), cy=toPy(y);
+        if (i===0) ctx.moveTo(cx,cy); else ctx.lineTo(cx,cy);
+      }
+      ctx.stroke();
+
+      if (interactive){
+        drawPoint(ctx, toPx(res.vx), toPy(res.vy), accentWarn, 'diamond');
+        drawPoint(ctx, toPx(0), toPy(res.c), ink, 'circle');
+        if (res.real){
+          drawPoint(ctx, toPx(res.x1), toPy(0), accent2, 'circle');
+          if (Math.abs(res.x1-res.x2) > 1e-9) drawPoint(ctx, toPx(res.x2), toPy(0), accent2, 'circle');
+        }
+      }
+    } else {
+      ctx.strokeStyle = accent; ctx.lineWidth = interactive?2.5:2;
+      ctx.beginPath();
+      var y1 = res.b*view.xMin+res.c, y2 = res.b*view.xMax+res.c;
+      ctx.moveTo(toPx(view.xMin), toPy(y1));
+      ctx.lineTo(toPx(view.xMax), toPy(y2));
+      ctx.stroke();
+    }
+
+    if (interactive && hoverPoint){
+      ctx.save();
+      ctx.strokeStyle = inkSoft; ctx.setLineDash([3,3]); ctx.lineWidth=1;
+      var hx=toPx(hoverPoint.x), hy=toPy(hoverPoint.y);
+      ctx.beginPath();
+      ctx.moveTo(hx,0); ctx.lineTo(hx,height);
+      ctx.moveTo(0,hy); ctx.lineTo(width,hy);
+      ctx.stroke();
+      ctx.restore();
+      drawPoint(ctx, hx, hy, ink, 'circle', 3);
+    }
+  }
+
+  function drawMainGraph(res){
+    if (res.isLinear){
+      var view0 = {xMin:-10,xMax:10,yMin:-10,yMax:10};
+      var s0 = setupCanvas(mainCanvas, 320);
+      paintGraph(s0.ctx, s0.width, s0.height, view0, res, true);
+      return;
+    }
+    if (!mainView) mainView = computeAutoRange(res.a,res.b,res.c);
+    var s = setupCanvas(mainCanvas, 320);
+    paintGraph(s.ctx, s.width, s.height, mainView, res, true);
+  }
+
+  function drawSketch(res){
+    var view = res.isLinear ? {xMin:-10,xMax:10,yMin:-10,yMax:10} : computeAutoRange(res.a,res.b,res.c);
+    var s = setupCanvas(sketchCanvas, 170);
+    paintGraph(s.ctx, s.width, s.height, view, res, false);
+  }
+
+  function redrawMain(){
+    var res = computeAll();
+    var s = setupCanvas(mainCanvas, 320);
+    paintGraph(s.ctx, s.width, s.height, mainView || {xMin:-10,xMax:10,yMin:-10,yMax:10}, res, true);
+  }
+
+  function zoomView(factor, clientX, clientY){
+    if (!mainView) return;
+    var rect = mainCanvas.getBoundingClientRect();
+    var cx, cy;
+    if (clientX!==undefined){
+      var px=clientX-rect.left, py=clientY-rect.top;
+      cx = mainView.xMin + (px/rect.width)*(mainView.xMax-mainView.xMin);
+      cy = mainView.yMin + (1-py/rect.height)*(mainView.yMax-mainView.yMin);
+    } else {
+      cx = (mainView.xMin+mainView.xMax)/2;
+      cy = (mainView.yMin+mainView.yMax)/2;
+    }
+    var newSpanX = (mainView.xMax-mainView.xMin)*factor;
+    var newSpanY = (mainView.yMax-mainView.yMin)*factor;
+    var ratioX = (cx-mainView.xMin)/(mainView.xMax-mainView.xMin);
+    var ratioY = (cy-mainView.yMin)/(mainView.yMax-mainView.yMin);
+    mainView.xMin = cx-newSpanX*ratioX; mainView.xMax = mainView.xMin+newSpanX;
+    mainView.yMin = cy-newSpanY*ratioY; mainView.yMax = mainView.yMin+newSpanY;
+    redrawMain();
+  }
+
+  mainCanvas.addEventListener('pointerdown', function(e){
+    isDragging = true;
+    dragLast = {x:e.clientX, y:e.clientY};
+    try { mainCanvas.setPointerCapture(e.pointerId); } catch(err){}
+  });
+  mainCanvas.addEventListener('pointermove', function(e){
+    if (!mainView) return;
+    var rect = mainCanvas.getBoundingClientRect();
+    if (isDragging && dragLast){
+      var dxPx = e.clientX-dragLast.x, dyPx = e.clientY-dragLast.y;
+      var dx = -dxPx/rect.width*(mainView.xMax-mainView.xMin);
+      var dy = dyPx/rect.height*(mainView.yMax-mainView.yMin);
+      mainView.xMin+=dx; mainView.xMax+=dx; mainView.yMin+=dy; mainView.yMax+=dy;
+      dragLast = {x:e.clientX,y:e.clientY};
+    }
+    var px=e.clientX-rect.left, py=e.clientY-rect.top;
+    var mx = mainView.xMin+(px/rect.width)*(mainView.xMax-mainView.xMin);
+    var my = mainView.yMin+(1-py/rect.height)*(mainView.yMax-mainView.yMin);
+    var fy = state.a===0 ? (state.b*mx+state.c) : (state.a*mx*mx+state.b*mx+state.c);
+    hoverPoint = {x:mx, y:fy};
+    coordReadout.hidden = false;
+    coordReadout.textContent = t('point')+': ('+fmt(mx)+', '+fmt(fy)+')';
+    redrawMain();
+  });
+  window.addEventListener('pointerup', function(e){
+    isDragging = false; dragLast = null;
+    try { mainCanvas.releasePointerCapture(e.pointerId); } catch(err){}
+  });
+  mainCanvas.addEventListener('pointerleave', function(){
+    if (!isDragging){ hoverPoint = null; coordReadout.hidden = true; redrawMain(); }
+  });
+  mainCanvas.addEventListener('wheel', function(e){
+    if (!mainView) return;
+    e.preventDefault();
+    zoomView(e.deltaY>0 ? 1.1 : 0.9, e.clientX, e.clientY);
+  }, {passive:false});
+
+  el('zoomInBtn').addEventListener('click', function(){ zoomView(0.8); });
+  el('zoomOutBtn').addEventListener('click', function(){ zoomView(1.25); });
+  el('recenterBtn').addEventListener('click', function(){
+    var res = computeAll();
+    mainView = res.isLinear ? {xMin:-10,xMax:10,yMin:-10,yMax:10} : computeAutoRange(res.a,res.b,res.c);
+    redrawMain();
+  });
+
+  [['inputA','a'],['inputB','b'],['inputC','c']].forEach(function(pair){
+    el(pair[0]).addEventListener('input', function(e){
+      state[pair[1]] = parseInput(e.target.value);
+      mainView = null;
+      render();
+    });
+  });
+
+  el('resetBtn').addEventListener('click', function(){
+    state.a=1; state.b=-3; state.c=2;
+    inputA.value=1; inputB.value=-3; inputC.value=2;
+    mainView=null; hoverPoint=null; coordReadout.hidden=true;
+    render();
+  });
+  el('copyBtn').addEventListener('click', copyResult);
+
+  function updateThemeIcon(theme){
+    el('themeIconSun').style.display = theme==='dark' ? 'none' : 'block';
+    el('themeIconMoon').style.display = theme==='dark' ? 'block' : 'none';
+  }
+  el('themeToggle').addEventListener('click', function(){
+    var next = document.documentElement.getAttribute('data-theme')==='dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    updateThemeIcon(next);
+    render();
+  });
+
+  function applyI18n(){
+    document.querySelectorAll('[data-i18n]').forEach(function(elx){
+      elx.textContent = t(elx.getAttribute('data-i18n'));
+    });
+  }
+  el('langToggle').addEventListener('click', function(){
+    state.lang = state.lang==='en' ? 'hi' : 'en';
+    document.documentElement.lang = state.lang;
+    langToggleLabel.textContent = state.lang==='en' ? 'हिं' : 'EN';
+    applyI18n();
+    render();
+  });
+
+  window.addEventListener('resize', function(){ render(); });
+
+  function init(){
+    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var initialTheme = prefersDark ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', initialTheme);
+    updateThemeIcon(initialTheme);
+    applyI18n();
+    render();
+  }
+  init();
+})();
+</script>
+</body>
+</html>

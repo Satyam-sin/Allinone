@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Cube &amp; Cuboid Calculator · क्यूब और क्युबॉइड कैलकुलेटर</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Noto+Serif+Devanagari:wght@600;700&family=Noto+Sans:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<style>
+  :root{
+    --paper:#F4F7FB; --grid:#CBDCEF; --ink:#172542; --ink-soft:#51608A; --card-bg:#FFFFFF;
+    --accent:#2856A3; --accent-warn:#E15A45; --accent2:#7C5FC4;
+    --accent-tint: rgba(40,86,163,.12); --accent2-tint: rgba(124,95,196,.14); --warn-tint: rgba(225,90,69,.12);
+    --shadow: 0 1px 2px rgba(23,37,66,.06), 0 8px 24px rgba(23,37,66,.09);
+    --radius: 14px;
+    --font-display:'Fraunces','Noto Serif Devanagari', ui-serif, serif;
+    --font-body:'Noto Sans','Noto Sans Devanagari', ui-sans-serif, sans-serif;
+    --font-mono:'IBM Plex Mono', ui-monospace, monospace;
+  }
+  [data-theme="dark"]{
+    --paper:#16241D; --grid:#2C4136; --ink:#F2EFE4; --ink-soft:#AFC2B4; --card-bg:#1E2F25;
+    --accent:#7FB6E8; --accent-warn:#E8879E; --accent2:#E8C46B;
+    --accent-tint: rgba(127,182,232,.16); --accent2-tint: rgba(232,196,107,.16); --warn-tint: rgba(232,135,158,.16);
+    --shadow: 0 1px 2px rgba(0,0,0,.35), 0 10px 28px rgba(0,0,0,.4);
+  }
+  *,*::before,*::after{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background-color:var(--paper);
+    background-image:linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size:24px 24px; color:var(--ink); font-family:var(--font-body); line-height:1.5;
+    transition:background-color .3s ease, color .3s ease; -webkit-font-smoothing:antialiased;
+  }
+  [data-theme="dark"] body{
+    background-image:linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+      radial-gradient(ellipse at 20% 20%, rgba(255,255,255,.035), transparent 60%), radial-gradient(ellipse at 80% 75%, rgba(255,255,255,.03), transparent 55%);
+    background-size:24px 24px, 24px 24px, cover, cover;
+  }
+  h1,h2,h3{font-family:var(--font-display);margin:0 0 .3em;line-height:1.2;}
+  p{margin:0;} button{font-family:var(--font-body);} a{color:var(--accent);}
+
+  .page{position:relative;max-width:960px;margin:0 auto;padding:1.25rem 1rem 4rem;}
+  .page::before{content:'';position:absolute;top:0;bottom:0;left:44px;width:2px;background:var(--accent-warn);opacity:.45;pointer-events:none;}
+  @media (max-width:639px){ .page::before{display:none;} }
+  [data-theme="dark"] .page::before{display:none;}
+
+  .site-header{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;padding:.5rem 0 1.5rem;}
+  .brand{display:flex;align-items:center;gap:.9rem;}
+  .brand-mark{
+    font-family:var(--font-mono);font-size:.72rem;font-weight:600;color:var(--accent-warn);
+    border:1.5px solid var(--accent-warn);padding:.3em .5em;border-radius:6px;white-space:nowrap;
+    letter-spacing:.02em;transform:rotate(-3deg);opacity:.85;
+  }
+  .brand-text h1{font-size:clamp(1.05rem,3vw,1.4rem);font-weight:700;}
+  .tagline{color:var(--ink-soft);font-size:.82rem;margin-top:.15rem;}
+  .controls{display:flex;align-items:center;gap:.6rem;}
+
+  .pill-btn{
+    font-family:var(--font-mono);font-weight:600;font-size:.85rem;border:1px solid var(--grid);
+    background:var(--card-bg);color:var(--ink);padding:.5em .9em;border-radius:999px;cursor:pointer;
+    transition:transform .15s ease, border-color .2s ease;
+  }
+  .pill-btn:hover{border-color:var(--accent);transform:translateY(-1px);}
+  .icon-btn{
+    width:38px;height:38px;border-radius:50%;border:1px solid var(--grid);background:var(--card-bg);color:var(--ink);
+    display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;
+    transition:transform .15s ease, border-color .2s ease;
+  }
+  .icon-btn:hover{border-color:var(--accent);transform:translateY(-1px);}
+  .icon-btn.small{width:32px;height:32px;font-family:var(--font-mono);font-weight:700;font-size:1rem;}
+  .icon-btn svg{width:18px;height:18px;position:absolute;}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+
+  main{display:flex;flex-direction:column;gap:1.25rem;}
+
+  .hero{
+    position:relative;border-radius:var(--radius);background:var(--card-bg);box-shadow:var(--shadow);
+    padding:1.25rem;display:flex;flex-direction:column;align-items:center;gap:1rem;
+  }
+  .tabs{display:flex;gap:.35rem;background:var(--paper);border:1px solid var(--grid);border-radius:999px;padding:4px;}
+  .tab-btn{border:none;background:transparent;padding:.55em 1.4em;border-radius:999px;font-weight:600;font-size:.9rem;color:var(--ink-soft);cursor:pointer;transition:background .2s ease,color .2s ease;}
+  .tab-btn.active{background:var(--accent);color:var(--card-bg);}
+  .hero-equation{font-family:var(--font-mono);font-weight:600;font-size:clamp(1.4rem,5vw,2.1rem);color:var(--ink);}
+
+  .card{background:var(--card-bg);border:1px solid var(--grid);border-radius:var(--radius);box-shadow:var(--shadow);padding:clamp(1rem,3vw,1.6rem);}
+  .card h2{font-size:1.05rem;font-weight:600;color:var(--ink);}
+
+  .unit-row{margin-bottom:1rem;}
+  .unit-label-group{display:flex;flex-direction:column;gap:.3rem;width:fit-content;}
+  .unit-label-group span{font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);}
+  .unit-select{font-family:var(--font-mono);font-weight:600;border:1px solid var(--grid);background:var(--paper);color:var(--ink);border-radius:8px;padding:.5em .7em;font-size:.9rem;cursor:pointer;}
+
+  .input-row{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:1rem;}
+  .input-group{display:flex;flex-direction:column;gap:.4rem;flex:1 1 140px;}
+  .input-group span{font-size:.75rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);}
+  .input-group input{
+    font-family:var(--font-mono);font-size:1.4rem;font-weight:600;text-align:center;color:var(--ink);
+    background:transparent;border:none;border-bottom:2px solid var(--grid);padding:.35em .2em;transition:border-color .2s ease;
+  }
+  .input-group input:focus{border-bottom-color:var(--accent);outline:none;}
+  .action-row{display:flex;gap:.6rem;margin-top:.25rem;flex-wrap:wrap;}
+  .btn{font-weight:600;font-size:.85rem;padding:.65em 1.2em;border-radius:999px;cursor:pointer;border:1px solid transparent;transition:transform .15s ease, opacity .2s ease;}
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--accent);color:var(--card-bg);}
+  .btn-ghost{background:transparent;border-color:var(--grid);color:var(--ink);}
+
+  .warning-banner{background:var(--warn-tint);border-left:3px solid var(--accent-warn);color:var(--ink);padding:.9rem 1.1rem;border-radius:10px;font-size:.9rem;}
+
+  .results{display:grid;grid-template-columns:repeat(2,1fr);gap:.85rem;}
+  @media (min-width:640px){ .results{grid-template-columns:repeat(3,1fr);} }
+  @media (min-width:900px){ .results{grid-template-columns:repeat(4,1fr);} }
+  .stat-tile{background:var(--card-bg);border:1px solid var(--grid);border-radius:12px;padding:.85rem;display:flex;flex-direction:column;gap:.3rem;box-shadow:var(--shadow);}
+  .stat-tile span{font-size:.68rem;text-transform:uppercase;letter-spacing:.03em;color:var(--ink-soft);font-weight:600;}
+  .stat-tile strong{font-family:var(--font-mono);font-size:1rem;color:var(--ink);}
+
+  .steps-list{list-style:none;margin:0;padding:0;counter-reset:step;display:flex;flex-direction:column;gap:1rem;}
+  .steps-list li{position:relative;padding-left:2.6rem;counter-increment:step;border-left:2px solid var(--grid);padding-bottom:1rem;}
+  .steps-list li:last-child{border-left-color:transparent;padding-bottom:0;}
+  .steps-list li::before{
+    content:counter(step);position:absolute;left:-16px;top:-2px;width:32px;height:32px;border-radius:50%;
+    background:var(--accent);color:var(--card-bg);font-family:var(--font-mono);font-weight:700;
+    display:flex;align-items:center;justify-content:center;font-size:.9rem;
+  }
+  .step-title{font-weight:600;margin-bottom:.3rem;}
+  .step-math{font-family:var(--font-mono);font-size:.83rem;color:var(--ink-soft);overflow-x:auto;}
+
+  .formula-table{display:flex;flex-direction:column;gap:.55rem;margin-top:.5rem;}
+  .formula-row{display:flex;justify-content:space-between;align-items:center;gap:1rem;border-bottom:1px dashed var(--grid);padding-bottom:.5rem;flex-wrap:wrap;}
+  .formula-row span{font-size:.85rem;color:var(--ink-soft);}
+  .formula-row strong{font-family:var(--font-mono);color:var(--ink);font-size:.92rem;}
+
+  .net-wrap{position:relative;height:280px;border-radius:10px;overflow:hidden;background:var(--paper);border:1px solid var(--grid);}
+  @media (min-width:720px){ .net-wrap{height:320px;} }
+  #netCanvas{display:block;width:100%;height:100%;}
+  .net-caption{margin-top:.75rem;font-family:var(--font-mono);font-size:.82rem;color:var(--ink-soft);text-align:center;}
+
+  .three-wrap{position:relative;height:360px;border-radius:10px;overflow:hidden;background:var(--paper);border:1px solid var(--grid);touch-action:none;}
+  @media (min-width:720px){ .three-wrap{height:440px;} }
+  #threeCanvas{display:block;width:100%;height:100%;cursor:grab;}
+  #threeCanvas:active{cursor:grabbing;}
+  .three-labels{position:absolute;inset:0;pointer-events:none;}
+  .three-label{position:absolute;transform:translate(-50%,-50%);background:var(--card-bg);border:1px solid var(--grid);border-radius:6px;padding:.15em .5em;font-family:var(--font-mono);font-size:.75rem;color:var(--ink);white-space:nowrap;}
+  .drag-hint{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);font-size:.7rem;color:var(--ink-soft);background:var(--card-bg);padding:.25em .7em;border-radius:999px;border:1px solid var(--grid);pointer-events:none;}
+  .three-controls-top{position:absolute;top:8px;right:8px;display:flex;gap:.4rem;}
+
+  .controls-grid{display:flex;flex-wrap:wrap;gap:.75rem 1.5rem;margin-top:1.1rem;}
+  .toggle{display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.83rem;color:var(--ink);}
+  .toggle input{position:absolute;opacity:0;width:0;height:0;}
+  .toggle-track{width:38px;height:22px;background:var(--grid);border-radius:999px;position:relative;transition:background .2s ease;flex-shrink:0;}
+  .toggle-thumb{position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:var(--card-bg);box-shadow:var(--shadow);transition:transform .2s ease;}
+  .toggle input:checked + .toggle-track{background:var(--accent);}
+  .toggle input:checked + .toggle-track .toggle-thumb{transform:translateX(16px);}
+  .toggle input:focus-visible + .toggle-track{outline:2px solid var(--accent);outline-offset:2px;}
+
+  .site-footer{text-align:center;color:var(--ink-soft);font-size:.8rem;padding-top:2rem;}
+  .toast{
+    position:fixed;left:50%;bottom:1.5rem;transform:translate(-50%,20px);background:var(--ink);color:var(--paper);
+    padding:.6em 1.2em;border-radius:999px;font-size:.85rem;opacity:0;pointer-events:none;
+    transition:opacity .25s ease, transform .25s ease;z-index:50;box-shadow:var(--shadow);
+  }
+  .toast.show{opacity:1;transform:translate(-50%,0);}
+
+  @media (prefers-reduced-motion:reduce){ *{transition:none !important; animation:none !important;} }
+</style>
+</head>
+<body>
+  <div class="page">
+    <header class="site-header">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">V=l×b×h</span>
+        <div class="brand-text">
+          <h1 data-i18n="appName">Cube &amp; Cuboid Calculator</h1>
+          <p class="tagline" data-i18n="appTagline">Volume, surface area, diagonals, nets and 3D models — live</p>
+        </div>
+      </div>
+      <div class="controls">
+        <button id="langToggle" class="pill-btn" type="button" aria-label="Switch language"><span id="langToggleLabel">हिं</span></button>
+        <button id="themeToggle" class="icon-btn" type="button" aria-label="Toggle dark mode">
+          <svg id="themeIconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
+          <svg id="themeIconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5Z"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="tabs">
+          <button id="tabCubeBtn" class="tab-btn active" type="button" data-i18n="tabCube">Cube</button>
+          <button id="tabCuboidBtn" class="tab-btn" type="button" data-i18n="tabCuboid">Cuboid</button>
+        </div>
+        <div class="hero-equation" id="heroFormula">V = a³</div>
+      </section>
+
+      <section class="card input-card">
+        <div class="unit-row">
+          <label class="unit-label-group">
+            <span data-i18n="unit">Unit</span>
+            <select id="unitSelect" class="unit-select">
+              <option value="mm">mm</option>
+              <option value="cm">cm</option>
+              <option value="m">m</option>
+              <option value="inch">in</option>
+              <option value="feet">ft</option>
+            </select>
+          </label>
+        </div>
+        <div class="input-row" data-shape="cube">
+          <label class="input-group"><span data-i18n="side">Side (a)</span><input type="number" step="any" min="0.01" id="inputSide"></label>
+        </div>
+        <div class="input-row" data-shape="cuboid">
+          <label class="input-group"><span data-i18n="length">Length (l)</span><input type="number" step="any" min="0.01" id="inputL"></label>
+          <label class="input-group"><span data-i18n="breadth">Breadth (b)</span><input type="number" step="any" min="0.01" id="inputB2"></label>
+          <label class="input-group"><span data-i18n="height">Height (h)</span><input type="number" step="any" min="0.01" id="inputH2"></label>
+        </div>
+        <div class="action-row">
+          <button id="resetBtn" class="btn btn-ghost" type="button" data-i18n="reset">Reset</button>
+          <button id="copyBtn" class="btn btn-ghost" type="button" data-i18n="copy">Copy result</button>
+          <button id="shareBtn" class="btn btn-ghost" type="button" data-i18n="share">Share</button>
+          <button id="pdfBtn" class="btn btn-primary" type="button" data-i18n="downloadPdf">Download PDF</button>
+        </div>
+      </section>
+
+      <div id="warningBanner" class="warning-banner" hidden></div>
+
+      <section class="results" id="resultsSection">
+        <div class="stat-tile"><span data-i18n="volume">Volume</span><strong id="statVolume"></strong></div>
+        <div class="stat-tile"><span data-i18n="tsa">TSA</span><strong id="statTSA"></strong></div>
+        <div class="stat-tile"><span data-i18n="lsa">LSA</span><strong id="statLSA"></strong></div>
+        <div class="stat-tile"><span data-i18n="spaceDiagonal">Space Diagonal</span><strong id="statSpaceDiagonal"></strong></div>
+        <div class="stat-tile"><span data-i18n="totalEdgeLength">Total Edge Length</span><strong id="statTotalEdge"></strong></div>
+
+        <div class="stat-tile" data-shape="cube"><span data-i18n="faceArea">Face Area</span><strong id="statFaceArea"></strong></div>
+        <div class="stat-tile" data-shape="cube"><span data-i18n="faceDiagonal">Face Diagonal</span><strong id="statFaceDiagonal"></strong></div>
+        <div class="stat-tile" data-shape="cube"><span data-i18n="circumRadius">Circumscribed Radius</span><strong id="statCircumRadius"></strong></div>
+        <div class="stat-tile" data-shape="cube"><span data-i18n="inscribedRadius">Inscribed Radius</span><strong id="statInscribedRadius"></strong></div>
+
+        <div class="stat-tile" data-shape="cuboid"><span data-i18n="baseArea">Base Area</span><strong id="statBaseArea"></strong></div>
+        <div class="stat-tile" data-shape="cuboid"><span data-i18n="perimeterBase">Perimeter of Base</span><strong id="statPerimeterBase"></strong></div>
+        <div class="stat-tile" data-shape="cuboid"><span data-i18n="faceDiagonalLB">Face Diagonal (l×b)</span><strong id="statFaceDiagonalLB"></strong></div>
+        <div class="stat-tile" data-shape="cuboid"><span data-i18n="faceDiagonalBH">Face Diagonal (b×h)</span><strong id="statFaceDiagonalBH"></strong></div>
+        <div class="stat-tile" data-shape="cuboid"><span data-i18n="faceDiagonalHL">Face Diagonal (h×l)</span><strong id="statFaceDiagonalHL"></strong></div>
+        <div class="stat-tile" data-shape="cuboid"><span data-i18n="longestInternal">Longest Internal Distance</span><strong id="statLongestInternal"></strong></div>
+      </section>
+
+      <section class="card steps-card">
+        <h2 data-i18n="stepsTitle">Step-by-Step Solution</h2>
+        <ol class="steps-list" id="stepsList"></ol>
+      </section>
+
+      <section class="card formula-card">
+        <h2 data-i18n="formulaCardTitle">All Formulas</h2>
+        <div class="formula-table" id="formulaTable"></div>
+      </section>
+
+      <section class="card net-card">
+        <h2 data-i18n="netTitle">2D Net</h2>
+        <div class="net-wrap"><canvas id="netCanvas"></canvas></div>
+        <div class="net-caption" id="netCaption"></div>
+      </section>
+
+      <section class="card three-card">
+        <h2 data-i18n="threeDTitle">3D Rotating Model</h2>
+        <div class="three-wrap">
+          <canvas id="threeCanvas"></canvas>
+          <div class="three-labels" id="threeLabels">
+            <div class="three-label" id="labelL"></div>
+            <div class="three-label" id="labelB"></div>
+            <div class="three-label" id="labelH"></div>
+          </div>
+          <div class="three-controls-top">
+            <button id="threeZoomIn" class="icon-btn small" type="button" aria-label="Zoom in">+</button>
+            <button id="threeZoomOut" class="icon-btn small" type="button" aria-label="Zoom out">−</button>
+            <button id="threeRecenter" class="icon-btn small" type="button" aria-label="Recenter">⟲</button>
+          </div>
+          <div class="drag-hint" data-i18n="dragHint">Drag to rotate · Scroll or pinch to zoom</div>
+        </div>
+        <div class="controls-grid">
+          <label class="toggle"><input type="checkbox" id="toggleTransparent"><span class="toggle-track"><span class="toggle-thumb"></span></span><span data-i18n="transparentMode">Transparent</span></label>
+          <label class="toggle"><input type="checkbox" id="toggleDiagonals"><span class="toggle-track"><span class="toggle-thumb"></span></span><span data-i18n="showDiagonals">Show Diagonals</span></label>
+          <label class="toggle"><input type="checkbox" id="toggleEdges" checked><span class="toggle-track"><span class="toggle-thumb"></span></span><span data-i18n="highlightEdges">Highlight Edges</span></label>
+          <label class="toggle"><input type="checkbox" id="toggleLabels" checked><span class="toggle-track"><span class="toggle-thumb"></span></span><span data-i18n="showLabels">Show Labels</span></label>
+          <label class="toggle"><input type="checkbox" id="toggleMultiColor" checked><span class="toggle-track"><span class="toggle-thumb"></span></span><span data-i18n="multiColor">Multi-color Faces</span></label>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer"><p data-i18n="footer">Built with HTML, CSS &amp; JavaScript</p></footer>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  'use strict';
+
+  var translations = {
+    en:{
+      appName:"Cube & Cuboid Calculator",
+      appTagline:"Volume, surface area, diagonals, nets and 3D models — live",
+      tabCube:"Cube", tabCuboid:"Cuboid",
+      side:"Side (a)", length:"Length (l)", breadth:"Breadth (b)", height:"Height (h)", unit:"Unit",
+      reset:"Reset", copy:"Copy result", copied:"Copied to clipboard",
+      share:"Share", shareFallback:"Sharing isn't supported here — result copied instead.",
+      downloadPdf:"Download PDF",
+      warnInvalid:"Please enter a positive number for every dimension.",
+      volume:"Volume", tsa:"Total Surface Area (TSA)", lsa:"Lateral Surface Area (LSA)",
+      faceArea:"Face Area", faceDiagonal:"Face Diagonal", spaceDiagonal:"Space Diagonal",
+      totalEdgeLength:"Total Edge Length", circumRadius:"Circumscribed Sphere Radius", inscribedRadius:"Inscribed Sphere Radius",
+      baseArea:"Base Area", perimeterBase:"Perimeter of Base",
+      faceDiagonalLB:"Face Diagonal (l×b face)", faceDiagonalBH:"Face Diagonal (b×h face)", faceDiagonalHL:"Face Diagonal (h×l face)",
+      longestInternal:"Longest Internal Distance",
+      stepsTitle:"Step-by-Step Solution",
+      step1Title:"Write down the given values", step2Title:"Calculate the Volume",
+      step3Title:"Calculate the Total Surface Area", step4Title:"Calculate the Lateral Surface Area",
+      step5Title:"Calculate the diagonals", step6Title:"Calculate the total edge length",
+      step7Title:"Calculate the sphere radii",
+      formulaCardTitle:"All Formulas", netTitle:"2D Net", threeDTitle:"3D Rotating Model",
+      transparentMode:"Transparent", showDiagonals:"Show Diagonals", highlightEdges:"Highlight Edges",
+      showLabels:"Show Labels", multiColor:"Multi-color Faces",
+      dragHint:"Drag to rotate · Scroll or pinch to zoom",
+      footer:"Built with HTML, CSS & JavaScript"
+    },
+    hi:{
+      appName:"क्यूब और क्युबॉइड कैलकुलेटर",
+      appTagline:"आयतन, पृष्ठीय क्षेत्रफल, विकर्ण, नेट और 3D मॉडल — लाइव",
+      tabCube:"क्यूब", tabCuboid:"क्युबॉइड",
+      side:"भुजा (a)", length:"लंबाई (l)", breadth:"चौड़ाई (b)", height:"ऊँचाई (h)", unit:"इकाई",
+      reset:"रीसेट करें", copy:"परिणाम कॉपी करें", copied:"क्लिपबोर्ड पर कॉपी हो गया",
+      share:"शेयर करें", shareFallback:"यहाँ शेयर करना समर्थित नहीं है — परिणाम कॉपी कर दिया गया।",
+      downloadPdf:"PDF डाउनलोड करें",
+      warnInvalid:"कृपया हर माप के लिए एक धनात्मक संख्या दर्ज करें।",
+      volume:"आयतन", tsa:"कुल पृष्ठीय क्षेत्रफल (TSA)", lsa:"पार्श्व पृष्ठीय क्षेत्रफल (LSA)",
+      faceArea:"फलक क्षेत्रफल", faceDiagonal:"फलक विकर्ण", spaceDiagonal:"अंतरिक्ष विकर्ण",
+      totalEdgeLength:"कुल किनारों की लंबाई", circumRadius:"परिवृत्त गोले की त्रिज्या", inscribedRadius:"अंतर्वृत्त गोले की त्रिज्या",
+      baseArea:"आधार क्षेत्रफल", perimeterBase:"आधार का परिमाप",
+      faceDiagonalLB:"फलक विकर्ण (l×b फलक)", faceDiagonalBH:"फलक विकर्ण (b×h फलक)", faceDiagonalHL:"फलक विकर्ण (h×l फलक)",
+      longestInternal:"सबसे लंबी आंतरिक दूरी",
+      stepsTitle:"चरण-दर-चरण हल",
+      step1Title:"दिए गए मान लिखें", step2Title:"आयतन की गणना करें",
+      step3Title:"कुल पृष्ठीय क्षेत्रफल की गणना करें", step4Title:"पार्श्व पृष्ठीय क्षेत्रफल की गणना करें",
+      step5Title:"विकर्णों की गणना करें", step6Title:"कुल किनारों की लंबाई की गणना करें",
+      step7Title:"गोलों की त्रिज्या की गणना करें",
+      formulaCardTitle:"सभी सूत्र", netTitle:"2D नेट", threeDTitle:"3D घूमने वाला मॉडल",
+      transparentMode:"पारदर्शी", showDiagonals:"विकर्ण दिखाएं", highlightEdges:"किनारे हाइलाइट करें",
+      showLabels:"लेबल दिखाएं", multiColor:"बहुरंगी फलक",
+      dragHint:"घुमाने के लिए ड्रैग करें · ज़ूम के लिए स्क्रॉल या पिंच करें",
+      footer:"HTML, CSS और JavaScript से निर्मित"
+    }
+  };
+
+  var UNIT_TO_MM = { mm:1, cm:10, m:1000, inch:25.4, feet:304.8 };
+  var UNIT_SYMBOL = { mm:'mm', cm:'cm', m:'m', inch:'in', feet:'ft' };
+  var DEFAULTS = { cube:{a:5}, cuboid:{l:8,b:6,h:4} };
+  var FACE_COLORS_LIGHT = ['#2856A3','#E15A45','#7C5FC4','#1E8F79','#D9A441','#51608A'];
+  var FACE_COLORS_DARK  = ['#7FB6E8','#E8879E','#E8C46B','#7FD9C4','#C9A9E8','#AFC2B4'];
+
+  var CUBE_FORMULAS = [
+    ['volume','V = a³'], ['tsa','TSA = 6a²'], ['lsa','LSA = 4a²'],
+    ['faceArea','Face Area = a²'], ['faceDiagonal','Face Diagonal = a√2'],
+    ['spaceDiagonal','Space Diagonal = a√3'], ['totalEdgeLength','Total Edge Length = 12a'],
+    ['circumRadius','R = (√3/2)a'], ['inscribedRadius','r = a/2']
+  ];
+  var CUBOID_FORMULAS = [
+    ['volume','V = l × b × h'], ['tsa','TSA = 2(lb + bh + hl)'], ['lsa','LSA = 2h(l + b)'],
+    ['baseArea','Base Area = l × b'], ['perimeterBase','Perimeter = 2(l + b)'],
+    ['spaceDiagonal','Space Diagonal = √(l² + b² + h²)'],
+    ['faceDiagonalLB','Diagonal(l×b) = √(l² + b²)'], ['faceDiagonalBH','Diagonal(b×h) = √(b² + h²)'],
+    ['faceDiagonalHL','Diagonal(h×l) = √(h² + l²)'], ['totalEdgeLength','Total Edge Length = 4(l + b + h)'],
+    ['longestInternal','Longest Internal Distance = √(l² + b² + h²)']
+  ];
+
+  var state = { shape:'cube', unit:'cm', lang:'en', cube:{a:5}, cuboid:{l:8,b:6,h:4} };
+
+  function el(id){ return document.getElementById(id); }
+  var inputSide=el('inputSide'), inputL=el('inputL'), inputB2=el('inputB2'), inputH2=el('inputH2');
+  var unitSelect=el('unitSelect');
+  var heroFormula=el('heroFormula');
+  var tabCubeBtn=el('tabCubeBtn'), tabCuboidBtn=el('tabCuboidBtn');
+  var warningBanner=el('warningBanner'), resultsSection=el('resultsSection');
+  var statVolume=el('statVolume'), statTSA=el('statTSA'), statLSA=el('statLSA');
+  var statSpaceDiagonal=el('statSpaceDiagonal'), statTotalEdge=el('statTotalEdge');
+  var statFaceArea=el('statFaceArea'), statFaceDiagonal=el('statFaceDiagonal');
+  var statCircumRadius=el('statCircumRadius'), statInscribedRadius=el('statInscribedRadius');
+  var statBaseArea=el('statBaseArea'), statPerimeterBase=el('statPerimeterBase');
+  var statFaceDiagonalLB=el('statFaceDiagonalLB'), statFaceDiagonalBH=el('statFaceDiagonalBH'), statFaceDiagonalHL=el('statFaceDiagonalHL');
+  var statLongestInternal=el('statLongestInternal');
+  var stepsList=el('stepsList'), formulaTable=el('formulaTable');
+  var netCanvas=el('netCanvas'), netCaption=el('netCaption');
+  var threeCanvas=el('threeCanvas');
+  var labelLEl=el('labelL'), labelBEl=el('labelB'), labelHEl=el('labelH');
+  var threeZoomIn=el('threeZoomIn'), threeZoomOut=el('threeZoomOut'), threeRecenter=el('threeRecenter');
+  var toggleTransparent=el('toggleTransparent'), toggleDiagonals=el('toggleDiagonals');
+  var toggleEdges=el('toggleEdges'), toggleLabels=el('toggleLabels'), toggleMultiColor=el('toggleMultiColor');
+  var resetBtn=el('resetBtn'), copyBtn=el('copyBtn'), shareBtn=el('shareBtn'), pdfBtn=el('pdfBtn');
+  var toast=el('toast'), langToggleLabel=el('langToggleLabel');
+  var toastTimer=null;
+
+  function t(key){
+    var d = translations[state.lang] || translations.en;
+    return d[key] !== undefined ? d[key] : (translations.en[key] || key);
+  }
+  function fmt(n){
+    if (n===undefined || n===null || !isFinite(n)) return '0';
+    var r = Math.round(n*10000)/10000;
+    if (Math.abs(r) < 1e-9) r = 0;
+    if (Object.is(r,-0)) r = 0;
+    return r.toString();
+  }
+  function unitLabel(){ return UNIT_SYMBOL[state.unit] || state.unit; }
+  function convertUnit(value, fromU, toU){ return value * UNIT_TO_MM[fromU] / UNIT_TO_MM[toU]; }
+  function cssVar(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+  function roundForInput(n){ return Math.round(n*10000)/10000; }
+
+  function parseInputPositive(v){
+    if (v==='') return NaN;
+    var n = parseFloat(v);
+    if (isNaN(n) || n<=0) return NaN;
+    return n;
+  }
+
+  function getEffectiveDims(){
+    if (state.shape==='cube'){
+      var a = state.cube.a;
+      return { l:a, b:a, h:a, valid: isFinite(a) && a>0 };
+    }
+    var l=state.cuboid.l, b=state.cuboid.b, h=state.cuboid.h;
+    return { l:l, b:b, h:h, valid: isFinite(l)&&l>0 && isFinite(b)&&b>0 && isFinite(h)&&h>0 };
+  }
+
+  function computeShape(l,b,h){
+    var volume = l*b*h;
+    var tsa = 2*(l*b+b*h+h*l);
+    var lsa = 2*h*(l+b);
+    var baseArea = l*b;
+    var perimeterBase = 2*(l+b);
+    var spaceDiagonal = Math.sqrt(l*l+b*b+h*h);
+    var faceDiagLB = Math.sqrt(l*l+b*b);
+    var faceDiagBH = Math.sqrt(b*b+h*h);
+    var faceDiagHL = Math.sqrt(h*h+l*l);
+    var totalEdge = 4*(l+b+h);
+    var circumRadius = spaceDiagonal/2;
+    var isCubeShape = Math.abs(l-b)<1e-9 && Math.abs(b-h)<1e-9;
+    var inscribedRadius = isCubeShape ? l/2 : null;
+    return {
+      l:l,b:b,h:h,volume:volume,tsa:tsa,lsa:lsa,baseArea:baseArea,perimeterBase:perimeterBase,
+      spaceDiagonal:spaceDiagonal,faceDiagLB:faceDiagLB,faceDiagBH:faceDiagBH,faceDiagHL:faceDiagHL,
+      totalEdge:totalEdge,circumRadius:circumRadius,inscribedRadius:inscribedRadius,longestInternal:spaceDiagonal
+    };
+  }
+
+  function syncInputsFromState(){
+    inputSide.value = roundForInput(state.cube.a);
+    inputL.value = roundForInput(state.cuboid.l);
+    inputB2.value = roundForInput(state.cuboid.b);
+    inputH2.value = roundForInput(state.cuboid.h);
+  }
+
+  function applyShapeVisibility(){
+    document.querySelectorAll('[data-shape]').forEach(function(elx){
+      elx.style.display = (elx.getAttribute('data-shape')===state.shape) ? '' : 'none';
+    });
+  }
+
+  function renderResults(res){
+    var U=unitLabel(), U2=U+'²', U3=U+'³';
+    statVolume.textContent = fmt(res.volume)+' '+U3;
+    statTSA.textContent = fmt(res.tsa)+' '+U2;
+    statLSA.textContent = fmt(res.lsa)+' '+U2;
+    statSpaceDiagonal.textContent = fmt(res.spaceDiagonal)+' '+U;
+    statTotalEdge.textContent = fmt(res.totalEdge)+' '+U;
+    if (state.shape==='cube'){
+      statFaceArea.textContent = fmt(res.baseArea)+' '+U2;
+      statFaceDiagonal.textContent = fmt(res.faceDiagLB)+' '+U;
+      statCircumRadius.textContent = fmt(res.circumRadius)+' '+U;
+      statInscribedRadius.textContent = fmt(res.inscribedRadius)+' '+U;
+    } else {
+      statBaseArea.textContent = fmt(res.baseArea)+' '+U2;
+      statPerimeterBase.textContent = fmt(res.perimeterBase)+' '+U;
+      statFaceDiagonalLB.textContent = fmt(res.faceDiagLB)+' '+U;
+      statFaceDiagonalBH.textContent = fmt(res.faceDiagBH)+' '+U;
+      statFaceDiagonalHL.textContent = fmt(res.faceDiagHL)+' '+U;
+      statLongestInternal.textContent = fmt(res.longestInternal)+' '+U;
+    }
+  }
+
+  function renderSteps(res){
+    var U = unitLabel();
+    var isCube = state.shape==='cube';
+    var steps = [];
+    if (isCube){
+      steps.push({title:t('step1Title'), math:'a = '+fmt(res.l)+' '+U});
+      steps.push({title:t('step2Title'), math:'V = a³ = ('+fmt(res.l)+')³ = '+fmt(res.volume)+' '+U+'³'});
+      steps.push({title:t('step3Title'), math:'TSA = 6a² = 6×('+fmt(res.l)+')² = '+fmt(res.tsa)+' '+U+'²'});
+      steps.push({title:t('step4Title'), math:'LSA = 4a² = 4×('+fmt(res.l)+')² = '+fmt(res.lsa)+' '+U+'²'});
+      steps.push({title:t('step5Title'), math:'Face Diagonal = a√2 = '+fmt(res.faceDiagLB)+' '+U+',  Space Diagonal = a√3 = '+fmt(res.spaceDiagonal)+' '+U});
+      steps.push({title:t('step6Title'), math:'Total Edge Length = 12a = 12×'+fmt(res.l)+' = '+fmt(res.totalEdge)+' '+U});
+      steps.push({title:t('step7Title'), math:'R = (√3/2)a = '+fmt(res.circumRadius)+' '+U+',  r = a/2 = '+fmt(res.inscribedRadius)+' '+U});
+    } else {
+      steps.push({title:t('step1Title'), math:'l = '+fmt(res.l)+' '+U+', b = '+fmt(res.b)+' '+U+', h = '+fmt(res.h)+' '+U});
+      steps.push({title:t('step2Title'), math:'V = l×b×h = '+fmt(res.l)+'×'+fmt(res.b)+'×'+fmt(res.h)+' = '+fmt(res.volume)+' '+U+'³'});
+      steps.push({title:t('step3Title'), math:'TSA = 2(lb+bh+hl) = 2('+fmt(res.l*res.b)+'+'+fmt(res.b*res.h)+'+'+fmt(res.h*res.l)+') = '+fmt(res.tsa)+' '+U+'²'});
+      steps.push({title:t('step4Title'), math:'LSA = 2h(l+b) = 2×'+fmt(res.h)+'×('+fmt(res.l)+'+'+fmt(res.b)+') = '+fmt(res.lsa)+' '+U+'²'});
+      steps.push({title:t('step5Title'), math:'Space Diagonal = √(l²+b²+h²) = '+fmt(res.spaceDiagonal)+' '+U});
+      steps.push({title:t('step6Title'), math:'Total Edge Length = 4(l+b+h) = 4×('+fmt(res.l)+'+'+fmt(res.b)+'+'+fmt(res.h)+') = '+fmt(res.totalEdge)+' '+U});
+    }
+    stepsList.innerHTML = steps.map(function(s){
+      return '<li><div class="step-title">'+s.title+'</div><div class="step-math">'+s.math+'</div></li>';
+    }).join('');
+  }
+
+  function renderFormulaCard(){
+    var list = state.shape==='cube' ? CUBE_FORMULAS : CUBOID_FORMULAS;
+    formulaTable.innerHTML = list.map(function(pair){
+      return '<div class="formula-row"><span>'+t(pair[0])+'</span><strong>'+pair[1]+'</strong></div>';
+    }).join('');
+  }
+
+  // ---------- Canvas helpers ----------
+  function setupCanvas(canvas, fallbackHeight){
+    var dpr = window.devicePixelRatio || 1;
+    var width = canvas.parentElement.clientWidth || 300;
+    var height = canvas.parentElement.clientHeight || fallbackHeight;
+    canvas.style.width = width+'px'; canvas.style.height = height+'px';
+    canvas.width = Math.round(width*dpr); canvas.height = Math.round(height*dpr);
+    var ctx = canvas.getContext('2d');
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    return { ctx:ctx, width:width, height:height };
+  }
+
+  function clearNet(){
+    var s = setupCanvas(netCanvas, 280);
+    s.ctx.clearRect(0,0,s.width,s.height);
+    netCaption.textContent = '';
+  }
+
+  function drawNetCanvas(l,b,h){
+    var s = setupCanvas(netCanvas, 280);
+    var ctx=s.ctx, width=s.width, height=s.height;
+    ctx.clearRect(0,0,width,height);
+    var totalW = 2*(l+b), totalH = h+2*b;
+    var scale = Math.min((width-60)/totalW, (height-90)/totalH);
+    if (!isFinite(scale) || scale<=0) scale = 1;
+    var offX = (width - totalW*scale)/2, offY = (height - totalH*scale)/2;
+    var ink=cssVar('--ink'), cardBg=cssVar('--card-bg'), inkSoft=cssVar('--ink-soft'), tint=cssVar('--accent-tint');
+
+    function rect(x,y,w,h2,fill,label){
+      var px=offX+x*scale, py=offY+y*scale, pw=w*scale, ph=h2*scale;
+      ctx.fillStyle = fill;
+      ctx.fillRect(px,py,pw,ph);
+      ctx.strokeStyle = ink; ctx.lineWidth=1.5;
+      ctx.strokeRect(px,py,pw,ph);
+      if (label && pw>28 && ph>16){
+        ctx.fillStyle = inkSoft;
+        ctx.font = '11px "IBM Plex Mono", monospace';
+        ctx.textAlign='center'; ctx.textBaseline='middle';
+        ctx.fillText(label, px+pw/2, py+ph/2);
+      }
+    }
+    rect(0,b,b,h, cardBg, fmt(b)+'×'+fmt(h));
+    rect(b,b,l,h, tint, fmt(l)+'×'+fmt(h));
+    rect(b+l,b,b,h, cardBg, fmt(b)+'×'+fmt(h));
+    rect(b+l+b,b,l,h, tint, fmt(l)+'×'+fmt(h));
+    rect(b,0,l,b, cardBg, fmt(l)+'×'+fmt(b));
+    rect(b,b+h,l,b, cardBg, fmt(l)+'×'+fmt(b));
+
+    var U = unitLabel();
+    if (state.shape==='cube'){
+      netCaption.textContent = 'a = '+fmt(l)+' '+U;
+    } else {
+      netCaption.textContent = 'l = '+fmt(l)+' '+U+'  ·  b = '+fmt(b)+' '+U+'  ·  h = '+fmt(h)+' '+U;
+    }
+  }
+
+  // ---------- Three.js 3D viewer ----------
+  var scene, camera, renderer, boxMesh, edgesLines, diagonalsGroup, ground;
+  var camState = { theta: Math.PI/4, phi: Math.PI/3.2, radius: 6.2 };
+  var pointers = {};
+  var lastPinchDist = null;
+  var lastInteraction = Date.now();
+  var labelPoints = {};
+  var labelTexts = {};
+  var threeReady = false;
+
+  function initThree(){
+    if (typeof THREE === 'undefined') return;
+    scene = new THREE.Scene();
+    camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+    renderer = new THREE.WebGLRenderer({ canvas: threeCanvas, antialias:true, alpha:true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio||1, 2));
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+    var ambLight = new THREE.AmbientLight(0xffffff, 0.7);
+    var dirLight = new THREE.DirectionalLight(0xffffff, 0.9);
+    dirLight.position.set(4,6,4);
+    dirLight.castShadow = true;
+    dirLight.shadow.mapSize.set(1024,1024);
+    dirLight.shadow.camera.left=-6; dirLight.shadow.camera.right=6;
+    dirLight.shadow.camera.top=6; dirLight.shadow.camera.bottom=-6;
+    dirLight.shadow.camera.near=0.5; dirLight.shadow.camera.far=20;
+    scene.add(ambLight, dirLight);
+
+    var groundGeo = new THREE.PlaneGeometry(30,30);
+    var groundMat = new THREE.ShadowMaterial({ opacity:0.22 });
+    ground = new THREE.Mesh(groundGeo, groundMat);
+    ground.rotation.x = -Math.PI/2;
+    ground.receiveShadow = true;
+    scene.add(ground);
+
+    threeReady = true;
+    resizeThree();
+    updateCameraPosition();
+    requestAnimationFrame(animateThree);
+  }
+
+  function resizeThree(){
+    if (!threeReady) return;
+    var w = threeCanvas.parentElement.clientWidth || 300;
+    var h = threeCanvas.parentElement.clientHeight || 360;
+    camera.aspect = w/h;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w,h,false);
+  }
+
+  function updateCameraPosition(){
+    if (!threeReady) return;
+    var c = camState;
+    var x = c.radius*Math.sin(c.phi)*Math.sin(c.theta);
+    var y = c.radius*Math.cos(c.phi);
+    var z = c.radius*Math.sin(c.phi)*Math.cos(c.theta);
+    camera.position.set(x,y,z);
+    camera.lookAt(0,0,0);
+  }
+
+  function disposeObj(obj){
+    if (!obj) return;
+    scene.remove(obj);
+    if (obj.geometry) obj.geometry.dispose();
+    if (obj.material){
+      if (Array.isArray(obj.material)) obj.material.forEach(function(m){ m.dispose(); });
+      else obj.material.dispose();
+    }
+    if (obj.children && obj.children.length){
+      obj.children.slice().forEach(function(c){ disposeObj(c); });
+    }
+  }
+
+  function updateThreeScene(l,b,h){
+    if (!threeReady) return;
+    disposeObj(boxMesh); boxMesh=null;
+    disposeObj(edgesLines); edgesLines=null;
+    disposeObj(diagonalsGroup); diagonalsGroup=null;
+
+    var maxDim = Math.max(l,b,h);
+    var norm = maxDim>0 ? 2.6/maxDim : 1;
+    var sx=l*norm, sy=h*norm, sz=b*norm;
+
+    var geo = new THREE.BoxGeometry(sx,sy,sz);
+    var multi = toggleMultiColor.checked;
+    var transparentOn = toggleTransparent.checked;
+    var isDark = document.documentElement.getAttribute('data-theme')==='dark';
+    var palette = isDark ? FACE_COLORS_DARK : FACE_COLORS_LIGHT;
+    var baseColor = cssVar('--accent') || '#2856A3';
+    var mats = [];
+    for (var i=0;i<6;i++){
+      var col = multi ? palette[i] : baseColor;
+      mats.push(new THREE.MeshStandardMaterial({
+        color: new THREE.Color(col), transparent: transparentOn, opacity: transparentOn?0.38:1,
+        roughness:0.55, metalness:0.05, side: THREE.DoubleSide
+      }));
+    }
+    boxMesh = new THREE.Mesh(geo, mats);
+    boxMesh.castShadow = true;
+    scene.add(boxMesh);
+
+    if (toggleEdges.checked){
+      var edgesGeo = new THREE.EdgesGeometry(geo);
+      var edgesMat = new THREE.LineBasicMaterial({ color: new THREE.Color(cssVar('--accent-warn')||'#E15A45') });
+      edgesLines = new THREE.LineSegments(edgesGeo, edgesMat);
+      scene.add(edgesLines);
+    }
+
+    if (toggleDiagonals.checked){
+      diagonalsGroup = new THREE.Group();
+      var dMat = new THREE.LineBasicMaterial({ color: new THREE.Color(cssVar('--accent2')||'#7C5FC4') });
+      var hx=sx/2, hy=sy/2, hz=sz/2;
+      var pairs = [
+        [[-hx,-hy,-hz],[hx,hy,hz]], [[-hx,-hy,hz],[hx,hy,-hz]],
+        [[-hx,hy,-hz],[hx,-hy,hz]], [[-hx,hy,hz],[hx,-hy,-hz]]
+      ];
+      pairs.forEach(function(p){
+        var g = new THREE.BufferGeometry().setFromPoints([
+          new THREE.Vector3(p[0][0],p[0][1],p[0][2]),
+          new THREE.Vector3(p[1][0],p[1][1],p[1][2])
+        ]);
+        diagonalsGroup.add(new THREE.Line(g, dMat));
+      });
+      scene.add(diagonalsGroup);
+    }
+
+    ground.position.y = -sy/2 - 0.002;
+
+    labelPoints = {
+      l: new THREE.Vector3(0, -sy/2, sz/2),
+      b: new THREE.Vector3(sx/2, -sy/2, 0),
+      h: new THREE.Vector3(sx/2, 0, sz/2)
+    };
+    var U = unitLabel();
+    if (state.shape==='cube'){
+      var txt = 'a = '+fmt(l)+' '+U;
+      labelTexts = { l:txt, b:txt, h:txt };
+    } else {
+      labelTexts = { l:'l = '+fmt(l)+' '+U, b:'b = '+fmt(b)+' '+U, h:'h = '+fmt(h)+' '+U };
+    }
+  }
+
+  function clearThree(){
+    if (!threeReady) return;
+    disposeObj(boxMesh); boxMesh=null;
+    disposeObj(edgesLines); edgesLines=null;
+    disposeObj(diagonalsGroup); diagonalsGroup=null;
+    labelPoints = {};
+  }
+
+  function updateLabels(){
+    var show = toggleLabels.checked && labelPoints.l;
+    labelLEl.style.display = show?'block':'none';
+    labelBEl.style.display = show?'block':'none';
+    labelHEl.style.display = show?'block':'none';
+    if (!show) return;
+    var rect = threeCanvas.getBoundingClientRect();
+    if (rect.width===0) return;
+    ['l','b','h'].forEach(function(k){
+      var v = labelPoints[k].clone().project(camera);
+      var elx = k==='l'?labelLEl:(k==='b'?labelBEl:labelHEl);
+      elx.style.left = ((v.x*0.5+0.5)*rect.width)+'px';
+      elx.style.top = ((-v.y*0.5+0.5)*rect.height)+'px';
+      elx.textContent = labelTexts[k];
+    });
+  }
+
+  function animateThree(){
+    requestAnimationFrame(animateThree);
+    if (!threeReady) return;
+    if (Object.keys(pointers).length===0 && Date.now()-lastInteraction > 1800){
+      camState.theta += 0.0025;
+      updateCameraPosition();
+    }
+    updateLabels();
+    renderer.render(scene, camera);
+  }
+
+  threeCanvas.addEventListener('pointerdown', function(e){
+    pointers[e.pointerId] = {x:e.clientX,y:e.clientY};
+    lastInteraction = Date.now();
+    try{ threeCanvas.setPointerCapture(e.pointerId); }catch(err){}
+  });
+  threeCanvas.addEventListener('pointermove', function(e){
+    if (!pointers[e.pointerId]) return;
+    lastInteraction = Date.now();
+    var ids = Object.keys(pointers);
+    if (ids.length===1){
+      var prev = pointers[e.pointerId];
+      var dx = e.clientX-prev.x, dy = e.clientY-prev.y;
+      camState.theta -= dx*0.006;
+      camState.phi -= dy*0.006;
+      camState.phi = Math.max(0.2, Math.min(Math.PI-0.2, camState.phi));
+      pointers[e.pointerId] = {x:e.clientX,y:e.clientY};
+      updateCameraPosition();
+    } else if (ids.length===2){
+      pointers[e.pointerId] = {x:e.clientX,y:e.clientY};
+      var p1 = pointers[ids[0]], p2 = pointers[ids[1]];
+      var dist = Math.hypot(p2.x-p1.x, p2.y-p1.y);
+      if (lastPinchDist){
+        var ratio = dist/lastPinchDist;
+        camState.radius = Math.max(3, Math.min(16, camState.radius/ratio));
+        updateCameraPosition();
+      }
+      lastPinchDist = dist;
+    }
+  });
+  function endPointer(e){
+    delete pointers[e.pointerId];
+    lastPinchDist = null;
+    lastInteraction = Date.now();
+    try{ threeCanvas.releasePointerCapture(e.pointerId); }catch(err){}
+  }
+  threeCanvas.addEventListener('pointerup', endPointer);
+  threeCanvas.addEventListener('pointercancel', endPointer);
+  threeCanvas.addEventListener('pointerleave', function(e){ if (Object.keys(pointers).length<2) endPointer(e); });
+  threeCanvas.addEventListener('wheel', function(e){
+    e.preventDefault();
+    lastInteraction = Date.now();
+    camState.radius = Math.max(3, Math.min(16, camState.radius * (e.deltaY>0?1.08:0.92)));
+    updateCameraPosition();
+  }, {passive:false});
+
+  threeZoomIn.addEventListener('click', function(){ camState.radius = Math.max(3, camState.radius*0.85); lastInteraction=Date.now(); updateCameraPosition(); });
+  threeZoomOut.addEventListener('click', function(){ camState.radius = Math.min(16, camState.radius*1.18); lastInteraction=Date.now(); updateCameraPosition(); });
+  threeRecenter.addEventListener('click', function(){ camState = {theta:Math.PI/4, phi:Math.PI/3.2, radius:6.2}; lastInteraction=Date.now(); updateCameraPosition(); });
+
+  [toggleTransparent, toggleDiagonals, toggleEdges, toggleLabels, toggleMultiColor].forEach(function(cb){
+    cb.addEventListener('change', function(){
+      var dims = getEffectiveDims();
+      if (dims.valid) updateThreeScene(dims.l,dims.b,dims.h);
+    });
+  });
+
+  // ---------- Master render ----------
+  function render(){
+    applyShapeVisibility();
+    heroFormula.textContent = state.shape==='cube' ? 'V = a³' : 'V = l × b × h';
+    var dims = getEffectiveDims();
+
+    if (!dims.valid){
+      warningBanner.hidden = false;
+      warningBanner.textContent = t('warnInvalid');
+      resultsSection.style.opacity='.35'; resultsSection.style.pointerEvents='none';
+      stepsList.innerHTML='';
+      clearNet(); clearThree();
+      return;
+    }
+    warningBanner.hidden = true;
+    resultsSection.style.opacity='1'; resultsSection.style.pointerEvents='auto';
+
+    var res = computeShape(dims.l, dims.b, dims.h);
+    renderResults(res);
+    renderSteps(res);
+    renderFormulaCard();
+    drawNetCanvas(dims.l, dims.b, dims.h);
+    updateThreeScene(dims.l, dims.b, dims.h);
+  }
+
+  // ---------- Summary / Copy / Share ----------
+  function buildSummaryText(){
+    var dims = getEffectiveDims();
+    if (!dims.valid) return t('warnInvalid');
+    var res = computeShape(dims.l,dims.b,dims.h);
+    var isCube = state.shape==='cube';
+    var U = unitLabel();
+    var lines = [];
+    lines.push(t('appName')+' — '+t(isCube?'tabCube':'tabCuboid'));
+    if (isCube) lines.push(t('side')+': '+fmt(dims.l)+' '+U);
+    else lines.push(t('length')+': '+fmt(dims.l)+' '+U+', '+t('breadth')+': '+fmt(dims.b)+' '+U+', '+t('height')+': '+fmt(dims.h)+' '+U);
+    lines.push(t('volume')+': '+fmt(res.volume)+' '+U+'³');
+    lines.push(t('tsa')+': '+fmt(res.tsa)+' '+U+'²');
+    lines.push(t('lsa')+': '+fmt(res.lsa)+' '+U+'²');
+    if (isCube){
+      lines.push(t('faceArea')+': '+fmt(res.baseArea)+' '+U+'²');
+      lines.push(t('faceDiagonal')+': '+fmt(res.faceDiagLB)+' '+U);
+      lines.push(t('spaceDiagonal')+': '+fmt(res.spaceDiagonal)+' '+U);
+      lines.push(t('totalEdgeLength')+': '+fmt(res.totalEdge)+' '+U);
+      lines.push(t('circumRadius')+': '+fmt(res.circumRadius)+' '+U);
+      lines.push(t('inscribedRadius')+': '+fmt(res.inscribedRadius)+' '+U);
+    } else {
+      lines.push(t('baseArea')+': '+fmt(res.baseArea)+' '+U+'²');
+      lines.push(t('perimeterBase')+': '+fmt(res.perimeterBase)+' '+U);
+      lines.push(t('spaceDiagonal')+': '+fmt(res.spaceDiagonal)+' '+U);
+      lines.push(t('faceDiagonalLB')+': '+fmt(res.faceDiagLB)+' '+U);
+      lines.push(t('faceDiagonalBH')+': '+fmt(res.faceDiagBH)+' '+U);
+      lines.push(t('faceDiagonalHL')+': '+fmt(res.faceDiagHL)+' '+U);
+      lines.push(t('totalEdgeLength')+': '+fmt(res.totalEdge)+' '+U);
+      lines.push(t('longestInternal')+': '+fmt(res.longestInternal)+' '+U);
+    }
+    return lines.join('\n');
+  }
+
+  function showToast(msg){
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ toast.classList.remove('show'); }, 2200);
+  }
+  function fallbackCopy(text){
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.focus(); ta.select();
+    try { document.execCommand('copy'); } catch(e){}
+    document.body.removeChild(ta);
+  }
+  function copyResult(){
+    var text = buildSummaryText();
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){ showToast(t('copied')); }).catch(function(){ fallbackCopy(text); showToast(t('copied')); });
+    } else { fallbackCopy(text); showToast(t('copied')); }
+  }
+  function shareResult(){
+    var text = buildSummaryText();
+    if (navigator.share){
+      navigator.share({ title:t('appName'), text:text }).catch(function(){});
+    } else {
+      fallbackCopy(text);
+      showToast(t('shareFallback'));
+    }
+  }
+
+  // ---------- PDF export ----------
+  async function generatePDF(){
+    if (typeof PDFLib === 'undefined'){ showToast('PDF library failed to load'); return; }
+    var dims = getEffectiveDims();
+    if (!dims.valid) return;
+    var res = computeShape(dims.l,dims.b,dims.h);
+    var isCube = state.shape==='cube';
+    var U = unitLabel();
+
+    var PDFDocument = PDFLib.PDFDocument, StandardFonts = PDFLib.StandardFonts, rgb = PDFLib.rgb;
+    var pdfDoc = await PDFDocument.create();
+    var font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+    var fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+    var page = pdfDoc.addPage([595.28, 841.89]);
+    var margin = 50, y = 792;
+    var ink = rgb(0.09,0.15,0.26);
+    var soft = rgb(0.32,0.38,0.54);
+    var accentC = rgb(0.16,0.34,0.64);
+
+    function writeLine(text, opts){
+      opts = opts || {};
+      var f = opts.bold ? fontBold : font;
+      var size = opts.size || 11;
+      var color = opts.color || ink;
+      if (y < margin+20){ page = pdfDoc.addPage([595.28,841.89]); y = 792; }
+      page.drawText(text, { x: margin, y: y, size: size, font: f, color: color });
+      y -= opts.gap || (size+8);
+    }
+
+    writeLine(isCube ? 'Cube Calculator - Result' : 'Cuboid Calculator - Result', {bold:true, size:20, color:accentC, gap:30});
+    if (isCube){
+      writeLine('Side (a) = '+fmt(dims.l)+' '+U, {bold:true, size:12, gap:22});
+    } else {
+      writeLine('Length (l) = '+fmt(dims.l)+' '+U+'   Breadth (b) = '+fmt(dims.b)+' '+U+'   Height (h) = '+fmt(dims.h)+' '+U, {bold:true, size:12, gap:22});
+    }
+
+    writeLine('Results', {bold:true, size:14, color:accentC, gap:20});
+    writeLine('Volume: '+fmt(res.volume)+' '+U+'3', {size:11});
+    writeLine('Total Surface Area (TSA): '+fmt(res.tsa)+' '+U+'2', {size:11});
+    writeLine('Lateral Surface Area (LSA): '+fmt(res.lsa)+' '+U+'2', {size:11});
+    if (isCube){
+      writeLine('Face Area: '+fmt(res.baseArea)+' '+U+'2', {size:11});
+      writeLine('Face Diagonal: '+fmt(res.faceDiagLB)+' '+U, {size:11});
+      writeLine('Space Diagonal: '+fmt(res.spaceDiagonal)+' '+U, {size:11});
+      writeLine('Total Edge Length: '+fmt(res.totalEdge)+' '+U, {size:11});
+      writeLine('Circumscribed Sphere Radius: '+fmt(res.circumRadius)+' '+U, {size:11});
+      writeLine('Inscribed Sphere Radius: '+fmt(res.inscribedRadius)+' '+U, {size:11, gap:20});
+    } else {
+      writeLine('Base Area: '+fmt(res.baseArea)+' '+U+'2', {size:11});
+      writeLine('Perimeter of Base: '+fmt(res.perimeterBase)+' '+U, {size:11});
+      writeLine('Space Diagonal: '+fmt(res.spaceDiagonal)+' '+U, {size:11});
+      writeLine('Face Diagonal (l x b): '+fmt(res.faceDiagLB)+' '+U, {size:11});
+      writeLine('Face Diagonal (b x h): '+fmt(res.faceDiagBH)+' '+U, {size:11});
+      writeLine('Face Diagonal (h x l): '+fmt(res.faceDiagHL)+' '+U, {size:11});
+      writeLine('Total Edge Length: '+fmt(res.totalEdge)+' '+U, {size:11});
+      writeLine('Longest Internal Distance: '+fmt(res.longestInternal)+' '+U, {size:11, gap:20});
+    }
+
+    writeLine('Formulas Used', {bold:true, size:14, color:accentC, gap:20});
+    var formulas = isCube ? [
+      'Volume: V = a^3', 'TSA: 6 x a^2', 'LSA: 4 x a^2', 'Face Area: a^2',
+      'Face Diagonal: a x sqrt(2)', 'Space Diagonal: a x sqrt(3)', 'Total Edge Length: 12 x a',
+      'Circumscribed Radius: (sqrt(3)/2) x a', 'Inscribed Radius: a/2'
+    ] : [
+      'Volume: V = l x b x h', 'TSA: 2 x (lb + bh + hl)', 'LSA: 2h x (l + b)',
+      'Base Area: l x b', 'Perimeter of Base: 2 x (l + b)', 'Space Diagonal: sqrt(l^2 + b^2 + h^2)',
+      'Total Edge Length: 4 x (l + b + h)', 'Longest Internal Distance: sqrt(l^2 + b^2 + h^2)'
+    ];
+    formulas.forEach(function(f){ writeLine(f, {size:10.5, color:soft}); });
+
+    y -= 10;
+    writeLine('Generated with the Cube & Cuboid Calculator', {size:9, color:soft});
+
+    var pdfBytes = await pdfDoc.save();
+    var blob = new Blob([pdfBytes], {type:'application/pdf'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = (isCube?'cube':'cuboid')+'-result.pdf';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
+    showToast(t('downloadPdf'));
+  }
+
+  // ---------- Event wiring ----------
+  function setShape(shape){
+    if (state.shape===shape) return;
+    state.shape = shape;
+    tabCubeBtn.classList.toggle('active', shape==='cube');
+    tabCuboidBtn.classList.toggle('active', shape==='cuboid');
+    camState = {theta:Math.PI/4, phi:Math.PI/3.2, radius:6.2};
+    render();
+  }
+  tabCubeBtn.addEventListener('click', function(){ setShape('cube'); });
+  tabCuboidBtn.addEventListener('click', function(){ setShape('cuboid'); });
+
+  inputSide.addEventListener('input', function(e){ state.cube.a = parseInputPositive(e.target.value); render(); });
+  inputL.addEventListener('input', function(e){ state.cuboid.l = parseInputPositive(e.target.value); render(); });
+  inputB2.addEventListener('input', function(e){ state.cuboid.b = parseInputPositive(e.target.value); render(); });
+  inputH2.addEventListener('input', function(e){ state.cuboid.h = parseInputPositive(e.target.value); render(); });
+
+  unitSelect.addEventListener('change', function(){
+    var newUnit = unitSelect.value, oldUnit = state.unit;
+    if (newUnit !== oldUnit){
+      state.cube.a = convertUnit(state.cube.a, oldUnit, newUnit);
+      state.cuboid.l = convertUnit(state.cuboid.l, oldUnit, newUnit);
+      state.cuboid.b = convertUnit(state.cuboid.b, oldUnit, newUnit);
+      state.cuboid.h = convertUnit(state.cuboid.h, oldUnit, newUnit);
+      state.unit = newUnit;
+      syncInputsFromState();
+      render();
+    }
+  });
+
+  resetBtn.addEventListener('click', function(){
+    if (state.shape==='cube'){
+      state.cube.a = convertUnit(DEFAULTS.cube.a, 'cm', state.unit);
+    } else {
+      state.cuboid.l = convertUnit(DEFAULTS.cuboid.l, 'cm', state.unit);
+      state.cuboid.b = convertUnit(DEFAULTS.cuboid.b, 'cm', state.unit);
+      state.cuboid.h = convertUnit(DEFAULTS.cuboid.h, 'cm', state.unit);
+    }
+    syncInputsFromState();
+    camState = {theta:Math.PI/4, phi:Math.PI/3.2, radius:6.2};
+    render();
+  });
+  copyBtn.addEventListener('click', copyResult);
+  shareBtn.addEventListener('click', shareResult);
+  pdfBtn.addEventListener('click', generatePDF);
+
+  function updateThemeIcon(theme){
+    el('themeIconSun').style.display = theme==='dark' ? 'none' : 'block';
+    el('themeIconMoon').style.display = theme==='dark' ? 'block' : 'none';
+  }
+  el('themeToggle').addEventListener('click', function(){
+    var next = document.documentElement.getAttribute('data-theme')==='dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    updateThemeIcon(next);
+    render();
+  });
+
+  function applyI18n(){
+    document.querySelectorAll('[data-i18n]').forEach(function(elx){
+      elx.textContent = t(elx.getAttribute('data-i18n'));
+    });
+  }
+  el('langToggle').addEventListener('click', function(){
+    state.lang = state.lang==='en' ? 'hi' : 'en';
+    document.documentElement.lang = state.lang;
+    langToggleLabel.textContent = state.lang==='en' ? 'हिं' : 'EN';
+    applyI18n();
+    render();
+  });
+
+  window.addEventListener('resize', function(){ resizeThree(); render(); });
+
+  function init(){
+    state.unit = 'cm'; state.shape = 'cube';
+    state.cube.a = DEFAULTS.cube.a;
+    state.cuboid.l = DEFAULTS.cuboid.l; state.cuboid.b = DEFAULTS.cuboid.b; state.cuboid.h = DEFAULTS.cuboid.h;
+    syncInputsFromState();
+    unitSelect.value = state.unit;
+
+    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var initialTheme = prefersDark ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', initialTheme);
+    updateThemeIcon(initialTheme);
+
+    applyI18n();
+    initThree();
+    render();
+  }
+  init();
+})();
+</script>
+</body>
+</html>
